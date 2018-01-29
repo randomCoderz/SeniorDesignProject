@@ -1,4 +1,4 @@
-package com.praid.pantryraid;
+package com.pr.pr.pantryraid;
 
 import org.junit.Test;
 

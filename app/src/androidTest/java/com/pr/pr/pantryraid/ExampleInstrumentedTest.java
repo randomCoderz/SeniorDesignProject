@@ -1,4 +1,4 @@
-package com.praid.pantryraid;
+package com.pr.pr.pantryraid;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.praid.pantryraid", appContext.getPackageName());
+        assertEquals("com.pr.pr.pantryraid", appContext.getPackageName());
     }
 }
