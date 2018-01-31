@@ -9,16 +9,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import org.json.HTTP;
+import org.json.JSONObject;
+
 public class main extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -32,27 +36,28 @@ public class main extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+        networkConnection p = new networkConnection();
+        p.start();
 
-        //networkConnection();
     }
 
-//    public void networkConnection(){
-//        Runnable runnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    HttpResponse<JsonNode> response = Unirest.post("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/products/classify")
-//                            .header("X-Mashape-Key", "OkS1xENCS8mshJ1RJzjn5X9y1Ij5p11nRF2jsnMlSkI0S2WUan")
-//                            .header("Content-Type", "application/json")
-//                            .header("Accept", "application/json")
-//                            .body("{\"title\":\"Kroger Vitamin A & D Reduced Fat 2% Milk\",\"upc\":\"\",\"plu_code\":\"\"}")
-//                            .asJson();
-//                } catch (UnirestException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        };
-//    }
+    class networkConnection extends Thread {
+        public void run() {
+            try{
+                HttpResponse<JsonNode> response = Unirest.post("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/products/classify")
+                        .header("X-Mashape-Key", "OkS1xENCS8mshJ1RJzjn5X9y1Ij5p11nRF2jsnMlSkI0S2WUan")
+                        .header("Content-Type", "application/json")
+                        .header("Accept", "application/json")
+                        .body("{\"title\":\"Kroger Vitamin A & D Reduced Fat 2% Milk\",\"upc\":\"\",\"plu_code\":\"\"}")
+                        .asJson();
+                System.out.println(response.getBody().getObject().toString());
+            }
+            catch (UnirestException e) {
+                e.getStackTrace();
+            }
+
+        }
+    }
 
 
     @Override
