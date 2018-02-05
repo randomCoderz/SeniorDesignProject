@@ -11,65 +11,70 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+//Unirest, Spoonacular Imports
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.json.JSONObject;
+
+//FireBase Imports
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import android.util.Log;
 
 public class main extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
-        try{
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-            networkConnection p = new networkConnection();
-            p.start();
-            p.join();
+        networkConnection p = new networkConnection();
+        p.start();
 
-            HttpResponse<JsonNode> response = p.getResponse();
-//            System.out.println(response.getBody().getObject().toString());
-            JSONObject object = response.getBody().getObject();
-//            System.out.println(object.toString(2));
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+        myRef.setValue("Hello, World!");
 
-            TextView text = (TextView) findViewById(R.id.text);
-            text.setText(object.toString(2));
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
 
-        }
-        catch(Exception e){
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
-        }
     }
 
     class networkConnection extends Thread {
-        HttpResponse<JsonNode> response_return;
-
         public void run() {
             try{
-                HttpResponse<JsonNode> response = Unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&instructionsRequired=true&intolerances=egg%2C+gluten&limitLicense=false&number=10&offset=0&query=burger&type=main+course")
-                        .header("X-Mashape-Key", "5EiGHCnHhQmshhJo3ecXqsynDWfip1v46Iwjsn83KwprhwkP1v")
+                HttpResponse<JsonNode> response = Unirest.post("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/products/classify")
+                        .header("X-Mashape-Key", "OkS1xENCS8mshJ1RJzjn5X9y1Ij5p11nRF2jsnMlSkI0S2WUan")
+                        .header("Content-Type", "application/json")
                         .header("Accept", "application/json")
+                        .body("{\"title\":\"Kroger Vitamin A & D Reduced Fat 2% Milk\",\"upc\":\"\",\"plu_code\":\"\"}")
                         .asJson();
-                setResponse(response);
+                System.out.println(response.getBody().getObject().toString());
             }
             catch (UnirestException e) {
                 e.getStackTrace();
             }
-        }
 
-        public void setResponse(HttpResponse<JsonNode> response){
-            response_return = response;
         }
-
-        public HttpResponse<JsonNode> getResponse()
-        {
-            return response_return;
-        }
-
     }
 
     @Override

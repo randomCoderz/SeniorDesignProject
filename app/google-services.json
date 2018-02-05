@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "257952877284",
+    "firebase_url": "https://sdpfirebaseproject.firebaseio.com",
+    "project_id": "sdpfirebaseproject",
+    "storage_bucket": "sdpfirebaseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257952877284:android:bdda97cac72cbad5",
+        "android_client_info": {
+          "package_name": "com.pr.pr.pantryraid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257952877284-787d8g9tc87ec1jivuetsengo20l4chk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pr.pr.pantryraid",
+            "certificate_hash": "8021639a5067afc7ff1fa56d138a4824cde53394"
+          }
+        },
+        {
+          "client_id": "257952877284-fr9dukcb42hrddv06jg888ggn4h4ehko.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtqdb0jBPgKBQI5eEitbZ28cEi_bdOl4M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257952877284-fr9dukcb42hrddv06jg888ggn4h4ehko.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
