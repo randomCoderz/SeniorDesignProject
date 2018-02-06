@@ -17,7 +17,6 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import org.json.HTTP;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class main extends AppCompatActivity {
@@ -38,12 +37,15 @@ public class main extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-            networkConnection p = new networkConnection();
+            cookBook p = new cookBook();
             p.start();
             p.join();
 
             HttpResponse<JsonNode> response = p.getResponse();
-//            System.out.println(response.getBody().getObject().toString());
+
+            String test = "THIS IS THE RESPONSE " + response.getBody().getObject().toString();
+
+            System.out.println(test);
             JSONObject object = response.getBody().getObject();
 //            System.out.println(object.toString(2));
 
@@ -56,11 +58,29 @@ public class main extends AppCompatActivity {
         }
     }
 
-    class networkConnection extends Thread {
+    class cookBook extends Thread {
         HttpResponse<JsonNode> response_return;
+        String http;
+        String command;
+
+        public cookBook()
+        {
+            http = "";
+            command = "";
+        }
+
+        public cookBook(String command_)
+        {
+            http = "";
+            command = command_;
+        }
+
 
         public void run() {
             try{
+
+
+                // These code snippets use an open-source library.
                 HttpResponse<JsonNode> response = Unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&instructionsRequired=true&intolerances=egg%2C+gluten&limitLicense=false&number=10&offset=0&query=burger&type=main+course")
                         .header("X-Mashape-Key", "5EiGHCnHhQmshhJo3ecXqsynDWfip1v46Iwjsn83KwprhwkP1v")
                         .header("Accept", "application/json")
