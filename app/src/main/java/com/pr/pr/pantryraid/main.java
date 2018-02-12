@@ -29,8 +29,9 @@ import android.util.Log;
 
 public class main extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private static final String KEY = "5EiGHCnHhQmshhJo3ecXqsynDWfip1v46Iwjsn83KwprhwkP1v"; //Place Your Key Here!
-    private static final String URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?fillIngredients=false&ingredients=apples%2Cflour%2Csugar&limitLicense=false&number=5&ranking=1";
+    private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
+    private static final String URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients" +
+            "=coconut&instructionsRequired=true&intolerances=egg%2C+gluten&limitLicense=false&number=10&offset=0&query=burger&type=main+course";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
