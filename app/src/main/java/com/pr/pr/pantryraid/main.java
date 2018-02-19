@@ -18,15 +18,6 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-//FireBase Imports
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import android.util.Log;
-
 public class main extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
@@ -44,19 +35,13 @@ public class main extends AppCompatActivity {
             cookBook p = new cookBook();
 
             p.setCommand("getRecipe");
-//            String[] ingredients = {"strawbery", "appls", "oranges"};
-//            p.getRecipesByIngredients(false, ingredients, false, 5, 1);
             p.getInstructions(641803, true);
             p.start();
             p.join();
             HttpResponse<JsonNode> response = p.getResponse();
 
-
-//            JSONObject object = response.getBody().getObject();
             JSONArray array = response.getBody().getArray();
             JSONObject object = array.getJSONObject(0).getJSONArray("steps").getJSONObject(0);
-
-//            System.out.println(array.toString(2));
 
             TextView text = (TextView) findViewById(R.id.text);
             text.setMovementMethod(new ScrollingMovementMethod());
@@ -64,26 +49,6 @@ public class main extends AppCompatActivity {
         } catch (Exception e) {
             System.err.println("Network Connection Error.");
         }
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-        myRef.setValue("Hello, World!");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
 
     }
 
