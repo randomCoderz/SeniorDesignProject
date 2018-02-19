@@ -19,12 +19,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-//FireBase Imports
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
+
 
 import android.util.Log;
 
@@ -105,7 +100,6 @@ class cookBook extends Thread
         http = "";
         command = "";
     }
-
 
     /**
      * Searching for recipes by ingredients, ***doesnt work if ingredients are mispelled*** possible solution popup exception
