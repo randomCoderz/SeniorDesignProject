@@ -3,6 +3,7 @@ package com.pr.pr.pantryraid;
 //Android Tools
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
@@ -23,47 +24,81 @@ import org.json.JSONArray;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class main extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     private static final String URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?diet=vegetarian&excludeIngredients" +
             "=coconut&instructionsRequired=true&intolerances=egg%2C+gluten&limitLicense=false&number=10&offset=0&query=burger&type=main+course";
 
+
+    private List<ingredient> ingredientList;
+    private RecyclerView rv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
+//            super.onCreate(savedInstanceState);
+//            setContentView(R.layout.activity_main);
+//            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+//
+//            cookBook p = new cookBook(KEY);
+//
+//            p.setCommand("getRecipe");
+////            String[] ingredients = {"strawbery", "appls", "oranges"};
+////            p.getRecipesByIngredients(false, ingredients, false, 5, 1);
+//            p.getInstructions(641803, true);
+//            p.start();
+//            p.join();
+//            HttpResponse<JsonNode> response = p.getResponse();
+//
+//
+////            JSONObject object = response.getBody().getObject();
+//            JSONArray array = response.getBody().getArray();
+//            JSONObject object = array.getJSONObject(0).getJSONArray("steps").getJSONObject(1);
+//
+////            System.out.println(array.toString(2));
+//
+////            TextView text = (TextView) findViewById(R.id.text);
+////            text.setMovementMethod(new ScrollingMovementMethod());
+////            text.setText(object.toString(2));
+
             super.onCreate(savedInstanceState);
+
             setContentView(R.layout.activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
 
-            cookBook p = new cookBook(KEY);
+            rv = findViewById(R.id.rv);
 
-            p.setCommand("getRecipe");
-//            String[] ingredients = {"strawbery", "appls", "oranges"};
-//            p.getRecipesByIngredients(false, ingredients, false, 5, 1);
-            p.getInstructions(641803, true);
-            p.start();
-            p.join();
-            HttpResponse<JsonNode> response = p.getResponse();
+            LinearLayoutManager llm = new LinearLayoutManager(this);
 
+            rv.setHasFixedSize(true);
+            rv.setLayoutManager(llm);
 
-//            JSONObject object = response.getBody().getObject();
-            JSONArray array = response.getBody().getArray();
-            JSONObject object = array.getJSONObject(0).getJSONArray("steps").getJSONObject(1);
+            initializeData();
+            initializeAdapter();
 
-//            System.out.println(array.toString(2));
-
-            TextView text = (TextView) findViewById(R.id.text);
-            text.setMovementMethod(new ScrollingMovementMethod());
-            text.setText(object.toString(2));
         } catch (Exception e) {
             System.err.println("Network Connection Error.");
         }
-
     }
 
+    private void initializeData()
+    {
+        ingredientList = new ArrayList<>();
+        ingredientList.add(new ingredient("chicken", "chicken description", R.drawable.chicken));
+        ingredientList.add(new ingredient("pork", "pork description"));
+        ingredientList.add(new ingredient("beef", "beef description"));
+        ingredientList.add(new ingredient("chicken", "chicken description", R.drawable.chicken));
+    }
 
+    private void initializeAdapter()
+    {
+        recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
+        rv.setAdapter(adapter);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
