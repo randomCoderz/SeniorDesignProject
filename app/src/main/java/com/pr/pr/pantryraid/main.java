@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -80,6 +79,20 @@ public class main extends AppCompatActivity {
             initializeData();
             initializeAdapter();
 
+
+//             p.setCommand("getRecipe");
+//             p.getInstructions(641803, true);
+//             p.start();
+//             p.join();
+//             HttpResponse<JsonNode> response = p.getResponse();
+
+//             JSONArray array = response.getBody().getArray();
+//             JSONObject object = array.getJSONObject(0).getJSONArray("steps").getJSONObject(0);
+
+//             TextView text = (TextView) findViewById(R.id.text);
+//             text.setMovementMethod(new ScrollingMovementMethod());
+//             text.setText(object.toString(2));
+
         } catch (Exception e) {
             System.err.println("Network Connection Error.");
         }
@@ -105,6 +118,7 @@ public class main extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+
     }
 
     @Override
