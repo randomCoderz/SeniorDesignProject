@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -62,12 +61,14 @@ public class main extends AppCompatActivity {
 
             initializeData();
             initializeAdapter();
+
         try {
             getRecipeInformation();
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+
         }
 
 
@@ -129,6 +130,7 @@ public class main extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+
     }
 
     @Override
