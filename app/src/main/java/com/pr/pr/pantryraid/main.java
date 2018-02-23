@@ -59,11 +59,17 @@ public class main extends AppCompatActivity {
             rv.setHasFixedSize(true);
             rv.setLayoutManager(llm);
 
-            initializeData();
-            initializeAdapter();
+            //initializeData();
+            //initializeAdapter();
+
 
         try {
+            //make recipe list
             getRecipeInformation();
+            //intialize adapter
+            recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+            rv.setAdapter(adapter);
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -112,6 +118,9 @@ public class main extends AppCompatActivity {
             int id = object.getInt("id");
             String title = object.get("title").toString();
             String image = object.get("image").toString();
+
+            Log.d(TAG, "getRecipeInformation: " + image);
+
             recipeList.add(new recipe(id, title, image));
 //            jsonRecipesInfo.put(id, info);
 

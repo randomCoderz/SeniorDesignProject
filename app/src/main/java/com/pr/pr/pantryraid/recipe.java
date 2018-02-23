@@ -1,10 +1,13 @@
 package com.pr.pr.pantryraid;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Kan on 2/22/18.
  */
 
-public class recipe {
+public class recipe
+{
     int id;
     String name;
     String url;
@@ -21,4 +24,5 @@ public class recipe {
         this.name = name;
         this.url = url;
     }
+
 }
