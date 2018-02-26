@@ -59,11 +59,18 @@ public class main extends AppCompatActivity {
             rv.setHasFixedSize(true);
             rv.setLayoutManager(llm);
 
+
 //            initializeData();
             initializeAdapter();
 
+
         try {
+            //make recipe list
             getRecipeInformation();
+            //intialize adapter
+            recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+            rv.setAdapter(adapter);
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -106,6 +113,7 @@ public class main extends AppCompatActivity {
         {
             JSONObject object = array.getJSONObject(i);
             int id = object.getInt("id");
+
             String title = object.getString("title");
             String image = object.getString("image");
             int readyInMinutes = object.getInt("readyInMinutes");

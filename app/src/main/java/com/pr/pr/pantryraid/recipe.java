@@ -1,10 +1,15 @@
 package com.pr.pr.pantryraid;
 import java.util.ArrayList;
+
+
+import android.graphics.Bitmap;
+
 /**
  * Created by Kan on 2/22/18.
  */
 
-public class recipe {
+public class recipe
+{
     int id;
     String name;
     String url;
@@ -44,4 +49,5 @@ public class recipe {
         this.ingredients = ingredients;
         this.instructions = instructions;
     }
+
 }
