@@ -14,6 +14,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.pr.pr.pantryraid.roomPersist.AppDatabase;
+import com.pr.pr.pantryraid.roomPersist.dbInitialize;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -31,6 +33,11 @@ public class main extends AppCompatActivity {
             setContentView(R.layout.activity_main);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+            AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+            //Fix Database here
+            dbInitialize dbI = new dbInitialize();
+            dbI.test(mdb);
+            dbI.fetch(mdb);
 
             cookBook p = new cookBook();
 
