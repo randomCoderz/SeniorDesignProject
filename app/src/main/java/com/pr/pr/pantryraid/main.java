@@ -13,10 +13,14 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.pr.pr.pantryraid.roomPersist.AppDatabase;
+import com.pr.pr.pantryraid.roomPersist.dbInitialize;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
+import android.util.Log;
 
 
 import java.util.ArrayList;
@@ -35,12 +39,22 @@ public class main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 //            setContentView(R.layout.activity_main);
 //            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //            setSupportActionBar(toolbar);
 
             setContentView(R.layout.activity_main);
+            
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            //Database
+            AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+            dbInitialize dbI = new dbInitialize();
+            dbI.populateRecipes(mdb);
+
 
             rv = findViewById(R.id.rv);
 
@@ -63,7 +77,6 @@ public class main extends AppCompatActivity {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-
         }
 
 
@@ -138,5 +151,3 @@ public class main extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
-
