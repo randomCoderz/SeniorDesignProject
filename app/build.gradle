@@ -62,4 +62,6 @@ dependencies {
     // Test helpers for Room
     testImplementation "android.arch.persistence.room:testing:1.0.0"
     implementation files('libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.jar')
+
+    implementation files('libs/picasso-2.5.2.jar')
 }
