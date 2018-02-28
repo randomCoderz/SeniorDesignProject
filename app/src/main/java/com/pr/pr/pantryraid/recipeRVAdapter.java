@@ -1,10 +1,13 @@
 package com.pr.pr.pantryraid;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +17,12 @@ import android.widget.TextView;
 import com.mashape.relocation.HttpResponse;
 import com.mashape.relocation.client.methods.HttpGet;
 import com.mashape.relocation.impl.client.DefaultHttpClient;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
+import android.os.AsyncTask;
 
 /**
  * Created by Nam on 2/22/2018.
@@ -37,6 +42,7 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
             cv = (CardView) itemView.findViewById(R.id.cv);
             recipeName = (TextView) itemView.findViewById(R.id.cvName);
             recipeImage = (ImageView) itemView.findViewById(R.id.cvPhoto);
+
         }
     }
 
@@ -65,9 +71,11 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     public void onBindViewHolder(recipeViewHolder holder, int i)
     {
         try {
-            holder.recipeName.setText(recipeList.get(i).name);
-            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(recipeList.get(i).url).getContent());
-            holder.recipeImage.setImageBitmap(bitmap);
+//            holder.recipeName.setText(recipeList.get(i).name);
+//            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(recipeList.get(i).url).getContent());
+//            holder.recipeImage.setImageBitmap(bitmap);
+
+            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
 
             //InputStream is = (InputStream) new URL(recipeList.get(i).url).getContent();
             //InputStream is = (InputStream) new URL("https://images.spoonacular.com/file/wximages/228270-312x231.png").getContent();
@@ -85,4 +93,6 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
         return recipeList.size();
     }
 
+
 }
+

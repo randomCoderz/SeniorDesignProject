@@ -4,11 +4,8 @@ package com.pr.pr.pantryraid;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.support.v7.widget.RecyclerView;
 
 //Unirest, Spoonacular Imports, JSON
@@ -22,10 +19,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class main extends AppCompatActivity {
@@ -45,11 +39,7 @@ public class main extends AppCompatActivity {
 //            setContentView(R.layout.activity_main);
 //            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //            setSupportActionBar(toolbar);
-//
 
-//            super.onCreate(savedInstanceState);
-
-//
             setContentView(R.layout.activity_main);
 
             rv = findViewById(R.id.rv);
@@ -60,15 +50,13 @@ public class main extends AppCompatActivity {
             rv.setLayoutManager(llm);
 
 
-//            initializeData();
-            initializeAdapter();
-
 
         try {
             //make recipe list
             getRecipeInformation();
             //intialize adapter
             recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+
             rv.setAdapter(adapter);
 
         } catch (JSONException e) {
@@ -81,25 +69,18 @@ public class main extends AppCompatActivity {
 
     }
 
-//    private void initializeData()
-//    {
-//        ingredientList = new ArrayList<>();
-//        ingredientList.add(new ingredient("chicken", "chicken description", R.drawable.chicken));
-//        ingredientList.add(new ingredient("pork", "pork description"));
-//        ingredientList.add(new ingredient("beef", "beef description"));
-//        ingredientList.add(new ingredient("chicken", "chicken description", R.drawable.chicken));
-//    }
 
     private void initializeAdapter()
     {
         recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
+
         rv.setAdapter(adapter);
     }
 
     private void getRecipeInformation() throws JSONException, InterruptedException {
 
         recipeList = new ArrayList<>();
-        Home h = new Home(KEY);
+        home h = new home(KEY);
 
         h.randomRecipe(false, 5, null);
         h.start();
@@ -124,9 +105,9 @@ public class main extends AppCompatActivity {
             {
                 JSONObject ingredient = ingredient_array.getJSONObject(j);
                 int ingredient_id = ingredient.getInt("id");
-                String ingredient_name = object.getString("name");
-                String amount = object.getString("originalString");
-                String ingredient_image = object.getString("image");
+                String ingredient_name = ingredient.getString("name");
+                String amount = ingredient.getString("originalString");
+                String ingredient_image = ingredient.getString("image");
                 ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, ingredient_image));
             }
             recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, instructions));
@@ -146,7 +127,7 @@ public class main extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
@@ -158,148 +139,4 @@ public class main extends AppCompatActivity {
     }
 }
 
-class cookBook extends Thread
-{
-    HttpResponse<JsonNode> response_return;
-    String http;
-    String command;
-    private String KEY = "";
 
-    public cookBook(String key)
-    {
-        KEY = key;
-        http = "";
-        command = "";
-    }
-
-    /**
-     * Searching for recipes by ingredients, ***doesnt work if ingredients are mispelled*** possible solution popup exception
-     * @param fillIngredients Add information about the used and missing ingredients in each recipe.
-     * @param ingredients list of ingredients that the recipes should contain.
-     * @param limitLicense Whether to only show recipes with an attribution license.
-     * @param number The maximal number of recipes to return
-     * @param ranking Whether to maximize used ingredients (1) or minimize missing ingredients (2) first
-     */
-    public void getRecipesByIngredients(boolean fillIngredients, String[] ingredients, boolean limitLicense, int number, int ranking)
-    {
-        command = "getRecipe";
-
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?";
-        http += "fillIngredients=" + fillIngredients;
-        http += "&ingredients=";
-        for(int i = 0; i < ingredients.length; i++)
-        {
-            if(i != ingredients.length - 1)
-            {
-                http += (ingredients[i] + "%2C");
-            }
-            else
-            {
-                http += ingredients[i];
-            }
-        }
-        http += "&limitLicense=" + limitLicense;
-        http += "&number=" + number;
-        http += "&ranking=" + ranking;
-
-
-    }
-
-    public void getInstructions(int recipeID, boolean stepBreakdown)
-    {
-
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" +
-                recipeID + "/analyzedInstructions?";
-        http += "stepBreakdown=" + stepBreakdown;
-
-    }
-
-//        public String[] getIngredients
-
-    public void run() {
-        try {
-            if(command.equals("getRecipe"))
-            {
-                HttpResponse<JsonNode> response = Unirest.get(http)
-                        .header("X-Mashape-Key", KEY)
-                        .header("Accept", "application/json")
-                        .asJson();
-                setResponse(response);
-            }
-
-        } catch (UnirestException e) {
-            e.getStackTrace();
-        }
-    }
-
-    public void setResponse(HttpResponse<JsonNode> response) {
-        response_return = response;
-    }
-
-    public HttpResponse<JsonNode> getResponse() {
-        return response_return;
-    }
-
-    public void setCommand(String command_)
-    {
-        command = command_;
-    }
-
-}
-
-
-
-class Pantry extends Thread
-{
-    HttpResponse<JsonNode> response_return;
-    String http;
-    String command;
-    private String KEY;
-
-    public Pantry(String key) {
-        http = "";
-        command = "";
-        KEY = key;
-    }
-
-    public void searchIngredient(String intolerances, boolean metaInformation, int number, String query)
-    {
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?";
-        if(!intolerances.equals(null))
-        {
-            http += "intolerances=" + intolerances + "&";
-        }
-        http += "metaInformation=" + metaInformation + "&";
-        if(number > 0)
-        {
-            http += "number=" + "&";
-        }
-        http += "query=" + query;
-    }
-
-    public void run() {
-        try
-        {
-            if(command.equals("searchItem"))
-            {
-                HttpResponse<JsonNode> response = Unirest.get(http)
-                        .header("X-Mashape-Key", KEY)
-                        .header("Accept", "application/json")
-                        .asJson();
-                setResponse(response);
-            }
-
-        } catch (UnirestException e) {
-            e.getStackTrace();
-        }
-    }
-
-    public void setResponse(HttpResponse<JsonNode> response) {
-        response_return = response;
-    }
-
-    public HttpResponse<JsonNode> getResponse() {
-        return response_return;
-    }
-
-}

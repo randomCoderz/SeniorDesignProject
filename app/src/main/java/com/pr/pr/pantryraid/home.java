@@ -8,14 +8,14 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 /**
  * Created by Kan on 2/25/18.
  */
-class Home extends Thread
+class home extends Thread
 {
     HttpResponse<JsonNode> response_return;
     String http;
     String command;
     private String KEY;
 
-    public Home(String key) {
+    public home(String key) {
         http = "";
         command = "";
         KEY = key;
