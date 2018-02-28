@@ -21,8 +21,6 @@ import com.pr.pr.pantryraid.roomPersist.dbInitialize;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
-
-
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -41,43 +39,18 @@ public class main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.activity_main);
-//            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//            setSupportActionBar(toolbar);
-//
-//            cookBook p = new cookBook(KEY);
-//
-//            p.setCommand("getRecipe");
-////            String[] ingredients = {"strawbery", "appls", "oranges"};
-////            p.getRecipesByIngredients(false, ingredients, false, 5, 1);
-//            p.getInstructions(641803, true);
-//            p.start();
-//            p.join();
-//            HttpResponse<JsonNode> response = p.getResponse();
-//
-//
-////            JSONObject object = response.getBody().getObject();
-//            JSONArray array = response.getBody().getArray();
-//            JSONObject object = array.getJSONObject(0).getJSONArray("steps").getJSONObject(1);
-//
-////            System.out.println(array.toString(2));
-//
-////            TextView text = (TextView) findViewById(R.id.text);
-////            text.setMovementMethod(new ScrollingMovementMethod());
-////            text.setText(object.toString(2));
-
             super.onCreate(savedInstanceState);
 
             setContentView(R.layout.activity_main);
             
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+
+            //Database
             AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-            //Fix Database here
             dbInitialize dbI = new dbInitialize();
-            dbI.test(mdb);
-            dbI.fetch(mdb);
+            dbI.populateRecipes(mdb);
+
 
             rv = findViewById(R.id.rv);
 
@@ -88,20 +61,6 @@ public class main extends AppCompatActivity {
 
             initializeData();
             initializeAdapter();
-
-
-//             p.setCommand("getRecipe");
-//             p.getInstructions(641803, true);
-//             p.start();
-//             p.join();
-//             HttpResponse<JsonNode> response = p.getResponse();
-
-//             JSONArray array = response.getBody().getArray();
-//             JSONObject object = array.getJSONObject(0).getJSONArray("steps").getJSONObject(0);
-
-//             TextView text = (TextView) findViewById(R.id.text);
-//             text.setMovementMethod(new ScrollingMovementMethod());
-//             text.setText(object.toString(2));
 
         } catch (Exception e) {
             System.err.println("Network Connection Error.");
