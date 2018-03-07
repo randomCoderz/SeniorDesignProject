@@ -12,12 +12,10 @@ class pantry extends Thread
 {
     HttpResponse<JsonNode> response_return;
     String http;
-    String command;
     private String KEY;
 
     public pantry(String key) {
         http = "";
-        command = "";
         KEY = key;
     }
 
@@ -39,14 +37,12 @@ class pantry extends Thread
     public void run() {
         try
         {
-            if(command.equals("searchItem"))
-            {
-                HttpResponse<JsonNode> response = Unirest.get(http)
-                        .header("X-Mashape-Key", KEY)
-                        .header("Accept", "application/json")
-                        .asJson();
-                setResponse(response);
-            }
+
+            HttpResponse<JsonNode> response = Unirest.get(http)
+                    .header("X-Mashape-Key", KEY)
+                    .header("Accept", "application/json")
+                    .asJson();
+            setResponse(response);
 
         } catch (UnirestException e) {
             e.getStackTrace();

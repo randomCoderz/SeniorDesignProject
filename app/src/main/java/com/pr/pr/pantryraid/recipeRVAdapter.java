@@ -43,6 +43,7 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
             recipeName = (TextView) itemView.findViewById(R.id.cvName);
             recipeImage = (ImageView) itemView.findViewById(R.id.cvPhoto);
 
+
         }
     }
 
@@ -71,16 +72,12 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     public void onBindViewHolder(recipeViewHolder holder, int i)
     {
         try {
-//            holder.recipeName.setText(recipeList.get(i).name);
-//            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(recipeList.get(i).url).getContent());
-//            holder.recipeImage.setImageBitmap(bitmap);
+
+            holder.recipeName.setText(recipeList.get(i).name);
 
             Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
 
-            //InputStream is = (InputStream) new URL(recipeList.get(i).url).getContent();
-            //InputStream is = (InputStream) new URL("https://images.spoonacular.com/file/wximages/228270-312x231.png").getContent();
-            //Drawable d = Drawable.createFromStream(is, "src name");
-            //holder.recipeImage.setImageDrawable(d);
+
         } catch(Exception e){
             e.printStackTrace();
         }
