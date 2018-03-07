@@ -49,5 +49,6 @@ public class recipe
         this.ingredients = ingredients;
         this.instructions = instructions;
     }
+    
 
 }

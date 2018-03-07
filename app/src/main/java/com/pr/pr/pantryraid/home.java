@@ -5,6 +5,12 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by Kan on 2/25/18.
  */
@@ -12,12 +18,10 @@ class home extends Thread
 {
     HttpResponse<JsonNode> response_return;
     String http;
-    String command;
     private String KEY;
 
     public home(String key) {
         http = "";
-        command = "";
         KEY = key;
     }
 
@@ -34,9 +38,7 @@ class home extends Thread
      * @param query The (natural language) recipe search query.
      * @param type the type of the recipes. (main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink)
      */
-    public void searchRecipes(String[] cuisine, String diet[], String[] excludeIngredients, boolean instructionsRequired, String[] intolerances, boolean limitLicense, int number, int offset, String query, String type)
-    {
-        command = "search";
+    public ArrayList<recipe> searchRecipes(String[] cuisine, String diet[], String[] excludeIngredients, boolean instructionsRequired, String[] intolerances, boolean limitLicense, int number, int offset, String query, String type) throws InterruptedException, JSONException {
 
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?";
         if(cuisine != null)
@@ -84,7 +86,8 @@ class home extends Thread
                 }
             }
         }
-        http += "instructionsRequired=" + instructionsRequired;
+        if(instructionsRequired == true)
+            http += "instructionsRequired=" + instructionsRequired + "&";
         if(intolerances != null)
         {
             http += "intolerances=";
@@ -100,16 +103,80 @@ class home extends Thread
                 }
             }
         }
-        http += "limitLicense=" + limitLicense;
+        if(limitLicense == true)
+            http += "limitLicense=" + limitLicense + "&";
+        if(number > 0)
+            http += "number=" + number;
         if(offset > 0)
         {
-            http += "offset=" + offset + "&";
+            http += "offset=" + offset;
         }
-        http += "query=" + query;
-        if(!type.equals(null))
+        http += "&query=" + query;
+        if(type != null)
         {
             http +="&type=" + type;
         }
+
+        ArrayList<recipe> recipeList = new ArrayList<>();
+
+        start();
+        join();
+        HttpResponse<JsonNode> response = response_return;
+
+        JSONObject object = response.getBody().getObject();
+        JSONArray array = object.getJSONArray("results");
+        for(int i = 0; i < array.length(); i++)
+        {
+            JSONObject recipe = array.getJSONObject(i);
+            int id = recipe.getInt("id");
+            String title = recipe.getString("title");
+
+            String image = "https://spoonacular.com/recipeImages/";
+            image += recipe.getString("image");
+
+
+            int readyInMinutes = recipe.getInt("readyInMinutes");
+            recipeList.add(new recipe(id, title, image, readyInMinutes));
+        }
+        return recipeList;
+    }
+
+    /**
+     * Searches for recipes (Everything but query is optional)
+     * @param instructionsRequired whether recipes must have instructions
+     * @param number The number of results to return (between 0 and 100)
+     * @param query The (natural language) recipe search query.
+     */
+    public ArrayList<recipe> searchRecipes(boolean instructionsRequired, int number, String query) throws InterruptedException, JSONException {
+
+        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?";
+
+        http += "instructionsRequired=" + instructionsRequired + "&";
+        http += "number=" + number + "&";
+        http += "query=" + query;
+
+        ArrayList<recipe> recipeList = new ArrayList<>();
+
+        start();
+        join();
+        HttpResponse<JsonNode> response = response_return;
+
+        JSONObject object = response.getBody().getObject();
+        JSONArray array = object.getJSONArray("results");
+        for(int i = 0; i < array.length(); i++)
+        {
+            JSONObject recipe = array.getJSONObject(i);
+            int id = recipe.getInt("id");
+            String title = recipe.getString("title");
+
+            String image = "https://spoonacular.com/recipeImages/";
+            image += recipe.getString("image");
+
+
+            int readyInMinutes = recipe.getInt("readyInMinutes");
+            recipeList.add(new recipe(id, title, image, readyInMinutes));
+        }
+        return recipeList;
     }
 
 
@@ -119,9 +186,7 @@ class home extends Thread
      * @param number The number of random recipes to be returned. Must be in interval [1,100]. NOTE: Each random recipe returned counts as one request.
      * @param tags Tags that the random recipe(s) must adhere to
      */
-    public void randomRecipe(boolean limitLicense, int number, String[] tags)
-    {
-        command = "random";
+    public ArrayList<recipe> randomRecipe(boolean limitLicense, int number, String[] tags) throws InterruptedException, JSONException {
 
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?";
         http += "limitLicense=" + limitLicense;
@@ -142,21 +207,50 @@ class home extends Thread
             }
         }
 
+        ArrayList<recipe> recipeList = new ArrayList<>();
+
+        start();
+        join();
+        HttpResponse<JsonNode> response = response_return;
+
+        JSONArray array = response.getBody().getObject().getJSONArray("recipes");
+        for(int i = 0; i < array.length(); i++)
+        {
+            JSONObject object = array.getJSONObject(i);
+            int id = object.getInt("id");
+            String title = object.getString("title");
+            String image = object.getString("image");
+            int readyInMinutes = object.getInt("readyInMinutes");
+            String instructions = object.getString("instructions");
+
+            ArrayList<ingredient> ingredients = new ArrayList<>();
+            JSONArray ingredient_array = object.getJSONArray("extendedIngredients");
+            for(int j = 0; j < ingredient_array.length(); j++)
+            {
+                JSONObject ingredient = ingredient_array.getJSONObject(j);
+                int ingredient_id = ingredient.getInt("id");
+                String ingredient_name = ingredient.getString("name");
+                String amount = ingredient.getString("originalString");
+                String ingredient_image = ingredient.getString("image");
+                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, ingredient_image));
+            }
+            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, instructions));
+
+        }
+        return recipeList;
     }
 
     public void run() {
         try
         {
-            if(command.equals("random") || command.equals("search"))
-            {
                 HttpResponse<JsonNode> response = Unirest.get(http)
                         .header("X-Mashape-Key", KEY)
                         .header("Accept", "application/json")
                         .asJson();
                 setResponse(response);
-            }
-
-        } catch (UnirestException e) {
+        }
+        catch (UnirestException e)
+        {
             e.getStackTrace();
         }
     }
@@ -165,8 +259,5 @@ class home extends Thread
         response_return = response;
     }
 
-    public HttpResponse<JsonNode> getResponse() {
-        return response_return;
-    }
 
 }
