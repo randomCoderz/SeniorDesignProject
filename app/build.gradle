@@ -65,6 +65,3 @@ dependencies {
 
     implementation files('libs/picasso-2.5.2.jar')
 }
-
-
-apply plugin: 'com.google.gms.google-services'

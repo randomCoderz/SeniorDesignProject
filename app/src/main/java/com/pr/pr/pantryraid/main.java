@@ -23,9 +23,20 @@ import android.widget.Toast;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.pr.pr.pantryraid.roomPersist.AppDatabase;
+import com.pr.pr.pantryraid.roomPersist.dbInitialize;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import org.json.JSONArray;
+
+import android.util.Log;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +55,19 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
             setContentView(R.layout.activity_main);
+            
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            //Database
+            AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+            dbInitialize dbI = new dbInitialize();
+            dbI.populateRecipes(mdb);
+
 
             //start of navigation drawer
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -93,7 +114,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-
         }
 
     }
@@ -137,6 +157,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
