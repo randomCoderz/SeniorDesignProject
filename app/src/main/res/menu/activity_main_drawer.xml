@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:title="My Pantry" />
+            <!--android:icon="@drawable/ic_menu_camera"-->
+        <item
+            android:id="@+id/nav_gallery"
+            android:title="Cookbok" />
+
+        <!--android:icon="@drawable/ic_menu_gallery"-->
+        <item
+            android:id="@+id/nav_slideshow"
+            android:title="Settings" />
+
+        <!--android:icon="@drawable/ic_menu_slideshow"-->
+        <item
+            android:id="@+id/nav_manage"
+            android:title="My Calendar" />
+        <!--android:icon="@drawable/ic_menu_manage"-->
+    </group>
+
+</menu>
