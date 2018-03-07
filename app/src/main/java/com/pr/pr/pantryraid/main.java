@@ -1,10 +1,13 @@
 package com.pr.pr.pantryraid;
 
 //Android Tools
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -29,6 +33,7 @@ import java.util.List;
 //Unirest, Spoonacular Imports, JSON
 
 public class main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    NavigationView navigationView;
     private static final String TAG = "MainActivity";
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
 
@@ -62,7 +67,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
             //end of navigation drawer
 
@@ -138,17 +143,38 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment frag = null;
 
-        if (id == R.id.nav_camera) {
+        Toast.makeText(this, "selected item", Toast.LENGTH_SHORT).show();
+
+
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_settings) {
+            frag = new Settings();
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_cart) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_pantry) {
 
         }
+         else if (id == R.id.nav_cookbook) {
 
+        }
+        else if (id == R.id.nav_calendar) {
+
+        }
+        else if (id == R.id.nav_recipe) {
+
+        }
+        else if (id == R.id.nav_favorites) {
+
+        }
+        if(frag != null){
+            FragmentManager fragman = getSupportFragmentManager();
+            fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
