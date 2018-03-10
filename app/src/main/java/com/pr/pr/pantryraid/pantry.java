@@ -5,6 +5,12 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 /**
  * Created by Kan on 2/26/18.
  */
@@ -19,19 +25,37 @@ class pantry extends Thread
         KEY = key;
     }
 
-    public void searchIngredient(String intolerances, boolean metaInformation, int number, String query)
-    {
+    public ArrayList<ingredient> searchIngredient(String intolerances, boolean metaInformation, int number, String query) throws InterruptedException, JSONException {
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?";
-        if(!intolerances.equals(null))
+        if(intolerances != null)
         {
             http += "intolerances=" + intolerances + "&";
         }
         http += "metaInformation=" + metaInformation + "&";
         if(number > 0)
         {
-            http += "number=" + "&";
+            http += "number=" + number + "&";
         }
         http += "query=" + query;
+
+        ArrayList<ingredient> ingredientList = new ArrayList<>();
+
+        start();
+        join();
+        HttpResponse<JsonNode> response = response_return;
+
+        JSONArray array = response.getBody().getArray();
+        for(int i = 0; i < array.length(); i++)
+        {
+            JSONObject ingredient = array.getJSONObject(i);
+            String name = ingredient.getString("name");
+            String image = "https://spoonacular.com/cdn/ingredients_100x100/";
+            image += ingredient.getString("image");
+            int id = ingredient.getInt("id");
+            String aisle = ingredient.getString("aisle");
+            ingredientList.add(new ingredient(id, name, null, null, image, aisle));
+        }
+        return ingredientList;
     }
 
     public void run() {
