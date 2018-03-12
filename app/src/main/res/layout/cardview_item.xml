@@ -24,7 +24,9 @@
             android:id="@+id/cvPhoto"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="25dp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
             />
 
         <TextView
@@ -33,7 +35,7 @@
             android:id="@+id/cvName"
             android:layout_toRightOf="@+id/cvPhoto"
             android:layout_alignParentTop="true"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:text="name"
             />
 

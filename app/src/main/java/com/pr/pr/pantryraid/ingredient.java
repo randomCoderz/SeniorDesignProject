@@ -5,20 +5,45 @@ import java.util.List;
 
 public class ingredient
 {
+    int id;
     String name;
-    String description;
+    String amount;
+    String unit;
+    String photoURL;
+    String aisle;
     int photoID;
 
-    ingredient(String name, String description)
+    ingredient(int id, String name, String photoURL)
     {
+        this.id = id;
         this.name = name;
-        this.description = description;
+        this.photoURL = photoURL;
     }
 
-    ingredient(String name, String description, int photoID)
+    ingredient(int id, String name, String amount, int photoID)
     {
+        this.id = id;
         this.name = name;
-        this.description = description;
+        this.amount = amount;
         this.photoID = photoID;
+    }
+
+    ingredient(int id, String name, String amount, String photoURL)
+    {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.photoURL = photoURL;
+    }
+
+
+    ingredient(int id, String name, String amount, String unit, String photoURL, String aisle)
+    {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.unit = unit;
+        this.photoURL = photoURL;
+        this.aisle = aisle;
     }
 }

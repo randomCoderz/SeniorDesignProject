@@ -19,9 +19,9 @@ public class recipes {
 
     //Constructor for roomPersist
     public recipes(String name, int recipeId, double price){
-    this.name = name;
-    this.recipeId = recipeId;
-    this.price = price;
+        this.name = name;
+        this.recipeId = recipeId;
+        this.price = price;
     }
     //Getters and Setters
     public int getRecipeId() {

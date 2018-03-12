@@ -58,7 +58,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
     public void onBindViewHolder(ingredientViewHolder holder, int i)
     {
         holder.ingredientName.setText(ingredientList.get(i).name);
-        holder.ingredientDescription.setText(ingredientList.get(i).description);
+//        holder.ingredientDescription.setText(ingredientList.get(i).description);
         holder.ingredientImage.setImageResource(ingredientList.get(i).photoID);
     }
 
