@@ -70,7 +70,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
             //start of navigation drawer
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
