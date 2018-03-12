@@ -60,8 +60,8 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
             setContentView(R.layout.activity_main);
             
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+//            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
 
             //Database
             AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
