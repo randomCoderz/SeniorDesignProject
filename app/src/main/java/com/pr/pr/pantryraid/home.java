@@ -26,22 +26,22 @@ class home extends Thread
     }
 
     /**
-     * Searches for recipesDB (Everything but query is optional)
-     * @param cuisine The cuisine(s) of the recipesDB (african, chinese, japanese, korean, vietnamese, thai, indian, british, irish, french, italian, mexican, spanish, middle eastern, jewish, american, cajun, southern, greek, german, nordic, eastern european, caribbean, or latin american)
-     * @param diet The diet to which the recipesDB must be compliant. Possible values are: pescetarian, lacto vegetarian, ovo vegetarian, vegan, and vegetarian.
-     * @param excludeIngredients ingredients or ingredient types that should not be contained in recipesDB
-     * @param instructionsRequired whether recipesDB must have instructions
+     * Searches for recipes (Everything but query is optional)
+     * @param cuisine The cuisine(s) of the recipes (african, chinese, japanese, korean, vietnamese, thai, indian, british, irish, french, italian, mexican, spanish, middle eastern, jewish, american, cajun, southern, greek, german, nordic, eastern european, caribbean, or latin american)
+     * @param diet The diet to which the recipes must be compliant. Possible values are: pescetarian, lacto vegetarian, ovo vegetarian, vegan, and vegetarian.
+     * @param excludeIngredients ingredients or ingredient types that should not be contained in recipes
+     * @param instructionsRequired whether recipes must have instructions
      * @param intolerances list of intolerances (dairy, egg, gluten, peanut, sesame, seafood, shellfish, soy, sulfite, tree nut, and wheat)
-     * @param limitLicense Whether the recipesDB should have an open license that allows for displaying with proper attribution.
+     * @param limitLicense Whether the recipes should have an open license that allows for displaying with proper attribution.
      * @param number The number of results to return (between 0 and 100)
      * @param offset The number of results to skip (between 0 and 900).
      * @param query The (natural language) recipe search query.
-     * @param type the type of the recipesDB. (main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink)
+     * @param type the type of the recipes. (main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink)
      */
 
     public ArrayList<recipe> searchRecipes(String[] cuisine, String diet[], String[] excludeIngredients, boolean instructionsRequired, String[] intolerances, boolean limitLicense, int number, int offset, String query, String type) throws InterruptedException, JSONException {
 
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipesDB/search?";
+        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?";
         if(cuisine != null)
         {
             http += "cuisine=";
@@ -143,14 +143,14 @@ class home extends Thread
     }
 
     /**
-     * Searches for recipesDB (Everything but query is optional)
-     * @param instructionsRequired whether recipesDB must have instructions
+     * Searches for recipes (Everything but query is optional)
+     * @param instructionsRequired whether recipes must have instructions
      * @param number The number of results to return (between 0 and 100)
      * @param query The (natural language) recipe search query.
      */
     public ArrayList<recipe> searchRecipes(boolean instructionsRequired, int number, String query) throws InterruptedException, JSONException {
 
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipesDB/search?";
+        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?";
 
         http += "instructionsRequired=" + instructionsRequired + "&";
         http += "number=" + number + "&";
@@ -182,14 +182,14 @@ class home extends Thread
 
 
     /**
-     * find random (popular) recipesDB
-     * @param limitLicense Whether the recipesDB should have an open license that allows for displaying with proper attribution
-     * @param number The number of random recipesDB to be returned. Must be in interval [1,100]. NOTE: Each random recipe returned counts as one request.
+     * find random (popular) recipes
+     * @param limitLicense Whether the recipes should have an open license that allows for displaying with proper attribution
+     * @param number The number of random recipes to be returned. Must be in interval [1,100]. NOTE: Each random recipe returned counts as one request.
      * @param tags Tags that the random recipe(s) must adhere to
      */
     public ArrayList<recipe> randomRecipe(boolean limitLicense, int number, String[] tags) throws InterruptedException, JSONException {
 
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipesDB/random?";
+        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?";
         http += "limitLicense=" + limitLicense;
         http += "&number=" + number;
         if(tags != null)
@@ -214,7 +214,7 @@ class home extends Thread
         join();
         HttpResponse<JsonNode> response = response_return;
 
-        JSONArray array = response.getBody().getObject().getJSONArray("recipesDB");
+        JSONArray array = response.getBody().getObject().getJSONArray("recipes");
         for(int i = 0; i < array.length(); i++)
         {
             JSONObject object = array.getJSONObject(i);
