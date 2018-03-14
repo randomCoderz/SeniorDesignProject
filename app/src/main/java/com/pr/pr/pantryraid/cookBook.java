@@ -27,16 +27,16 @@ class cookBook extends Thread
     }
 
     /**
-     * Searching for recipes by ingredients, ***doesnt work if ingredients are mispelled*** possible solution popup exception
+     * Searching for recipesDB by ingredients, ***doesnt work if ingredients are mispelled*** possible solution popup exception
      * @param fillIngredients Add information about the used and missing ingredients in each recipe.
-     * @param ingredients list of ingredients that the recipes should contain.
-     * @param limitLicense Whether to only show recipes with an attribution license.
-     * @param number The maximal number of recipes to return
+     * @param ingredients list of ingredients that the recipesDB should contain.
+     * @param limitLicense Whether to only show recipesDB with an attribution license.
+     * @param number The maximal number of recipesDB to return
      * @param ranking Whether to maximize used ingredients (1) or minimize missing ingredients (2) first
      */
     public ArrayList<recipe> getRecipesByIngredients(boolean fillIngredients, String[] ingredients, boolean limitLicense, int number, int ranking) throws InterruptedException, JSONException {
 
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?";
+        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipesDB/findByIngredients?";
         http += "fillIngredients=" + fillIngredients;
         http += "&ingredients=";
         for(int i = 0; i < ingredients.length; i++)
@@ -76,7 +76,7 @@ class cookBook extends Thread
 
     public ArrayList<step> getInstructions(int recipeID, boolean stepBreakdown) throws InterruptedException, JSONException {
 
-        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" +
+        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipesDB/" +
                 recipeID + "/analyzedInstructions?";
         http += "stepBreakdown=" + stepBreakdown;
 
