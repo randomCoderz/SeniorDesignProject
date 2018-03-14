@@ -3,10 +3,11 @@ package com.pr.pr.pantryraid.roomPersist;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 @Dao
 public interface recipesDAO {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void testPass(recipesDB r1);
 
     @Query("SELECT * FROM recipesDB")

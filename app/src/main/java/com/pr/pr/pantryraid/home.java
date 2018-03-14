@@ -38,6 +38,7 @@ class home extends Thread
      * @param query The (natural language) recipe search query.
      * @param type the type of the recipesDB. (main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink)
      */
+
     public ArrayList<recipe> searchRecipes(String[] cuisine, String diet[], String[] excludeIngredients, boolean instructionsRequired, String[] intolerances, boolean limitLicense, int number, int offset, String query, String type) throws InterruptedException, JSONException {
 
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipesDB/search?";
