@@ -1,9 +1,12 @@
-package com.pr.pr.pantryraid;
+package com.pr.pr.pantryraid.roomPersist;
+
+import android.arch.persistence.room.Entity;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.pr.pr.pantryraid.ingredient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,17 +14,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Kan on 2/26/18.
- */
-
-class pantry extends Thread
-{
-    HttpResponse<JsonNode> response_return;
-    String http;
+@Entity
+public class pantryDB extends Thread{
+    private HttpResponse<JsonNode> response_return;
+    private String http;
     private String KEY;
-
-    public pantry(String key) {
+    ingredient i;
+    public pantryDB(String key) {
         http = "";
         KEY = key;
     }
@@ -54,7 +53,7 @@ class pantry extends Thread
             image += ingredient.getString("image");
             int id = ingredient.getInt("id");
             String aisle = ingredient.getString("aisle");
-            ingredientList.add(new ingredient(id, name, null, null, image, aisle));
+            //ingredientList.add(new ingredient(id, name, null, null, image, aisle));
         }
         return ingredientList;
     }

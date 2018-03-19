@@ -22,7 +22,7 @@ public class dbInitialize{
         private final AppDatabase mdb;
         populateRecipesAsync(AppDatabase db){mdb = db;}
         protected Void doInBackground(final Void... params){
-            recipes r = new recipes("Hello",10,20);
+            recipesDB r = new recipesDB("Hello",10,20);
             mdb.recipeDao().testPass(r);
            // System.out.println(mdb.recipeDao().getRecipes());
             return null;

@@ -61,7 +61,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             setContentView(R.layout.activity_main);
             
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+//            setSupportActionBar(toolbar);
 
             //Database
             AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
@@ -70,7 +70,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
             //start of navigation drawer
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -103,8 +102,19 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         try {
             //make recipe list
-//            recipeList = h.randomRecipe(false, 5, null);
-            recipeList = h.searchRecipes(true, 10, "pasta");
+//            cookBook c = new cookBook(KEY);
+//            String[] ingredients = {"butter", "flour", "corn"};
+//            c.getInstructions(640058, true);
+//            c.start();
+//            c.join();
+//
+//            HttpResponse<JsonNode> response = c.getResponse();
+//            System.out.println(response.getBody().getArray().toString());
+
+            recipeList = h.randomRecipe(false, 5, null);
+
+
+//            recipeList = h.searchRecipes(true, 10, "pasta");
             //intialize adapter
             recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
 

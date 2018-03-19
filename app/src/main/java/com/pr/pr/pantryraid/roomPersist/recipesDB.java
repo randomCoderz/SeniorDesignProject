@@ -6,7 +6,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
-public class recipes {
+public class recipesDB {
     @PrimaryKey
     private int recipeId;
 
@@ -18,7 +18,7 @@ public class recipes {
     private String name;
 
     //Constructor for roomPersist
-    public recipes(String name, int recipeId, double price){
+    public recipesDB(String name, int recipeId, double price){
         this.name = name;
         this.recipeId = recipeId;
         this.price = price;
