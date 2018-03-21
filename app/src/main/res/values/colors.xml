@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name = "GreenIsGo" >#2BC016</color>
+    <color name = "Default" > #EDEDED</color>
 </resources>

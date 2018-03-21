@@ -2,6 +2,7 @@ package com.pr.pr.pantryraid;
 
 //Android Tools
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,25 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-
-import com.mashape.unirest.http.exceptions.UnirestException;
 import com.pr.pr.pantryraid.roomPersist.AppDatabase;
 import com.pr.pr.pantryraid.roomPersist.dbInitialize;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import org.json.JSONArray;
-
-import android.util.Log;
-
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 //Unirest, Spoonacular Imports, JSON
@@ -53,24 +40,22 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     private RecyclerView rv;
     private home h = new home(KEY);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
             setContentView(R.layout.activity_main);
-            
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
 
-            //Database
+        //Database
             AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
             dbInitialize dbI = new dbInitialize();
             dbI.populateRecipes(mdb);
 
 
             //start of navigation drawer
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -144,6 +129,8 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -170,10 +157,8 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_settings) {
-            frag = new Settings();
-
+            Intent intent = new Intent(this, main.class);
+            startActivity(intent);
         } else if (id == R.id.nav_cart) {
 
         } else if (id == R.id.nav_pantry) {
@@ -189,6 +174,10 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         }
         else if (id == R.id.nav_favorites) {
+
+        }
+        else if (id == R.id.nav_settings) {
+            frag = new Settings();
 
         }
         if(frag != null){
