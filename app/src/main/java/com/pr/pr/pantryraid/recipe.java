@@ -2,6 +2,7 @@ package com.pr.pr.pantryraid;
 import java.util.ArrayList;
 
 
+import android.arch.persistence.room.TypeConverters;
 import android.graphics.Bitmap;
 
 /**
