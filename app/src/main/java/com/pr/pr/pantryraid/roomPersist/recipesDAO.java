@@ -18,5 +18,4 @@ public interface recipesDAO {
 
     @Delete
     void delete(recipesDB recipe);
-
 }
