@@ -8,9 +8,8 @@ import android.content.Context;
 @Database(entities = {recipesDB.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
-
-    public abstract recipesDAO recipeDao();
-
+    public abstract recipesDAO recipesdao();
+    //public abstract pantryDAO pantrydao();
     public static AppDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class).build();
