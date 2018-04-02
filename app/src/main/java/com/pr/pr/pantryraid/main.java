@@ -160,7 +160,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             Intent intent = new Intent(this, main.class);
             startActivity(intent);
         } else if (id == R.id.nav_cart) {
-
+            frag = new shoppingCart();
         } else if (id == R.id.nav_pantry) {
 
         }
