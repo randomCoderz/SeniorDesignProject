@@ -1,7 +1,6 @@
 package com.pr.pr.pantryraid;
 
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 /**
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 public class shoppingCartLVHolder {
     TextView itemName;
-    FrameLayout btnPlus;
-    FrameLayout btnMinus;
+    at.markushi.ui.CircleButton btnPlus;
+    at.markushi.ui.CircleButton btnMinus;
     EditText itemQty;
 }

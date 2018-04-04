@@ -47,8 +47,8 @@ public class shoppingCartLVAdapter extends BaseAdapter{
             listViewHolder = new shoppingCartLVHolder();
             listViewHolder.itemName = row.findViewById(R.id.item);
             listViewHolder.itemQty = row.findViewById(R.id.quantityNumber);
-            listViewHolder.btnMinus = row.findViewById(R.id.minus);
-            listViewHolder.btnPlus = row.findViewById(R.id.plus);
+            listViewHolder.btnMinus = row.findViewById(R.id.minusButton);
+            listViewHolder.btnPlus = row.findViewById(R.id.plusButton);
             row.setTag(listViewHolder);
         }
         else

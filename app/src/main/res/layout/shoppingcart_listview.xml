@@ -14,6 +14,7 @@
         android:clickable="true">
 
     <at.markushi.ui.CircleButton
+        android:id="@+id/plusButton"
         android:layout_width="40dip"
         android:layout_height="40dip"
         app:cb_color="#99CC00"
@@ -35,6 +36,7 @@
         android:clickable="true">
 
         <at.markushi.ui.CircleButton
+            android:id="@+id/minusButton"
             android:layout_width="40dip"
             android:layout_height="40dip"
             app:cb_color="#A50104"

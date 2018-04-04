@@ -1,5 +1,6 @@
 package com.pr.pr.pantryraid;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -26,6 +29,7 @@ public class Settings extends Fragment {
     Button expirationDaily;
     Button expirationWeekly;
     Button expirationMonthly;
+    Button test;
     savedSettings s;
     Button saveSettings;
     SharedPreferences mpref;
@@ -47,6 +51,7 @@ public class Settings extends Fragment {
             s = gson.fromJson(json,savedSettings.class);
         }
 
+        test = (Button) rootView.findViewById(R.id.test);
         vegan = (Switch)rootView.findViewById(R.id.vegan);
         saveSettings = (Button)rootView.findViewById(R.id.saveSettings);
         calendar = (Switch)rootView.findViewById(R.id.calendarSwitch);
@@ -328,8 +333,24 @@ public class Settings extends Fragment {
             }
         });
 
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<items> products;
+                products = new ArrayList<items>();
+                products.add(new items("one"));
+                products.add(new items("two"));
+                products.add(new items("three"));
+                products.add(new items("four"));
+                Intent i = new Intent(getActivity(), TestingClass.class);
+                i.putExtra("products", products);
+                startActivity(i);
+            }
+        });
+
         return rootView;
     }
+
 
 
 }
