@@ -14,8 +14,9 @@ public class shoppingCart extends Fragment{
 
     private ListView listView;
     private shoppingCartLVAdapter listAdapter;
-    ArrayList<items> products;
+    ArrayList<items> products = new ArrayList<>();
     Button btnPlaceOrder;
+    ArrayList<items> productOrders = new ArrayList<>();
 
     public shoppingCart(){
 
@@ -24,8 +25,8 @@ public class shoppingCart extends Fragment{
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_shoppingcart, container, false);
         getProduct();
-        products  = new ArrayList<>();
-        products = (ArrayList<items>) getActivity().getIntent().getSerializableExtra("products");
+        //later use
+        //products = (ArrayList<items>) getActivity().getIntent().getSerializableExtra("products");
         listView = (ListView) rootView.findViewById(R.id.customCartListView);
         listAdapter = new shoppingCartLVAdapter(getActivity(),products);
         listView.setAdapter(listAdapter);
@@ -40,24 +41,24 @@ public class shoppingCart extends Fragment{
     }
 
     private void placeOrder()
-    {/*
+    {
         //sending
-        Intent i = new Intent(getActivity(), HomePage.class);
-        i.putExtra("products", products);
-        startActivity(i);
+        //Intent i = new Intent(getActivity(), HomePage.class);
+       // i.putExtra("products", products);
+       // startActivity(i);
 
-//        productOrders.clear();
-//        for(int i=0;i<listAdapter.listProducts.size();i++)
-//        {
-//            if(listAdapter.listProducts.get(i).CartQuantity > 0)
-//            {
-//                items products = new items(
-//                        listAdapter.listProducts.get(i).itemName
-//                );
-//                products.CartQuantity = listAdapter.listProducts.get(i).CartQuantity;
-//                productOrders.add(products);
-//            }
-//        }*/
+        productOrders.clear();
+        for(int i=0;i<listAdapter.listProducts.size();i++)
+        {
+            if(listAdapter.listProducts.get(i).CartQuantity > 0)
+            {
+                items products = new items(
+                        listAdapter.listProducts.get(i).itemName
+                );
+                products.CartQuantity = listAdapter.listProducts.get(i).CartQuantity;
+                productOrders.add(products);
+            }
+        }
     }
 
     public void getProduct() {
