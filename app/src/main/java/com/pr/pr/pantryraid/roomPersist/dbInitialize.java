@@ -2,29 +2,38 @@ package com.pr.pr.pantryraid.roomPersist;
 
 import android.os.AsyncTask;
 
+import com.pr.pr.pantryraid.ingredient;
+
+import java.util.ArrayList;
+
 public class dbInitialize{
 
     public static void populateRecipes(AppDatabase db){
-            populateRecipesAsync task = new populateRecipesAsync(db);
-            task.execute();
-        }
+        populateDBAsync task = new populateDBAsync(db);
+        task.execute();
+    }
 
+    public static void fetchById(AppDatabase mdb, int id){
+        mdb.recipesdao().getRecipeFromID(id);
+    }
 
-//    public static void fetch(AppDatabase db){
-//        for(int i = 0; i < 100; i++) {
-//            System.out.println("IM IN THE FETCH");
-//        }
-//        System.out.println(db.recipeDao().getRecipes());
-//    }
+    public static void populateWithData(AppDatabase db){
+        //int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, String instructions
+        ArrayList<ingredient> test = new ArrayList<>();
+        test.add(new ingredient(1, "hel", "7"));
+        test.add(new ingredient(2, "hell", "7"));
+        test.add(new ingredient(3, "hello", "7"));
 
+        db.recipesdao().insertRecipes(new recipesDB(20, "Tester", "lololol", 5, null, "HI"));
+    }
 
-    private static class populateRecipesAsync extends AsyncTask<Void, Void, Void>{
+    private static class populateDBAsync extends AsyncTask<Void, Void, Void>{
         private final AppDatabase mdb;
-        populateRecipesAsync(AppDatabase db){mdb = db;}
+
+        populateDBAsync(AppDatabase db){mdb = db;}
+
         protected Void doInBackground(final Void... params){
-            recipesDB r = new recipesDB("Hello",10,20);
-            mdb.recipeDao().testPass(r);
-           // System.out.println(mdb.recipeDao().getRecipes());
+            populateWithData(mdb);
             return null;
         }
     }

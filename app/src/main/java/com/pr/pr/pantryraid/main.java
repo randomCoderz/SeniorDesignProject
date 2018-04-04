@@ -67,6 +67,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
             dbInitialize dbI = new dbInitialize();
             dbI.populateRecipes(mdb);
+            dbI.fetchById(mdb, 20);
 
 
             //start of navigation drawer

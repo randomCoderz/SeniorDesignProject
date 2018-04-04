@@ -13,14 +13,14 @@ public class ingredient
     String aisle;
     int photoID;
 
-    ingredient(int id, String name, String photoURL)
+    public ingredient(int id, String name, String photoURL)
     {
         this.id = id;
         this.name = name;
         this.photoURL = photoURL;
     }
 
-    ingredient(int id, String name, String amount, int photoID)
+    public ingredient(int id, String name, String amount, int photoID)
     {
         this.id = id;
         this.name = name;
@@ -28,7 +28,7 @@ public class ingredient
         this.photoID = photoID;
     }
 
-    ingredient(int id, String name, String amount, String photoURL)
+    public ingredient(int id, String name, String amount, String photoURL)
     {
         this.id = id;
         this.name = name;
@@ -37,7 +37,7 @@ public class ingredient
     }
 
 
-    ingredient(int id, String name, String amount, String unit, String photoURL, String aisle)
+    public ingredient(int id, String name, String amount, String unit, String photoURL, String aisle)
     {
         this.id = id;
         this.name = name;
