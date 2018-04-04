@@ -16,7 +16,7 @@ public class recipe
     int readyInMinutes;
     ArrayList<ingredient> ingredients = new ArrayList<>();
     String instructions;
-    ArrayList<String> analyzedInstructions;
+    ArrayList<step> analyzedInstructions;
 
     public recipe(int id, String name)
     {
