@@ -32,14 +32,14 @@ public class recipesDB {
     @ColumnInfo(name = "readyInMinutes")
     private int readyInMinutes;
 
+
     @ColumnInfo(name = "ingredients")
-    @TypeConverters(DataConverter.class)
     private ArrayList<ingredient> ingredients;
 
     @ColumnInfo(name = "instructions")
     private String instructions;
 
-    @TypeConverters(DataConverter2.class)
+    //@TypeConverters({DataConverter2.class})
     @ColumnInfo(name = "analyzedInstructions")
     private ArrayList<step> analyzedInstructions;
 
