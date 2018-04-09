@@ -13,18 +13,18 @@ public class dbInitialize{
         task.execute();
     }
 
-    public static void fetchById(AppDatabase mdb, int id){
-        mdb.recipesdao().getRecipeFromID(id);
-    }
+//    public static void fetchById(AppDatabase mdb, int id){
+//        mdb.recipesdao().getRecipeFromID(id);
+//    }
 
     public static void populateWithData(AppDatabase db){
         //int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, String instructions
-        ArrayList<ingredient> test = new ArrayList<>();
-        test.add(new ingredient(1, "hel", "7"));
-        test.add(new ingredient(2, "hell", "7"));
-        test.add(new ingredient(3, "hello", "7"));
+//        ArrayList<ingredient> test = new ArrayList<>();
+//        test.add(new ingredient(1, "hel", "7"));
+//        test.add(new ingredient(2, "hell", "7"));
+//        test.add(new ingredient(3, "hello", "7"));
 
-        db.recipesdao().insertRecipes(new recipesDB(20, "Tester", "lololol", 5, null, "HI"));
+        db.recipesdao().insertRecipes(new recipesDB(20, "Tester", "lololol", 5));
     }
 
     private static class populateDBAsync extends AsyncTask<Void, Void, Void>{

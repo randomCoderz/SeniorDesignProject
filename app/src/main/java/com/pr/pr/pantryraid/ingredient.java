@@ -1,5 +1,7 @@
 package com.pr.pr.pantryraid;
 
+import android.arch.persistence.room.Dao;
+
 import java.util.ArrayList;
 import java.util.List;
 
