@@ -6,8 +6,8 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-@Database(entities = {recipesDB.class}, version = 2, exportSchema = false)
-@TypeConverters(DataConverter.class)
+@Database(entities = {recipesDB.class}, version = 1, exportSchema = false)
+@TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
     public abstract recipesDAO recipesdao();

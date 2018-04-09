@@ -18,13 +18,12 @@ public class dbInitialize{
 //    }
 
     public static void populateWithData(AppDatabase db){
-        //int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, String instructions
-//        ArrayList<ingredient> test = new ArrayList<>();
-//        test.add(new ingredient(1, "hel", "7"));
-//        test.add(new ingredient(2, "hell", "7"));
-//        test.add(new ingredient(3, "hello", "7"));
+        ArrayList<Ingredient> test = new ArrayList<>();
+        test.add(new Ingredient(1, "hel", "7"));
+        test.add(new Ingredient(2, "hell", "7"));
+        test.add(new Ingredient(3, "hello", "7"));
 
-        db.recipesdao().insertRecipes(new recipesDB(20, "Tester", "lololol", 5));
+        db.recipesdao().insertRecipes(new recipesDB(20, "Tester", "lololol", 5, test, "Hello"));
     }
 
     private static class populateDBAsync extends AsyncTask<Void, Void, Void>{

@@ -1,6 +1,6 @@
 package com.pr.pr.pantryraid.roomPersist;
 
-public class ingredient
+public class Ingredient
 {
     int id;
     String name;
@@ -10,14 +10,14 @@ public class ingredient
     String aisle;
     int photoID;
 
-    public ingredient(int id, String name, String photoURL)
+    public Ingredient(int id, String name, String photoURL)
     {
         this.id = id;
         this.name = name;
         this.photoURL = photoURL;
     }
 
-    public ingredient(int id, String name, String amount, int photoID)
+    public Ingredient(int id, String name, String amount, int photoID)
     {
         this.id = id;
         this.name = name;
@@ -25,7 +25,7 @@ public class ingredient
         this.photoID = photoID;
     }
 
-    public ingredient(int id, String name, String amount, String photoURL)
+    public Ingredient(int id, String name, String amount, String photoURL)
     {
         this.id = id;
         this.name = name;
@@ -34,7 +34,7 @@ public class ingredient
     }
 
 
-    public ingredient(int id, String name, String amount, String unit, String photoURL, String aisle)
+    public Ingredient(int id, String name, String amount, String unit, String photoURL, String aisle)
     {
         this.id = id;
         this.name = name;

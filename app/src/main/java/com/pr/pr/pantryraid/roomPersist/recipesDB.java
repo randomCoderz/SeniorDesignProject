@@ -2,10 +2,7 @@ package com.pr.pr.pantryraid.roomPersist;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -27,14 +24,14 @@ public class recipesDB {
     @ColumnInfo(name = "readyInMinutes")
     private int readyInMinutes;
 
-//    @ColumnInfo(name = "ingredients")
-//    private ArrayList<ingredient> ingredients;
+    @ColumnInfo(name = "ingredients")
+    private ArrayList<Ingredient> ingredients;
 
     @ColumnInfo(name = "instructions")
     private String instructions;
 
-//    @ColumnInfo(name = "analyzedInstructions")
-//    private ArrayList<step> analyzedInstructions;
+    @ColumnInfo(name = "analyzedInstructions")
+    private ArrayList<Step> analyzedInstructions;
 
 //    //Constructor for roomPersist
 //    public recipesDB(int id, String name)
@@ -51,27 +48,26 @@ public class recipesDB {
 //        this.url = url;
 //    }
 //
-    public recipesDB(int id, String name, String url, int readyInMinutes)
-    {
-        this.id = id;
-        this.name = name;
-        this.url = url;
-        this.readyInMinutes = readyInMinutes;
-    }
 
-//    @Ignore
-//    public recipesDB(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, String instructions)
+//    public recipesDB(int id, String name, String url, int readyInMinutes)
 //    {
 //        this.id = id;
 //        this.name = name;
 //        this.url = url;
 //        this.readyInMinutes = readyInMinutes;
-//        this.ingredients = ingredients;
-//        this.instructions = instructions;
 //    }
 
-    //Getters and Setters
+    public recipesDB(int id, String name, String url, int readyInMinutes, ArrayList<Ingredient> ingredients, String instructions)
+    {
+        this.id = id;
+        this.name = name;
+        this.url = url;
+        this.readyInMinutes = readyInMinutes;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+    }
 
+    //Getters and Setters
     @NonNull
     public int getId() {
         return id;
@@ -105,13 +101,13 @@ public class recipesDB {
         this.readyInMinutes = readyInMinutes;
     }
 
-//    public ArrayList<ingredient> getIngredients() {
-//        return ingredients;
-//    }
-//
-//    public void setIngredients(ArrayList<ingredient> ingredients) {
-//        this.ingredients = ingredients;
-//    }
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public String getInstructions() {
         return instructions;
@@ -121,12 +117,12 @@ public class recipesDB {
         this.instructions = instructions;
     }
 
-//    public ArrayList<step> getAnalyzedInstructions() {
-//        return analyzedInstructions;
-//    }
-//
-//    public void setAnalyzedInstructions(ArrayList<step> analyzedInstructions) {
-//        this.analyzedInstructions = analyzedInstructions;
-//    }
+    public ArrayList<Step> getAnalyzedInstructions() {
+        return analyzedInstructions;
+    }
+
+    public void setAnalyzedInstructions(ArrayList<Step> analyzedInstructions) {
+        this.analyzedInstructions = analyzedInstructions;
+    }
 }
 

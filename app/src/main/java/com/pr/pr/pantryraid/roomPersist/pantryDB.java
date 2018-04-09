@@ -6,7 +6,7 @@
 //import com.mashape.unirest.http.JsonNode;
 //import com.mashape.unirest.http.Unirest;
 //import com.mashape.unirest.http.exceptions.UnirestException;
-//import com.pr.pr.pantryraid.ingredient;
+//import com.pr.pr.pantryraid.Ingredient;
 //
 //import org.json.JSONArray;
 //import org.json.JSONException;
@@ -19,13 +19,13 @@
 //    private HttpResponse<JsonNode> response_return;
 //    private String http;
 //    private String KEY;
-//    ingredient i;
+//    Ingredient i;
 //    public pantryDB(String key) {
 //        http = "";
 //        KEY = key;
 //    }
 //
-//    public ArrayList<ingredient> searchIngredient(String intolerances, boolean metaInformation, int number, String query) throws InterruptedException, JSONException {
+//    public ArrayList<Ingredient> searchIngredient(String intolerances, boolean metaInformation, int number, String query) throws InterruptedException, JSONException {
 //        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?";
 //        if(intolerances != null)
 //        {
@@ -38,7 +38,7 @@
 //        }
 //        http += "query=" + query;
 //
-//        ArrayList<ingredient> ingredientList = new ArrayList<>();
+//        ArrayList<Ingredient> ingredientList = new ArrayList<>();
 //
 //        start();
 //        join();
@@ -47,13 +47,13 @@
 //        JSONArray array = response.getBody().getArray();
 //        for(int i = 0; i < array.length(); i++)
 //        {
-//            JSONObject ingredient = array.getJSONObject(i);
-//            String name = ingredient.getString("name");
+//            JSONObject Ingredient = array.getJSONObject(i);
+//            String name = Ingredient.getString("name");
 //            String image = "https://spoonacular.com/cdn/ingredients_100x100/";
-//            image += ingredient.getString("image");
-//            int id = ingredient.getInt("id");
-//            String aisle = ingredient.getString("aisle");
-//            //ingredientList.add(new ingredient(id, name, null, null, image, aisle));
+//            image += Ingredient.getString("image");
+//            int id = Ingredient.getInt("id");
+//            String aisle = Ingredient.getString("aisle");
+//            //ingredientList.add(new Ingredient(id, name, null, null, image, aisle));
 //        }
 //        return ingredientList;
 //    }

@@ -8,13 +8,13 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 
-public class step {
+public class Step {
     int number;
     String step_description;
     ArrayList<ingredient> ingredients = new ArrayList<>();
     JSONArray equipment;
 
-    public step(int number, String step_description, ArrayList<ingredient> ingredients, JSONArray equipment)
+    public Step(int number, String step_description, ArrayList<ingredient> ingredients, JSONArray equipment)
     {
         this.number = number;
         this.step_description = step_description;
