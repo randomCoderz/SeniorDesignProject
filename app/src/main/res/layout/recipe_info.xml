@@ -21,7 +21,7 @@
         android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
         android:text="@string/addToCalendar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +33,7 @@
         android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="2dp"
         android:text="@string/selectedToCart"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,24 +43,27 @@
 
     <Button
         android:id="@+id/missingToCart"
-        android:layout_width="136dp"
+        android:layout_width="130dp"
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="2dp"
         android:text="@string/missingToCart"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/selectedToCart"
-        tools:layout_editor_absoluteX="139dp" />
+        app:layout_constraintEnd_toStartOf="@+id/addToCalendar"
+        app:layout_constraintStart_toEndOf="@+id/selectedToCart" />
 
     <TextView
         android:id="@+id/recipeName"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginBottom="1dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Recipe Name"
         app:layout_constraintBottom_toTopOf="@+id/ingredientList"
-        app:layout_constraintStart_toEndOf="@+id/completed"
-        app:layout_constraintEnd_toStartOf="@+id/instructions"/>
+        app:layout_constraintEnd_toStartOf="@+id/instructions"
+        app:layout_constraintStart_toEndOf="@+id/completed" />
 
     <Button
         android:id="@+id/completed"

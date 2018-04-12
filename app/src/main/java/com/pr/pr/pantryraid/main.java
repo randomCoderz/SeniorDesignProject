@@ -48,18 +48,18 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
             setContentView(R.layout.activity_main);
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            Toolbar toolbar = findViewById(R.id.toolbar);
 
         //Database
             AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
             dbInitialize dbI = new dbInitialize();
-            dbI.populateRecipes(mdb);
+            dbInitialize.populateRecipes(mdb);
 
 
             //start of navigation drawer
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,13 +68,13 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
             //end of navigation drawer
 
@@ -125,7 +125,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -184,6 +184,10 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         }
         else if (id == R.id.nav_recipe) {
 
+            Intent recipe = new Intent(main.this, recipe.class);
+            startActivity(recipe);
+
+
         }
         else if (id == R.id.nav_favorites) {
 
@@ -197,7 +201,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

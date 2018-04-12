@@ -39,9 +39,9 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
         recipeViewHolder(View itemView)
         {
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            recipeName = (TextView) itemView.findViewById(R.id.cvName);
-            recipeImage = (ImageView) itemView.findViewById(R.id.cvPhoto);
+            cv = itemView.findViewById(R.id.cv);
+            recipeName = itemView.findViewById(R.id.cvName);
+            recipeImage = itemView.findViewById(R.id.cvPhoto);
 
 
         }

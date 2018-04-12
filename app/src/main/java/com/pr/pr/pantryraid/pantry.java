@@ -53,7 +53,7 @@ class pantry extends Thread
             image += ingredient.getString("image");
             int id = ingredient.getInt("id");
             String aisle = ingredient.getString("aisle");
-            ingredientList.add(new ingredient(id, name, null, null, image, aisle));
+            ingredientList.add(new ingredient(id, name, "", "", image, aisle, false));
         }
         return ingredientList;
     }

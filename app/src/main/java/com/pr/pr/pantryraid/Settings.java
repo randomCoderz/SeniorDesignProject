@@ -48,16 +48,16 @@ public class Settings extends Fragment {
             s = gson.fromJson(json,savedSettings.class);
         }
 
-        vegan = (Switch)rootView.findViewById(R.id.vegan);
-        saveSettings = (Button)rootView.findViewById(R.id.saveSettings);
-        calendar = (Switch)rootView.findViewById(R.id.calendarSwitch);
-        expNotification = (Switch)rootView.findViewById(R.id.expirationSwitch);
-        calendarDaily = (Button)rootView.findViewById(R.id.calendarDaily);
-        calendarWeekly = (Button)rootView.findViewById(R.id.calendarWeekly);
-        calendarMonthly = (Button)rootView.findViewById(R.id.calendarMonthly);
-        expirationDaily = (Button)rootView.findViewById(R.id.expirationDaily);
-        expirationWeekly = (Button)rootView.findViewById(R.id.expirationWeekly);
-        expirationMonthly = (Button)rootView.findViewById(R.id.expirationMonthly);
+        vegan = rootView.findViewById(R.id.vegan);
+        saveSettings = rootView.findViewById(R.id.saveSettings);
+        calendar = rootView.findViewById(R.id.calendarSwitch);
+        expNotification = rootView.findViewById(R.id.expirationSwitch);
+        calendarDaily = rootView.findViewById(R.id.calendarDaily);
+        calendarWeekly = rootView.findViewById(R.id.calendarWeekly);
+        calendarMonthly = rootView.findViewById(R.id.calendarMonthly);
+        expirationDaily = rootView.findViewById(R.id.expirationDaily);
+        expirationWeekly = rootView.findViewById(R.id.expirationWeekly);
+        expirationMonthly = rootView.findViewById(R.id.expirationMonthly);
 
         if(s.getVegan() == false){
             vegan.setChecked(false);
