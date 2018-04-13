@@ -74,7 +74,7 @@
         android:textSize="30dp"
         android:layout_below="@+id/calendarWeekly"
         android:layout_centerHorizontal="true"
-
+        android:textColor="@color/colorPrimaryDark"
         />
 
     <Switch

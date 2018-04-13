@@ -184,8 +184,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         }
         else if (id == R.id.nav_recipe) {
 
-            Intent recipe = new Intent(main.this, recipe.class);
-            startActivity(recipe);
+            frag = new recipe();
 
 
         }
