@@ -193,6 +193,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
                 e.printStackTrace();
             }
 
+
         }
         else if (id == R.id.nav_favorites) {
 

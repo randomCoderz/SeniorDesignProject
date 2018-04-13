@@ -1,22 +1,25 @@
 package com.pr.pr.pantryraid;
 
-import android.view.LayoutInflater;
-import android.widget.BaseAdapter;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 
 public class ingredientsLVAdapter extends BaseAdapter {
     Context context;
     ArrayList<ingredient> ingredientList;
+
     private static LayoutInflater inflater = null;
 
     public ingredientsLVAdapter(Context context, ArrayList<ingredient> ingredientList)
     {
+        this.context = context;
         this.ingredientList = ingredientList;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

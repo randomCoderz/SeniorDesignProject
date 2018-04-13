@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_light_background"
+    android:background="@color/primaryLight"
     android:paddingTop="?android:attr/actionBarSize"
 >
 
@@ -15,6 +15,7 @@
         android:gravity="center"
         android:text="Calendar Notifications"
         android:textSize="30dp"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_centerHorizontal="true"
      />
 
@@ -37,7 +38,10 @@
         android:layout_below="@+id/calendarSwitch"
         android:layout_toLeftOf="@id/calendarWeekly"
         android:text="Daily"
-    />
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+
+        />
 
     <Button
         android:id="@+id/calendarWeekly"
@@ -45,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/calendarSwitch"
         android:text="Weekly"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
         android:layout_centerHorizontal="true"
         />
 
@@ -55,7 +61,10 @@
         android:layout_below="@+id/calendarSwitch"
         android:layout_toRightOf="@id/calendarWeekly"
         android:text="Monthly"
-     />
+        android:textColor="@color/White"
+        android:background="@color/colorPrimary"
+
+        />
 
     <TextView
         android:id="@+id/textView3"
@@ -65,7 +74,7 @@
         android:textSize="30dp"
         android:layout_below="@+id/calendarWeekly"
         android:layout_centerHorizontal="true"
-
+        android:textColor="@color/colorPrimaryDark"
         />
 
     <Switch
@@ -84,6 +93,8 @@
         android:layout_below="@+id/expirationSwitch"
         android:layout_toLeftOf="@id/expirationWeekly"
         android:text="Daily"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
         />
 
 
@@ -95,6 +106,8 @@
         android:layout_below="@+id/expirationSwitch"
         android:text="Weekly"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
         />
 
     <Button
@@ -104,6 +117,8 @@
         android:layout_toRightOf="@id/expirationWeekly"
         android:layout_below="@+id/expirationSwitch"
         android:text="Monthly"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
 />
 
 
@@ -123,6 +138,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/vegan"
         android:text="Save Settings"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
         />
 
 

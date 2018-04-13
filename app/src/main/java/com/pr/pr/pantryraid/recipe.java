@@ -1,14 +1,22 @@
 package com.pr.pr.pantryraid;
+
 import java.util.ArrayList;
 
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.support.v4.app.Fragment;
+
+
 
 /**
  * Created by Kan on 2/22/18.
@@ -20,13 +28,13 @@ public class recipe extends Fragment
     String name;
     String url;
     int readyInMinutes;
+    private ingredientsLVAdapter listAdapter;
     ArrayList<ingredient> ingredients = new ArrayList<>();
     String instructions;
     ArrayList<step> analyzedInstructions;
     private ListView listView;
 
-    public recipe()
-    {
+    public recipe() {
 
     }
 
@@ -37,6 +45,7 @@ public class recipe extends Fragment
         listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
         return rootView;
     }
+
 
 
     @SuppressLint("ValidFragment")
@@ -65,7 +74,8 @@ public class recipe extends Fragment
 
 
     @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, String instructions)
+    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<
+            ingredient > ingredients, String instructions)
     {
         this.id = id;
         this.name = name;
@@ -74,6 +84,5 @@ public class recipe extends Fragment
         this.ingredients = ingredients;
         this.instructions = instructions;
     }
-    
 
 }
