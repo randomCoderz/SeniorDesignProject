@@ -27,10 +27,10 @@ public class shoppingCart extends Fragment{
         getProduct();
         //later use
         //products = (ArrayList<items>) getActivity().getIntent().getSerializableExtra("products");
-        listView = (ListView) rootView.findViewById(R.id.customCartListView);
+        listView = rootView.findViewById(R.id.customCartListView);
         listAdapter = new shoppingCartLVAdapter(getActivity(),products);
         listView.setAdapter(listAdapter);
-        btnPlaceOrder = (Button) rootView.findViewById(R.id.btnPlaceOrder);
+        btnPlaceOrder = rootView.findViewById(R.id.btnPlaceOrder);
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

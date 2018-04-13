@@ -10,6 +10,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         debug {
@@ -36,7 +37,7 @@ android {
 
 dependencies {
     implementation 'com.github.markushi:circlebutton:1.1'
-    implementation 'com.google.code.gson:gson:2.7'
+//    implementation 'com.google.code.gson:gson:2.7'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
@@ -66,4 +67,7 @@ dependencies {
     implementation files('libs/unirest-java-1.4.10-SNAPSHOT-withDependency-ShadedForAndroid.jar')
 
     implementation files('libs/picasso-2.5.2.jar')
+    implementation files('libs/gson-2.7.jar')
+
+
 }

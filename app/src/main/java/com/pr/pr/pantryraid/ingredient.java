@@ -12,6 +12,7 @@ public class ingredient
     String photoURL;
     String aisle;
     int photoID;
+    boolean selected;
 
     ingredient(int id, String name, String photoURL)
     {
@@ -37,7 +38,7 @@ public class ingredient
     }
 
 
-    ingredient(int id, String name, String amount, String unit, String photoURL, String aisle)
+    ingredient(int id, String name, String amount, String unit, String photoURL, String aisle, boolean selected)
     {
         this.id = id;
         this.name = name;
@@ -45,5 +46,6 @@ public class ingredient
         this.unit = unit;
         this.photoURL = photoURL;
         this.aisle = aisle;
+        this.selected = selected;
     }
 }

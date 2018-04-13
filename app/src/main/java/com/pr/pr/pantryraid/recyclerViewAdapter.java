@@ -26,10 +26,10 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
         ingredientViewHolder(View itemView)
         {
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            ingredientName = (TextView) itemView.findViewById(R.id.cvName);
-            ingredientDescription = (TextView) itemView.findViewById(R.id.cvDescription);
-            ingredientImage = (ImageView) itemView.findViewById(R.id.cvPhoto);
+            cv = itemView.findViewById(R.id.cv);
+            ingredientName = itemView.findViewById(R.id.cvName);
+            ingredientDescription = itemView.findViewById(R.id.cvDescription);
+            ingredientImage = itemView.findViewById(R.id.cvPhoto);
         }
     }
 
