@@ -14,17 +14,13 @@ public class DataConverter{
 
 
     @TypeConverter
-    public static ArrayList<ingredient> toIngredient(String s){
-        if(s == null){
-    public static String getIngredients(ArrayList<Ingredient> ingredients){
-        if(ingredients == null){
+    public static String getIngredients(ArrayList<Ingredient> i){
+        if(i == null){
             return null;
         }
-
         Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<ingredient>>(){}.getType();
-        ArrayList<ingredient> ingredients = gson.fromJson(s, listType);
-        return ingredients;
+        String json = gson.toJson(i);
+        return json;
     }
 
     @TypeConverter

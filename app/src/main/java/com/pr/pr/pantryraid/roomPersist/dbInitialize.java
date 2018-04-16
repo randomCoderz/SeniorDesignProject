@@ -2,8 +2,6 @@ package com.pr.pr.pantryraid.roomPersist;
 
 import android.os.AsyncTask;
 
-import com.pr.pr.pantryraid.ingredient;
-
 import java.util.ArrayList;
 
 public class dbInitialize{
@@ -13,9 +11,10 @@ public class dbInitialize{
         task.execute();
     }
 
-//    public static void fetchById(AppDatabase mdb, int id){
-//        mdb.recipesdao().getRecipeFromID(id);
-//    }
+    public static void fetchById(AppDatabase mdb, int id){
+        System.out.println("!!!!!!!!!!DARUDE SANDSTORM!!!!!!!!!!!!");
+        System.out.println(mdb.recipesdao().getRecipeFromID(id));
+    }
 
     public static void populateWithData(AppDatabase db){
         ArrayList<Ingredient> test = new ArrayList<>();
@@ -33,6 +32,7 @@ public class dbInitialize{
 
         protected Void doInBackground(final Void... params){
             populateWithData(mdb);
+            //fetchById(mdb,20);
             return null;
         }
     }

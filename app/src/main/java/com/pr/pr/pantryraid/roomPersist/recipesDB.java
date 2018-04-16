@@ -3,8 +3,6 @@ package com.pr.pr.pantryraid.roomPersist;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverter;
-import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -29,42 +27,11 @@ public class recipesDB {
     @ColumnInfo(name = "ingredients")
     private ArrayList<Ingredient> ingredients;
 
-//    public void setIngredients(ArrayList<String> ingredients) {
-//        this.ingredients = ingredients;
-//    }
-
     @ColumnInfo(name = "instructions")
     private String instructions;
 
     @ColumnInfo(name = "analyzedInstructions")
     private ArrayList<Step> analyzedInstructions;
-
-//@ColumnInfo(name = "analyzedInstructions")
-    //private ArrayList<step> analyzedInstructions;
-
-//    //Constructor for roomPersist
-//    public recipesDB(int id, String name)
-//    {
-//        this.id = id;
-//        this.name = name;
-//    }
-//
-//    @Ignore
-//    public recipesDB(int id, String name, String url)
-//    {
-//        this.id = id;
-//        this.name = name;
-//        this.url = url;
-//    }
-//
-
-//    public recipesDB(int id, String name, String url, int readyInMinutes)
-//    {
-//        this.id = id;
-//        this.name = name;
-//        this.url = url;
-//        this.readyInMinutes = readyInMinutes;
-//    }
 
     public recipesDB(int id, String name, String url, int readyInMinutes, ArrayList<Ingredient> ingredients, String instructions)
     {

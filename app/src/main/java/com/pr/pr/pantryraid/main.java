@@ -20,30 +20,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-
-import com.mashape.unirest.http.exceptions.UnirestException;
 import com.pr.pr.pantryraid.roomPersist.AppDatabase;
 import com.pr.pr.pantryraid.roomPersist.dbInitialize;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import org.json.JSONArray;
-
-import android.util.Log;
-
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 //Unirest, Spoonacular Imports, JSON
 
-public class main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView navigationView;
     private static final String TAG = "MainActivity";
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
@@ -58,19 +44,16 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         super.onCreate(savedInstanceState);
 
-            setContentView(R.layout.activity_main);
-            
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//            setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_main);
 
-            //Database
-            AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-            dbInitialize dbI = new dbInitialize();
-            dbI.populateRecipes(mdb);
-            //dbI.fetchById(mdb, 20);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        //Database Here
+        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+        dbInitialize dbI = new dbInitialize();
+        dbI.populateRecipes(mdb);
 
-            //start of navigation drawer
+        //start of navigation drawer
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -90,33 +73,20 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-            //end of navigation drawer
+        //end of navigation drawer
 
-            rv = findViewById(R.id.rv);
+        rv = findViewById(R.id.rv);
 
-            LinearLayoutManager llm = new LinearLayoutManager(this);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
 
-            rv.setHasFixedSize(true);
-            rv.setLayoutManager(llm);
-
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
 
 
         try {
-            //make recipe list
-//            cookBook c = new cookBook(KEY);
-//            String[] ingredients = {"butter", "flour", "corn"};
-//            c.getInstructions(640058, true);
-//            c.start();
-//            c.join();
-//
-//            HttpResponse<JsonNode> response = c.getResponse();
-//            System.out.println(response.getBody().getArray().toString());
 
             recipeList = h.randomRecipe(false, 5, null);
 
-
-//            recipeList = h.searchRecipes(true, 10, "pasta");
-            //intialize adapter
             recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
 
             rv.setAdapter(adapter);
@@ -130,8 +100,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
-    private void initializeAdapter()
-    {
+    private void initializeAdapter() {
         recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
 
         rv.setAdapter(adapter);
@@ -189,20 +158,16 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         } else if (id == R.id.nav_pantry) {
 
-        }
-         else if (id == R.id.nav_cookbook) {
+        } else if (id == R.id.nav_cookbook) {
+
+        } else if (id == R.id.nav_calendar) {
+
+        } else if (id == R.id.nav_recipe) {
+
+        } else if (id == R.id.nav_favorites) {
 
         }
-        else if (id == R.id.nav_calendar) {
-
-        }
-        else if (id == R.id.nav_recipe) {
-
-        }
-        else if (id == R.id.nav_favorites) {
-
-        }
-        if(frag != null){
+        if (frag != null) {
             FragmentManager fragman = getSupportFragmentManager();
             fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 

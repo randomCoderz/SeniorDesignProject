@@ -1,16 +1,11 @@
 package com.pr.pr.pantryraid.roomPersist;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import android.arch.persistence.room.TypeConverter;
-import android.arch.persistence.room.TypeConverters;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -19,15 +14,14 @@ public interface  recipesDAO {
     void insertRecipes(recipesDB r1);
 
     @Query("SELECT * FROM recipes")
-    List<recipesDB> allRecipes();
+    List <recipesDB> allRecipes();
 
-//    @Query("SELECT * FROM recipes WHERE recipeId LIKE :id")
-//    void getRecipeFromID(int id);
+    @Query("SELECT * FROM recipes WHERE recipeId LIKE :id")
+    List <recipesDB> getRecipeFromID(int id);
 
     @Delete
-    void deleteAllRecipes(recipesDB recipe);
+    void deleteARecipe(recipesDB recipe);
 }
-
 
 // LiveData is a data holder class that can be observed within a given lifecycle.
 // Always holds/caches latest version of data. Notifies its active observers when the
