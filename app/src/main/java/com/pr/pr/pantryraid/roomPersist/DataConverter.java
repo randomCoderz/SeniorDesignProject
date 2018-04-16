@@ -6,19 +6,25 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.pr.pr.pantryraid.ingredient;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class DataConverter{
+
+
     @TypeConverter
+    public static ArrayList<ingredient> toIngredient(String s){
+        if(s == null){
     public static String getIngredients(ArrayList<Ingredient> ingredients){
         if(ingredients == null){
             return null;
         }
 
         Gson gson = new Gson();
-        String json = gson.toJson(ingredients);
-        return json;
+        Type listType = new TypeToken<ArrayList<ingredient>>(){}.getType();
+        ArrayList<ingredient> ingredients = gson.fromJson(s, listType);
+        return ingredients;
     }
 
     @TypeConverter
