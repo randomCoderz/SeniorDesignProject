@@ -1,6 +1,7 @@
 package com.pr.pr.pantryraid;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,14 +12,16 @@ import java.util.ArrayList;
 
 
 public class ingredientsLVAdapter extends BaseAdapter {
-
+    Context context;
     ArrayList<ingredient> ingredientList;
-    private Context context;
 
-    public ingredientsLVAdapter(Context context,ArrayList<ingredient> ingredientList)
+    private static LayoutInflater inflater = null;
+
+    public ingredientsLVAdapter(Context context, ArrayList<ingredient> ingredientList)
     {
         this.context = context;
         this.ingredientList = ingredientList;
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public int getCount()
@@ -40,6 +43,8 @@ public class ingredientsLVAdapter extends BaseAdapter {
     {
 
         View row = convertView;
+        if(row == null)
+            row = inflater.inflate(R.layout.ingredient_item, null);
         TextView ingredientName = row.findViewById(R.id.ingredientName);
         CheckBox selected = row.findViewById(R.id.checkBox);
         ingredientName.setText(ingredientList.get(position).name);
