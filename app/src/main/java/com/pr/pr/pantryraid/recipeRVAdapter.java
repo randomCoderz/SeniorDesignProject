@@ -1,28 +1,18 @@
 package com.pr.pr.pantryraid;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mashape.relocation.HttpResponse;
-import com.mashape.relocation.client.methods.HttpGet;
-import com.mashape.relocation.impl.client.DefaultHttpClient;
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
-import android.os.AsyncTask;
 
 /**
  * Created by Nam on 2/22/2018.
@@ -42,7 +32,17 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
             cv = itemView.findViewById(R.id.cv);
             recipeName = itemView.findViewById(R.id.cvName);
             recipeImage = itemView.findViewById(R.id.cvPhoto);
+            cv.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
 
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    Fragment myFragment = new recipe();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, myFragment).addToBackStack(null).commit();
+
+
+                }
+            });
 
         }
     }
