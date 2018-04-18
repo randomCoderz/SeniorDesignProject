@@ -14,8 +14,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-@Entity
+@Entity (tableName = "Pantry")
 public class pantryDB extends Thread{
+    @ColumnInfo(name = "ingredient")
     Ingredient i;
 
     @ColumnInfo(name = "response")
@@ -60,7 +61,7 @@ public class pantryDB extends Thread{
             image += Ingredient.getString("image");
             int id = Ingredient.getInt("id");
             String aisle = Ingredient.getString("aisle");
-            //ingredientList.add(new Ingredient(id, name, null, null, image, aisle));
+            ingredientList.add(new Ingredient(id, name, null, null, image, aisle));
         }
         return ingredientList;
     }
@@ -88,4 +89,35 @@ public class pantryDB extends Thread{
         return response_return;
     }
 
+    public Ingredient getI() {
+        return i;
+    }
+
+    public void setI(Ingredient i) {
+        this.i = i;
+    }
+
+    public HttpResponse<JsonNode> getResponse_return() {
+        return response_return;
+    }
+
+    public void setResponse_return(HttpResponse<JsonNode> response_return) {
+        this.response_return = response_return;
+    }
+
+    public String getHttp() {
+        return http;
+    }
+
+    public void setHttp(String http) {
+        this.http = http;
+    }
+
+    public String getKEY() {
+        return KEY;
+    }
+
+    public void setKEY(String KEY) {
+        this.KEY = KEY;
+    }
 }

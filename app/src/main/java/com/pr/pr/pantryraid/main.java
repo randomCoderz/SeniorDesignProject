@@ -47,13 +47,10 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
         dbInitialize dbI = new dbInitialize();
         dbI.populateRecipes(mdb);
-        //dbI.fetchAll(mdb);
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
