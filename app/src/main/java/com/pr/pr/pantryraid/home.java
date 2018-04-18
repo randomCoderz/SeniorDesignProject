@@ -230,11 +230,33 @@ class home extends Thread
                 JSONObject ingredient = ingredient_array.getJSONObject(j);
                 int ingredient_id = ingredient.getInt("id");
                 String ingredient_name = ingredient.getString("name");
-                String amount = ingredient.getString("originalString");
+                String amount = ingredient.getString("amount");
+                String unit = ingredient.getString("unit");
                 String ingredient_image = ingredient.getString("image");
-                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, ingredient_image));
+                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, false));
             }
-            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, instructions));
+            ArrayList<step> analyzedInstructions = new ArrayList<step>();
+            JSONArray ai = object.getJSONArray("analyzedInstructions");
+            JSONArray s = ai.getJSONObject(0).getJSONArray("steps");
+
+            for(int k = 0; k < s.length(); k++)
+            {
+                int num = s.getJSONObject(k).getInt("number");
+                String step_description = s.getJSONObject(k).getString("step");
+                JSONArray ing = s.getJSONObject(k).getJSONArray("ingredients");
+                ArrayList<ingredient> step_ingredients = new ArrayList();
+                for(int l = 0; l < ing.length(); l++)
+                {
+                    int id_ = ing.getJSONObject(l).getInt("id");
+                    String name = ing.getJSONObject(l).getString("name");
+                    String url = ing.getJSONObject(l).getString("image");
+                    step_ingredients.add(new ingredient(id_, name, url));
+                }
+                JSONArray equipment = s.getJSONObject(k).getJSONArray("equipment");
+                analyzedInstructions.add(new step(num, step_description, step_ingredients, equipment));
+            }
+
+            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions));
 
         }
         return recipeList;

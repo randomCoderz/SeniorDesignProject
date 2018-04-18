@@ -186,6 +186,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             try {
                 List<recipe> list = h.randomRecipe(true, 1, null);
                 recipe r = list.get(0);
+                
                 frag = r;
             } catch (InterruptedException e) {
                 e.printStackTrace();

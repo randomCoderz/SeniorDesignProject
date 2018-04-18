@@ -8,5 +8,6 @@
     <string name="missingToCart">Add missing items to Cart</string>
     <string name="completed">Completed</string>
     <string name="instructions">Instructions</string>
+    <string name="recipe_name">Recipe Name</string>
 
 </resources>

@@ -13,11 +13,11 @@
 
         <TextView
             android:id="@+id/ingredientName"
-            android:layout_width="99dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:text="TextView"
             tools:layout_editor_absoluteX="68dp"
             tools:layout_editor_absoluteY="86dp" />

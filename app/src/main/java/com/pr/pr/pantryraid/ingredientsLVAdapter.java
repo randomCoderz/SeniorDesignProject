@@ -1,6 +1,8 @@
 package com.pr.pr.pantryraid;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -46,8 +49,14 @@ public class ingredientsLVAdapter extends BaseAdapter {
         if(row == null)
             row = inflater.inflate(R.layout.ingredient_item, null);
         TextView ingredientName = row.findViewById(R.id.ingredientName);
+        ingredientName.setTextSize(20);
+        ingredientName.setTypeface(null, Typeface.BOLD);
         CheckBox selected = row.findViewById(R.id.checkBox);
-        ingredientName.setText(ingredientList.get(position).name);
+        double a = Double.parseDouble(ingredientList.get(position).amount);
+        ingredientName.setText(new DecimalFormat("#.##").format(a) + " " + ingredientList.get(position).unit + " " + ingredientList.get(position).name);
+
+//        row.setBackgroundColor(Color.RED);
+
         return row;
     }
 }

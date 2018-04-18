@@ -10,9 +10,9 @@ public class ingredient
     String amount;
     String unit;
     String photoURL;
-    String aisle;
     int photoID;
     boolean selected;
+
 
     ingredient(int id, String name, String photoURL)
     {
@@ -38,14 +38,13 @@ public class ingredient
     }
 
 
-    ingredient(int id, String name, String amount, String unit, String photoURL, String aisle, boolean selected)
+    ingredient(int id, String name, String amount, String unit, String photoURL, boolean selected)
     {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
         this.photoURL = photoURL;
-        this.aisle = aisle;
         this.selected = selected;
     }
 }

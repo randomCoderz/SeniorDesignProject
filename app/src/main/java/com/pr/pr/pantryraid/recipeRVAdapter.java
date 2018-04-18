@@ -22,6 +22,7 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
 {
     public static class recipeViewHolder extends RecyclerView.ViewHolder
     {
+        int index;
         CardView cv;
         TextView recipeName;
         ImageView recipeImage;
@@ -37,7 +38,8 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
                 public void onClick(View view){
 
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    Fragment myFragment = new recipe();
+
+                    Fragment myFragment = recipeList.get(index);
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, myFragment).addToBackStack(null).commit();
 
 
@@ -47,7 +49,9 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
         }
     }
 
-    List<recipe> recipeList;
+    private static List<recipe> recipeList;
+
+
 
     recipeRVAdapter(List<recipe> recipeList)
     {
@@ -72,9 +76,8 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     public void onBindViewHolder(recipeViewHolder holder, int i)
     {
         try {
-
             holder.recipeName.setText(recipeList.get(i).name);
-
+            holder.index = i;
             Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
 
 
@@ -89,6 +92,8 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     {
         return recipeList.size();
     }
+
+
 
 
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class step {
     int number;
     String step_description;
-    ArrayList<ingredient> ingredients = new ArrayList<>();
+    ArrayList<ingredient> ingredients;
     JSONArray equipment;
 
     public step(int number, String step_description, ArrayList<ingredient> ingredients, JSONArray equipment)
