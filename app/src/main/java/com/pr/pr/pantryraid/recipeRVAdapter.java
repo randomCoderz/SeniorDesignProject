@@ -42,7 +42,6 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
                     Fragment myFragment = recipeList.get(index);
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, myFragment).addToBackStack(null).commit();
 
-
                 }
             });
 
@@ -50,8 +49,6 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     }
 
     private static List<recipe> recipeList;
-
-
 
     recipeRVAdapter(List<recipe> recipeList)
     {
