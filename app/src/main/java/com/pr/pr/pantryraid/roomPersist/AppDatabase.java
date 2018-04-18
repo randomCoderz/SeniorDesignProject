@@ -18,5 +18,12 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+//    public static AppDatabase getDatabase(Context context) {
+//        if (INSTANCE == null) {
+//            INSTANCE = Room.databaseBuilder(context, AppDatabase.class, "RECIPES").build();
+//        }
+//        return INSTANCE;
+//    }
     public static void destroyInstance(){INSTANCE = null;}
 }

@@ -11,9 +11,15 @@ public class dbInitialize{
         task.execute();
     }
 
-    public static void fetchById(AppDatabase mdb, int id){
-        System.out.println("!!!!!!!!!!DARUDE SANDSTORM!!!!!!!!!!!!");
-        System.out.println(mdb.recipesdao().getRecipeFromID(id));
+//    public static void fetchAll(AppDatabase mdb){
+//        System.out.println("!!!!!!!!!!DARUDE SANDSTORM!!!!!!!!!!!!");
+//        fetchThing task = new fetchThing(mdb);
+//        task.execute();
+//        //System.out.println(mdb.recipesdao().allRecipes().getValue());
+//    }
+
+    public static void fetch(AppDatabase mdb){
+        System.out.println(mdb.recipesdao().allRecipes().getValue());
     }
 
     public static void populateWithData(AppDatabase db){
@@ -32,8 +38,25 @@ public class dbInitialize{
 
         protected Void doInBackground(final Void... params){
             populateWithData(mdb);
-            //fetchById(mdb,20);
+            fetch(mdb);
             return null;
         }
     }
+
+//
+//    //Second Async
+//    private static class fetchThing extends AsyncTask<Void, Void, Void>{
+//        private final AppDatabase mdb;
+//
+//        fetchThing(AppDatabase db){mdb = db;}
+//
+//        protected Void doInBackground(final Void... params){
+//            fetch(mdb);
+//            return null;
+//        }
+//    }
+
+
+
+
 }

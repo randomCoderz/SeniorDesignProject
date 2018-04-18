@@ -1,5 +1,6 @@
 package com.pr.pr.pantryraid.roomPersist;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -10,14 +11,18 @@ import java.util.List;
 
 @Dao
 public interface  recipesDAO {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRecipes(recipesDB r1);
 
-    @Query("SELECT * FROM recipes")
-    List <recipesDB> allRecipes();
+    @Query("SELECT * FROM Recipes")
+    LiveData<List<recipesDB>> allRecipes();
 
-    @Query("SELECT * FROM recipes WHERE recipeId LIKE :id")
-    List <recipesDB> getRecipeFromID(int id);
+    //livedata test
+//    @Query("SELECT * FROM Recipes WHERE recipeId LIKE :id")
+//    LiveData<recipesDB> getRecipeFromID(int id);
+
+//    @Query("SELECT * FROM recipes WHERE recipeId LIKE :id")
+//    List <recipesDB> getRecipeFromID(int id);
 
     @Delete
     void deleteARecipe(recipesDB recipe);
