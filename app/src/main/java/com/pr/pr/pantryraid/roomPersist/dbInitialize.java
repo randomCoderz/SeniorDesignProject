@@ -27,8 +27,7 @@ public class dbInitialize{
         test.add(new Ingredient(1, "hel", "7"));
         test.add(new Ingredient(2, "hell", "7"));
         test.add(new Ingredient(3, "hello", "7"));
-
-        db.recipesdao().insertRecipes(new recipesDB(20, "Tester", "lololol", 5, test, "Hello"));
+        db.recipesdao().insertRecipes(new recipesDB(20, "Tester", "lolol", 5, test, "Hello"));
     }
 
     private static class populateDBAsync extends AsyncTask<Void, Void, Void>{
