@@ -73,9 +73,11 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     public void onBindViewHolder(recipeViewHolder holder, int i)
     {
         try {
+
             holder.recipeName.setText(recipeList.get(i).name);
             holder.index = i;
             Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
+
 
 
         } catch(Exception e){
