@@ -183,17 +183,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         }
         else if (id == R.id.nav_recipe) {
-            try {
-                List<recipe> list = h.randomRecipe(true, 1, null);
-                recipe r = list.get(0);
-                
-                frag = r;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
 
         }
         else if (id == R.id.nav_favorites) {
