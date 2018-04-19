@@ -180,7 +180,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         }
         else if (id == R.id.nav_calendar) {
-
+            frag = new calendar();
         }
         else if (id == R.id.nav_recipe) {
 
