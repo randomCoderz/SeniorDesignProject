@@ -22,8 +22,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.pr.pr.pantryraid.roomPersist.AppDatabase;
-import com.pr.pr.pantryraid.roomPersist.dbInitialize;
+import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.DbInitialize;
 
 
 import org.json.JSONException;
@@ -49,13 +49,9 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-
-
-
-
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-        dbInitialize dbI = new dbInitialize();
+        DbInitialize dbI = new DbInitialize();
         dbI.populateRecipes(mdb);
 
 

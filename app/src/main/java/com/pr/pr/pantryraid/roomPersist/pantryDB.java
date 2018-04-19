@@ -1,4 +1,4 @@
-package com.pr.pr.pantryraid.roomPersist;
+package com.pr.pr.pantryraid.RoomPersist;
 
 import android.arch.persistence.room.Entity;
 

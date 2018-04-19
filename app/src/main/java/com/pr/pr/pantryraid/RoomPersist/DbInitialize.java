@@ -1,4 +1,4 @@
-package com.pr.pr.pantryraid.roomPersist;
+package com.pr.pr.pantryraid.RoomPersist;
 
 import android.os.AsyncTask;
 
@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
-public class dbInitialize{
+
+public class DbInitialize {
 
     public static void populateRecipes(AppDatabase db){
         DBAsync task = new DBAsync(db);
