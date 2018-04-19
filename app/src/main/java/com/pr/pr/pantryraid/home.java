@@ -137,7 +137,7 @@ class home extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null));
         }
         return recipeList;
     }
@@ -175,7 +175,7 @@ class home extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null));
         }
         return recipeList;
     }

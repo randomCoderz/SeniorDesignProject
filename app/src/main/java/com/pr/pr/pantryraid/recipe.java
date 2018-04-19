@@ -27,7 +27,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 @Entity(tableName = "Recipes")
-public class recipe extends Fragment
+public class recipe
 {
     @PrimaryKey
     @NonNull
@@ -49,48 +49,48 @@ public class recipe extends Fragment
 //    ArrayList<ingredient> ingredients = new ArrayList<>();
 //    String instructions;
 //    ArrayList<step> analyzedInstructions;
-    @Ignore
-    private ListView listView;
+//    @Ignore
+//    private ListView listView;
 
-    @Ignore
-    public recipe() {
+//    @Ignore
+//    public recipe() {
+//
+//    }
 
-    }
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
-
-        listView = rootView.findViewById(R.id.ingredientList);
-        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
-        TextView recipeName = rootView.findViewById(R.id.recipeName);
-        recipeName.setText(name);
-        ImageView img = rootView.findViewById(R.id.recipeImage);
-        img.getLayoutParams().width = 700;
-        img.getLayoutParams().height = 700;
-        Picasso.with(rootView.getContext()).load(url).into(img);
-        TextView readyInMin = rootView.findViewById(R.id.readyInMin);
-        readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
-        final Button instructions = rootView.findViewById(R.id.instructions);
-        instructions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String instr = "";
-                for(int i = 0; i < analyzedInstructions.size(); i++)
-                {
-
-                    step x = analyzedInstructions.get(i);
-                    instr += x.number + ". " + x.step_description + "\n";
-                }
-                Fragment fragment =  new instructions(instr);
-
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
-            }
-        });
-
-        return rootView;
-    }
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
+//
+//        listView = rootView.findViewById(R.id.ingredientList);
+//        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
+//        TextView recipeName = rootView.findViewById(R.id.recipeName);
+//        recipeName.setText(name);
+//        ImageView img = rootView.findViewById(R.id.recipeImage);
+//        img.getLayoutParams().width = 700;
+//        img.getLayoutParams().height = 700;
+//        Picasso.with(rootView.getContext()).load(url).into(img);
+//        TextView readyInMin = rootView.findViewById(R.id.readyInMin);
+//        readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
+//        final Button instructions = rootView.findViewById(R.id.instructions);
+//        instructions.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                String instr = "";
+//                for(int i = 0; i < analyzedInstructions.size(); i++)
+//                {
+//
+//                    step x = analyzedInstructions.get(i);
+//                    instr += x.number + ". " + x.step_description + "\n";
+//                }
+//                Fragment fragment =  new instructions(instr);
+//
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
+//            }
+//        });
+//
+//        return rootView;
+//    }
 
 
     @ColumnInfo(name = "readyInMinutes")
@@ -106,19 +106,20 @@ public class recipe extends Fragment
     private ArrayList<step> analyzedInstructions;
 
     @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, String instructions)
+    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions)
     {
         this.id = id;
         this.name = name;
         this.url = url;
         this.readyInMinutes = readyInMinutes;
         this.ingredients = ingredients;
+        this.analyzedInstructions = analyzedInstructions;
         this.instructions = instructions;
     }
 
     //Getters and Setters
     @NonNull
-    public int getIdRecipes() {
+    public int getId() {
         return id;
     }
 

@@ -26,6 +26,16 @@ class pantry extends Thread
         KEY = key;
     }
 
+    /**
+     *
+     * @param intolerances
+     * @param metaInformation
+     * @param number
+     * @param query
+     * @return
+     * @throws InterruptedException
+     * @throws JSONException
+     */
     public ArrayList<ingredient> searchIngredient(String intolerances, boolean metaInformation, int number, String query) throws InterruptedException, JSONException {
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?";
         if(intolerances != null)

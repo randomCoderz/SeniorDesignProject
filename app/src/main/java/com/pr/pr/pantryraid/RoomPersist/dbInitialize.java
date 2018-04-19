@@ -20,8 +20,8 @@ public class dbInitialize{
     public static void populateWithData(AppDatabase db){
         ArrayList<ingredient> test = new ArrayList<>();
         test.add(new ingredient(1, "hel", "7"));
-        db.recipesdao().insertRecipes(new recipe(20, "Tester", "lolol", 5, test, "Hello"));
-        db.recipesdao().insertRecipes(new recipe(100, "test2","llll",10,test,"testinggg"));
+        db.recipesdao().insertRecipes(new recipe(20, "Tester", "lolol", 5, test, null, "Hello"));
+        db.recipesdao().insertRecipes(new recipe(100, "test2","llll",10,test,null, "testinggg"));
     }
 
     private static class DBAsync extends AsyncTask<Void, Void, Void>{
