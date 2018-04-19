@@ -5,17 +5,19 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import com.pr.pr.pantryraid.recipe;
+
 @Dao
-public interface recipesDAO {
+public interface RecipesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void testPass(recipesDB r1);
+    void insertRecipes(recipe r1);
 
-    @Query("SELECT * FROM recipesDB")
-    recipesDB getRecipes();
+    @Query("SELECT * FROM Recipes")
+    recipe allRecipes();
 
-    @Query("SELECT * from recipesDB where recipeId LIKE :id")
-    recipesDB getRecipeFromID(int id);
+    @Query("SELECT * FROM Recipes WHERE recipeID LIKE :id")
+    recipe getRecipeFromID(int id);
 
     @Delete
-    void delete(recipesDB recipe);
+    void deleteARecipe(recipe r);
 }

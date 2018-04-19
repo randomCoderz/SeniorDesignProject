@@ -2,6 +2,7 @@ package com.pr.pr.pantryraid;
 
 //Android Tools
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,30 +21,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
 import com.pr.pr.pantryraid.roomPersist.AppDatabase;
 import com.pr.pr.pantryraid.roomPersist.dbInitialize;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import org.json.JSONArray;
-
-import android.util.Log;
-
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 //Unirest, Spoonacular Imports, JSON
 
-public class main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView navigationView;
     private static final String TAG = "MainActivity";
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
@@ -53,26 +42,28 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     private RecyclerView rv;
     private home h = new home(KEY);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-            setContentView(R.layout.activity_main);
-            
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//            setSupportActionBar(toolbar);
-
-            //Database
-            AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-            dbInitialize dbI = new dbInitialize();
-            dbI.populateRecipes(mdb);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
 
-            //start of navigation drawer
+
+
+
+        //Database Here
+        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+        dbInitialize dbI = new dbInitialize();
+        dbI.populateRecipes(mdb);
+
+
+        //start of navigation drawer
+
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,41 +72,28 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-            //end of navigation drawer
+        //end of navigation drawer
 
-            rv = findViewById(R.id.rv);
+        rv = findViewById(R.id.rv);
 
-            LinearLayoutManager llm = new LinearLayoutManager(this);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
 
-            rv.setHasFixedSize(true);
-            rv.setLayoutManager(llm);
-
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
 
 
         try {
-            //make recipe list
-//            cookBook c = new cookBook(KEY);
-//            String[] ingredients = {"butter", "flour", "corn"};
-//            c.getInstructions(640058, true);
-//            c.start();
-//            c.join();
-//
-//            HttpResponse<JsonNode> response = c.getResponse();
-//            System.out.println(response.getBody().getArray().toString());
 
             recipeList = h.randomRecipe(false, 5, null);
 
-
-//            recipeList = h.searchRecipes(true, 10, "pasta");
-            //intialize adapter
             recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
 
             rv.setAdapter(adapter);
@@ -129,8 +107,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
-    private void initializeAdapter()
-    {
+    private void initializeAdapter() {
         recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
 
         rv.setAdapter(adapter);
@@ -138,7 +115,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -153,6 +130,8 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         return true;
 
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -180,33 +159,34 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_settings) {
-            frag = new Settings();
-
+            Intent intent = new Intent(this, main.class);
+            startActivity(intent);
         } else if (id == R.id.nav_cart) {
-
+            frag = new shoppingCart();
         } else if (id == R.id.nav_pantry) {
 
-        }
-         else if (id == R.id.nav_cookbook) {
+        } else if (id == R.id.nav_cookbook) {
 
         }
         else if (id == R.id.nav_calendar) {
-
+            frag = new calendar();
         }
         else if (id == R.id.nav_recipe) {
 
+        } else if (id == R.id.nav_favorites) {
+
         }
-        else if (id == R.id.nav_favorites) {
+        else if (id == R.id.nav_settings) {
+            frag = new Settings();
 
         }
         if(frag != null){
+
             FragmentManager fragman = getSupportFragmentManager();
             fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

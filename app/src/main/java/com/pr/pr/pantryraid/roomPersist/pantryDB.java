@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 @Entity
 public class pantryDB extends Thread{
-
-
     private HttpResponse<JsonNode> response_return;
     private String http;
     private String KEY;
@@ -55,7 +53,7 @@ public class pantryDB extends Thread{
             image += ingredient.getString("image");
             int id = ingredient.getInt("id");
             String aisle = ingredient.getString("aisle");
-            ingredientList.add(new ingredient(id, name, null, null, image, aisle));
+            //ingredientList.add(new ingredient(id, name, null, null, image, aisle));
         }
         return ingredientList;
     }
