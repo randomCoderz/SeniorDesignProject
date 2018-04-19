@@ -1,12 +1,12 @@
-package com.pr.pr.pantryraid.roomPersist;
+package com.pr.pr.pantryraid.RoomPersist;
 
 import android.arch.persistence.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.pr.pr.pantryraid.ingredient;
+import com.pr.pr.pantryraid.step;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class DataConverter{
 
 
     @TypeConverter
-    public static String getIngredients(ArrayList<Ingredient> i){
+    public static String getIngredients(ArrayList<ingredient> i){
         if(i == null){
             return null;
         }
@@ -24,16 +24,16 @@ public class DataConverter{
     }
 
     @TypeConverter
-    public static ArrayList<Ingredient> toIngredient(String s){
+    public static ArrayList<ingredient> toIngredient(String s){
         if(s == null){
             return null;
         }
-        Type listType = new TypeToken<ArrayList<Ingredient>>(){}.getType();
+        Type listType = new TypeToken<ArrayList<ingredient>>(){}.getType();
         return new Gson().fromJson(s, listType);
     }
 
     @TypeConverter
-    public static String aInstructions(ArrayList <Step> i){
+    public static String aInstructions(ArrayList <step> i){
         if(i == null){
             return null;
         }
@@ -43,11 +43,11 @@ public class DataConverter{
     }
 
     @TypeConverter
-    public static ArrayList<Step> toAInstructions(String s){
+    public static ArrayList<step> toAInstructions(String s){
         if(s == null){
             return null;
         }
-        Type listType = new TypeToken<ArrayList<Step>>(){}.getType();
+        Type listType = new TypeToken<ArrayList<step>>(){}.getType();
         return new Gson().fromJson(s, listType);
     }
 

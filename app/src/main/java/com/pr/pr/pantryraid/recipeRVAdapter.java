@@ -73,9 +73,9 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     {
         try {
 
-            holder.recipeName.setText(recipeList.get(i).name);
+            holder.recipeName.setText(recipeList.get(i).getName());
 
-            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
+            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).getUrl()).into(holder.recipeImage);
 
 
         } catch(Exception e){

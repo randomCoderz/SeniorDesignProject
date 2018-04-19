@@ -1,10 +1,5 @@
 package com.pr.pr.pantryraid;
 
-import android.arch.persistence.room.Dao;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class ingredient
 {
     int id;
@@ -47,5 +42,61 @@ public class ingredient
         this.unit = unit;
         this.photoURL = photoURL;
         this.aisle = aisle;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public String getAisle() {
+        return aisle;
+    }
+
+    public void setAisle(String aisle) {
+        this.aisle = aisle;
+    }
+
+    public int getPhotoID() {
+        return photoID;
+    }
+
+    public void setPhotoID(int photoID) {
+        this.photoID = photoID;
     }
 }
