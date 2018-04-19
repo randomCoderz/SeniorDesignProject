@@ -2,6 +2,7 @@ package com.pr.pr.pantryraid;
 
 //Android Tools
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -20,8 +21,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
-import com.pr.pr.pantryraid.RoomPersist.dbInitialize;
+
+import com.pr.pr.pantryraid.roomPersist.AppDatabase;
+import com.pr.pr.pantryraid.roomPersist.dbInitialize;
+
 
 import org.json.JSONException;
 
@@ -39,23 +42,28 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     private RecyclerView rv;
     private home h = new home(KEY);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
-        setContentView(R.layout.activity_main);
+
+
+
 
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
         dbInitialize dbI = new dbInitialize();
         dbI.populateRecipes(mdb);
 
+
         //start of navigation drawer
+
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,13 +72,13 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //end of navigation drawer
 
@@ -107,7 +115,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -122,6 +130,8 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         return true;
 
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -149,29 +159,34 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_settings) {
-            frag = new Settings();
-
+            Intent intent = new Intent(this, main.class);
+            startActivity(intent);
         } else if (id == R.id.nav_cart) {
-
+            frag = new shoppingCart();
         } else if (id == R.id.nav_pantry) {
 
         } else if (id == R.id.nav_cookbook) {
 
-        } else if (id == R.id.nav_calendar) {
-
-        } else if (id == R.id.nav_recipe) {
+        }
+        else if (id == R.id.nav_calendar) {
+            frag = new calendar();
+        }
+        else if (id == R.id.nav_recipe) {
 
         } else if (id == R.id.nav_favorites) {
 
         }
-        if (frag != null) {
+        else if (id == R.id.nav_settings) {
+            frag = new Settings();
+
+        }
+        if(frag != null){
+
             FragmentManager fragman = getSupportFragmentManager();
             fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

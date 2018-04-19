@@ -7,8 +7,9 @@ public class ingredient
     String amount;
     String unit;
     String photoURL;
-    String aisle;
     int photoID;
+    boolean selected;
+
 
     public ingredient(int id, String name, String photoURL)
     {
@@ -34,14 +35,15 @@ public class ingredient
     }
 
 
-    public ingredient(int id, String name, String amount, String unit, String photoURL, String aisle)
+
+    ingredient(int id, String name, String amount, String unit, String photoURL, boolean selected)
     {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
         this.photoURL = photoURL;
-        this.aisle = aisle;
+        this.selected = selected;
     }
 
     public int getId() {
@@ -84,12 +86,12 @@ public class ingredient
         this.photoURL = photoURL;
     }
 
-    public String getAisle() {
-        return aisle;
+    public boolean getSelected() {
+        return selected;
     }
 
-    public void setAisle(String aisle) {
-        this.aisle = aisle;
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public int getPhotoID() {

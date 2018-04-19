@@ -3,5 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="addToCalendar">Add to Calendar</string>
+    <string name="selectedToCart">Add selected to Cart</string>
+    <string name="missingToCart">Add missing items to Cart</string>
+    <string name="completed">Completed</string>
+    <string name="instructions">Instructions</string>
+    <string name="recipe_name">Recipe Name</string>
 
 </resources>

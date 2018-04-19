@@ -1,4 +1,4 @@
-package com.pr.pr.pantryraid.RoomPersist;
+package com.pr.pr.pantryraid.roomPersist;
 
 import android.arch.persistence.room.TypeConverter;
 

@@ -1,28 +1,18 @@
 package com.pr.pr.pantryraid;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mashape.relocation.HttpResponse;
-import com.mashape.relocation.client.methods.HttpGet;
-import com.mashape.relocation.impl.client.DefaultHttpClient;
 import com.squareup.picasso.Picasso;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
-import android.os.AsyncTask;
 
 /**
  * Created by Nam on 2/22/2018.
@@ -32,6 +22,7 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
 {
     public static class recipeViewHolder extends RecyclerView.ViewHolder
     {
+        int index;
         CardView cv;
         TextView recipeName;
         ImageView recipeImage;
@@ -39,15 +30,25 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
         recipeViewHolder(View itemView)
         {
             super(itemView);
-            cv = (CardView) itemView.findViewById(R.id.cv);
-            recipeName = (TextView) itemView.findViewById(R.id.cvName);
-            recipeImage = (ImageView) itemView.findViewById(R.id.cvPhoto);
+            cv = itemView.findViewById(R.id.cv);
+            recipeName = itemView.findViewById(R.id.cvName);
+            recipeImage = itemView.findViewById(R.id.cvPhoto);
+            cv.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
 
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    recipeFragment recipe = new recipeFragment(recipeList.get(index));
+                    Fragment myFragment = recipe;
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, myFragment).addToBackStack(null).commit();
+
+                }
+            });
 
         }
     }
 
-    List<recipe> recipeList;
+    private static List<recipe> recipeList;
 
     recipeRVAdapter(List<recipe> recipeList)
     {
@@ -73,9 +74,10 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     {
         try {
 
-            holder.recipeName.setText(recipeList.get(i).getName());
+            holder.recipeName.setText(recipeList.get(i).name);
+            holder.index = i;
+            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
 
-            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).getUrl()).into(holder.recipeImage);
 
 
         } catch(Exception e){
@@ -89,6 +91,8 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     {
         return recipeList.size();
     }
+
+
 
 
 }

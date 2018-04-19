@@ -4,43 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/primaryLight"
+    android:paddingTop="?android:attr/actionBarSize"
+>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/calendarNotifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Calendar Notifications"
         android:textSize="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
      />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/calendarSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarNotifications"
+        android:layout_centerHorizontal="true"
         android:text=""
         />
 
+
+
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/calendarDaily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarSwitch"
+        android:layout_toLeftOf="@id/calendarWeekly"
         android:text="Daily"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+
         />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/calendarWeekly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarSwitch"
         android:text="Weekly"
-       />
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        android:layout_centerHorizontal="true"
+        />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/calendarMonthly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarSwitch"
+        android:layout_toRightOf="@id/calendarWeekly"
         android:text="Monthly"
-     />
+        android:textColor="@color/White"
+        android:background="@color/colorPrimary"
+
+        />
 
     <TextView
         android:id="@+id/textView3"
@@ -48,38 +72,75 @@
         android:layout_height="wrap_content"
         android:text="Expiration Notifications"
         android:textSize="30dp"
-        tools:layout_editor_absoluteX="36dp"
-        tools:layout_editor_absoluteY="257dp" />
+        android:layout_below="@+id/calendarWeekly"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimaryDark"
+        />
 
     <Switch
-        android:id="@+id/switch2"
+        android:id="@+id/expirationSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
         android:text=""
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="311dp" />
+        android:layout_centerHorizontal="true"
+ />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/expirationDaily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/expirationSwitch"
+        android:layout_toLeftOf="@id/expirationWeekly"
         android:text="Daily"
-        tools:layout_editor_absoluteX="48dp"
-        tools:layout_editor_absoluteY="358dp" />
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        />
+
+
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/expirationWeekly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/expirationSwitch"
         android:text="Weekly"
-        tools:layout_editor_absoluteX="136dp"
-        tools:layout_editor_absoluteY="358dp" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/expirationMonthly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/expirationWeekly"
+        android:layout_below="@+id/expirationSwitch"
         android:text="Monthly"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="358dp" />
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+/>
+
+
+    <Switch
+        android:id="@+id/vegan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/expirationMonthly"
+        android:layout_centerHorizontal="true"
+        android:text="Vegan" />
+
+    <Button
+        android:id="@+id/saveSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/vegan"
+        android:text="Save Settings"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        />
+
+
 </RelativeLayout>
