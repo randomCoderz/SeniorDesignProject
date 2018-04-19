@@ -215,47 +215,60 @@ class home extends Thread
         HttpResponse<JsonNode> response = response_return;
 
         JSONArray array = response.getBody().getObject().getJSONArray("recipes");
+//        System.out.println(array.toString(2));
         for(int i = 0; i < array.length(); i++)
         {
             JSONObject object = array.getJSONObject(i);
             int id = object.getInt("id");
             String title = object.getString("title");
-            String image = object.getString("image");
+            String image = "";
+            if(object.has("image"))
+                image = object.getString("image");
             int readyInMinutes = object.getInt("readyInMinutes");
             String instructions = object.getString("instructions");
 
             ArrayList<ingredient> ingredients = new ArrayList<>();
             JSONArray ingredient_array = object.getJSONArray("extendedIngredients");
+
             for(int j = 0; j < ingredient_array.length(); j++)
             {
                 JSONObject ingredient = ingredient_array.getJSONObject(j);
-                int ingredient_id = ingredient.getInt("id");
+                int ingredient_id = 0;
+                if(ingredient.has("id"))
+                    ingredient_id = ingredient.getInt("id");
                 String ingredient_name = ingredient.getString("name");
                 String amount = ingredient.getString("amount");
                 String unit = ingredient.getString("unit");
-                String ingredient_image = ingredient.getString("image");
+                String ingredient_image = "";
+                if(ingredient.has("image"))
+                    ingredient_image = ingredient.getString("image");
                 ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, false));
+
             }
             ArrayList<step> analyzedInstructions = new ArrayList<step>();
             JSONArray ai = object.getJSONArray("analyzedInstructions");
-            JSONArray s = ai.getJSONObject(0).getJSONArray("steps");
-
-            for(int k = 0; k < s.length(); k++)
+            if(ai.length() > 0)
             {
-                int num = s.getJSONObject(k).getInt("number");
-                String step_description = s.getJSONObject(k).getString("step");
-                JSONArray ing = s.getJSONObject(k).getJSONArray("ingredients");
-                ArrayList<ingredient> step_ingredients = new ArrayList();
-                for(int l = 0; l < ing.length(); l++)
+                JSONArray s = ai.getJSONObject(0).getJSONArray("steps");
+
+                for(int k = 0; k < s.length(); k++)
                 {
-                    int id_ = ing.getJSONObject(l).getInt("id");
-                    String name = ing.getJSONObject(l).getString("name");
-                    String url = ing.getJSONObject(l).getString("image");
-                    step_ingredients.add(new ingredient(id_, name, url));
+                    int num = s.getJSONObject(k).getInt("number");
+                    String step_description = s.getJSONObject(k).getString("step");
+                    JSONArray ing = s.getJSONObject(k).getJSONArray("ingredients");
+                    ArrayList<ingredient> step_ingredients = new ArrayList();
+                    for(int l = 0; l < ing.length(); l++)
+                    {
+                        int id_ = ing.getJSONObject(l).getInt("id");
+                        String name = ing.getJSONObject(l).getString("name");
+                        String url = ing.getJSONObject(l).getString("image");
+                        step_ingredients.add(new ingredient(id_, name, url));
+                    }
+                    JSONArray equipment = s.getJSONObject(k).getJSONArray("equipment");
+                    analyzedInstructions.add(new step(num, step_description, step_ingredients, equipment));
                 }
-                JSONArray equipment = s.getJSONObject(k).getJSONArray("equipment");
-                analyzedInstructions.add(new step(num, step_description, step_ingredients, equipment));
             }
+
 
             recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions));
 
