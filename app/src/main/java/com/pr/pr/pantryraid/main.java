@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
-import com.pr.pr.pantryraid.RoomPersist.RecipeView;
 
 
 import org.json.JSONException;
