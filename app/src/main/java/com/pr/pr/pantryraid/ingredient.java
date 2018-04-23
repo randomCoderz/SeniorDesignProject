@@ -8,6 +8,7 @@ public class ingredient
     String unit;
     String photoURL;
     int photoID;
+    double quantity;
     boolean selected;
 
 
@@ -36,7 +37,7 @@ public class ingredient
 
 
 
-    ingredient(int id, String name, String amount, String unit, String photoURL, boolean selected)
+    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean selected)
     {
         this.id = id;
         this.name = name;
@@ -100,5 +101,13 @@ public class ingredient
 
     public void setPhotoID(int photoID) {
         this.photoID = photoID;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 }

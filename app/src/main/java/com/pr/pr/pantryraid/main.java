@@ -50,9 +50,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = findViewById(R.id.toolbar);
 
 
-
-
-
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
         dbInitialize dbI = new dbInitialize();
