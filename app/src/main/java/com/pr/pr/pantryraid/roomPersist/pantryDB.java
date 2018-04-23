@@ -59,7 +59,7 @@ public class pantryDB extends Thread{
     }
 
     public void run() {
-        try
+        try  
         {
 
             HttpResponse<JsonNode> response = Unirest.get(http)

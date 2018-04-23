@@ -23,7 +23,8 @@ import android.widget.Toast;
 
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
-import com.pr.pr.pantryraid.RoomPersist.DbInitialize;
+import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
+import com.pr.pr.pantryraid.RoomPersist.RecipeView;
 
 
 import org.json.JSONException;
@@ -51,12 +52,10 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-        DbInitialize dbI = new DbInitialize();
-        dbI.populateRecipes(mdb);
-
+        RecipeRepository dbI = new RecipeRepository(mdb);
+        dbI.insertRecipe(new recipe(10,"Hello","Hello",10, null, null,"Yolo"));
 
         //start of navigation drawer
-
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
