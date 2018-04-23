@@ -28,11 +28,11 @@ class pantry extends Thread
 
     /**
      *
-     * @param intolerances
-     * @param metaInformation
-     * @param number
-     * @param query
-     * @return
+     * @param intolerances Possible values are: dairy, egg, gluten, peanut, sesame, seafood, shellfish, soy, sulfite, tree nut, and wheat.
+     * @param metaInformation Whether to return more meta information about the ingredients.
+     * @param number The number of results to return, between [1,100]
+     * @param query The query - a partial or full ingredient name
+     * @return returns an arraylist of ingredients that fit the query
      * @throws InterruptedException
      * @throws JSONException
      */
