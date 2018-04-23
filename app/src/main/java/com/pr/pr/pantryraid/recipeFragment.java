@@ -14,9 +14,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class recipeFragment extends Fragment {
+    private final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     int id;
     String name;
     String url;
@@ -61,13 +64,25 @@ public class recipeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                if(analyzedInstructions == null)
+                {
+                    home h = new home(KEY);
+                    try {
+                        analyzedInstructions = h.getAnalyzedInstructions(id, true);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 String instr = "";
                 for(int i = 0; i < analyzedInstructions.size(); i++)
                 {
-
                     step x = analyzedInstructions.get(i);
                     instr += x.number + ". " + x.step_description + "\n";
                 }
+
                 Fragment fragment =  new instructions(instr);
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
