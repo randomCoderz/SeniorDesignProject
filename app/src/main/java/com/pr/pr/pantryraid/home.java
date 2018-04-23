@@ -239,11 +239,11 @@ class home extends Thread
                 String ingredient_name = ingredient.getString("name");
                 String amount = ingredient.getString("amount");
                 String unit = ingredient.getString("unit");
+
                 String ingredient_image = "";
                 if(ingredient.has("image"))
                     ingredient_image = ingredient.getString("image");
-                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, false));
-
+                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, false));
             }
             ArrayList<step> analyzedInstructions = new ArrayList();
             JSONArray ai = object.getJSONArray("analyzedInstructions");
