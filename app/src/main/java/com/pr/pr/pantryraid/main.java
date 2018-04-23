@@ -22,8 +22,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.pr.pr.pantryraid.roomPersist.AppDatabase;
-import com.pr.pr.pantryraid.roomPersist.dbInitialize;
+import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.dbInitialize;
 
 
 import org.json.JSONException;

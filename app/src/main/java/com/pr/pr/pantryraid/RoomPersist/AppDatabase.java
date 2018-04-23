@@ -1,4 +1,4 @@
-package com.pr.pr.pantryraid.roomPersist;
+package com.pr.pr.pantryraid.RoomPersist;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
@@ -8,7 +8,7 @@ import android.content.Context;
 
 import com.pr.pr.pantryraid.recipe;
 
-@TypeConverters({DataConverter.class})
+@TypeConverters({com.pr.pr.pantryraid.RoomPersist.DataConverter.class})
 @Database(entities = {recipe.class /*,pantryDB.class*/}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
