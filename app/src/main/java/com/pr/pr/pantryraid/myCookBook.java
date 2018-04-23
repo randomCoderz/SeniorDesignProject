@@ -3,12 +3,14 @@ package com.pr.pr.pantryraid;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import org.json.JSONException;
 
@@ -18,8 +20,8 @@ public class myCookBook extends Fragment {
     //GUI
     Button favoriteRecipes;
     Button viewIngredients;
-    Button shoppingCart;
-    Button searchRicipe;
+    ImageButton shoppingCart;
+    ImageButton searchRicipe;
 
     //Cards
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
@@ -53,21 +55,16 @@ public class myCookBook extends Fragment {
         // linking buttons
         favoriteRecipes = (Button)rootView.findViewById(R.id.bttnFav);
         viewIngredients = (Button)rootView.findViewById(R.id.bttnIngredients);
-        shoppingCart = (Button)rootView.findViewById(R.id.bttnShoppingCart);
-        searchRicipe = (Button)rootView.findViewById(R.id.bttnSearchRecipe);
+        shoppingCart = (ImageButton) rootView.findViewById(R.id.bttnShoppingCart);
+        searchRicipe = (ImageButton)rootView.findViewById(R.id.bttnSearchRecipe);
 
 
         //on click buttons redirect to other pages favoriteRecipes
         favoriteRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //might need to extends Activity in this class!!!
-                // AND IMPORT    import android.app.Activity;
 
-                /*Intent intent = new Intent(cookBook.this, pantry.class);
-                Intent intent = new Intent(this, pantry.class);
-                Intent intent = new Intent(this, pantry.class);
-                startActivity(intent);*/
+
             }
         });
 
@@ -75,6 +72,9 @@ public class myCookBook extends Fragment {
         viewIngredients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Fragment pantryFrag =  new myPantry();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, pantryFrag).addToBackStack(null).commit();
 
             }
         });
@@ -83,6 +83,11 @@ public class myCookBook extends Fragment {
         shoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Fragment shoppingCartFrag =  new shoppingCart();
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, shoppingCartFrag).addToBackStack(null).commit();
 
             }
         });
