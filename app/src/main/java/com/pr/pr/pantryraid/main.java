@@ -161,7 +161,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         } else if (id == R.id.nav_cart) {
             frag = new shoppingCart();
         } else if (id == R.id.nav_pantry) {
-            //frag = new myPantry();
+            frag = new myPantry();
         } else if (id == R.id.nav_cookbook) {
             frag = new myCookBook();
         }
