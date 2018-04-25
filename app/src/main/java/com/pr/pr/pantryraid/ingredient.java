@@ -1,7 +1,6 @@
 package com.pr.pr.pantryraid;
 
-public class ingredient
-{
+public class ingredient {
     int id;
     String name;
     String amount;
@@ -34,9 +33,7 @@ public class ingredient
         this.photoURL = photoURL;
     }
 
-
-
-    ingredient(int id, String name, String amount, String unit, String photoURL, boolean selected)
+    public ingredient(int id, String name, String amount, String unit, String photoURL, boolean selected)
     {
         this.id = id;
         this.name = name;

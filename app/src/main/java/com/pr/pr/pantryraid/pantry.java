@@ -11,10 +11,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Kan on 2/26/18.
- */
-
 class pantry extends Thread
 {
     HttpResponse<JsonNode> response_return;
@@ -36,6 +32,7 @@ class pantry extends Thread
      * @throws InterruptedException
      * @throws JSONException
      */
+
     public ArrayList<ingredient> searchIngredient(String intolerances, boolean metaInformation, int number, String query) throws InterruptedException, JSONException {
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?";
         if(intolerances != null)

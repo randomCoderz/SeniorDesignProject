@@ -13,10 +13,6 @@ public class RecipeRepository {
         gdb = data;
     }
 
-//    recipe getRecipeByID(int id){
-//        return gdb.recipesdao().getRecipeFromID(id);
-//    }
-
     //Insert Recipe into Database
     public void insertRecipe(recipe r){
         new insertAsync(gdb).execute(r);
@@ -34,7 +30,6 @@ public class RecipeRepository {
     }
 
     //Get Recipe from by ID from Database
-
     public void getRecipeByID(int id){
         new recipeIDAsync(gdb).execute(id);
     }

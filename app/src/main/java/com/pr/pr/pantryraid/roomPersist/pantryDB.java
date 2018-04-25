@@ -1,6 +1,11 @@
 package com.pr.pr.pantryraid.RoomPersist;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverter;
+import android.support.annotation.NonNull;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -15,13 +20,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 @Entity
-public class pantryDB extends Thread{
+public class pantryDB extends Thread {
+
+    //@ColumnInfo(name = "ingredient")
+    @Ignore
+    private ingredient i;
+
+    @Ignore
     private HttpResponse<JsonNode> response_return;
+
+    @ColumnInfo(name = "http")
     private String http;
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "key")
     private String KEY;
-    ingredient i;
+
+    public pantryDB(){
+
+    }
+
     public pantryDB(String key) {
-        http = "";
+       http = "";
         KEY = key;
     }
 
@@ -81,4 +102,19 @@ public class pantryDB extends Thread{
         return response_return;
     }
 
+    public String getHttp() {
+        return http;
+    }
+
+    public void setHttp(String http) {
+        this.http = http;
+    }
+
+    public String getKEY() {
+        return KEY;
+    }
+
+    public void setKEY(String KEY) {
+        this.KEY = KEY;
+    }
 }
