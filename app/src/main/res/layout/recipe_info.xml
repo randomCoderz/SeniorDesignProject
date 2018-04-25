@@ -43,10 +43,11 @@
 
     <TextView
         android:id="@+id/recipeName"
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_width="258dp"
+        android:layout_height="112dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/recipeImage"
+        android:layout_marginTop="0dp"
         android:text="@string/recipe_name"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="164dp"
@@ -74,11 +75,10 @@
 
     <ImageView
         android:id="@+id/recipeImage"
-        android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_above="@+id/readyInMin"
+        android:layout_width="152dp"
+        android:layout_height="114dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="0dp"
+        android:layout_alignParentTop="true"
         app:srcCompat="@android:drawable/ic_menu_gallery"
         tools:layout_editor_absoluteX="5dp"
         tools:layout_editor_absoluteY="0dp" />
@@ -98,8 +98,8 @@
         android:id="@+id/readyInMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/completed"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/recipeImage"
         android:text="TextView" />
 
 </RelativeLayout>

@@ -8,12 +8,12 @@ import android.content.Context;
 
 import com.pr.pr.pantryraid.recipe;
 
-@TypeConverters({com.pr.pr.pantryraid.RoomPersist.DataConverter.class})
-@Database(entities = {recipe.class /*,pantryDB.class*/}, version = 1, exportSchema = false)
+@TypeConverters({DataConverter.class})
+@Database(entities = {recipe.class ,pantryDB.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
     public abstract RecipesDAO recipesdao();
-    //public abstract pantryDAO pantrydao();
+    public abstract PantryDAO pantrydao();
     public static AppDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class).build();
