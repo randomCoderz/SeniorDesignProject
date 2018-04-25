@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
+
 import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
@@ -39,11 +42,20 @@ public class calendar extends Fragment
     private RecyclerView rv;
     private home h = new home(KEY);
 
+    private int year;
+    private int month;
+    private int day;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         {
             View rootView = inflater.inflate(R.layout.calendar, container, false);
 
+            //database stuff
+            AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+            RecipeRepository d = new RecipeRepository(mdb);
+
+            //RVAdapter for recipe cards
             rv = rootView.findViewById(R.id.rv);
             LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
             rv.setHasFixedSize(true);
@@ -52,7 +64,6 @@ public class calendar extends Fragment
             try {
                 recipeList = h.randomRecipe(false, 2, null);
                 recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
-
                 rv.setAdapter(adapter);
 
             } catch (JSONException e) {
@@ -73,10 +84,10 @@ public class calendar extends Fragment
                 @Override
                 public void onClick(View v) {
                     currentDate = Calendar.getInstance();
-                    int year = currentDate.get(Calendar.YEAR);
-                    int month = currentDate.get(Calendar.MONTH);
-                    int day = currentDate.get(Calendar.DAY_OF_MONTH);
-                    int dayOfWeek = currentDate.get(Calendar.DAY_OF_WEEK);
+                    year = currentDate.get(Calendar.YEAR);
+                    month = currentDate.get(Calendar.MONTH);
+                    day = currentDate.get(Calendar.DAY_OF_MONTH);
+                    //int dayOfWeek = currentDate.get(Calendar.DAY_OF_WEEK);
 
                     DatePickerDialog mDatePicker = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                         @Override
