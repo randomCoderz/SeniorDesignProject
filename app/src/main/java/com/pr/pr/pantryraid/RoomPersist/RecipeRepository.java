@@ -45,7 +45,7 @@ public class RecipeRepository {
 
         @Override
         protected void onPostExecute(recipe r){
-
+            //System.out.println(r.name);
         }
 
     }

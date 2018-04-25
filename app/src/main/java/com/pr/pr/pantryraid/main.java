@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.PantryRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeView;
 
@@ -52,8 +53,15 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+
         RecipeRepository dbI = new RecipeRepository(mdb);
-        dbI.insertRecipe(new recipe(10,"Hello","Hello",10, null, null,"Yolo"));
+        PantryRepository pbi = new PantryRepository(mdb);
+
+
+        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo");
+        System.out.println("----------------------------HERE----------------------------");
+        dbI.insertRecipe(test);
+        dbI.getRecipeByID(10);
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
