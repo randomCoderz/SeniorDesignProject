@@ -13,9 +13,6 @@ interface RecipesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRecipes(recipe r1);
 
-    @Query("SELECT * FROM Recipes")
-    recipe allRecipes();
-
     @Query("SELECT * FROM Recipes WHERE recipeID LIKE :id")
     recipe getRecipeFromID(int id);
 

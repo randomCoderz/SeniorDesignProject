@@ -6,7 +6,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.OnConflictStrategy;
 
-public interface pantryDAO {
+@Dao
+public interface PantryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPantry(pantryDB r1);
 
@@ -14,5 +15,5 @@ public interface pantryDAO {
     pantryDB getpantry();
 
     @Delete
-    void deletePantry();
+    void deletePantry(pantryDB p);
 }
