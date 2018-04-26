@@ -42,7 +42,7 @@ public class ingredientsLVAdapter extends BaseAdapter {
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
 
         View row = convertView;
@@ -54,7 +54,17 @@ public class ingredientsLVAdapter extends BaseAdapter {
         CheckBox selected = row.findViewById(R.id.checkBox);
         double a = Double.parseDouble(ingredientList.get(position).amount);
         ingredientName.setText(new DecimalFormat("#.##").format(a) + " " + ingredientList.get(position).unit + " " + ingredientList.get(position).name);
+        View.OnClickListener c = new View.OnClickListener() {
+            public void onClick(View view)
+            {
+                if(ingredientList.get(position).selected)
+                    ingredientList.get(position).selected = false;
+                else
+                    ingredientList.get(position).selected = true;
+            }
+        };
 
+        selected.setOnClickListener(c);
 //        row.setBackgroundColor(Color.RED);
 
         return row;

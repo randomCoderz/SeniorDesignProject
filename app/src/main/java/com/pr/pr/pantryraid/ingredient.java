@@ -8,6 +8,7 @@ public class ingredient {
     String photoURL;
     int photoID;
     double quantity;
+    boolean missing;
     boolean selected;
 
 
@@ -34,14 +35,15 @@ public class ingredient {
         this.photoURL = photoURL;
     }
 
-
-    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean selected)
+    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
     {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.unit = unit;
         this.photoURL = photoURL;
+        this.quantity = quantity;
+        this.missing = missing;
         this.selected = selected;
     }
 
@@ -107,5 +109,13 @@ public class ingredient {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isMissing() {
+        return missing;
+    }
+
+    public void setMissing(boolean missing) {
+        this.missing = missing;
     }
 }

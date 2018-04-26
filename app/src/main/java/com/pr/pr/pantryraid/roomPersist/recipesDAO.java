@@ -9,7 +9,7 @@ import android.arch.persistence.room.Query;
 import com.pr.pr.pantryraid.recipe;
 
 @Dao
-public interface RecipesDAO {
+interface RecipesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRecipes(recipe r1);
 
