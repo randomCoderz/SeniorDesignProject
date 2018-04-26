@@ -24,18 +24,18 @@
     <EditText
         android:id="@+id/searchPantry"
         android:layout_width="299dp"
-        android:layout_height="48dp"
+        android:layout_height="78dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="7dp"
         android:layout_marginStart="16dp"
         android:ems="10"
+        android:hint="Search"
         android:inputType="textPersonName"
-        android:text="Search..."
         app:layout_constraintBottom_toTopOf="@+id/myPantry"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.036" />
 
     <ListView
         android:id="@+id/myPantry"
