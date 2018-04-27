@@ -41,18 +41,6 @@
         app:layout_constraintEnd_toStartOf="@+id/addToCalendar"
         app:layout_constraintStart_toEndOf="@+id/selectedToCart" />
 
-    <TextView
-        android:id="@+id/recipeName"
-        android:layout_width="258dp"
-        android:layout_height="112dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/recipeImage"
-        android:layout_marginTop="0dp"
-        android:text="@string/recipe_name"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="0dp" />
-
     <Button
         android:id="@+id/completed"
         android:layout_width="126dp"
@@ -75,7 +63,7 @@
 
     <ImageView
         android:id="@+id/recipeImage"
-        android:layout_width="152dp"
+        android:layout_width="319dp"
         android:layout_height="114dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -100,6 +88,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/recipeImage"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/recipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/recipeImage"
+        android:layout_toEndOf="@+id/recipeImage"
         android:text="TextView" />
 
 </RelativeLayout>

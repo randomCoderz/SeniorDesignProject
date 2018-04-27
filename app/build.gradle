@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin'
+apply plugin: 'kotlin-android'
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -67,6 +68,4 @@ dependencies {
 
     implementation files('libs/picasso-2.5.2.jar')
     implementation files('libs/gson-2.8.2.jar')
-
-
 }
