@@ -15,17 +15,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="337dp"
         android:background="@android:color/background_light"
         android:padding="16dp">
 
         <ImageView
             android:id="@+id/cvPhoto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="25dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside" />
 
@@ -33,17 +32,19 @@
             android:id="@+id/cvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/cvPhoto"
+            android:layout_above="@+id/cvDescription"
+            android:layout_centerHorizontal="true"
             android:text="name"
+            android:textColor="@android:color/background_dark"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/cvDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cvName"
-            android:layout_toRightOf="@+id/cvPhoto"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/cvPhoto"
+            android:layout_marginBottom="33dp"
             android:text="description" />
 
     </RelativeLayout>

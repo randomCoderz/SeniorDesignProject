@@ -51,16 +51,16 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         //Database Here
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-
-        RecipeRepository dbI = new RecipeRepository(mdb);
-        PantryRepository pbi = new PantryRepository(mdb);
-
-
-        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo");
-        System.out.println("----------------------------HERE----------------------------");
-        dbI.insertRecipe(test);
-        dbI.getRecipeByID(10);
+//        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+//
+//        RecipeRepository dbI = new RecipeRepository(mdb);
+//        PantryRepository pbi = new PantryRepository(mdb);
+//
+//
+//        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo");
+//        System.out.println("----------------------------HERE----------------------------");
+//        dbI.insertRecipe(test);
+//        dbI.getRecipeByID(10);
 
         //start of navigation drawer
         setSupportActionBar(toolbar);

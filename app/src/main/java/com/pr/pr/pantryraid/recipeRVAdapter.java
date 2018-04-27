@@ -50,7 +50,7 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
 
     private static List<recipe> recipeList;
 
-    recipeRVAdapter(List<recipe> recipeList)
+    public recipeRVAdapter(List<recipe> recipeList)
     {
         this.recipeList = recipeList;
     }
@@ -76,9 +76,7 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
 
             holder.recipeName.setText(recipeList.get(i).name);
             holder.index = i;
-            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
-
-
+            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).resize(2000,900).into(holder.recipeImage);
 
         } catch(Exception e){
             e.printStackTrace();

@@ -2,22 +2,21 @@
 
 buildscript {
 
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.40-1'
 
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.40"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-apply plugin: 'kotlin'
+
+//apply plugin: 'kotlin'
 
 allprojects {
     repositories {
@@ -29,7 +28,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.40"
 }
 compileKotlin {
     kotlinOptions {
@@ -41,7 +40,3 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
-
-//task clean(type: Delete) {
-//    delete rootProject.buildDir
-//}
