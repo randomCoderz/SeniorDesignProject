@@ -9,8 +9,8 @@ public class ingredient
     String photoURL;
     int photoID;
     double quantity;
-    boolean missing;
     boolean selected;
+    boolean missing;
     boolean pantry;
     boolean shoppingCart;
 
@@ -39,7 +39,6 @@ public class ingredient
     }
 
 
-
     ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected, boolean pantry, boolean shoppingCart)
     {
         this.id = id;
@@ -47,9 +46,9 @@ public class ingredient
         this.amount = amount;
         this.unit = unit;
         this.photoURL = photoURL;
+        this.selected = selected;
         this.quantity = quantity;
         this.missing = missing;
-        this.selected = selected;
         this.pantry = pantry;
         this.shoppingCart = shoppingCart;
     }
@@ -141,7 +140,5 @@ public class ingredient
     public void setShoppingCart(boolean shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
-
-
 
 }
