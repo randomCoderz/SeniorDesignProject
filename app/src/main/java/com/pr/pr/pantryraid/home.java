@@ -137,7 +137,7 @@ class home extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false, false));
         }
         return recipeList;
     }
@@ -175,7 +175,7 @@ class home extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false ,false));
         }
         return recipeList;
     }
@@ -243,7 +243,7 @@ class home extends Thread
                 String ingredient_image = "";
                 if(ingredient.has("image"))
                     ingredient_image = ingredient.getString("image");
-                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, true, false));
+                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, true, false, false, false));
             }
             ArrayList<step> analyzedInstructions = new ArrayList();
             JSONArray ai = object.getJSONArray("analyzedInstructions");
@@ -270,7 +270,7 @@ class home extends Thread
             }
 
 
-            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions, false, false));
 
         }
         return recipeList;
