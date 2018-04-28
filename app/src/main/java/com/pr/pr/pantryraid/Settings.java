@@ -47,7 +47,6 @@ public class Settings extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
         View rootView = inflater.inflate(R.layout.settings, container, false);
         Gson gson = new Gson();
         mpref = getActivity().getPreferences(MODE_PRIVATE);

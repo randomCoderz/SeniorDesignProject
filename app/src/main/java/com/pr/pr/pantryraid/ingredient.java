@@ -29,7 +29,6 @@ public class ingredient {
     boolean missing;
 
 
-
     @Ignore
     public ingredient(int id, String name, String photoURL)
     {
@@ -109,7 +108,7 @@ public class ingredient {
         this.photoURL = photoURL;
     }
 
-    public boolean getSelected() {
+    public boolean isSelected() {
         return selected;
     }
 

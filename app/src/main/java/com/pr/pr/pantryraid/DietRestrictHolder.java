@@ -7,3 +7,4 @@ public class DietRestrictHolder {
     TextView restriction;
     CheckBox selected;
 }
+

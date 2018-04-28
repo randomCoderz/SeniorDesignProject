@@ -145,8 +145,7 @@ public class recipe
         this.analyzedInstructions = analyzedInstructions;
     }
 
-
-    public boolean isFavorites() {
+   public boolean isFavorites() {
         return favorites;
     }
 
@@ -185,7 +184,6 @@ public class recipe
     public void setYear(int year) {
         this.year = year;
     }
-
 }
 
 
