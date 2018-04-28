@@ -12,6 +12,7 @@
         android:layout_width="46dp"
         android:layout_height="44dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,24 +22,13 @@
         android:id="@+id/searchPantry"
         android:layout_width="299dp"
         android:layout_height="45dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Search"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/myPantry"
-        android:layout_width="fill_parent"
-        android:layout_height="363dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"></ListView>
 
     <Button
         android:id="@+id/bttnRecipe"
@@ -51,5 +41,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/myPantry"
+        android:layout_width="fill_parent"
+        android:layout_height="515dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"></ListView>
 
 </android.support.constraint.ConstraintLayout>
