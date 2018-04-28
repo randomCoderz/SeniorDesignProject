@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
+import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
+
 import org.json.JSONException;
 
 import java.util.List;
@@ -24,7 +27,7 @@ public class favorites extends Fragment
 
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
 
-    private List<recipe> recipeList;
+    private List<recipe> favoritesList;
     private RecyclerView rv;
     private home h = new home(KEY);
 
@@ -39,16 +42,21 @@ public class favorites extends Fragment
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
 
-        try {
-            recipeList = h.randomRecipe(false, 5, null);
-            recipeFavoriteRVAdapter adapter = new recipeFavoriteRVAdapter(recipeList);
-            rv.setAdapter(adapter);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            recipeList = h.randomRecipe(false, 5, null);
+//            recipeFavoriteRVAdapter adapter = new recipeFavoriteRVAdapter(recipeList);
+//            rv.setAdapter(adapter);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
+        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+        RecipeRepository dbI = new RecipeRepository(mdb);
+        //favoritesList.add( new recipe(12,"Favorite55","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
+
+        dbI.getFavorites();
         return rootView;
     }
 }
