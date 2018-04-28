@@ -53,35 +53,6 @@ public class myPantry extends Fragment{
 
         listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
-
-
-//        initList();
-//        searchPantry.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if(s.toString().equals("")){
-//                    // reset listview
-//                    initList();
-//                }
-//                else{
-//                    // perform search
-//                    searchItem(s.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-
-
-
-            // not sure if i need to make it final
         return rootView;
         }
 
@@ -102,18 +73,6 @@ public class myPantry extends Fragment{
         adapter.notifyDataSetChanged();
 
     }
-//
-//    private void initList() {
-//        items=new String[]{"apple","banana","milk","cherry","avocado"};
-//        listItems=new ArrayList<>(Arrays.asList(items));
-//        //might need to extends ActionBarActivity in this class!!!
-//        adapter=new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
-//        myPantry.setAdapter(adapter);
-//    }
-
 
 } // myPantry ends
-
-
-
 
