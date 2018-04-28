@@ -76,8 +76,9 @@
         android:id="@+id/recipeImage"
         android:layout_width="match_parent"
         android:layout_height="86dp"
+        android:layout_above="@+id/readyInMin"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/recipeName"
+        android:layout_marginBottom="0dp"
         app:srcCompat="@android:drawable/ic_menu_gallery"
         tools:layout_editor_absoluteX="5dp"
         tools:layout_editor_absoluteY="0dp" />

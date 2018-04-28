@@ -10,9 +10,6 @@ public class ingredient
     int photoID;
     double quantity;
     boolean selected;
-    boolean missing;
-    boolean pantry;
-    boolean shoppingCart;
 
 
     public ingredient(int id, String name, String photoURL)
@@ -39,7 +36,8 @@ public class ingredient
     }
 
 
-    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected, boolean pantry, boolean shoppingCart)
+
+    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean selected)
     {
         this.id = id;
         this.name = name;
@@ -47,10 +45,6 @@ public class ingredient
         this.unit = unit;
         this.photoURL = photoURL;
         this.selected = selected;
-        this.quantity = quantity;
-        this.missing = missing;
-        this.pantry = pantry;
-        this.shoppingCart = shoppingCart;
     }
 
     public int getId() {
@@ -93,7 +87,7 @@ public class ingredient
         this.photoURL = photoURL;
     }
 
-    public boolean isSelected() {
+    public boolean getSelected() {
         return selected;
     }
 
@@ -116,29 +110,4 @@ public class ingredient
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
-
-    public boolean isMissing() {
-        return missing;
-    }
-
-    public void setMissing(boolean missing) {
-        this.missing = missing;
-    }
-
-    public boolean isPantry() {
-        return pantry;
-    }
-
-    public void setPantry(boolean pantry) {
-        this.pantry = pantry;
-    }
-
-    public boolean isShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(boolean shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
-
 }

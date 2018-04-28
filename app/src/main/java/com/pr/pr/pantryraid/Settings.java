@@ -9,21 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
 
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-
 import static android.content.Context.MODE_PRIVATE;
 
 
 public class Settings extends Fragment {
-
-    Switch restrictions;
+    Switch vegan;
     Switch calendar;
     Switch expNotification;
     Button calendarDaily;
@@ -32,39 +28,30 @@ public class Settings extends Fragment {
     Button expirationDaily;
     Button expirationWeekly;
     Button expirationMonthly;
+    Button test;
     savedSettings s;
     Button saveSettings;
     SharedPreferences mpref;
-    private ListView listView;
-    ArrayList<DietRestrictName> r = new ArrayList<>();
-    private DietRestrictLVAdapter listAdapter;
-
-
-    public Settings() {
+    public Settings(){
 
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        @Override
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View rootView = inflater.inflate(R.layout.settings, container, false);
         Gson gson = new Gson();
         mpref = getActivity().getPreferences(MODE_PRIVATE);
         String json = mpref.getString("settings", "");
-        if (json.equals("")) {
+        if(json.equals("")) {
             s = new savedSettings();
-        } else {
-            s = gson.fromJson(json, savedSettings.class);
         }
-        getList();
-        listView = rootView.findViewById(R.id.restrictionList);
-        listAdapter = new DietRestrictLVAdapter(getActivity(), r);
-        listView.setAdapter(listAdapter);
-        // restrictionName.setText(restriction);
+        else {
+            s = gson.fromJson(json,savedSettings.class);
+        }
 
-        restrictions = rootView.findViewById(R.id.DietaryRestrictions);
+        vegan = rootView.findViewById(R.id.vegan);
         saveSettings = rootView.findViewById(R.id.saveSettings);
         calendar = rootView.findViewById(R.id.calendarSwitch);
         expNotification = rootView.findViewById(R.id.expirationSwitch);
@@ -75,61 +62,70 @@ public class Settings extends Fragment {
         expirationWeekly = rootView.findViewById(R.id.expirationWeekly);
         expirationMonthly = rootView.findViewById(R.id.expirationMonthly);
 
-        if (s.getRestrictions() == false) {
-            restrictions.setChecked(false);
-        } else {
-            restrictions.setChecked(true);
+        if(s.getVegan() == false){
+            vegan.setChecked(false);
         }
-        if (s.getCalendarNotifications() == false) {
+        else{
+            vegan.setChecked(true);
+        }
+        if(s.getCalendarNotifications() == false){
             calendar.setChecked(false);
-        } else {
+        }
+        else{
             calendar.setChecked(true);
         }
-        if (s.getExpNotifications() == false) {
+        if(s.getExpNotifications() == false){
             expNotification.setChecked(false);
-        } else {
+        }
+        else{
             expNotification.setChecked(true);
         }
-        if (s.getCalendarDaily() == false) {
+        if(s.getCalendarDaily() == false){
             //change color to a false color
             calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        } else {
+        }
+        else{
             calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
-        if (s.getCalendarWeekly() == false) {
+        if(s.getCalendarWeekly() == false){
             calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        } else {
+        }
+        else{
             calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
-        if (s.getCalendarMonthly() == false) {
+        if(s.getCalendarMonthly() == false){
             calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-        } else {
+        }
+        else{
             calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         }
-        if (s.getExpDaily() == false) {
+        if(s.getExpDaily() == false){
             expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        } else {
+        }
+        else{
             expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
-        if (s.getExpWeekly() == false) {
+        if(s.getExpWeekly() == false){
             expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        } else {
+        }
+        else{
             expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
-        if (s.getExpMonthly() == false) {
+        if(s.getExpMonthly() == false){
             expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        } else {
+        }
+        else{
             expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -142,11 +138,12 @@ public class Settings extends Fragment {
                 s.setCalendarDaily(true);
                 s.setCalendarWeekly(false);
                 s.setCalendarMonthly(false);
-                if (calendar.isChecked()) {
+                if(calendar.isChecked()) {
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                } else {
+                }
+                else{
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -160,11 +157,12 @@ public class Settings extends Fragment {
                 s.setCalendarWeekly(true);
                 s.setCalendarDaily(false);
                 s.setCalendarMonthly(false);
-                if (calendar.isChecked()) {
+                if(calendar.isChecked()) {
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                } else {
+                }
+                else{
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -178,11 +176,12 @@ public class Settings extends Fragment {
                 s.setCalendarMonthly(true);
                 s.setCalendarDaily(false);
                 s.setCalendarWeekly(false);
-                if (calendar.isChecked()) {
+                if(calendar.isChecked()) {
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                } else {
+                }
+                else{
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -194,7 +193,7 @@ public class Settings extends Fragment {
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (calendar.isChecked()) {
+                if(calendar.isChecked()) {
 
                     //UI side
                     s.setCalendarNotifications(true);
@@ -203,7 +202,8 @@ public class Settings extends Fragment {
                     s.setCalendarDaily(true);
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
 
-                } else {
+                }
+                else{
 
                     //UI side
                     calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -225,13 +225,15 @@ public class Settings extends Fragment {
         expNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (expNotification.isChecked()) {
+                if(expNotification.isChecked()) {
                     s.setExpNotifications(true);
                     expNotification.setChecked(true);
                     s.setExpDaily(true);
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
 
-                } else {
+                    }
+
+                else{
 
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -250,11 +252,12 @@ public class Settings extends Fragment {
                 s.setExpDaily(true);
                 s.setExpWeekly(false);
                 s.setExpMonthly(false);
-                if (expNotification.isChecked()) {
+                if(expNotification.isChecked()) {
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                } else {
+                }
+                else{
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -268,11 +271,12 @@ public class Settings extends Fragment {
                 s.setExpDaily(false);
                 s.setExpWeekly(true);
                 s.setExpMonthly(false);
-                if (expNotification.isChecked()) {
+                if(expNotification.isChecked()) {
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                } else {
+                }
+                else{
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -287,11 +291,12 @@ public class Settings extends Fragment {
                 s.setExpDaily(false);
                 s.setExpWeekly(false);
                 s.setExpMonthly(true);
-                if (expNotification.isChecked()) {
+                if(expNotification.isChecked()) {
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                } else {
+                }
+                else{
                     expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -306,49 +311,33 @@ public class Settings extends Fragment {
                 SharedPreferences.Editor prefsEditor = pref.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(s);
-                prefsEditor.putString("settings", json);
+                prefsEditor.putString("settings",json);
                 prefsEditor.commit();
                 Toast.makeText(getActivity(), "Your Settings Have Been Saved", Toast.LENGTH_LONG).show();
 
             }
         });
 
-        restrictions.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        vegan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean b) {
 
-                if (b) {
-                    s.setRestrictions(true);
+                if(b){
+                    s.setVegan(true);
 
-                } else {
-                    s.setRestrictions(false);
+                }
+                else{
+                    s.setVegan(false);
 
                 }
             }
         });
 
 
+
         return rootView;
     }
 
-    public void getList() {
-        r.add(new DietRestrictName("Dairy"));
-        r.add(new DietRestrictName("Egg"));
-        r.add(new DietRestrictName("Gluten"));
-        r.add(new DietRestrictName("Peanut"));
-        r.add(new DietRestrictName("Sesame"));
-        r.add(new DietRestrictName("Seafood"));
-        r.add(new DietRestrictName("Soy"));
-        r.add(new DietRestrictName("Sulfite"));
-        r.add(new DietRestrictName("Nuts"));
-        r.add(new DietRestrictName("Wheat"));
-        r.add(new DietRestrictName("Pescetarian"));
-        r.add(new DietRestrictName("LactoVegetarian"));
-        r.add(new DietRestrictName("OvoVegetarian"));
-        r.add(new DietRestrictName("Vegetarian"));
-        r.add(new DietRestrictName("Vegan"));
 
 
-
-    }
 }
 

@@ -14,9 +14,9 @@ public class shoppingCart extends Fragment{
 
     private ListView listView;
     private shoppingCartLVAdapter listAdapter;
-    ArrayList<ingredient> products = new ArrayList<>();
+    ArrayList<items> products = new ArrayList<>();
     Button btnPlaceOrder;
-    ArrayList<ingredient> productOrders = new ArrayList<>();
+    ArrayList<items> productOrders = new ArrayList<>();
 
     public shoppingCart(){
 
@@ -50,23 +50,23 @@ public class shoppingCart extends Fragment{
         productOrders.clear();
         for(int i=0;i<listAdapter.listProducts.size();i++)
         {
-            if(listAdapter.listProducts.get(i).quantity > 0)
+            if(listAdapter.listProducts.get(i).CartQuantity > 0)
             {
-//                ingredient products = new ingredient(
-//                        listAdapter.listProducts.get(i).name
-//                );
-//                products.quantity = listAdapter.listProducts.get(i).quantity;
-//                productOrders.add(products);
+                items products = new items(
+                        listAdapter.listProducts.get(i).itemName
+                );
+                products.CartQuantity = listAdapter.listProducts.get(i).CartQuantity;
+                productOrders.add(products);
             }
         }
     }
 
     public void getProduct() {
-//        products.add(new items("one"));
-//        products.add(new items("two"));
-//        products.add(new items("three"));
-//        products.add(new items("four"));
-          products.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false, false, false));
+        products.add(new items("one"));
+        products.add(new items("two"));
+        products.add(new items("three"));
+        products.add(new items("four"));
+
 
 //        products.add(new Product("Camera",11.0d,R.mipmap.camera_1));
 //        products.add(new Product("Floppy",12.0d,R.mipmap.floppy));

@@ -55,11 +55,6 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
         this.recipeList = recipeList;
     }
 
-    public void recipeRVAdapterRefresh(List<recipe> recipeList)
-    {
-        this.recipeList = recipeList;
-    }
-
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView)
     {
@@ -82,6 +77,7 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
             holder.recipeName.setText(recipeList.get(i).name);
             holder.index = i;
             Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
+
 
 
         } catch(Exception e){

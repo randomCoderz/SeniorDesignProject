@@ -1,164 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ScrollView01"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryLight"
+    android:paddingTop="?android:attr/actionBarSize"
 >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/primaryLight"
-        android:paddingTop="?android:attr/actionBarSize">
 
-        <TextView
-            android:id="@+id/calendarNotifications"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Calendar Notifications"
-            android:textSize="30dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_centerHorizontal="true"
-         />
-
-        <Switch
-            android:id="@+id/calendarSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calendarNotifications"
-            android:layout_centerHorizontal="true"
-            android:text=""
-            />
-
-
-
-
-        <Button
-            android:id="@+id/calendarDaily"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calendarSwitch"
-            android:layout_toLeftOf="@id/calendarWeekly"
-            android:text="Daily"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-
-            />
-
-        <Button
-            android:id="@+id/calendarWeekly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calendarSwitch"
-            android:text="Weekly"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-            android:layout_centerHorizontal="true"
-            />
-
-        <Button
-            android:id="@+id/calendarMonthly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calendarSwitch"
-            android:layout_toRightOf="@id/calendarWeekly"
-            android:text="Monthly"
-            android:textColor="@color/White"
-            android:background="@color/colorPrimary"
-
-            />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Expiration Notifications"
-            android:textSize="30dp"
-            android:layout_below="@+id/calendarWeekly"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/colorPrimaryDark"
-            />
-
-        <Switch
-            android:id="@+id/expirationSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
-            android:text=""
-            android:layout_centerHorizontal="true"
+    <TextView
+        android:id="@+id/calendarNotifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Calendar Notifications"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
      />
 
-        <Button
-            android:id="@+id/expirationDaily"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/expirationSwitch"
-            android:layout_toLeftOf="@id/expirationWeekly"
-            android:text="Daily"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-            />
+    <Switch
+        android:id="@+id/calendarSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarNotifications"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        />
 
 
 
-        <Button
-            android:id="@+id/expirationWeekly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/expirationSwitch"
-            android:text="Weekly"
-            android:layout_centerHorizontal="true"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-            />
 
-        <Button
-            android:id="@+id/expirationMonthly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/expirationWeekly"
-            android:layout_below="@+id/expirationSwitch"
-            android:text="Monthly"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-    />
+    <Button
+        android:id="@+id/calendarDaily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarSwitch"
+        android:layout_toLeftOf="@id/calendarWeekly"
+        android:text="Daily"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
 
-        <TextView
-            android:id="@+id/restrictions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/expirationWeekly"
-            android:text="Dietary Restrictions"
-            android:layout_centerHorizontal="true"
-            />
+        />
+
+    <Button
+        android:id="@+id/calendarWeekly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarSwitch"
+        android:text="Weekly"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:id="@+id/calendarMonthly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendarSwitch"
+        android:layout_toRightOf="@id/calendarWeekly"
+        android:text="Monthly"
+        android:textColor="@color/White"
+        android:background="@color/colorPrimary"
+
+        />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expiration Notifications"
+        android:textSize="30dp"
+        android:layout_below="@+id/calendarWeekly"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimaryDark"
+        />
+
+    <Switch
+        android:id="@+id/expirationSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:text=""
+        android:layout_centerHorizontal="true"
+ />
+
+    <Button
+        android:id="@+id/expirationDaily"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/expirationSwitch"
+        android:layout_toLeftOf="@id/expirationWeekly"
+        android:text="Daily"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        />
 
 
-        <Switch
-            android:id="@+id/DietaryRestrictions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/restrictions"
-            android:layout_centerHorizontal="true"
-             />
 
-        <Button
-            android:id="@+id/saveSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/restrictionList"
-            android:text="Save Settings"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-            />
+    <Button
+        android:id="@+id/expirationWeekly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/expirationSwitch"
+        android:text="Weekly"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        />
 
-        <ListView
-            android:id="@+id/restrictionList"
-            android:layout_width="wrap_content"
-            android:layout_height="980dp"
-            android:layout_below="@id/DietaryRestrictions"
-            android:text="CheckBox" />
-    </RelativeLayout>
+    <Button
+        android:id="@+id/expirationMonthly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/expirationWeekly"
+        android:layout_below="@+id/expirationSwitch"
+        android:text="Monthly"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+/>
 
-</ScrollView>
+
+    <Switch
+        android:id="@+id/vegan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/expirationMonthly"
+        android:layout_centerHorizontal="true"
+        android:text="Vegan" />
+
+    <Button
+        android:id="@+id/saveSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/vegan"
+        android:text="Save Settings"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/White"
+        />
+
+
+</RelativeLayout>
