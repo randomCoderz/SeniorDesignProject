@@ -49,7 +49,7 @@
         android:layout_marginTop="80dp"
         android:ems="10"
         android:inputType="text|textPersonName"
-        android:text="@string/search"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
