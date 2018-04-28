@@ -23,7 +23,7 @@ public class myPantry extends Fragment{
     EditText searchPantry;
     ListView pantryList;
     //ArrayList<String> listItems;
-    ArrayList<items> listItems = new ArrayList<>();
+    ArrayList<ingredient> listItems = new ArrayList<>();
     private shoppingCartLVAdapter listAdapter;
 
     // This will make it so that when you search for ingredients it will filter the list.
