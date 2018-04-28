@@ -79,7 +79,6 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
             Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).into(holder.recipeImage);
 
 
-
         } catch(Exception e){
             e.printStackTrace();
         }
