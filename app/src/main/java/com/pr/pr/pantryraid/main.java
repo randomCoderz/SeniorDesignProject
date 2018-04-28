@@ -168,7 +168,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         else if (id == R.id.nav_recipe) {
 
         } else if (id == R.id.nav_favorites) {
-
+            frag = new favorites();
         }
         else if (id == R.id.nav_settings) {
             frag = new Settings();
