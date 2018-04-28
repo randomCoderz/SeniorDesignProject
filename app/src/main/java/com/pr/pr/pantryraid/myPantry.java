@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -108,6 +111,13 @@ public class myPantry extends Fragment{
 //        adapter=new ArrayAdapter<String>(this, R.layout.list_item, R.id.txtitem, listItems);
 //        myPantry.setAdapter(adapter);
 //    }
+
+    private void initializeList() {
+        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+        IngredientRepository pbI = new IngredientRepository(mdb);
+
+
+    }
 
 
 } // myPantry ends
