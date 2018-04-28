@@ -50,6 +50,7 @@ public class RecipeRepository {
 
         @Override
         protected void onPostExecute(recipe r){
+<<<<<<< HEAD
 
             System.out.println(r.name);
 
@@ -74,6 +75,9 @@ public class RecipeRepository {
         protected void onPostExecute(recipe r){
             System.out.println(r.name);
 
+=======
+            System.out.println(r.name);
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
         }
 
     }

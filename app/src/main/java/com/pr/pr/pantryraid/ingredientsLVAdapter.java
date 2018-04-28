@@ -42,13 +42,13 @@ public class ingredientsLVAdapter extends BaseAdapter {
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
 
         View row = convertView;
         if(row == null)
             row = inflater.inflate(R.layout.ingredient_item, null);
-        TextView ingredientName = row.findViewById(R.id.ingredientName);
+        final TextView ingredientName = row.findViewById(R.id.ingredientName);
         ingredientName.setTextSize(20);
         ingredientName.setTypeface(null, Typeface.BOLD);
         CheckBox selected = row.findViewById(R.id.checkBox);
@@ -56,6 +56,17 @@ public class ingredientsLVAdapter extends BaseAdapter {
         ingredientName.setText(new DecimalFormat("#.##").format(a) + " " + ingredientList.get(position).unit + " " + ingredientList.get(position).name);
 
 //        row.setBackgroundColor(Color.RED);
+        selected.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(ingredientList.get(position).selected)
+                ingredientList.get(position).selected = false;
+            else
+                ingredientList.get(position).selected = true;
+
+        }
+    });
+
 
         return row;
     }

@@ -145,7 +145,10 @@ public class recipe
         this.analyzedInstructions = analyzedInstructions;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
     public boolean isFavorites() {
         return favorites;
     }
@@ -185,7 +188,10 @@ public class recipe
     public void setYear(int year) {
         this.year = year;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
 }
 
 

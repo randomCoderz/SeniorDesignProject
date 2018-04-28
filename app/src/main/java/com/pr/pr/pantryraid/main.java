@@ -58,6 +58,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 //
         RecipeRepository dbI = new RecipeRepository(mdb);
+<<<<<<< HEAD
 
         IngredientRepository pbI = new IngredientRepository(mdb);
         ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
@@ -80,6 +81,9 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         scI.insertShoppingCartItem(testCartItem);
         scI.getShoppingCartItemFromID(72);
 
+=======
+        dbI.insertRecipe(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0 ,0, 0));
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
 
         //start of navigation drawer
         setSupportActionBar(toolbar);

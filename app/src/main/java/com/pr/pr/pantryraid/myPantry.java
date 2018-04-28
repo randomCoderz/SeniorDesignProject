@@ -23,8 +23,10 @@ public class myPantry extends Fragment{
     EditText searchPantry;
     ListView pantryList;
     //ArrayList<String> listItems;
-    ArrayList<items> listItems = new ArrayList<>();
+    ArrayList<ingredient> listItems = new ArrayList<>();
     private shoppingCartLVAdapter listAdapter;
+
+
 
     // This will make it so that when you search for ingredients it will filter the list.
     String[] items;
@@ -40,8 +42,6 @@ public class myPantry extends Fragment{
 
         View rootView = inflater.inflate(R.layout.my_pantry, container,false);
 
-
-
         searchButton = (ImageButton)rootView.findViewById(R.id.searchButton);
         searchPantry = (EditText)rootView.findViewById(R.id.searchPantry);
         pantryList = (ListView)rootView.findViewById(R.id.myPantry);
@@ -49,6 +49,10 @@ public class myPantry extends Fragment{
 
         listAdapter = new shoppingCartLVAdapter(getActivity(),listItems);
         pantryList.setAdapter(listAdapter);
+
+
+
+
 //        initList();
 //        searchPantry.addTextChangedListener(new TextWatcher() {
 //            @Override

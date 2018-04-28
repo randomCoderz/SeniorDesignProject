@@ -27,6 +27,11 @@ public class ingredient {
     double quantity;
     boolean selected;
     boolean missing;
+<<<<<<< HEAD
+=======
+    boolean pantry;
+    boolean shoppingCart;
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
 
 
 
@@ -56,7 +61,12 @@ public class ingredient {
         this.photoURL = photoURL;
     }
 
+<<<<<<< HEAD
     public ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
+=======
+
+    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected, boolean pantry, boolean shoppingCart)
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
     {
         this.id = id;
         this.name = name;
@@ -66,7 +76,12 @@ public class ingredient {
         this.selected = selected;
         this.quantity = quantity;
         this.missing = missing;
+<<<<<<< HEAD
 
+=======
+        this.pantry = pantry;
+        this.shoppingCart = shoppingCart;
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
     }
 
     public int getId() {
@@ -109,7 +124,7 @@ public class ingredient {
         this.photoURL = photoURL;
     }
 
-    public boolean getSelected() {
+    public boolean isSelected() {
         return selected;
     }
 
@@ -141,4 +156,23 @@ public class ingredient {
         this.missing = missing;
     }
 
+<<<<<<< HEAD
+=======
+    public boolean isPantry() {
+        return pantry;
+    }
+
+    public void setPantry(boolean pantry) {
+        this.pantry = pantry;
+    }
+
+    public boolean isShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(boolean shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
 }

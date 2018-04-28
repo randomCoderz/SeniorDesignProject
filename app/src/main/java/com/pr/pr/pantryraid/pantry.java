@@ -63,9 +63,13 @@ class pantry extends Thread
             String image = "https://spoonacular.com/cdn/ingredients_100x100/";
             image += ingredient.getString("image");
             int id = ingredient.getInt("id");
+<<<<<<< HEAD
 
             ingredientList.add(new ingredient(id, name, "", "", image, 0, false, false));
 
+=======
+            ingredientList.add(new ingredient(id, name, "", "", image, 0, true, false, false, false));
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
         }
         return ingredientList;
     }

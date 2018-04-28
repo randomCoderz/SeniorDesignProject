@@ -14,9 +14,9 @@ public class shoppingCart extends Fragment{
 
     private ListView listView;
     private shoppingCartLVAdapter listAdapter;
-    ArrayList<items> products = new ArrayList<>();
+    ArrayList<ingredient> products = new ArrayList<>();
     Button btnPlaceOrder;
-    ArrayList<items> productOrders = new ArrayList<>();
+    ArrayList<ingredient> productOrders = new ArrayList<>();
 
     public shoppingCart(){
 
@@ -50,25 +50,32 @@ public class shoppingCart extends Fragment{
         productOrders.clear();
         for(int i=0;i<listAdapter.listProducts.size();i++)
         {
-            if(listAdapter.listProducts.get(i).CartQuantity > 0)
+            if(listAdapter.listProducts.get(i).quantity > 0)
             {
-                items products = new items(
-                        listAdapter.listProducts.get(i).itemName
-                );
-                products.CartQuantity = listAdapter.listProducts.get(i).CartQuantity;
-                productOrders.add(products);
+//                ingredient products = new ingredient(
+//                        listAdapter.listProducts.get(i).name
+//                );
+//                products.quantity = listAdapter.listProducts.get(i).quantity;
+//                productOrders.add(products);
             }
         }
     }
 
     public void getProduct() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
 //        products.add(new items("one"));
 //        products.add(new items("two"));
 //        products.add(new items("three"));
 //        products.add(new items("four"));
+<<<<<<< HEAD
           products.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
+=======
+          products.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false, false, false));
+>>>>>>> parent of 01a5877... Revert "Merge branch 'gui' of https://github.com/randomCoderz/SeniorDesignProject into gui"
 
     }
 }
