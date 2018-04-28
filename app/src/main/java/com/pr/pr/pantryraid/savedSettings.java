@@ -27,8 +27,6 @@ public class savedSettings {
     boolean ovoVegetarian;
     boolean vegetarian;
 
-
-
     public savedSettings(){
         CalendarDaily = false;
         CalendarWeekly = false;

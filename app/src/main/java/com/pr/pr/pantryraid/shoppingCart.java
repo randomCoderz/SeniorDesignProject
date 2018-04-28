@@ -16,11 +16,12 @@ public class shoppingCart extends Fragment{
     private shoppingCartLVAdapter listAdapter;
     ArrayList<ingredient> products = new ArrayList<>();
     Button btnPlaceOrder;
-    ArrayList<ingredient> productOrders = new ArrayList<>();
+    ArrayList<items> productOrders = new ArrayList<>();
 
     public shoppingCart(){
 
     }
+
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_shoppingcart, container, false);
@@ -34,39 +35,41 @@ public class shoppingCart extends Fragment{
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                placeOrder();
+            //    placeOrder();
             }
         });
         return rootView;
     }
 
-    private void placeOrder()
-    {
-        //sending
-        //Intent i = new Intent(getActivity(), HomePage.class);
-       // i.putExtra("products", products);
-       // startActivity(i);
-
-        productOrders.clear();
-        for(int i=0;i<listAdapter.listProducts.size();i++)
-        {
-            if(listAdapter.listProducts.get(i).quantity > 0)
-            {
+//    private void placeOrder()
+//    {
+//        //sending
+//        //Intent i = new Intent(getActivity(), HomePage.class);
+//       // i.putExtra("products", products);
+//       // startActivity(i);
+//
+//        productOrders.clear();
+//        for(int i=0;i<listAdapter.listProducts.size();i++)
+//        {
+//            if(listAdapter.listProducts.get(i).quantity > 0)
+//            {
 //                ingredient products = new ingredient(
 //                        listAdapter.listProducts.get(i).name
 //                );
-//                products.quantity = listAdapter.listProducts.get(i).quantity;
+//                products.CartQuantity = listAdapter.listProducts.get(i).quantity;
 //                productOrders.add(products);
-            }
-        }
-    }
+//            }
+//        }
+//    }
 
     public void getProduct() {
+
 //        products.add(new items("one"));
 //        products.add(new items("two"));
 //        products.add(new items("three"));
 //        products.add(new items("four"));
           products.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
+
 
     }
 }

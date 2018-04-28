@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF6F00</color>
-    <color name="colorPrimaryDark">#616161</color>
+    <color name="colorPrimary">#75292B</color>
+    <color name="colorPrimaryDark">#5e2123</color>
     <color name="colorAccent">#2BC016</color>
+    <color name = "GreenIsGo" >#2BC016</color>
     <color name = "primaryLight" > #fff9fa</color>
     <color name="White">#FFFFFF</color>
 </resources>

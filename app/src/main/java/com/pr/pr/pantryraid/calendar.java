@@ -61,6 +61,15 @@ public class calendar extends Fragment
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
 
+        try {
+            recipeList = h.randomRecipe(false, 2, null);
+            recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+            rv.setAdapter(adapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         editText = (EditText) rootView.findViewById(R.id.textBox);
         dateButton = (Button) rootView.findViewById(R.id.dateButton);
@@ -92,14 +101,12 @@ public class calendar extends Fragment
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
 
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
         return rootView;
