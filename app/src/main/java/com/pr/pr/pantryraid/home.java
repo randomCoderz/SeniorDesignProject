@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 class home extends Thread
 {
-    HttpResponse<JsonNode> response_return;
-    String http;
+    private HttpResponse<JsonNode> response_return;
+    private String http;
     private String KEY;
 
     public home(String key) {
@@ -38,6 +38,7 @@ class home extends Thread
      * @param query The (natural language) recipe search query.
      * @param type the type of the recipes. (main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink)
      */
+
     public ArrayList<recipe> searchRecipes(String[] cuisine, String diet[], String[] excludeIngredients, boolean instructionsRequired, String[] intolerances, boolean limitLicense, int number, int offset, String query, String type) throws InterruptedException, JSONException {
 
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search?";
@@ -86,7 +87,7 @@ class home extends Thread
                 }
             }
         }
-        if(instructionsRequired == true)
+        if(instructionsRequired)
             http += "instructionsRequired=" + instructionsRequired + "&";
         if(intolerances != null)
         {
@@ -95,7 +96,7 @@ class home extends Thread
             {
                 if(i != intolerances.length - 1)
                 {
-                    http += (intolerances[i] + "%2C");
+                    http = http + (intolerances[i] + "%2C");
                 }
                 else
                 {
@@ -103,7 +104,7 @@ class home extends Thread
                 }
             }
         }
-        if(limitLicense == true)
+        if(limitLicense)
             http += "limitLicense=" + limitLicense + "&";
         if(number > 0)
             http += "number=" + number;
@@ -136,7 +137,7 @@ class home extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false, false));
         }
         return recipeList;
     }
@@ -174,7 +175,7 @@ class home extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false ,false));
         }
         return recipeList;
     }
@@ -214,52 +215,102 @@ class home extends Thread
         HttpResponse<JsonNode> response = response_return;
 
         JSONArray array = response.getBody().getObject().getJSONArray("recipes");
+//        System.out.println(array.toString(2));
         for(int i = 0; i < array.length(); i++)
         {
             JSONObject object = array.getJSONObject(i);
             int id = object.getInt("id");
             String title = object.getString("title");
-            String image = object.getString("image");
+            String image = "";
+            if(object.has("image"))
+                image = object.getString("image");
             int readyInMinutes = object.getInt("readyInMinutes");
             String instructions = object.getString("instructions");
 
             ArrayList<ingredient> ingredients = new ArrayList<>();
             JSONArray ingredient_array = object.getJSONArray("extendedIngredients");
+
             for(int j = 0; j < ingredient_array.length(); j++)
             {
                 JSONObject ingredient = ingredient_array.getJSONObject(j);
-                int ingredient_id = ingredient.getInt("id");
+                int ingredient_id = 0;
+                if(ingredient.has("id"))
+                    ingredient_id = ingredient.getInt("id");
                 String ingredient_name = ingredient.getString("name");
                 String amount = ingredient.getString("amount");
                 String unit = ingredient.getString("unit");
-                String ingredient_image = ingredient.getString("image");
-                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, false));
+
+                String ingredient_image = "";
+                if(ingredient.has("image"))
+                    ingredient_image = ingredient.getString("image");
+                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, true, false, false, false));
             }
-            ArrayList<step> analyzedInstructions = new ArrayList<step>();
+            ArrayList<step> analyzedInstructions = new ArrayList();
             JSONArray ai = object.getJSONArray("analyzedInstructions");
-            JSONArray s = ai.getJSONObject(0).getJSONArray("steps");
-
-            for(int k = 0; k < s.length(); k++)
+            if(ai.length() > 0)
             {
-                int num = s.getJSONObject(k).getInt("number");
-                String step_description = s.getJSONObject(k).getString("step");
-                JSONArray ing = s.getJSONObject(k).getJSONArray("ingredients");
-                ArrayList<ingredient> step_ingredients = new ArrayList();
-                for(int l = 0; l < ing.length(); l++)
+                JSONArray s = ai.getJSONObject(0).getJSONArray("steps");
+
+                for(int k = 0; k < s.length(); k++)
                 {
-                    int id_ = ing.getJSONObject(l).getInt("id");
-                    String name = ing.getJSONObject(l).getString("name");
-                    String url = ing.getJSONObject(l).getString("image");
-                    step_ingredients.add(new ingredient(id_, name, url));
+                    int num = s.getJSONObject(k).getInt("number");
+                    String step_description = s.getJSONObject(k).getString("step");
+                    JSONArray ing = s.getJSONObject(k).getJSONArray("ingredients");
+                    ArrayList<ingredient> step_ingredients = new ArrayList();
+                    for(int l = 0; l < ing.length(); l++)
+                    {
+                        int id_ = ing.getJSONObject(l).getInt("id");
+                        String name = ing.getJSONObject(l).getString("name");
+                        String url = ing.getJSONObject(l).getString("image");
+                        step_ingredients.add(new ingredient(id_, name, url));
+                    }
+                    JSONArray equipment = s.getJSONObject(k).getJSONArray("equipment");
+                    analyzedInstructions.add(new step(num, step_description, step_ingredients, equipment));
                 }
-                JSONArray equipment = s.getJSONObject(k).getJSONArray("equipment");
-                analyzedInstructions.add(new step(num, step_description, step_ingredients, equipment));
             }
 
-            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions));
+
+            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions, false, false));
 
         }
         return recipeList;
+    }
+
+    /**
+     * method to get analyzed recipes because some methods don't return enough information
+     * @param id the id of the recipe
+     * @param stepBreakdown Whether to break down the recipe steps even more.
+     * @return return a arraylist of steps to complete a recipe
+     * @throws InterruptedException
+     * @throws JSONException
+     */
+    public ArrayList<step> getAnalyzedInstructions(int id, boolean stepBreakdown) throws InterruptedException, JSONException {
+        http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id + "/analyzedInstructions?";
+        http += "stepBreakdown=" + stepBreakdown;
+
+        start();
+        join();
+
+        HttpResponse<JsonNode> response = response_return;
+
+        ArrayList<step> analyzedInstructions = new ArrayList<step>();
+        JSONArray s = response.getBody().getArray().getJSONObject(0).getJSONArray("steps");
+        for(int k = 0; k < s.length(); k++) {
+            int num = s.getJSONObject(k).getInt("number");
+            String step_description = s.getJSONObject(k).getString("step");
+            JSONArray ing = s.getJSONObject(k).getJSONArray("ingredients");
+            ArrayList<ingredient> step_ingredients = new ArrayList();
+            for (int l = 0; l < ing.length(); l++) {
+                int id_ = ing.getJSONObject(l).getInt("id");
+                String name = ing.getJSONObject(l).getString("name");
+                String url = ing.getJSONObject(l).getString("image");
+                step_ingredients.add(new ingredient(id_, name, url));
+            }
+            JSONArray equipment = s.getJSONObject(k).getJSONArray("equipment");
+            analyzedInstructions.add(new step(num, step_description, step_ingredients, equipment));
+        }
+
+        return analyzedInstructions;
     }
 
     public void run() {

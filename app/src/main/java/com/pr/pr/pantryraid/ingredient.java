@@ -1,8 +1,5 @@
 package com.pr.pr.pantryraid;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ingredient
 {
     int id;
@@ -11,17 +8,21 @@ public class ingredient
     String unit;
     String photoURL;
     int photoID;
+    double quantity;
     boolean selected;
+    boolean missing;
+    boolean pantry;
+    boolean shoppingCart;
 
 
-    ingredient(int id, String name, String photoURL)
+    public ingredient(int id, String name, String photoURL)
     {
         this.id = id;
         this.name = name;
         this.photoURL = photoURL;
     }
 
-    ingredient(int id, String name, String amount, int photoID)
+    public ingredient(int id, String name, String amount, int photoID)
     {
         this.id = id;
         this.name = name;
@@ -29,7 +30,7 @@ public class ingredient
         this.photoID = photoID;
     }
 
-    ingredient(int id, String name, String amount, String photoURL)
+    public ingredient(int id, String name, String amount, String photoURL)
     {
         this.id = id;
         this.name = name;
@@ -38,7 +39,7 @@ public class ingredient
     }
 
 
-    ingredient(int id, String name, String amount, String unit, String photoURL, boolean selected)
+    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected, boolean pantry, boolean shoppingCart)
     {
         this.id = id;
         this.name = name;
@@ -46,5 +47,98 @@ public class ingredient
         this.unit = unit;
         this.photoURL = photoURL;
         this.selected = selected;
+        this.quantity = quantity;
+        this.missing = missing;
+        this.pantry = pantry;
+        this.shoppingCart = shoppingCart;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public int getPhotoID() {
+        return photoID;
+    }
+
+    public void setPhotoID(int photoID) {
+        this.photoID = photoID;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isMissing() {
+        return missing;
+    }
+
+    public void setMissing(boolean missing) {
+        this.missing = missing;
+    }
+
+    public boolean isPantry() {
+        return pantry;
+    }
+
+    public void setPantry(boolean pantry) {
+        this.pantry = pantry;
+    }
+
+    public boolean isShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(boolean shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
 }

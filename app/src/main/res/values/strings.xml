@@ -9,5 +9,11 @@
     <string name="completed">Completed</string>
     <string name="instructions">Instructions</string>
     <string name="recipe_name">Recipe Name</string>
+    <string name="favorite_recipes">Favorite Recipes</string>
+    <string name="view_ingredients">View Ingredients</string>
+    <string name="search">Search...</string>
+    <string name="todo">TODO</string>
+
+>>>>>>> 49db26b068df94d90a49e552171e899d7cd76380
 
 </resources>

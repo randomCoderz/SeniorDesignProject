@@ -1,116 +1,67 @@
 package com.pr.pr.pantryraid;
 
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+//import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+import android.annotation.SuppressLint;
+//import android.graphics.Color;
+//import android.os.Bundle;
+
+
+//import android.annotation.SuppressLint;
+//import android.os.Bundle;
+//import android.support.v4.app.Fragment;
+//import android.support.v4.app.FragmentManager;
+//import android.support.v4.app.FragmentTransaction;
+//
+//import android.support.v7.app.AppCompatActivity;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.*;
+//import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
-
-import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.os.Bundle;
-
-
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.*;
-import com.squareup.picasso.Picasso;
-import android.content.Intent;
-
-
-
-/**
- * Created by Kan on 2/22/18.
- */
-
-public class recipe extends Fragment
+@Entity(tableName = "Recipes")
+public class recipe
 {
-    int id;
-    String name;
-    String url;
-    int readyInMinutes;
-    private ingredientsLVAdapter listAdapter;
-    ArrayList<ingredient> ingredients = new ArrayList<>();
-    String instructions;
-    ArrayList<step> analyzedInstructions;
-    private ListView listView;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "recipeID")
+    private int id;
 
-    public recipe() {
+    //Foreign Key to be used from Ingredients
+    @ColumnInfo(name = "name")
+    public String name;
 
-    }
+    @ColumnInfo(name = "url")
+    public String url;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
+    @ColumnInfo(name = "readyInMinutes")
+    private int readyInMinutes;
 
-        listView = rootView.findViewById(R.id.ingredientList);
-        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
-        TextView recipeName = rootView.findViewById(R.id.recipeName);
-        recipeName.setText(name);
-        ImageView img = rootView.findViewById(R.id.recipeImage);
-        img.getLayoutParams().width = 700;
-        img.getLayoutParams().height = 700;
-        Picasso.with(rootView.getContext()).load(url).into(img);
-        TextView readyInMin = rootView.findViewById(R.id.readyInMin);
-        readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
-        final Button instructions = rootView.findViewById(R.id.instructions);
-        instructions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @ColumnInfo(name = "ingredients")
+    private ArrayList<ingredient> ingredients;
 
-                String instr = "";
-                for(int i = 0; i < analyzedInstructions.size(); i++)
-                {
+    @ColumnInfo(name = "instructions")
+    private String instructions;
 
-                    step x = analyzedInstructions.get(i);
-                    instr += x.number + ". " + x.step_description + "\n";
-                }
-                Fragment fragment =  new instructions(instr);
+    @ColumnInfo(name = "analyzedInstructions")
+    private ArrayList<step> analyzedInstructions;
 
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
-            }
-        });
+    @ColumnInfo(name = "favorites")
+    boolean favorites;
 
-
-
-        return rootView;
-    }
-
+    @ColumnInfo(name = "mealCalendar")
+    boolean mealCalendar;
 
 
     @SuppressLint("ValidFragment")
-    public recipe(int id, String name)
-    {
-        this.id = id;
-        this.name = name;
-    }
-
-    @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url)
-    {
-        this.id = id;
-        this.name = name;
-        this.url = url;
-    }
-
-    @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes)
-    {
-        this.id = id;
-        this.name = name;
-        this.url = url;
-        this.readyInMinutes = readyInMinutes;
-    }
-
-
-    @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<
-            ingredient > ingredients, ArrayList<step> analyzedInstructions, String instructions)
+    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions, boolean favorites, boolean mealCalendar)
     {
         this.id = id;
         this.name = name;
@@ -121,4 +72,79 @@ public class recipe extends Fragment
         this.instructions = instructions;
     }
 
+    //Getters and Setters
+    @NonNull
+    public int getId() {
+        return id;
+    }
+
+    public void setId(@NonNull int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getReadyInMinutes() {
+        return readyInMinutes;
+    }
+
+    public void setReadyInMinutes(int readyInMinutes) {
+        this.readyInMinutes = readyInMinutes;
+    }
+
+    public ArrayList<ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(ArrayList<ingredient> ingredients) {
+        this.ingredients = ingredients;
+
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public ArrayList<step> getAnalyzedInstructions() {
+        return analyzedInstructions;
+    }
+
+    public void setAnalyzedInstructions(ArrayList<step> analyzedInstructions) {
+        this.analyzedInstructions = analyzedInstructions;
+    }
+
+    public boolean isFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(boolean favorites) {
+        this.favorites = favorites;
+    }
+
+    public boolean isMealCalendar() {
+        return mealCalendar;
+    }
+
+    public void setMealCalendar(boolean mealCalendar) {
+        this.mealCalendar = mealCalendar;
+    }
 }
+

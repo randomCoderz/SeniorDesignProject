@@ -1,5 +1,6 @@
 package com.pr.pr.pantryraid;
 
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
+
 
 import com.google.gson.Gson;
 
@@ -45,6 +47,7 @@ public class Settings extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 
         View rootView = inflater.inflate(R.layout.settings, container, false);
         Gson gson = new Gson();
