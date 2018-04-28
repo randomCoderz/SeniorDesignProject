@@ -6,14 +6,18 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
 
 @TypeConverters({com.pr.pr.pantryraid.RoomPersist.DataConverter.class})
 @Database(entities = {recipe.class /*,pantryDB.class*/}, version = 1, exportSchema = false)
+@TypeConverters({DataConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
     public abstract RecipesDAO recipesdao();
-    //public abstract pantryDAO pantrydao();
+    public abstract IngredientDAO ingredientDAO();
+    public abstract ShoppingCartDAO shoppingcartDAO();
+
     public static AppDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.inMemoryDatabaseBuilder(context.getApplicationContext(), AppDatabase.class).build();

@@ -22,8 +22,8 @@
         android:id="@+id/selectedToCart"
         android:layout_width="135dp"
         android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/addToCalendar"
+        android:layout_toStartOf="@+id/instructions"
         android:text="@string/selectedToCart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/missingToCart"
@@ -41,17 +41,6 @@
         app:layout_constraintEnd_toStartOf="@+id/addToCalendar"
         app:layout_constraintStart_toEndOf="@+id/selectedToCart" />
 
-    <TextView
-        android:id="@+id/recipeName"
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/recipe_name"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="0dp" />
-
     <Button
         android:id="@+id/completed"
         android:layout_width="126dp"
@@ -59,47 +48,59 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/instructions"
         android:text="@string/completed"
-        app:layout_constraintBottom_toTopOf="@+id/ingredientList"
+
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
-        android:layout_above="@+id/ingredientList"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="166dp"
+        android:layout_marginEnd="87dp"
         android:text="@string/instructions"
-        app:layout_constraintBottom_toTopOf="@+id/ingredientList"
+
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/recipeImage"
         android:layout_width="match_parent"
-        android:layout_height="86dp"
-        android:layout_above="@+id/readyInMin"
+        android:layout_height="254dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="0dp"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_alignParentTop="true" />
 
-    <ListView
-        android:id="@+id/ingredientList"
-        android:layout_width="match_parent"
-        android:layout_height="308dp"
-        android:layout_above="@+id/addToCalendar"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--<ListView-->
+        <!--android:id="@+id/ingredientList"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="279dp"-->
+        <!--android:layout_above="@+id/addToCalendar"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginStart="0dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
 
     <TextView
         android:id="@+id/readyInMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/completed"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/instructions"
+        android:layout_marginBottom="251dp"
+        android:text="readyinmin" />
+
+    <TextView
+        android:id="@+id/recipeName"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/recipeImage"
+        android:layout_marginStart="47dp"
         android:text="TextView" />
+
+
+
 
 </RelativeLayout>

@@ -68,7 +68,8 @@ class cookBook extends Thread
             String name = recipe.getString("title");
             String image = recipe.getString("image");
 
-            recipeList.add(new recipe(id, name, image, 0,null,null, null));
+
+            recipeList.add(new recipe(id, name, image, 0,null,null, null, false, false, 0, 0, 0));
         }
 
         return recipeList;

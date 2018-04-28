@@ -53,8 +53,24 @@ public class recipe
     @ColumnInfo(name = "analyzedInstructions")
     private ArrayList<step> analyzedInstructions;
 
+    @ColumnInfo(name = "favorites")
+    boolean favorites;
+
+    @ColumnInfo(name = "mealCalendar")
+    boolean mealCalendar;
+
+    @ColumnInfo(name = "day")
+    int day;
+
+    @ColumnInfo(name = "month")
+    int month;
+
+    @ColumnInfo(name = "year")
+    int year;
+
+
     @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions)
+    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions, boolean favorites, boolean mealCalendar,int month, int day, int year)
     {
         this.id = id;
         this.name = name;
@@ -63,6 +79,11 @@ public class recipe
         this.ingredients = ingredients;
         this.analyzedInstructions = analyzedInstructions;
         this.instructions = instructions;
+        this.favorites = favorites;
+        this.mealCalendar = mealCalendar;
+        this.month = month;
+        this.day = day;
+        this.year = year;
     }
 
     //Getters and Setters
@@ -124,5 +145,47 @@ public class recipe
         this.analyzedInstructions = analyzedInstructions;
     }
 
+
+    public boolean isFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(boolean favorites) {
+        this.favorites = favorites;
+    }
+
+    public boolean isMealCalendar() {
+        return mealCalendar;
+    }
+
+    public void setMealCalendar(boolean mealCalendar) {
+        this.mealCalendar = mealCalendar;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
 }
+
 
