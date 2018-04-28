@@ -66,7 +66,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         ingredient testIngredient = new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false);
         recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0);
         recipe fav = new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
-        recipe fav2 = new recipe(12,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
+        recipe fav2 = new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
 
         shoppingCartItems testCartItem = new shoppingCartItems(72, "Bran Flakes", "1 box");
         System.out.println("----------------------------HERE----------------------------");
