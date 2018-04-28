@@ -53,8 +53,11 @@ public class recipe
     @ColumnInfo(name = "analyzedInstructions")
     private ArrayList<step> analyzedInstructions;
 
+    @ColumnInfo(name = "favorited")
+    private int favorite;
+
     @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions)
+    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions, int favorite)
     {
         this.id = id;
         this.name = name;
@@ -63,6 +66,7 @@ public class recipe
         this.ingredients = ingredients;
         this.analyzedInstructions = analyzedInstructions;
         this.instructions = instructions;
+        this.favorite = favorite;
     }
 
     //Getters and Setters
@@ -124,5 +128,12 @@ public class recipe
         this.analyzedInstructions = analyzedInstructions;
     }
 
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
 }
 
