@@ -55,6 +55,11 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
         this.recipeList = recipeList;
     }
 
+    public void recipeRVAdapterRefresh(List<recipe> recipeList)
+    {
+        this.recipeList = recipeList;
+    }
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView)
     {
