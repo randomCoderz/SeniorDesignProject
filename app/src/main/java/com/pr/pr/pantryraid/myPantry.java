@@ -23,7 +23,7 @@ public class myPantry extends Fragment{
     EditText searchPantry;
     ListView pantryList;
     //ArrayList<String> listItems;
-    ArrayList<items> listItems = new ArrayList<>();
+    ArrayList<ingredient> listItems = new ArrayList<>();
     private shoppingCartLVAdapter listAdapter;
 
 

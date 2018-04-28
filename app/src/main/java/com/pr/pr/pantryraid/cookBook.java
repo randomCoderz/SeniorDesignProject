@@ -138,7 +138,8 @@ class cookBook extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false, false));
+
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false, false, 0, 0, 0));
         }
         return recipeList;
     }
@@ -185,7 +186,7 @@ class cookBook extends Thread
             String name = recipe.getString("title");
             String image = recipe.getString("image");
 
-            recipeList.add(new recipe(id, name, image, 0,null,null, null, false, false));
+            recipeList.add(new recipe(id, name, image, 0,null,null, null, false, false, 0, 0, 0));
         }
 
         return recipeList;

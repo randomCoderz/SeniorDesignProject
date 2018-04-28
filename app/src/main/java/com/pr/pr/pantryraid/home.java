@@ -26,7 +26,6 @@ class home extends Thread
     }
 
 
-
     /**
      * Searches for recipes (Everything but query is optional)
      * @param instructionsRequired whether recipes must have instructions
@@ -60,7 +59,7 @@ class home extends Thread
 
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false ,false));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false ,false, 0,0, 0));
         }
         return recipeList;
     }
@@ -154,8 +153,7 @@ class home extends Thread
                 }
             }
 
-
-            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions, false, false));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions, false, false, 0, 0, 0));
 
         }
         return recipeList;
@@ -201,11 +199,11 @@ class home extends Thread
     public void run() {
         try
         {
-                HttpResponse<JsonNode> response = Unirest.get(http)
-                        .header("X-Mashape-Key", KEY)
-                        .header("Accept", "application/json")
-                        .asJson();
-                setResponse(response);
+            HttpResponse<JsonNode> response = Unirest.get(http)
+                    .header("X-Mashape-Key", KEY)
+                    .header("Accept", "application/json")
+                    .asJson();
+            setResponse(response);
         }
         catch (UnirestException e)
         {

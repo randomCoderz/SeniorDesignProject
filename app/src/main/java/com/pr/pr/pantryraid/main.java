@@ -52,7 +52,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
         RecipeRepository dbI = new RecipeRepository(mdb);
-        dbI.insertRecipe(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false));
+        dbI.insertRecipe(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0 ,0, 0));
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
