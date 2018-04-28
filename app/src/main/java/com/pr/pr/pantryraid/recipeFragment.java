@@ -2,6 +2,7 @@ package com.pr.pr.pantryraid;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -49,14 +50,14 @@ public class recipeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
 
-        listView = rootView.findViewById(R.id.ingredientList);
-        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
+//        listView = rootView.findViewById(R.id.ingredientList);
+//        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
         TextView recipeName = rootView.findViewById(R.id.recipeName);
         recipeName.setText(name);
         ImageView img = rootView.findViewById(R.id.recipeImage);
-        img.getLayoutParams().width = 700;
-        img.getLayoutParams().height = 700;
-        Picasso.with(rootView.getContext()).load(url).into(img);
+//        img.getLayoutParams().width = 700;
+//        img.getLayoutParams().height = 700;
+        Picasso.with(rootView.getContext()).load(url).resize(2300,1300).into(img);
         TextView readyInMin = rootView.findViewById(R.id.readyInMin);
         readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
         final Button instructions = rootView.findViewById(R.id.instructions);
