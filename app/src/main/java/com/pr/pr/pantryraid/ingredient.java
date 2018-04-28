@@ -1,11 +1,27 @@
 package com.pr.pr.pantryraid;
 
-public class ingredient
-{
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "Pantry")
+public class ingredient {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     int id;
+
+    @ColumnInfo(name = "name")
     String name;
+
+    @ColumnInfo(name = "amount")
     String amount;
+
+    @ColumnInfo(name = "unit")
     String unit;
+
     String photoURL;
     int photoID;
     double quantity;
@@ -13,7 +29,7 @@ public class ingredient
     boolean missing;
 
 
-
+    @Ignore
     public ingredient(int id, String name, String photoURL)
     {
         this.id = id;
@@ -21,6 +37,7 @@ public class ingredient
         this.photoURL = photoURL;
     }
 
+    @Ignore
     public ingredient(int id, String name, String amount, int photoID)
     {
         this.id = id;
@@ -29,6 +46,7 @@ public class ingredient
         this.photoID = photoID;
     }
 
+    @Ignore
     public ingredient(int id, String name, String amount, String photoURL)
     {
         this.id = id;
@@ -38,7 +56,7 @@ public class ingredient
     }
 
 
-    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected, boolean pantry, boolean shoppingCart)
+    public ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
     {
         this.id = id;
         this.name = name;

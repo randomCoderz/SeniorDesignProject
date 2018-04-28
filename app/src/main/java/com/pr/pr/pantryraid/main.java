@@ -23,7 +23,11 @@ import android.widget.Toast;
 
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+
+import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
+import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
+import com.pr.pr.pantryraid.RoomPersist.shoppingCartItems;
 
 
 import org.json.JSONException;
@@ -51,20 +55,33 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+
+//
         RecipeRepository dbI = new RecipeRepository(mdb);
-        dbI.insertRecipe(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0 ,0, 0));
+        IngredientRepository pbI = new IngredientRepository(mdb);
+        ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
+//
+        //    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
+        ingredient testIngredient = new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false);
+        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0);
+        recipe fav = new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
+        recipe fav2 = new recipe(12,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
+
+        shoppingCartItems testCartItem = new shoppingCartItems(72, "Bran Flakes", "1 box");
+        System.out.println("----------------------------HERE----------------------------");
+        dbI.insertRecipe(test);
+        dbI.insertRecipe(fav);
+        dbI.insertRecipe(fav2);
+        dbI.getRecipeByID(10);
+        dbI.getFavorites();
+        pbI.insertIngredient(testIngredient);
+        pbI.getIngredientByID(5);
+        scI.insertShoppingCartItem(testCartItem);
+        scI.getShoppingCartItemFromID(72);
+
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

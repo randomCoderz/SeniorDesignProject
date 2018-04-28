@@ -66,7 +66,7 @@ public class shoppingCart extends Fragment{
 //        products.add(new items("two"));
 //        products.add(new items("three"));
 //        products.add(new items("four"));
-          products.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false, false, false));
+          products.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
     }
 }
