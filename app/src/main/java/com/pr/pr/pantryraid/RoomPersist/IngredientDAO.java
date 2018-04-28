@@ -1,26 +1,21 @@
 package com.pr.pr.pantryraid.RoomPersist;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
 
-import java.util.List;
-
 @Dao
-interface RecipesDAO {
+interface IngredientDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertRecipes(recipe r1);
+    void insertIngredient(ingredient r1);
 
-    @Query("SELECT * FROM Recipes WHERE recipeID LIKE :id")
-    recipe getRecipeFromID(int id);
-
-    @Query("SELECT * FROM Recipes WHERE favorited = 1")
-    recipe getFavorites();
+    @Query("SELECT * FROM Pantry WHERE id LIKE :id")
+    ingredient getIngredientFromID(int id);
 
     @Delete
-    void deleteARecipe(recipe r);
+    void deleteAnIngredient(ingredient r);
 }
