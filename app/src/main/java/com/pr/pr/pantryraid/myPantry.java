@@ -47,9 +47,11 @@ public class myPantry extends Fragment{
         pantryList = (ListView)rootView.findViewById(R.id.myPantry);
 
 
+        pantryList = rootView.findViewById(R.id.myPantry);
         listAdapter = new shoppingCartLVAdapter(getActivity(),listItems);
         pantryList.setAdapter(listAdapter);
 
+        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
 
 
