@@ -8,8 +8,10 @@ import android.arch.persistence.room.Query;
 import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
 
+
 @Dao
 interface IngredientDAO {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertIngredient(ingredient r1);
 
@@ -17,5 +19,7 @@ interface IngredientDAO {
     ingredient getIngredientFromID(int id);
 
     @Delete
+
     void deleteAnIngredient(ingredient r);
 }
+

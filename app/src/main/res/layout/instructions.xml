@@ -17,6 +17,8 @@
         android:layout_marginTop="65dp"
         android:lineSpacingExtra="8sp"
         android:text="TextView"
+        android:textSize="26sp"
+        android:scrollbars = "vertical"
         tools:layout_editor_absoluteX="4dp"
         tools:layout_editor_absoluteY="4dp" />
 </RelativeLayout>

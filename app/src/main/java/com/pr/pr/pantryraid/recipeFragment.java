@@ -61,8 +61,6 @@ public class recipeFragment extends Fragment {
         TextView readyInMin = rootView.findViewById(R.id.readyInMin);
         readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
         final Button instructions = rootView.findViewById(R.id.instructions);
-        final Button missingToCart = rootView.findViewById(R.id.missingToCart);
-        final Button selectedToCart = rootView.findViewById(R.id.selectedToCart);
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,37 +88,6 @@ public class recipeFragment extends Fragment {
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
-            }
-        });
-
-        missingToCart.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view)
-            {
-                ArrayList<ingredient> toSend = new ArrayList<ingredient>();
-                for(int i = 0; i < ingredients.size(); i++)
-                {
-                    if(ingredients.get(i).missing)
-                    {
-                        toSend.add(ingredients.get(i));
-                    }
-                }
-
-            }
-        });
-
-        selectedToCart.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view)
-            {
-                ArrayList<ingredient> toSend = new ArrayList<ingredient>();
-                for(int i = 0; i < ingredients.size(); i++)
-                {
-                    if(ingredients.get(i).selected)
-                    {
-                        toSend.add(ingredients.get(i));
-                    }
-                }
-
-
             }
         });
 

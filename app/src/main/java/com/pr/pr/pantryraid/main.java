@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
 import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
@@ -54,16 +55,18 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         //Database Here
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+
 //
         RecipeRepository dbI = new RecipeRepository(mdb);
+
         IngredientRepository pbI = new IngredientRepository(mdb);
         ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
 //
         //    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
         ingredient testIngredient = new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false);
-        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo", 0);
-        recipe fav = new recipe(11,"Favorite","Hello",10, null, null,"Yolo", 1);
-        recipe fav2 = new recipe(12,"Favorite","Hello",10, null, null,"Yolo", 1);
+        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0);
+        recipe fav = new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
+        recipe fav2 = new recipe(12,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
 
         shoppingCartItems testCartItem = new shoppingCartItems(72, "Bran Flakes", "1 box");
         System.out.println("----------------------------HERE----------------------------");
@@ -76,6 +79,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         pbI.getIngredientByID(5);
         scI.insertShoppingCartItem(testCartItem);
         scI.getShoppingCartItemFromID(72);
+
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
@@ -182,7 +186,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         else if (id == R.id.nav_recipe) {
 
         } else if (id == R.id.nav_favorites) {
-
+            frag = new favorites();
         }
         else if (id == R.id.nav_settings) {
             frag = new Settings();
