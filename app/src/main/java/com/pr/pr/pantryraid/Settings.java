@@ -1,25 +1,41 @@
 package com.pr.pr.pantryraid;
 
-
 import android.content.SharedPreferences;
+
+//import android.os.Bundle;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
+
+//import android.view.LayoutInflater;
 import android.view.LayoutInflater;
+
+//import android.view.View;
 import android.view.View;
+
+//import android.view.ViewGroup;
 import android.view.ViewGroup;
+
+//import android.widget.Button;
 import android.widget.Button;
+
+//import android.widget.CompoundButton;
 import android.widget.CompoundButton;
+
+//import android.widget.ListView;
 import android.widget.ListView;
+
+//import android.widget.Switch;
 import android.widget.Switch;
+
 import android.widget.Toast;
 
-
+//import com.google.gson.Gson;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
-
 
 public class Settings extends Fragment {
 
