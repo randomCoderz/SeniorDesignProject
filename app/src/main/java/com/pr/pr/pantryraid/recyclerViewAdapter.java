@@ -20,7 +20,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
     {
         CardView cv;
         TextView ingredientName;
-        TextView ingredientDescription;
         ImageView ingredientImage;
 
         ingredientViewHolder(View itemView)
@@ -28,7 +27,6 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewAdapte
             super(itemView);
             cv = itemView.findViewById(R.id.cv);
             ingredientName = itemView.findViewById(R.id.cvName);
-            ingredientDescription = itemView.findViewById(R.id.cvDescription);
             ingredientImage = itemView.findViewById(R.id.cvPhoto);
         }
     }
