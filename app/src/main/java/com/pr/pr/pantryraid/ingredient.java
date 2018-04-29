@@ -22,10 +22,19 @@ public class ingredient {
     @ColumnInfo(name = "unit")
     String unit;
 
+    @ColumnInfo(name = "photoURL")
     String photoURL;
+
+    @ColumnInfo(name = "photoID")
     int photoID;
+
+    @ColumnInfo(name = "quantity")
     double quantity;
+
+    @ColumnInfo(name = "selected")
     boolean selected;
+
+    @ColumnInfo(name = "missing")
     boolean missing;
 
 
@@ -139,5 +148,6 @@ public class ingredient {
     public void setMissing(boolean missing) {
         this.missing = missing;
     }
+
 
 }

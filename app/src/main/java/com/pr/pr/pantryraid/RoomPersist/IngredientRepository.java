@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientRepository {
@@ -63,7 +64,7 @@ public class IngredientRepository {
 
         @Override
         protected void onPostExecute(ingredient r){
-            setIngredient(r);
+            ing.add(r);
         }
 
     }
@@ -86,9 +87,7 @@ public class IngredientRepository {
 
         @Override
         protected void onPostExecute(List<ingredient> r) {
-            for (int i = 0; i < r.size(); i++) {
-                System.out.println(r.get(i).getName());
-            }
+            setIngredient((ArrayList<ingredient>) r);
         }
     }
 
@@ -109,14 +108,14 @@ public class IngredientRepository {
         }
     }
 
-    static ingredient ing;
+    static ArrayList<ingredient> ing;
 
-    public static void setIngredient(ingredient i)
+    public static void setIngredient(ArrayList<ingredient> i)
     {
         ing = i;
     }
 
-    public ingredient getIngredient()
+    public ArrayList<ingredient> getIngredients()
     {
         return ing;
     }

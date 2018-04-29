@@ -11,6 +11,7 @@ import java.util.List;
 public class RecipeRepository {
     private AppDatabase gdb;
 
+
     public RecipeRepository(AppDatabase data){
         gdb = data;
     }
@@ -133,3 +134,4 @@ public class RecipeRepository {
         }
     }
 }
+
