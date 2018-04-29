@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +75,10 @@ public class recipeFragment extends Fragment {
         return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, day, month , year);
     }
 
+
+    private ArrayList<ingredient> pantryList = new ArrayList<ingredient>();
+    private RecyclerView rv;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
@@ -80,8 +86,21 @@ public class recipeFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
 
-        listView = rootView.findViewById(R.id.ingredientList);
-        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
+
+        rv = rootView.findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        rv.setItemViewCacheSize(20);
+        rv.setDrawingCacheEnabled(true);
+        rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
+
+        myPantryAdapter adapter = new myPantryAdapter(ingredients);
+        rv.setAdapter(adapter);
+
+//        listView = rootView.findViewById(R.id.ingredientList);
+//        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
         TextView recipeName = rootView.findViewById(R.id.recipeName);
         recipeName.setText(name);
         ImageView img = rootView.findViewById(R.id.recipeImage);
