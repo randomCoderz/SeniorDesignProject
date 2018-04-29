@@ -78,6 +78,8 @@ public class shoppingCartLVAdapter extends BaseAdapter{
             }
         });
 
+
+
         return row;
     }
 

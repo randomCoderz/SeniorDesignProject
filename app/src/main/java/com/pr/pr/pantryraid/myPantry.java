@@ -16,11 +16,14 @@ import android.widget.ListView;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class myPantry extends Fragment{
-
+    private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     //declaration
     ImageButton searchButton;
     EditText searchPantry;
@@ -29,6 +32,9 @@ public class myPantry extends Fragment{
     ArrayList<ingredient> listItems = new ArrayList<>();
     private shoppingCartLVAdapter listAdapter;
 
+    pantry p = new pantry(KEY);
+    AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+    IngredientRepository pbI = new IngredientRepository(mdb);
 
 
     // This will make it so that when you search for ingredients it will filter the list.
@@ -43,7 +49,7 @@ public class myPantry extends Fragment{
     // linking the UI with jave
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-        View rootView = inflater.inflate(R.layout.my_pantry, container,false);
+        final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
 
         searchButton = (ImageButton)rootView.findViewById(R.id.searchButton);
         searchPantry = (EditText)rootView.findViewById(R.id.searchPantry);
@@ -52,17 +58,30 @@ public class myPantry extends Fragment{
 
         pantryList = rootView.findViewById(R.id.myPantry);
         listAdapter = new shoppingCartLVAdapter(getActivity(),listItems);
+
         pantryList.setAdapter(listAdapter);
 
-        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
+
+
+//        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<ingredient> updatedList;
+                String ingredientString = searchPantry.getText().toString();
+
+
+
+            }
+        });
 
         return rootView;
         }
 
 
     private void initializeList() {
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-        IngredientRepository pbI = new IngredientRepository(mdb);
+
 
 
     }

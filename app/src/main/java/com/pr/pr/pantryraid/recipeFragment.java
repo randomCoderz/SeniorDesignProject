@@ -72,8 +72,8 @@ public class recipeFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
 
-//        listView = rootView.findViewById(R.id.ingredientList);
-//        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
+        listView = rootView.findViewById(R.id.ingredientList);
+        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
         TextView recipeName = rootView.findViewById(R.id.recipeName);
         recipeName.setText(name);
         ImageView img = rootView.findViewById(R.id.recipeImage);
