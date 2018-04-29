@@ -3,6 +3,8 @@ package com.pr.pr.pantryraid;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -24,14 +26,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
+
     //declaration
     ImageButton searchButton;
     Button RecipeButton;
     EditText searchPantry;
-    ListView pantryList;
     //ArrayList<String> listItems;
+
     ArrayList<ingredient> listItems = new ArrayList<>();
     private shoppingCartLVAdapter listAdapter;
 
@@ -42,10 +46,12 @@ public class myPantry extends Fragment{
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
     IngredientRepository pbI = new IngredientRepository(mdb);
 
+    private ArrayList<ingredient> pantryList = new ArrayList<ingredient>();
+    private RecyclerView rv;
+
 
     // This will make it so that when you search for ingredients it will filter the list.
     String[] items;
-
     ArrayAdapter<String> adapter;
 
     public myPantry(){
@@ -53,17 +59,21 @@ public class myPantry extends Fragment{
     }
 
     // linking the UI with jave
+
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
 
-        searchButton = (ImageButton)rootView.findViewById(R.id.searchButton);
-        searchPantry = (EditText)rootView.findViewById(R.id.searchPantry);
-        pantryList = (ListView)rootView.findViewById(R.id.myPantry);
-        RecipeButton = (Button)rootView.findViewById(R.id.bttnRecipe);
 
+        searchButton = rootView.findViewById(R.id.searchButton);
+        searchPantry = rootView.findViewById(R.id.searchPantry);
+        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
 
-        pantryList = rootView.findViewById(R.id.myPantry);
+        rv = rootView.findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+
 
         List<ingredient> list;
         try {
@@ -79,7 +89,7 @@ public class myPantry extends Fragment{
         initializeList();
         listAdapter = new shoppingCartLVAdapter(getActivity(),listItems);
 
-        pantryList.setAdapter(listAdapter);
+
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
@@ -103,6 +113,10 @@ public class myPantry extends Fragment{
 
             }
         });
+        getList();
+
+        myPantryAdapter adapter = new myPantryAdapter(pantryList);
+        rv.setAdapter(adapter);
 
         return rootView;
         }
@@ -115,7 +129,19 @@ public class myPantry extends Fragment{
 
     }
 
+    public void getList()
+    {
+        pantryList.add(new ingredient(0, "test", "fef", "", " ", 0, false, false));
+        pantryList.add(new ingredient(1, "test1", "fef", "", " ", 0, false, false));
+        pantryList.add(new ingredient(2, "test2", "fef", "", " ", 0, false, false));
+    }
 
+//    private void initializeList() {
+//        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+//        IngredientRepository pbI = new IngredientRepository(mdb);
+//
+//
+//    }
 
 } // myPantry ends
 
