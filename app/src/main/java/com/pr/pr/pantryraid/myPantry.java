@@ -26,6 +26,7 @@ public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     //declaration
     ImageButton searchButton;
+    Button RecipeButton;
     EditText searchPantry;
     ListView pantryList;
     //ArrayList<String> listItems;
@@ -54,6 +55,7 @@ public class myPantry extends Fragment{
         searchButton = (ImageButton)rootView.findViewById(R.id.searchButton);
         searchPantry = (EditText)rootView.findViewById(R.id.searchPantry);
         pantryList = (ListView)rootView.findViewById(R.id.myPantry);
+        RecipeButton = (Button)rootView.findViewById(R.id.bttnRecipe);
 
 
         pantryList = rootView.findViewById(R.id.myPantry);
