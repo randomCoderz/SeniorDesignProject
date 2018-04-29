@@ -90,4 +90,5 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     {
         return recipeList.size();
     }
+
 }

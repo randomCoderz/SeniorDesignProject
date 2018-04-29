@@ -88,12 +88,18 @@ public class recipeFragment extends Fragment {
 
 
         rv = rootView.findViewById(R.id.rv);
-        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+        LinearLayoutManager llm = new LinearLayoutManager(this.getContext()){
+                @Override
+                public boolean canScrollVertically() {
+                return false;
+            }
+        };
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
         rv.setItemViewCacheSize(20);
         rv.setDrawingCacheEnabled(true);
         rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
 
 
         myPantryAdapter adapter = new myPantryAdapter(ingredients);
