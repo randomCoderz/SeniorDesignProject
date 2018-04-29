@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 
 import com.pr.pr.pantryraid.recipe;
 
+import java.util.List;
+
 public class RecipeRepository {
     private AppDatabase gdb;
 
@@ -29,6 +31,21 @@ public class RecipeRepository {
         @Override
         protected Void doInBackground(final recipe... params){
             mdb.recipesdao().insertRecipes(params[0]);
+            return null;
+        }
+    }
+
+    public void insertRecipeList(List<recipe> r){
+        new insertListAsync(gdb).execute(r);
+    }
+
+    private static class insertListAsync extends AsyncTask<List<recipe>, Void, Void>{
+        private final AppDatabase mdb;
+        insertListAsync(AppDatabase db){mdb = db;}
+
+        @Override
+        protected Void doInBackground(final List<recipe>... params){
+            mdb.recipesdao().insertRecipesList(params[0]);
             return null;
         }
     }
@@ -60,23 +77,45 @@ public class RecipeRepository {
         new recipeFavAsync(gdb).execute();
     }
 
-    private static class recipeFavAsync extends AsyncTask<Void, Void, recipe>{
+    private static class recipeFavAsync extends AsyncTask<Void, Void, List<recipe>>{
         private final AppDatabase mdb;
         recipeFavAsync(AppDatabase db){mdb = db;}
 
         @Override
-        protected recipe doInBackground(final Void... params){
+        protected List<recipe> doInBackground(final Void... params){
             return mdb.recipesdao().getFavorites();
         }
 
         @Override
-        protected void onPostExecute(recipe r){
-            System.out.println(r.name);
-
+        protected void onPostExecute(List<recipe> r){
+            for (int i = 0; i < r.size(); i++) {
+                System.out.println(r.get(i).getName());
+            }
         }
 
     }
 
+    public void getAllRecipes(){
+        new recipeAllAsync(gdb).execute();
+    }
+
+    private static class recipeAllAsync extends AsyncTask<Void, Void, List<recipe>>{
+        private final AppDatabase mdb;
+        recipeAllAsync(AppDatabase db){mdb = db;}
+
+        @Override
+        protected List<recipe> doInBackground(final Void... params){
+            return mdb.recipesdao().allRecipes();
+        }
+
+        @Override
+        protected void onPostExecute(List<recipe> r){
+            for (int i = 0; i < r.size(); i++) {
+                System.out.println(r.get(i).getName());
+            }
+        }
+
+    }
 
     //Remove Recipe from Database
     public void removeRecipe(recipe r){

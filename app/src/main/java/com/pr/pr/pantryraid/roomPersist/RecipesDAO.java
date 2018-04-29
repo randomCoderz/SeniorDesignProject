@@ -15,14 +15,17 @@ public interface RecipesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertRecipes(recipe r1);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertRecipesList(List<recipe> r1);
+
     @Query("SELECT * FROM Recipes")
-    recipe allRecipes();
+    List<recipe> allRecipes();
 
     @Query("SELECT * FROM Recipes WHERE recipeID LIKE :id")
     recipe getRecipeFromID(int id);
 
     @Query("SELECT * FROM Recipes WHERE favorites = 1")
-    recipe getFavorites();
+    List<recipe> getFavorites();
 
     @Delete
     void deleteARecipe(recipe r);

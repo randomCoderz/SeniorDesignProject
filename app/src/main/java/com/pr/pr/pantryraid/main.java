@@ -32,6 +32,7 @@ import com.pr.pr.pantryraid.RoomPersist.shoppingCartItems;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Unirest, Spoonacular Imports, JSON
@@ -63,23 +64,42 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
 //
         //    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
-        ingredient testIngredient = new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false);
-        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0);
-        recipe fav = new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
-        recipe fav2 = new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
+        List<recipe> recipeList = new ArrayList<recipe>();
+        recipeList.add(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
+        recipeList.add(new recipe(55,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
+        recipeList.add(new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
+        recipeList.add(new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
 
+        List<ingredient> ingredientList = new ArrayList<ingredient>();
+        ingredientList.add(new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false));
+        ingredientList.add(new ingredient(6, "Banana", "test","20", "httpwhatever", 12, false, false));
+        ingredientList.add(new ingredient(7, "Münster Cheese", "test","20", "httpwhatever", 12, false, false));
+
+        //testing shopping cart items
         shoppingCartItems testCartItem = new shoppingCartItems(72, "Bran Flakes", "1 box");
-        System.out.println("----------------------------HERE----------------------------");
-        dbI.insertRecipe(test);
-        dbI.insertRecipe(fav);
-        dbI.insertRecipe(fav2);
-        dbI.getRecipeByID(10);
-        dbI.getFavorites();
-        pbI.insertIngredient(testIngredient);
-        pbI.getIngredientByID(5);
-        scI.insertShoppingCartItem(testCartItem);
-        scI.getShoppingCartItemFromID(72);
+        shoppingCartItems testCartItem2 = new shoppingCartItems(73, "Corn Flakes", "1 box");
+        shoppingCartItems testCartItem3 = new shoppingCartItems(74, "Frosted Flakes", "1 box");
 
+        //testing List entry
+        List<shoppingCartItems> testCartList = new ArrayList<shoppingCartItems>();
+        testCartList.add(new shoppingCartItems(74, "Cheapo Flakes", "2 boxes"));
+        testCartList.add(new shoppingCartItems(75, "Garbage Flakes", "2 boxes"));
+        testCartList.add(new shoppingCartItems(76, "Ran Flakes", "50 boxes"));
+
+        System.out.println("----------------------------HERE----------------------------");
+        //dbI.insertRecipeList(recipeList);
+
+        //dbI.getFavorites();
+        //dbI.getAllRecipes();
+
+        pbI.insertIngredientList(ingredientList);
+        pbI.getAllIngredients();
+
+        //scI.insertShoppingCartItem(testCartItem);
+        //scI.insertShoppingCartItem(testCartItem2);
+        //scI.insertShoppingCartItem(testCartItem3);
+        //scI.insertShoppingCartItemList(testCartList);
+        //scI.getAllCartItems();
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
