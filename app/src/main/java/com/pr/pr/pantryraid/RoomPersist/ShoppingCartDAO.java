@@ -8,14 +8,22 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import com.pr.pr.pantryraid.recipe;
 
+import java.util.List;
+
 @Dao
 interface ShoppingCartDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertShoppingCartItem(shoppingCartItems r1);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertShoppingCartItemList(List<shoppingCartItems> r1);
 
     @Query("SELECT * FROM ShoppingCart WHERE id LIKE :id")
     shoppingCartItems getCartItemsFromID(int id);
 
     @Delete
     void deleteACartItem(shoppingCartItems r);
+
+    @Query("SELECT * FROM ShoppingCart")
+    List<shoppingCartItems> getAllCartItems();
 }

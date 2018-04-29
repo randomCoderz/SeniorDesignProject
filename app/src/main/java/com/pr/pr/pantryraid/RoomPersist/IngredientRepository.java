@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IngredientRepository {
     private AppDatabase gdb;
 
@@ -30,6 +33,21 @@ public class IngredientRepository {
         }
     }
 
+    public void insertIngredientList(List<ingredient> r){
+        new insertListAsync(gdb).execute(r);
+    }
+
+    private static class insertListAsync extends AsyncTask<List<ingredient>, Void, Void>{
+        private final AppDatabase mdb;
+        insertListAsync(AppDatabase db){mdb = db;}
+
+        @Override
+        protected Void doInBackground(final List<ingredient>... params){
+            mdb.ingredientDAO().insertIngredientList(params[0]);
+            return null;
+        }
+    }
+
     //Get Recipe from by ID from Database
     public void getIngredientByID(int id){
         new ingredientIDAsync(gdb).execute(id);
@@ -46,13 +64,35 @@ public class IngredientRepository {
 
         @Override
         protected void onPostExecute(ingredient r){
-            System.out.println(r.getName());
+            ing.add(r);
         }
 
     }
 
+    public void getAllIngredients(){
+        new ingredientAllAsync(gdb).execute();
+    }
 
-    //Remove Recipe from Database
+    private static class ingredientAllAsync extends AsyncTask<Void, Void, List<ingredient>> {
+        private final AppDatabase mdb;
+
+        ingredientAllAsync(AppDatabase db) {
+            mdb = db;
+        }
+
+        @Override
+        protected List<ingredient> doInBackground(final Void... params) {
+            return mdb.ingredientDAO().getAllIngredients();
+        }
+
+        @Override
+        protected void onPostExecute(List<ingredient> r) {
+            setIngredient((ArrayList<ingredient>) r);
+        }
+    }
+
+
+        //Remove Recipe from Database
     public void removeIngredient(ingredient r){
         new removeAsync(gdb).execute(r);
     }
@@ -66,5 +106,17 @@ public class IngredientRepository {
             mdb.ingredientDAO().deleteAnIngredient(params[0]);
             return null;
         }
+    }
+
+    static ArrayList<ingredient> ing;
+
+    public static void setIngredient(ArrayList<ingredient> i)
+    {
+        ing = i;
+    }
+
+    public ArrayList<ingredient> getIngredients()
+    {
+        return ing;
     }
 }

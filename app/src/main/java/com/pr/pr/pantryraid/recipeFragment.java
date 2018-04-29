@@ -3,6 +3,7 @@ package com.pr.pr.pantryraid;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
+import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -22,6 +24,7 @@ import org.json.JSONException;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class recipeFragment extends Fragment {
     private final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
@@ -38,6 +41,9 @@ public class recipeFragment extends Fragment {
     int day;
     int month;
     int year;
+
+    AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+    ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
 
     private ListView listView;
 
@@ -146,7 +152,7 @@ public class recipeFragment extends Fragment {
                         toCart.add(ingredients.get(i));
                     }
                 }
-
+//                scI.insertShoppingCartItemList((List<ingredient>)toCart);
             }
         });
 

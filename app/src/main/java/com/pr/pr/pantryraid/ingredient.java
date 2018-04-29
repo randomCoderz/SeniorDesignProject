@@ -22,12 +22,20 @@ public class ingredient {
     @ColumnInfo(name = "unit")
     String unit;
 
+    @ColumnInfo(name = "photoURL")
     String photoURL;
-    int photoID;
-    double quantity;
-    boolean selected;
-    boolean missing;
 
+    @ColumnInfo(name = "photoID")
+    int photoID;
+
+    @ColumnInfo(name = "quantity")
+    double quantity;
+
+    @ColumnInfo(name = "selected")
+    boolean selected;
+
+    @ColumnInfo(name = "missing")
+    boolean missing;
 
 
     @Ignore
@@ -109,7 +117,7 @@ public class ingredient {
         this.photoURL = photoURL;
     }
 
-    public boolean getSelected() {
+    public boolean isSelected() {
         return selected;
     }
 
@@ -140,5 +148,6 @@ public class ingredient {
     public void setMissing(boolean missing) {
         this.missing = missing;
     }
+
 
 }

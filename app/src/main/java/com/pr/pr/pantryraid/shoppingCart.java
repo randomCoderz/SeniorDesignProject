@@ -16,7 +16,7 @@ public class shoppingCart extends Fragment{
     private shoppingCartLVAdapter listAdapter;
     ArrayList<ingredient> products = new ArrayList<>();
     Button btnPlaceOrder;
-    ArrayList<items> productOrders = new ArrayList<>();
+    ArrayList<ingredient> productOrders = new ArrayList<>();
 
     public shoppingCart(){
 
@@ -62,12 +62,13 @@ public class shoppingCart extends Fragment{
 //        }
 //    }
 
-    public void getProduct() {
 
+    public void getProduct() {
 //        products.add(new items("one"));
 //        products.add(new items("two"));
 //        products.add(new items("three"));
 //        products.add(new items("four"));
+
           products.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
 

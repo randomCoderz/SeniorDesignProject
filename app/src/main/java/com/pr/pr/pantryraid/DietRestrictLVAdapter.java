@@ -71,6 +71,7 @@ public class DietRestrictLVAdapter extends BaseAdapter {
 
         return row;
 /**
+
  View row = convertView;
  if(row == null)
  row = inflater.inflate(R.layout.settings_restrictions_view, null);
@@ -84,3 +85,4 @@ public class DietRestrictLVAdapter extends BaseAdapter {
  **/
     }
 }
+

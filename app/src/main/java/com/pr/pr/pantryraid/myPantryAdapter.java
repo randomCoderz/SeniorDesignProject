@@ -1,61 +1,62 @@
 package com.pr.pr.pantryraid;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.CheckBox;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
- * Created by Nam on 2/22/2018.
+ * Created by Nam on 4/28/2018.
  */
 
-public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipeViewHolder>
+public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipeViewHolder>
 {
     public static class recipeViewHolder extends RecyclerView.ViewHolder
     {
         int index;
         CardView cv;
         TextView recipeName;
-        ImageView recipeImage;
+        CheckBox checkBox;
 
         recipeViewHolder(View itemView)
         {
             super(itemView);
             cv = itemView.findViewById(R.id.cv);
             recipeName = itemView.findViewById(R.id.cvName);
-            recipeImage = itemView.findViewById(R.id.cvPhoto);
+            checkBox = itemView.findViewById(R.id.checkBox);
+
             cv.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    recipeFragment recipe = new recipeFragment(recipeList.get(index));
-                    Fragment myFragment = recipe;
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, myFragment).addToBackStack(null).commit();
-
+                    if(checkBox.isChecked() == false)
+                    {
+                        recipeList.get(index).selected = true;
+                        cv.setCardBackgroundColor(Color.GREEN);
+                        checkBox.setChecked(true);
+                    }
+                    else
+                    {
+                        recipeList.get(index).selected = false;
+                        cv.setCardBackgroundColor(0x0106000f);
+                        checkBox.setChecked(false);
+                    }
                 }
             });
 
         }
     }
 
-    private static List<recipe> recipeList;
+    private static List<ingredient> recipeList;
 
-    public recipeRVAdapter(List<recipe> recipeList)
-    {
-        this.recipeList = recipeList;
-    }
+    public myPantryAdapter(List<ingredient> recipeList) { this.recipeList = recipeList; }
 
-    public void recipeRVAdapterRefresh(List<recipe> recipeList)
+    public void myPantryAdapter(List<ingredient> recipeList)
     {
         this.recipeList = recipeList;
     }
@@ -67,24 +68,19 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     }
 
     @Override
-    public recipeViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
+    public myPantryAdapter.recipeViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
     {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_my_pantry_ingredient, viewGroup, false);
         recipeViewHolder rvh = new recipeViewHolder(view);
         return rvh;
     }
 
     @Override
-    public void onBindViewHolder(recipeViewHolder holder, int i)
+    public void onBindViewHolder(myPantryAdapter.recipeViewHolder holder, int i)
     {
         try {
-
             holder.recipeName.setText(recipeList.get(i).name);
             holder.index = i;
-
-            Picasso.with(holder.itemView.getContext()).load(recipeList.get(i).url).resize(2300,1300).into(holder.recipeImage);
-
-
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -96,5 +92,4 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
     {
         return recipeList.size();
     }
-
 }

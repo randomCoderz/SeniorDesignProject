@@ -59,7 +59,9 @@ public class shoppingCartLVAdapter extends BaseAdapter{
         final ingredient products = getItem(position);
 
         listViewHolder.itemName.setText(products.name);
-        listViewHolder.itemQty.setText(products.quantity+"");
+
+        listViewHolder.itemQty.setText((int)products.quantity+"");
+
         listViewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -75,6 +77,8 @@ public class shoppingCartLVAdapter extends BaseAdapter{
 
             }
         });
+
+
 
         return row;
     }
@@ -94,6 +98,8 @@ public class shoppingCartLVAdapter extends BaseAdapter{
             }
 
         }
-        itemQty.setText(products.quantity+"");
+
+        itemQty.setText((int)products.quantity+"");
+
     }
 }

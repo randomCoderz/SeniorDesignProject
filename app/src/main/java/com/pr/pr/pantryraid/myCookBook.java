@@ -24,9 +24,9 @@ public class myCookBook extends Fragment {
     Button favoriteRecipes;
     Button viewIngredients;
     ImageButton shoppingCart;
-    ImageButton searchRicipe;
-    EditText ricipeName;
-    String stringRicipe;
+    ImageButton searchRecipe;
+    EditText recipeName;
+    String stringRecipe;
 
     //Cards
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
@@ -70,8 +70,8 @@ public class myCookBook extends Fragment {
         favoriteRecipes = (Button)rootView.findViewById(R.id.bttnFav);
         viewIngredients = (Button)rootView.findViewById(R.id.bttnIngredients);
         shoppingCart = (ImageButton) rootView.findViewById(R.id.bttnShoppingCart);
-        searchRicipe = (ImageButton)rootView.findViewById(R.id.bttnSearchRecipe);
-        ricipeName = (EditText) rootView.findViewById(R.id.editText);
+        searchRecipe = (ImageButton)rootView.findViewById(R.id.bttnSearchRecipe);
+        recipeName = (EditText) rootView.findViewById(R.id.editText);
 
         //on click buttons redirect to other pages favoriteRecipes
         favoriteRecipes.setOnClickListener(new View.OnClickListener() {
@@ -106,13 +106,13 @@ public class myCookBook extends Fragment {
             }
         });
 
-        searchRicipe.setOnClickListener(new View.OnClickListener() {
+        searchRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 List<recipe> updatedList;
-                stringRicipe = ricipeName.getText().toString();
+                stringRecipe = recipeName.getText().toString();
                 try {
-                    updatedList = c.searchRecipes(null,null,null,true,null,false,5,0,stringRicipe,null);
+                    updatedList = c.searchRecipes(null,null,null,true,null,false,5,0,stringRecipe,null);
                     // adapter.recipeRVAdapterR(updatedList);
                     rootView.clearFocus();
 
