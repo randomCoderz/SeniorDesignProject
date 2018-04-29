@@ -54,9 +54,9 @@ public class recipeFragment extends Fragment {
         TextView recipeName = rootView.findViewById(R.id.recipeName);
         recipeName.setText(name);
         ImageView img = rootView.findViewById(R.id.recipeImage);
-        img.getLayoutParams().width = 700;
-        img.getLayoutParams().height = 700;
-        Picasso.with(rootView.getContext()).load(url).into(img);
+//        img.getLayoutParams().width = 700;
+//        img.getLayoutParams().height = 700;
+        Picasso.with(rootView.getContext()).load(url).resize(2300,1300).into(img);
         TextView readyInMin = rootView.findViewById(R.id.readyInMin);
         readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
         final Button instructions = rootView.findViewById(R.id.instructions);
