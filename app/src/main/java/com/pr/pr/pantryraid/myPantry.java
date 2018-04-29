@@ -1,5 +1,6 @@
 package com.pr.pr.pantryraid;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -7,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,9 @@ public class myPantry extends Fragment{
     //ArrayList<String> listItems;
     ArrayList<ingredient> listItems = new ArrayList<>();
     private shoppingCartLVAdapter listAdapter;
+
+    ////////////////
+    int id;
 
     pantry p = new pantry(KEY);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
@@ -59,20 +64,41 @@ public class myPantry extends Fragment{
 
 
         pantryList = rootView.findViewById(R.id.myPantry);
+
+        List<ingredient> list;
+        try {
+            list = p.searchIngredient(null, true, 1, "appe");
+            pbI.insertIngredient(list.get(0));
+            id = list.get(0).id;
+            rootView.clearFocus();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        initializeList();
         listAdapter = new shoppingCartLVAdapter(getActivity(),listItems);
 
         pantryList.setAdapter(listAdapter);
-
-
-
+        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<ingredient> updatedList;
+                List<ingredient> list;
                 String ingredientString = searchPantry.getText().toString();
+                try {
+                    list = p.searchIngredient(null, true, 1, ingredientString);
+                    pbI.insertIngredient(list.get(0));
 
+                    rootView.clearFocus();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -84,7 +110,8 @@ public class myPantry extends Fragment{
 
     private void initializeList() {
 
-
+        pbI.getIngredientByID(id);
+        listItems.add(pbI.getIngredient());
 
     }
 

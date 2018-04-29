@@ -46,7 +46,7 @@ public class IngredientRepository {
 
         @Override
         protected void onPostExecute(ingredient r){
-            System.out.println(r.getName());
+            setIngredient(r);
         }
 
     }
@@ -66,5 +66,17 @@ public class IngredientRepository {
             mdb.ingredientDAO().deleteAnIngredient(params[0]);
             return null;
         }
+    }
+
+    static ingredient ing;
+
+    public static void setIngredient(ingredient i)
+    {
+        ing = i;
+    }
+
+    public ingredient getIngredient()
+    {
+        return ing;
     }
 }
