@@ -71,18 +71,18 @@ public class DietRestrictLVAdapter extends BaseAdapter {
 
         return row;
 /**
-        View row = convertView;
-        if(row == null)
-            row = inflater.inflate(R.layout.settings_restrictions_view, null);
-        TextView ingredientName = row.findViewById(R.id.restrictionName);
-        ingredientName.setTextSize(20);
-        ingredientName.setTypeface(null, Typeface.BOLD);
-        CheckBox selected = row.findViewById(R.id.restrictionCheckBox);
-        ingredientName.setText(List.get(position).restriction);
 
-//        row.setBackgroundColor(Color.RED);
-
-        return row;
+ View row = convertView;
+ if(row == null)
+ row = inflater.inflate(R.layout.settings_restrictions_view, null);
+ TextView ingredientName = row.findViewById(R.id.restrictionName);
+ ingredientName.setTextSize(20);
+ ingredientName.setTypeface(null, Typeface.BOLD);
+ CheckBox selected = row.findViewById(R.id.restrictionCheckBox);
+ ingredientName.setText(List.get(position).restriction);
+ //        row.setBackgroundColor(Color.RED);
+ return row;
  **/
     }
 }
+

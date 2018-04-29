@@ -1,20 +1,35 @@
 package com.pr.pr.pantryraid;
 
-public class ingredient
-{
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "Pantry")
+public class ingredient {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     int id;
+
+    @ColumnInfo(name = "name")
     String name;
+
+    @ColumnInfo(name = "amount")
     String amount;
+
+    @ColumnInfo(name = "unit")
     String unit;
+
     String photoURL;
     int photoID;
     double quantity;
     boolean selected;
     boolean missing;
-    boolean pantry;
-    boolean shoppingCart;
 
 
+    @Ignore
     public ingredient(int id, String name, String photoURL)
     {
         this.id = id;
@@ -22,6 +37,7 @@ public class ingredient
         this.photoURL = photoURL;
     }
 
+    @Ignore
     public ingredient(int id, String name, String amount, int photoID)
     {
         this.id = id;
@@ -30,6 +46,7 @@ public class ingredient
         this.photoID = photoID;
     }
 
+    @Ignore
     public ingredient(int id, String name, String amount, String photoURL)
     {
         this.id = id;
@@ -38,8 +55,7 @@ public class ingredient
         this.photoURL = photoURL;
     }
 
-
-    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected, boolean pantry, boolean shoppingCart)
+    public ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
     {
         this.id = id;
         this.name = name;
@@ -49,8 +65,7 @@ public class ingredient
         this.selected = selected;
         this.quantity = quantity;
         this.missing = missing;
-        this.pantry = pantry;
-        this.shoppingCart = shoppingCart;
+
     }
 
     public int getId() {
@@ -123,22 +138,6 @@ public class ingredient
 
     public void setMissing(boolean missing) {
         this.missing = missing;
-    }
-
-    public boolean isPantry() {
-        return pantry;
-    }
-
-    public void setPantry(boolean pantry) {
-        this.pantry = pantry;
-    }
-
-    public boolean isShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(boolean shoppingCart) {
-        this.shoppingCart = shoppingCart;
     }
 
 }

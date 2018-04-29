@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 
 public class shoppingCartLVAdapter extends BaseAdapter{
-    public ArrayList<items> listProducts;
+    public ArrayList<ingredient> listProducts;
     private Context context;
 
-    public shoppingCartLVAdapter(Context context, ArrayList<items> listProducts){
+    public shoppingCartLVAdapter(Context context, ArrayList<ingredient> listProducts){
         this.context = context;
         this.listProducts = listProducts;
     }
@@ -27,7 +27,7 @@ public class shoppingCartLVAdapter extends BaseAdapter{
     }
 
     @Override
-    public items getItem(int position) {
+    public ingredient getItem(int position) {
         return listProducts.get(position);
     }
 
@@ -56,10 +56,12 @@ public class shoppingCartLVAdapter extends BaseAdapter{
             row=convertView;
             listViewHolder= (shoppingCartLVHolder) row.getTag();
         }
-        final items products = getItem(position);
+        final ingredient products = getItem(position);
 
-        listViewHolder.itemName.setText(products.itemName);
-        listViewHolder.itemQty.setText(products.CartQuantity+"");
+        listViewHolder.itemName.setText(products.name);
+
+        listViewHolder.itemQty.setText((int)products.quantity+"");
+
         listViewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -76,24 +78,28 @@ public class shoppingCartLVAdapter extends BaseAdapter{
             }
         });
 
+
+
         return row;
     }
 
     private void updateQuantity(int position, EditText itemQty, int value) {
 
-        items products = getItem(position);
+        ingredient products = getItem(position);
         if(value > 0)
         {
-            products.CartQuantity = products.CartQuantity + 1;
+            products.quantity = products.quantity + 1;
         }
         else
         {
-            if(products.CartQuantity > 0)
+            if(products.quantity > 0)
             {
-                products.CartQuantity = products.CartQuantity - 1;
+                products.quantity = products.quantity - 1;
             }
 
         }
-        itemQty.setText(products.CartQuantity+"");
+
+        itemQty.setText((int)products.quantity+"");
+
     }
 }

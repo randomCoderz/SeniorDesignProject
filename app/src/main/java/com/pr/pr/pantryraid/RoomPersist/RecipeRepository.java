@@ -50,6 +50,28 @@ public class RecipeRepository {
 
         @Override
         protected void onPostExecute(recipe r){
+            System.out.println(r.name);
+
+        }
+
+    }
+
+    public void getFavorites(){
+        new recipeFavAsync(gdb).execute();
+    }
+
+    private static class recipeFavAsync extends AsyncTask<Void, Void, recipe>{
+        private final AppDatabase mdb;
+        recipeFavAsync(AppDatabase db){mdb = db;}
+
+        @Override
+        protected recipe doInBackground(final Void... params){
+            return mdb.recipesdao().getFavorites();
+        }
+
+        @Override
+        protected void onPostExecute(recipe r){
+            System.out.println(r.name);
 
         }
 
