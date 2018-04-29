@@ -1,67 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLight"
     android:paddingTop="?android:attr/actionBarSize">
-
-    <Button
-        android:id="@+id/addToCalendar"
-        android:layout_width="135dp"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="@string/addToCalendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/missingToCart" />
-
-    <Button
-        android:id="@+id/selectedToCart"
-        android:layout_width="135dp"
-        android:layout_height="55dp"
-        android:layout_above="@+id/addToCalendar"
-        android:layout_toStartOf="@+id/instructions"
-        android:text="@string/selectedToCart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/missingToCart"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/missingToCart"
-        android:layout_width="135dp"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/missingToCart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addToCalendar"
-        app:layout_constraintStart_toEndOf="@+id/selectedToCart" />
-
-    <Button
-        android:id="@+id/completed"
-        android:layout_width="126dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/instructions"
-        android:text="@string/completed"
-
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="41dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="166dp"
-        android:layout_marginEnd="87dp"
-        android:text="@string/instructions"
-
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/recipeImage"
@@ -69,39 +13,137 @@
 
         android:layout_height="254dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="22dp" />
 
 
     <ListView
         android:id="@+id/ingredientList"
         android:layout_width="match_parent"
-        android:layout_height="279dp"
-        android:layout_above="@+id/addToCalendar"
+        android:layout_height="267dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
     <TextView
         android:id="@+id/readyInMin"
-        android:layout_width="wrap_content"
+        android:layout_width="98dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/instructions"
-        android:layout_marginBottom="251dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/recipeImage"
+        android:layout_marginEnd="18dp"
         android:text="readyinmin" />
 
     <TextView
         android:id="@+id/recipeName"
-        android:layout_width="130dp"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/recipeImage"
-        android:layout_marginStart="47dp"
+        android:layout_marginStart="31dp"
         android:text="TextView" />
 
+    <FrameLayout
+        android:layout_width="254dp"
+        android:layout_height="391dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true">
 
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="361dp"
+            android:layout_height="257dp" />
 
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menu"
+            android:layout_width="334dp"
+            android:layout_height="271dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:menu_animationDelayPerItem="50"
+            app:menu_backgroundColor="@android:color/transparent"
+            app:menu_buttonSpacing="0dp"
+            app:menu_colorNormal="#DA4336"
+            app:menu_colorPressed="#E75043"
+            app:menu_colorRipple="#99FFFFFF"
+            app:menu_fab_label=""
+            app:menu_fab_size="normal"
+            app:menu_icon="@drawable/fab_add"
+            app:menu_labels_colorNormal="#333333"
+            app:menu_labels_colorPressed="#444444"
+            app:menu_labels_colorRipple="#66FFFFFF"
+            app:menu_labels_cornerRadius="3dp"
+            app:menu_labels_ellipsize="none"
+            app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+            app:menu_labels_margin="0dp"
+            app:menu_labels_maxLines="-1"
+            app:menu_labels_padding="8dp"
+            app:menu_labels_paddingBottom="4dp"
+            app:menu_labels_paddingLeft="8dp"
+            app:menu_labels_paddingRight="8dp"
+            app:menu_labels_paddingTop="4dp"
+            app:menu_labels_position="left"
+            app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+            app:menu_labels_showShadow="true"
+            app:menu_labels_singleLine="false"
+            app:menu_labels_textColor="#FFFFFF"
+            app:menu_labels_textSize="14sp"
+            app:menu_openDirection="up"
+            app:menu_shadowColor="#66000000"
+            app:menu_shadowRadius="4dp"
+            app:menu_shadowXOffset="1dp"
+            app:menu_shadowYOffset="3dp"
+            app:menu_showShadow="true">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/addToCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_event_white_24px"
+                app:fab_label="Add To Calendar"
+                app:fab_size="mini"
+                />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/instructions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src = "@drawable/ic_description_white_24px"
+                app:fab_label="View Instructions"
+                app:fab_size="mini"
+                />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/missingToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_shopping_cart_white_24px"
+                app:fab_label="Add Missing Items"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/selectedToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_shopping_cart_white_24px"
+                app:fab_label="Add Selected to Cart"
+                app:fab_size="mini" />
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_done_white_24px"
+                app:fab_label="Completed"
+                app:fab_size="mini" />
+
+        </com.github.clans.fab.FloatingActionMenu>
+    </FrameLayout>
 
 </RelativeLayout>

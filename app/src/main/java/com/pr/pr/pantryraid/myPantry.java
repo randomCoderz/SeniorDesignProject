@@ -60,7 +60,7 @@ public class myPantry extends Fragment{
 
 
         searchButton = rootView.findViewById(R.id.searchButton);
-        searchPantry = rootView.findViewById(R.id.searchPantry);
+//        searchPantry = rootView.findViewById(R.id.searchPantry);
         RecipeButton = rootView.findViewById(R.id.bttnRecipe);
 
         rv = rootView.findViewById(R.id.rv);

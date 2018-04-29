@@ -2,7 +2,8 @@ package com.pr.pr.pantryraid;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.FloatingActionButton;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,10 +91,10 @@ public class recipeFragment extends Fragment {
         TextView readyInMin = rootView.findViewById(R.id.readyInMin);
         readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
 
-        final Button instructions = rootView.findViewById(R.id.instructions);
-        final Button addToCalendar = rootView.findViewById(R.id.addToCalendar);
-        final Button missingToCart = rootView.findViewById(R.id.missingToCart);
-        final Button selectedToCart = rootView.findViewById(R.id.selectedToCart);
+        final FloatingActionButton instructions = rootView.findViewById(R.id.instructions);
+        final FloatingActionButton addToCalendar = rootView.findViewById(R.id.addToCalendar);
+        final FloatingActionButton missingToCart = rootView.findViewById(R.id.missingToCart);
+        final FloatingActionButton selectedToCart = rootView.findViewById(R.id.selectedToCart);
 
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
