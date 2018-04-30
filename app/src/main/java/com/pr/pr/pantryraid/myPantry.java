@@ -110,8 +110,8 @@ public class myPantry extends Fragment{
         });
 
 
-        //This button will delete selected ingredient from my pantry
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        //This button will search a recipe with selected ingredients
+        RecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
@@ -122,6 +122,16 @@ public class myPantry extends Fragment{
                         toSearch.add(pantryList.get(i));
                     }
                 }
+
+
+            }
+        });
+
+        //This button will delete selected ingredients from my pantry
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
 
 
             }
