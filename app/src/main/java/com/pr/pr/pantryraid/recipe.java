@@ -11,19 +11,6 @@ import android.annotation.SuppressLint;
 //import android.os.Bundle;
 
 
-//import android.annotation.SuppressLint;
-//import android.os.Bundle;
-//import android.support.v4.app.Fragment;
-//import android.support.v4.app.FragmentManager;
-//import android.support.v4.app.FragmentTransaction;
-//
-//import android.support.v7.app.AppCompatActivity;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.*;
-//import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 @Entity(tableName = "Recipes")

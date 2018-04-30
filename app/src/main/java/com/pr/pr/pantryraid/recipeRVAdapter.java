@@ -38,7 +38,12 @@ public class recipeRVAdapter extends RecyclerView.Adapter<recipeRVAdapter.recipe
                 public void onClick(View view){
 
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    recipeFragment recipe = new recipeFragment(recipeList.get(index));
+                    recipeFragment recipe = new recipeFragment();
+                    if(recipeList != null)
+                    {
+                        recipe = new recipeFragment(recipeList.get(index));
+
+                    }
                     Fragment myFragment = recipe;
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, myFragment).addToBackStack(null).commit();
 
