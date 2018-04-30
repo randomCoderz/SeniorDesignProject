@@ -37,7 +37,8 @@ android {
 }
 
 dependencies {
-    implementation 'me.lynnchurch:floating-action-button-menu:1.1.0'
+    implementation 'com.github.clans:fab:1.6.4'
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'

@@ -4,9 +4,7 @@ package com.pr.pr.pantryraid;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 
@@ -26,12 +23,11 @@ import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
-import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
-import com.pr.pr.pantryraid.RoomPersist.shoppingCartItems;
 
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Unirest, Spoonacular Imports, JSON
@@ -60,26 +56,36 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         RecipeRepository dbI = new RecipeRepository(mdb);
 
         IngredientRepository pbI = new IngredientRepository(mdb);
-        ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
+
 //
         //    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
-        ingredient testIngredient = new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false);
-        recipe test = new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0);
-        recipe fav = new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
-        recipe fav2 = new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0);
+        List<recipe> recipeList = new ArrayList<recipe>();
+        recipeList.add(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
+        recipeList.add(new recipe(55,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
+        recipeList.add(new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
+        recipeList.add(new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
 
-        shoppingCartItems testCartItem = new shoppingCartItems(72, "Bran Flakes", "1 box");
+        List<ingredient> ingredientList = new ArrayList<ingredient>();
+        ingredientList.add(new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false, true, false));
+        ingredientList.add(new ingredient(6, "Banana", "test","20", "httpwhatever", 12, false, false, true ,false));
+        ingredientList.add(new ingredient(7, "Münster Cheese", "test","20", "httpwhatever", 12, false, false,true, true));
+
+
+
         System.out.println("----------------------------HERE----------------------------");
-        dbI.insertRecipe(test);
-        dbI.insertRecipe(fav);
-        dbI.insertRecipe(fav2);
-        dbI.getRecipeByID(10);
-        dbI.getFavorites();
-        pbI.insertIngredient(testIngredient);
-        pbI.getIngredientByID(5);
-        scI.insertShoppingCartItem(testCartItem);
-        scI.getShoppingCartItemFromID(72);
+        //dbI.insertRecipeList(recipeList);
 
+        //dbI.getFavorites();
+        //dbI.getAllRecipes();
+
+        pbI.insertIngredientList(ingredientList);
+        pbI.getAllIngredients();
+
+        //scI.insertShoppingCartItem(testCartItem);
+        //scI.insertShoppingCartItem(testCartItem2);
+        //scI.insertShoppingCartItem(testCartItem3);
+        //scI.insertShoppingCartItemList(testCartList);
+        //scI.getAllCartItems();
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
@@ -181,8 +187,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             frag = new myCookBook();
         } else if (id == R.id.nav_calendar) {
             frag = new calendar();
-        } else if (id == R.id.nav_recipe) {
-
         } else if (id == R.id.nav_favorites) {
             frag = new favorites();
         } else if (id == R.id.nav_settings) {

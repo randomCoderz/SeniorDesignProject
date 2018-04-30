@@ -120,9 +120,10 @@ class home extends Thread
             {
                 JSONObject ingredient = ingredient_array.getJSONObject(j);
                 int ingredient_id = 0;
-                if(ingredient.has("id"))
-                    ingredient_id = ingredient.getInt("id");
                 String ingredient_name = ingredient.getString("name");
+                if(ingredient.has("id") && !ingredient.isNull("id"))
+                    ingredient_id = ingredient.getInt("id");
+
                 String amount = ingredient.getString("amount");
                 String unit = ingredient.getString("unit");
 
@@ -130,7 +131,7 @@ class home extends Thread
                 if(ingredient.has("image"))
                     ingredient_image = ingredient.getString("image");
 
-                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, false, false));
+                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, false, false, false ,false));
 
             }
             ArrayList<step> analyzedInstructions = new ArrayList();

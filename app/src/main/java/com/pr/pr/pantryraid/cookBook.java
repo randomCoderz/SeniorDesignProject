@@ -28,16 +28,16 @@ class cookBook extends Thread
 
     /**
      * Searches for recipes (Everything but query is optional)
-     * @param cuisine The cuisine(s) of the recipes (african, chinese, japanese, korean, vietnamese, thai, indian, british, irish, french, italian, mexican, spanish, middle eastern, jewish, american, cajun, southern, greek, german, nordic, eastern european, caribbean, or latin american)
+     * @param cuisine The cuisine(s) of the recipes (african, chinese, japanese, korean, vietnamese, thai, indian, british, irish, french, italian, mexican, spanish, middle eastern, jewish, american, cajun, southern, greek, german, nordic, eastern european, caribbean, or latin american).
      * @param diet The diet to which the recipes must be compliant. Possible values are: pescetarian, lacto vegetarian, ovo vegetarian, vegan, and vegetarian.
-     * @param excludeIngredients ingredients or ingredient types that should not be contained in recipes
-     * @param instructionsRequired whether recipes must have instructions
-     * @param intolerances list of intolerances (dairy, egg, gluten, peanut, sesame, seafood, shellfish, soy, sulfite, tree nut, and wheat)
+     * @param excludeIngredients ingredients or ingredient types that should not be contained in recipes.
+     * @param instructionsRequired whether recipes must have instructions.
+     * @param intolerances list of intolerances (dairy, egg, gluten, peanut, sesame, seafood, shellfish, soy, sulfite, tree nut, and wheat).
      * @param limitLicense Whether the recipes should have an open license that allows for displaying with proper attribution.
-     * @param number The number of results to return (between 0 and 100)
+     * @param number The number of results to return (between 0 and 100).
      * @param offset The number of results to skip (between 0 and 900).
      * @param query The (natural language) recipe search query.
-     * @param type the type of the recipes. (main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink)
+     * @param type the type of the recipes. (main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink).
      */
 
     public ArrayList<recipe> searchRecipes(String[] cuisine, String diet[], String[] excludeIngredients, boolean instructionsRequired, String[] intolerances, boolean limitLicense, int number, int offset, String query, String type) throws InterruptedException, JSONException {

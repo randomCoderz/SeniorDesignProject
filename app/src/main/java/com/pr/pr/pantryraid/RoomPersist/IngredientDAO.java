@@ -8,6 +8,8 @@ import android.arch.persistence.room.Query;
 import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
 
+import java.util.List;
+
 
 @Dao
 interface IngredientDAO {
@@ -15,11 +17,16 @@ interface IngredientDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertIngredient(ingredient r1);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertIngredientList(List<ingredient> r1);
+
     @Query("SELECT * FROM Pantry WHERE id LIKE :id")
     ingredient getIngredientFromID(int id);
 
-    @Delete
+    @Query("SELECT * FROM Pantry")
+    List<ingredient> getAllIngredients();
 
+    @Delete
     void deleteAnIngredient(ingredient r);
 }
 

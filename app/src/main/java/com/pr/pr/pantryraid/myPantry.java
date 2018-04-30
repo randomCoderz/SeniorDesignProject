@@ -34,13 +34,7 @@ public class myPantry extends Fragment{
     ImageButton searchButton;
     Button RecipeButton;
     EditText searchPantry;
-    //ArrayList<String> listItems;
 
-    ArrayList<ingredient> listItems = new ArrayList<>();
-    private shoppingCartLVAdapter listAdapter;
-
-    ////////////////
-    int id;
 
     pantry p = new pantry(KEY);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
@@ -66,7 +60,7 @@ public class myPantry extends Fragment{
 
 
         searchButton = rootView.findViewById(R.id.searchButton);
-        searchPantry = rootView.findViewById(R.id.searchPantry);
+//        searchPantry = rootView.findViewById(R.id.searchPantry);
         RecipeButton = rootView.findViewById(R.id.bttnRecipe);
 
         rv = rootView.findViewById(R.id.rv);
@@ -76,19 +70,10 @@ public class myPantry extends Fragment{
 
 
         List<ingredient> list;
-        try {
-            list = p.searchIngredient(null, true, 1, "appe");
-            pbI.insertIngredient(list.get(0));
-            id = list.get(0).id;
-            rootView.clearFocus();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         initializeList();
-        listAdapter = new shoppingCartLVAdapter(getActivity(),listItems);
-
+//        pantryList.add();
+        myPantryAdapter adapter = new myPantryAdapter(pantryList);
+        rv.setAdapter(adapter);
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
@@ -100,7 +85,10 @@ public class myPantry extends Fragment{
                 String ingredientString = searchPantry.getText().toString();
                 try {
                     list = p.searchIngredient(null, true, 1, ingredientString);
-                    pbI.insertIngredient(list.get(0));
+
+                    ingredient ing = list.get(0);
+                    ing.pantry = true;
+                    pbI.insertIngredient(ing);
 
                     rootView.clearFocus();
 
@@ -113,10 +101,22 @@ public class myPantry extends Fragment{
 
             }
         });
-        getList();
 
-        myPantryAdapter adapter = new myPantryAdapter(pantryList);
-        rv.setAdapter(adapter);
+        RecipeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
+                for(int i = 0; i < pantryList.size(); i++)
+                {
+                    if(pantryList.get(i).selected)
+                    {
+                        toSearch.add(pantryList.get(i));
+                    }
+                }
+
+
+            }
+        });
 
         return rootView;
         }
@@ -124,24 +124,18 @@ public class myPantry extends Fragment{
 
     private void initializeList() {
 
-        pbI.getIngredientByID(id);
-        listItems.add(pbI.getIngredient());
+        pbI.getAllIngredients();
+        ArrayList<ingredient> allIngredients = pbI.getIngredients();
+        for(int i = 0; i < allIngredients.size(); i++)
+        {
+            if(allIngredients.get(i).pantry)
+            {
+                pantryList.add(allIngredients.get(i));
+            }
+        }
 
     }
 
-    public void getList()
-    {
-        pantryList.add(new ingredient(0, "test", "fef", "", " ", 0, false, false));
-        pantryList.add(new ingredient(1, "test1", "fef", "", " ", 0, false, false));
-        pantryList.add(new ingredient(2, "test2", "fef", "", " ", 0, false, false));
-    }
-
-//    private void initializeList() {
-//        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-//        IngredientRepository pbI = new IngredientRepository(mdb);
-//
-//
-//    }
 
 } // myPantry ends
 
