@@ -83,7 +83,7 @@ public class myPantry extends Fragment{
 
 
         //buttons click lister:
-        
+
         //This button will search for an ingredient
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
