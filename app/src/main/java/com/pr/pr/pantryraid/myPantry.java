@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -15,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 
@@ -26,6 +30,7 @@ import java.util.List;
 
 public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
+    private MaterialSearchView searchView;
 
     //declaration
 //    ImageButton searchButton;
@@ -57,7 +62,7 @@ public class myPantry extends Fragment{
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
-
+        setHasOptionsMenu(true);
 
 //        Buttons
 //        searchButton = rootView.findViewById(R.id.searchButton);
@@ -81,10 +86,35 @@ public class myPantry extends Fragment{
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
+        ////////////////////////////////////////
+        searchView = rootView.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //Do some magic
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Do some magic
+                return false;
+            }
+        });
 
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                //Do some magic
+            }
 
-        //buttons click lister:
+            @Override
+            public void onSearchViewClosed() {
+                //Do some magic
+            }
+        });
+
+        ////////////////////////////////////////
 
         //This button will search for an ingredient
 //        searchButton.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +174,19 @@ public class myPantry extends Fragment{
         return rootView;
         }
 
+//        @Override
+//        public void onCreate(Bundle savedInstanceState){
+//            super.onCreate(savedInstanceState);
+//            setHasOptionsMenu(true);
+//        }
+//
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+            super.onCreateOptionsMenu(menu, inflater);
+            MenuItem item = menu.findItem(R.id.action_search);
+            item.setVisible(true);
+            searchView.setMenuItem(item);
+        }
 
 
     private void initializeList() {
