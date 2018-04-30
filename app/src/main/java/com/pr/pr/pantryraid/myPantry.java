@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -34,7 +35,10 @@ public class myPantry extends Fragment{
     //declaration
     ImageButton searchButton;
     Button RecipeButton;
+    Button deleteButton;
     EditText searchPantry;
+
+    //ArrayList<String> listItems;
 
 
     pantry p = new pantry(KEY);
@@ -61,8 +65,9 @@ public class myPantry extends Fragment{
         setHasOptionsMenu(true);
 
         searchButton = rootView.findViewById(R.id.searchButton);
-//        searchPantry = rootView.findViewById(R.id.searchPantry);
+        searchPantry = rootView.findViewById(R.id.searchPantry);
         RecipeButton = rootView.findViewById(R.id.bttnRecipe);
+        deleteButton = rootView.findViewById(R.id.bttnDelete);
 
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
@@ -132,6 +137,8 @@ public class myPantry extends Fragment{
             }
         });
 
+
+        //This button will search a recipe with selected ingredients
         RecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,6 +152,18 @@ public class myPantry extends Fragment{
                 }
             }
         });
+
+        //This button will delete selected ingredients from my pantry
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+            }
+        });
+
+
 
         return rootView;
         }
@@ -162,6 +181,7 @@ public class myPantry extends Fragment{
             item.setVisible(true);
             searchView.setMenuItem(item);
         }
+
 
     private void initializeList() {
 
