@@ -1,22 +1,26 @@
 package com.pr.pr.pantryraid;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.DatePicker;
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
-import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -24,9 +28,11 @@ import org.json.JSONException;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import android.app.DatePickerDialog;
 
-public class recipeFragment extends Fragment {
+public class recipeFragment extends Fragment implements DatePickerDialog.OnDateSetListener   {
     private final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     int id;
     String name;
@@ -43,7 +49,9 @@ public class recipeFragment extends Fragment {
     int year;
 
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-    ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
+    IngredientRepository pbI = new IngredientRepository(mdb);
+    final RecipeRepository dbI = new RecipeRepository(mdb);
+
 
     private ListView listView;
 
@@ -70,18 +78,41 @@ public class recipeFragment extends Fragment {
 
     public recipe getAsRecipe()
     {
-        return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, day, month , year);
+        return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, month , day, year);
     }
 
+
+    private ArrayList<ingredient> pantryList = new ArrayList<ingredient>();
+    private RecyclerView rv;
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-        final RecipeRepository dbI = new RecipeRepository(mdb);
+
 
         final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
 
-        listView = rootView.findViewById(R.id.ingredientList);
-        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
+
+        rv = rootView.findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this.getContext()){
+                @Override
+                public boolean canScrollVertically() {
+                return false;
+            }
+        };
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        rv.setItemViewCacheSize(20);
+        rv.setDrawingCacheEnabled(true);
+        rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
+
+
+        myPantryAdapter adapter = new myPantryAdapter(ingredients);
+        rv.setAdapter(adapter);
+
+//        listView = rootView.findViewById(R.id.ingredientList);
+//        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
         TextView recipeName = rootView.findViewById(R.id.recipeName);
         recipeName.setText(name);
         ImageView img = rootView.findViewById(R.id.recipeImage);
@@ -95,6 +126,11 @@ public class recipeFragment extends Fragment {
         final FloatingActionButton addToCalendar = rootView.findViewById(R.id.addToCalendar);
         final FloatingActionButton missingToCart = rootView.findViewById(R.id.missingToCart);
         final FloatingActionButton selectedToCart = rootView.findViewById(R.id.selectedToCart);
+        final FloatingActionButton completed = rootView.findViewById(R.id.completed);
+
+        Calendar currentDate = Calendar.getInstance();
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this.getContext(), recipeFragment.this, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DAY_OF_MONTH));
 
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +152,7 @@ public class recipeFragment extends Fragment {
                 for(int i = 0; i < analyzedInstructions.size(); i++)
                 {
                     step x = analyzedInstructions.get(i);
-                    instr += x.number + ". " + x.step_description + "\n";
+                    instr += x.number + ". " + x.step_description + "\n\n";
                 }
 
                 Fragment fragment =  new instructions(instr);
@@ -129,30 +165,32 @@ public class recipeFragment extends Fragment {
         missingToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<ingredient> toCart = new ArrayList<ingredient>();
+                List<ingredient> toCart = new ArrayList<>();
                 for (int i = 0; i < ingredients.size(); i++)
                 {
                     if(ingredients.get(i).missing)
                     {
+                        ingredients.get(i).shoppingCart = true;
                         toCart.add(ingredients.get(i));
                     }
                 }
-
+                pbI.insertIngredientList(toCart);
             }
         });
 
         selectedToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<ingredient> toCart = new ArrayList<ingredient>();
+                List<ingredient> toCart = new ArrayList<>();
                 for (int i = 0; i < ingredients.size(); i++)
                 {
-                    if(ingredients.get(i).selected)
+                    if(ingredients.get(i).selected && ingredients.get(i) != null)
                     {
+                        ingredients.get(i).shoppingCart = true;
                         toCart.add(ingredients.get(i));
                     }
                 }
-//                scI.insertShoppingCartItemList((List<ingredient>)toCart);
+                pbI.insertIngredientList(toCart);
             }
         });
 
@@ -161,12 +199,39 @@ public class recipeFragment extends Fragment {
         addToCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 mealCalendar = true;
-                dbI.insertRecipe(getAsRecipe());
+                datePickerDialog.show();
+                System.out.println(month + "/" + day+ "/" + year);
+
 
             }
         });
 
+        completed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pbI.getAllIngredients();
+                ArrayList<ingredient> pantry = pbI.getIngredients();
+               for(int i = 0; i < ingredients.size(); i++)
+               {
+                   if(pantry.contains(ingredients.get(i)))
+                   {
+                       pbI.removeIngredient(ingredients.get(i));
+                   }
+               }
+            }
+        });
+
         return rootView;
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        this.year = year;
+        this.month = month+1;
+        this.day = day;
+
+        dbI.insertRecipe(getAsRecipe());
     }
 }

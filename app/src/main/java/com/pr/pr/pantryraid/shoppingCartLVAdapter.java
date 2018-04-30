@@ -60,7 +60,7 @@ public class shoppingCartLVAdapter extends BaseAdapter{
 
         listViewHolder.itemName.setText(products.name);
 
-        listViewHolder.itemQty.setText((int)products.quantity+"");
+        listViewHolder.itemQty.setText(products.quantity+"");
 
         listViewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -86,7 +86,9 @@ public class myPantry extends Fragment{
                 try {
                     list = p.searchIngredient(null, true, 1, ingredientString);
 
-                    pbI.insertIngredient(list.get(0));
+                    ingredient ing = list.get(0);
+                    ing.pantry = true;
+                    pbI.insertIngredient(ing);
 
                     rootView.clearFocus();
 
@@ -113,7 +115,6 @@ public class myPantry extends Fragment{
                 }
 
 
-
             }
         });
 
@@ -124,8 +125,14 @@ public class myPantry extends Fragment{
     private void initializeList() {
 
         pbI.getAllIngredients();
-        pantryList = pbI.getIngredients();
-
+        ArrayList<ingredient> allIngredients = pbI.getIngredients();
+        for(int i = 0; i < allIngredients.size(); i++)
+        {
+            if(allIngredients.get(i).pantry)
+            {
+                pantryList.add(allIngredients.get(i));
+            }
+        }
 
     }
 

@@ -37,13 +37,11 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
                     if(checkBox.isChecked() == false)
                     {
                         recipeList.get(index).selected = true;
-                        cv.setCardBackgroundColor(Color.GREEN);
                         checkBox.setChecked(true);
                     }
                     else
                     {
                         recipeList.get(index).selected = false;
-                        cv.setCardBackgroundColor(0x0106000f);
                         checkBox.setChecked(false);
                     }
                 }
@@ -92,4 +90,5 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     {
         return recipeList.size();
     }
+
 }

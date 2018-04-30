@@ -37,6 +37,12 @@ public class ingredient {
     @ColumnInfo(name = "missing")
     boolean missing;
 
+    @ColumnInfo(name = "pantry")
+    boolean pantry;
+
+    @ColumnInfo(name = "shoppingCart")
+    boolean shoppingCart;
+
 
     @Ignore
     public ingredient(int id, String name, String photoURL)
@@ -45,6 +51,8 @@ public class ingredient {
         this.name = name;
         this.photoURL = photoURL;
     }
+
+
 
     @Ignore
     public ingredient(int id, String name, String amount, int photoID)
@@ -64,7 +72,7 @@ public class ingredient {
         this.photoURL = photoURL;
     }
 
-    public ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
+    public ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected, boolean pantry, boolean shoppingCart)
     {
         this.id = id;
         this.name = name;
@@ -74,6 +82,8 @@ public class ingredient {
         this.selected = selected;
         this.quantity = quantity;
         this.missing = missing;
+        this.pantry = pantry;
+        this.shoppingCart = shoppingCart;
 
     }
 
@@ -149,5 +159,19 @@ public class ingredient {
         this.missing = missing;
     }
 
+    public boolean isPantry() {
+        return pantry;
+    }
 
+    public void setPantry(boolean pantry) {
+        this.pantry = pantry;
+    }
+
+    public boolean isShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(boolean shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
 }
