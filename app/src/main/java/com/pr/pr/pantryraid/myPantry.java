@@ -65,7 +65,7 @@ public class myPantry extends Fragment{
         setHasOptionsMenu(true);
 
         searchButton = rootView.findViewById(R.id.searchButton);
-        searchPantry = rootView.findViewById(R.id.searchPantry);
+        //searchPantry = rootView.findViewById(R.id.searchPantry);
         RecipeButton = rootView.findViewById(R.id.bttnRecipe);
         deleteButton = rootView.findViewById(R.id.bttnDelete);
 
