@@ -120,9 +120,10 @@ class home extends Thread
             {
                 JSONObject ingredient = ingredient_array.getJSONObject(j);
                 int ingredient_id = 0;
-                if(ingredient.has("id"))
-                    ingredient_id = ingredient.getInt("id");
                 String ingredient_name = ingredient.getString("name");
+                if(ingredient.has("id") && !ingredient.isNull("id"))
+                    ingredient_id = ingredient.getInt("id");
+
                 String amount = ingredient.getString("amount");
                 String unit = ingredient.getString("unit");
 

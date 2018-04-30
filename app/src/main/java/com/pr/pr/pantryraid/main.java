@@ -187,8 +187,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
             frag = new myCookBook();
         } else if (id == R.id.nav_calendar) {
             frag = new calendar();
-        } else if (id == R.id.nav_recipe) {
-
         } else if (id == R.id.nav_favorites) {
             frag = new favorites();
         } else if (id == R.id.nav_settings) {

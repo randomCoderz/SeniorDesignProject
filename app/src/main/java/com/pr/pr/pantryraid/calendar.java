@@ -64,9 +64,7 @@ public class calendar extends Fragment
         rv.setLayoutManager(llm);
 
 
-        recipeList = getRecipes();
-        recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
-        rv.setAdapter(adapter);
+
 
 
         editText = (EditText) rootView.findViewById(R.id.textBox);
@@ -76,14 +74,20 @@ public class calendar extends Fragment
 
         String date = new SimpleDateFormat("M/d/yyyy", Locale.getDefault()).format(new Date());
         editText.setText(date);
+        year = currentDate.get(Calendar.YEAR);
+        month = currentDate.get(Calendar.MONTH)+1;
+        day = currentDate.get(Calendar.DAY_OF_MONTH);
 
 
+        recipeList = getRecipes();
+        recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+        rv.setAdapter(adapter);
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 year = currentDate.get(Calendar.YEAR);
-                month = currentDate.get(Calendar.MONTH);
+                month = currentDate.get(Calendar.MONTH+1);
                 day = currentDate.get(Calendar.DAY_OF_MONTH);
                 //int dayOfWeek = currentDate.get(Calendar.DAY_OF_WEEK);
 
@@ -95,6 +99,7 @@ public class calendar extends Fragment
                     }
                 }, year, month, day);
                 mDatePicker.show();
+                //TO-DO -----NEED TO RELOAD THE LIST AFTER CHANGING DATE----
             }
         });
 
@@ -120,12 +125,16 @@ public class calendar extends Fragment
         List<recipe> dayRecipes = new ArrayList<recipe>();
         d.getAllRecipes();
         List<recipe> allRecipes = d.getRecipes();
-        for(int i = 0; i < allRecipes.size(); i++)
+        if(allRecipes != null)
         {
-            if(allRecipes.get(i).day == day && allRecipes.get(i).month == month && allRecipes.get(i).year == year)
+            for(int i = 0; i < allRecipes.size(); i++)
             {
-                dayRecipes.add(allRecipes.get(i));
+                if(allRecipes.get(i).day == day && allRecipes.get(i).month == month && allRecipes.get(i).year == year)
+                {
+                    dayRecipes.add(allRecipes.get(i));
+                }
             }
+
         }
         return dayRecipes;
     }
