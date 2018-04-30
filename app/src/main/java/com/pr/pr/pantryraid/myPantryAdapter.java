@@ -21,27 +21,35 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     {
         int index;
         CardView cv;
-        TextView recipeName;
+        TextView ingredientName;
         CheckBox checkBox;
 
         recipeViewHolder(View itemView)
         {
             super(itemView);
             cv = itemView.findViewById(R.id.cv);
-            recipeName = itemView.findViewById(R.id.cvName);
+            ingredientName = itemView.findViewById(R.id.cvName);
             checkBox = itemView.findViewById(R.id.checkBox);
-
+            
+            for(int i = 0; i < ingredientList.size(); i++)
+            {
+                if(ingredientList.get(i).missing)
+                {
+                    cv.setCardBackgroundColor(Color.RED);
+                }
+            }
+            
             cv.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
                     if(checkBox.isChecked() == false)
                     {
-                        recipeList.get(index).selected = true;
+                        ingredientList.get(index).selected = true;
                         checkBox.setChecked(true);
                     }
                     else
                     {
-                        recipeList.get(index).selected = false;
+                        ingredientList.get(index).selected = false;
                         checkBox.setChecked(false);
                     }
                 }
@@ -50,13 +58,13 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
         }
     }
 
-    private static List<ingredient> recipeList;
+    private static List<ingredient> ingredientList;
 
-    public myPantryAdapter(List<ingredient> recipeList) { this.recipeList = recipeList; }
+    public myPantryAdapter(List<ingredient> ingredientList) { this.ingredientList = ingredientList; }
 
-    public void myPantryAdapter(List<ingredient> recipeList)
+    public void myPantryAdapter(List<ingredient> ingredientList)
     {
-        this.recipeList = recipeList;
+        this.ingredientList = ingredientList;
     }
 
     @Override
@@ -77,7 +85,7 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     public void onBindViewHolder(myPantryAdapter.recipeViewHolder holder, int i)
     {
         try {
-            holder.recipeName.setText(recipeList.get(i).name);
+            holder.ingredientName.setText(ingredientList.get(i).name);
             holder.index = i;
         } catch(Exception e){
             e.printStackTrace();
@@ -88,7 +96,7 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     @Override
     public int getItemCount()
     {
-        return recipeList.size();
+        return ingredientList.size();
     }
 
 }

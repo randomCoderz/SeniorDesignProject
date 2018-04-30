@@ -1,5 +1,6 @@
 package com.pr.pr.pantryraid;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -38,6 +39,12 @@ public class myCookBook extends Fragment {
 
     private cookBook c = new cookBook(KEY);
 
+    @SuppressLint("ValidFragment")
+    public myCookBook(List<recipe> recipeList)
+    {
+        this.recipeList = recipeList;
+    }
+
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -49,17 +56,11 @@ public class myCookBook extends Fragment {
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
 
-        try {
-            recipeList = h.randomRecipe(false, 2, null);
-            adapter = new recipeRVAdapter(recipeList);
 
-            rv.setAdapter(adapter);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        adapter = new recipeRVAdapter(recipeList);
+        rv.setAdapter(adapter);
 
         //this is for the keyboard to hide later.
 
@@ -77,8 +78,9 @@ public class myCookBook extends Fragment {
         favoriteRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                Fragment favoritesFrag =  new favorites();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
             }
         });
 
@@ -126,7 +128,6 @@ public class myCookBook extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
             }
         });

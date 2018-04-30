@@ -127,13 +127,17 @@ public class myPantry extends Fragment{
 
         pbI.getAllIngredients();
         ArrayList<ingredient> allIngredients = pbI.getIngredients();
-        for(int i = 0; i < allIngredients.size(); i++)
+        if(allIngredients != null)
         {
-            if(allIngredients.get(i).pantry)
+            for(int i = 0; i < allIngredients.size(); i++)
             {
-                pantryList.add(allIngredients.get(i));
+                if(allIngredients.get(i).pantry)
+                {
+                    pantryList.add(allIngredients.get(i));
+                }
             }
         }
+
 
     }
 

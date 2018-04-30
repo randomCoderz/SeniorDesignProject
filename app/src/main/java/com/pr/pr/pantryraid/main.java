@@ -72,14 +72,13 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
 
-        System.out.println("----------------------------HERE----------------------------");
-        //dbI.insertRecipeList(recipeList);
+        dbI.insertRecipeList(recipeList);
 
         //dbI.getFavorites();
         //dbI.getAllRecipes();
 
         pbI.insertIngredientList(ingredientList);
-        pbI.getAllIngredients();
+//        pbI.getAllIngredients();
 
         //scI.insertShoppingCartItem(testCartItem);
         //scI.insertShoppingCartItem(testCartItem2);
