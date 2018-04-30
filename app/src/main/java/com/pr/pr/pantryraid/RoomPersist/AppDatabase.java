@@ -11,12 +11,12 @@ import com.pr.pr.pantryraid.recipe;
 
 
 @TypeConverters({DataConverter.class})
-@Database(entities = {recipe.class, ingredient.class, shoppingCartItems.class}, version = 1, exportSchema = false)
+@Database(entities = {recipe.class, ingredient.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
     public abstract RecipesDAO recipesdao();
     public abstract IngredientDAO ingredientDAO();
-    public abstract ShoppingCartDAO shoppingcartDAO();
+
 
     public static AppDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {

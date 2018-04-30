@@ -29,11 +29,6 @@
         <!--android:icon="@drawable/ic_menu_manage"-->
 
         <item
-            android:id="@+id/nav_recipe"
-            android:title="Recipes" />
-        <!--android:icon="@drawable/ic_menu_manage"-->
-
-        <item
             android:id="@+id/nav_favorites"
             android:title="Favorites" />
         <!--android:icon="@drawable/ic_menu_manage"-->

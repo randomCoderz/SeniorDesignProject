@@ -16,9 +16,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="331dp"
-        android:background="@android:color/background_light"
-        >
+        android:layout_height="288dp"
+        android:background="@android:color/background_light">
 
         <ImageView
             android:id="@+id/cvPhoto"
@@ -35,19 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="62dp"
+            android:layout_marginBottom="25dp"
             android:text="name"
             android:textColor="@android:color/background_dark"
             android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/cvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/cvPhoto"
-            android:layout_marginBottom="33dp"
-            android:text="description" />
 
     </RelativeLayout>
 

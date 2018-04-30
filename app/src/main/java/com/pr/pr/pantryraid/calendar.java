@@ -46,20 +46,25 @@ public class calendar extends Fragment
     private int month;
     private int day;
 
+    AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+    RecipeRepository d = new RecipeRepository(mdb);
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.calendar, container, false);
 
         //database stuff
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-        RecipeRepository d = new RecipeRepository(mdb);
+
 
         //RVAdapter for recipe cards
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
+
+
+
 
 
         editText = (EditText) rootView.findViewById(R.id.textBox);
@@ -69,12 +74,20 @@ public class calendar extends Fragment
 
         String date = new SimpleDateFormat("M/d/yyyy", Locale.getDefault()).format(new Date());
         editText.setText(date);
+        year = currentDate.get(Calendar.YEAR);
+        month = currentDate.get(Calendar.MONTH)+1;
+        day = currentDate.get(Calendar.DAY_OF_MONTH);
+
+
+        recipeList = getRecipes();
+        recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+        rv.setAdapter(adapter);
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 year = currentDate.get(Calendar.YEAR);
-                month = currentDate.get(Calendar.MONTH);
+                month = currentDate.get(Calendar.MONTH+1);
                 day = currentDate.get(Calendar.DAY_OF_MONTH);
                 //int dayOfWeek = currentDate.get(Calendar.DAY_OF_WEEK);
 
@@ -86,6 +99,7 @@ public class calendar extends Fragment
                     }
                 }, year, month, day);
                 mDatePicker.show();
+                //TO-DO -----NEED TO RELOAD THE LIST AFTER CHANGING DATE----
             }
         });
 
@@ -104,6 +118,25 @@ public class calendar extends Fragment
         });
         return rootView;
 
+    }
+
+    private List<recipe> getRecipes()
+    {
+        List<recipe> dayRecipes = new ArrayList<recipe>();
+        d.getAllRecipes();
+        List<recipe> allRecipes = d.getRecipes();
+        if(allRecipes != null)
+        {
+            for(int i = 0; i < allRecipes.size(); i++)
+            {
+                if(allRecipes.get(i).day == day && allRecipes.get(i).month == month && allRecipes.get(i).year == year)
+                {
+                    dayRecipes.add(allRecipes.get(i));
+                }
+            }
+
+        }
+        return dayRecipes;
     }
 
 }
