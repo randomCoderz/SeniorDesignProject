@@ -62,9 +62,9 @@ public class myCookBook extends Fragment {
         }
 
         //this is for the keyboard to hide later.
-
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         //refresh(recipeList);
+
 
         // linking buttons
         favoriteRecipes = (Button)rootView.findViewById(R.id.bttnFav);
@@ -93,6 +93,18 @@ public class myCookBook extends Fragment {
             }
         });
 
+
+        //on click buttons redirect to other pages viewIngredients
+        favoriteRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment favoritesFrag =  new favorites();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
+
+            }
+        });
+        
         //on click buttons redirect to other pages shoppingCart
         shoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,4 +156,6 @@ public class myCookBook extends Fragment {
         rv.setAdapter(adapter);
 
     };
+
 }
+
