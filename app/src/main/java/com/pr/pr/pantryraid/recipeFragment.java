@@ -102,11 +102,12 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         };
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
-        rv.setItemViewCacheSize(20);
-        rv.setDrawingCacheEnabled(true);
-        rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
         setMissing();
+        //rv.setItemViewCacheSize(20);
+        //rv.setDrawingCacheEnabled(true);
+        //rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
         myPantryAdapter adapter = new myPantryAdapter(ingredients);
         rv.setAdapter(adapter);
 

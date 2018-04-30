@@ -98,6 +98,18 @@ public class myCookBook extends Fragment {
             }
         });
 
+
+        //on click buttons redirect to other pages viewIngredients
+        favoriteRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment favoritesFrag =  new favorites();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
+
+            }
+        });
+        
         //on click buttons redirect to other pages shoppingCart
         shoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override

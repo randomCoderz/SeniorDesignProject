@@ -93,11 +93,11 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
-    private void initializeAdapter() {
-        recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
-
-        rv.setAdapter(adapter);
-    }
+//    private void initializeAdapter() {
+//        recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
+//
+//        rv.setAdapter(adapter);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -113,11 +113,9 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        menu.findItem(R.id.action_search).setVisible(false);
         return true;
-
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -127,9 +125,10 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
         return super.onOptionsItemSelected(item);
     }
 
