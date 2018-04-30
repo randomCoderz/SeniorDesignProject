@@ -23,8 +23,6 @@ import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
-import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
-import com.pr.pr.pantryraid.RoomPersist.shoppingCartItems;
 
 
 import org.json.JSONException;
@@ -58,7 +56,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         RecipeRepository dbI = new RecipeRepository(mdb);
 
         IngredientRepository pbI = new IngredientRepository(mdb);
-        ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
+
 //
         //    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
         List<recipe> recipeList = new ArrayList<recipe>();
@@ -68,20 +66,11 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         recipeList.add(new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
 
         List<ingredient> ingredientList = new ArrayList<ingredient>();
-        ingredientList.add(new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false));
-        ingredientList.add(new ingredient(6, "Banana", "test","20", "httpwhatever", 12, false, false));
-        ingredientList.add(new ingredient(7, "Münster Cheese", "test","20", "httpwhatever", 12, false, false));
+        ingredientList.add(new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false, true, false));
+        ingredientList.add(new ingredient(6, "Banana", "test","20", "httpwhatever", 12, false, false, true ,false));
+        ingredientList.add(new ingredient(7, "Münster Cheese", "test","20", "httpwhatever", 12, false, false,true, true));
 
-        //testing shopping cart items
-        shoppingCartItems testCartItem = new shoppingCartItems(72, "Bran Flakes", "1 box");
-        shoppingCartItems testCartItem2 = new shoppingCartItems(73, "Corn Flakes", "1 box");
-        shoppingCartItems testCartItem3 = new shoppingCartItems(74, "Frosted Flakes", "1 box");
 
-        //testing List entry
-        List<shoppingCartItems> testCartList = new ArrayList<shoppingCartItems>();
-        testCartList.add(new shoppingCartItems(74, "Cheapo Flakes", "2 boxes"));
-        testCartList.add(new shoppingCartItems(75, "Garbage Flakes", "2 boxes"));
-        testCartList.add(new shoppingCartItems(76, "Ran Flakes", "50 boxes"));
 
         System.out.println("----------------------------HERE----------------------------");
         //dbI.insertRecipeList(recipeList);

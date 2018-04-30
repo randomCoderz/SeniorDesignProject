@@ -130,7 +130,7 @@ class home extends Thread
                 if(ingredient.has("image"))
                     ingredient_image = ingredient.getString("image");
 
-                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, false, false));
+                ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, false, false, false ,false));
 
             }
             ArrayList<step> analyzedInstructions = new ArrayList();

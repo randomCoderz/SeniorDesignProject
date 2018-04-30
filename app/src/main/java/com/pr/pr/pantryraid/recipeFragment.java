@@ -9,14 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
-import com.pr.pr.pantryraid.RoomPersist.ShoppingCartRepository;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -43,7 +42,8 @@ public class recipeFragment extends Fragment {
     int year;
 
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-    ShoppingCartRepository scI = new ShoppingCartRepository(mdb);
+    IngredientRepository pbI = new IngredientRepository(mdb);
+
 
     private ListView listView;
 
@@ -116,7 +116,7 @@ public class recipeFragment extends Fragment {
                 for(int i = 0; i < analyzedInstructions.size(); i++)
                 {
                     step x = analyzedInstructions.get(i);
-                    instr += x.number + ". " + x.step_description + "\n";
+                    instr += x.number + ". " + x.step_description + "\n\n";
                 }
 
                 Fragment fragment =  new instructions(instr);
@@ -129,30 +129,32 @@ public class recipeFragment extends Fragment {
         missingToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<ingredient> toCart = new ArrayList<ingredient>();
+                List<ingredient> toCart = null;
                 for (int i = 0; i < ingredients.size(); i++)
                 {
                     if(ingredients.get(i).missing)
                     {
+                        ingredients.get(i).shoppingCart = true;
                         toCart.add(ingredients.get(i));
                     }
                 }
-
+                pbI.insertIngredientList(toCart);
             }
         });
 
         selectedToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<ingredient> toCart = new ArrayList<ingredient>();
+                List<ingredient> toCart = null;
                 for (int i = 0; i < ingredients.size(); i++)
                 {
                     if(ingredients.get(i).selected)
                     {
+                        ingredients.get(i).shoppingCart = true;
                         toCart.add(ingredients.get(i));
                     }
                 }
-//                scI.insertShoppingCartItemList((List<ingredient>)toCart);
+
             }
         });
 
@@ -162,6 +164,7 @@ public class recipeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mealCalendar = true;
+                //set day, month, and year before entering into database
                 dbI.insertRecipe(getAsRecipe());
 
             }

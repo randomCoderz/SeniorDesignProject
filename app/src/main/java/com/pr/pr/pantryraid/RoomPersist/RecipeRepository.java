@@ -4,13 +4,16 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.pr.pr.pantryraid.ingredient;
 import com.pr.pr.pantryraid.recipe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeRepository {
     private AppDatabase gdb;
 
+    private static List<recipe> rec;
 
     public RecipeRepository(AppDatabase data){
         gdb = data;
@@ -132,6 +135,16 @@ public class RecipeRepository {
             mdb.recipesdao().deleteARecipe(params[0]);
             return null;
         }
+    }
+
+    public static void setRecipe(List<recipe> i)
+    {
+        rec = i;
+    }
+
+    public List<recipe> getRecipes()
+    {
+        return rec;
     }
 }
 

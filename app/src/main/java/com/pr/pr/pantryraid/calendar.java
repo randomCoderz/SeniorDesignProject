@@ -46,20 +46,27 @@ public class calendar extends Fragment
     private int month;
     private int day;
 
+    AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+    RecipeRepository d = new RecipeRepository(mdb);
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.calendar, container, false);
 
         //database stuff
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-        RecipeRepository d = new RecipeRepository(mdb);
+
 
         //RVAdapter for recipe cards
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
+
+
+        recipeList = getRecipes();
+        recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+        rv.setAdapter(adapter);
 
 
         editText = (EditText) rootView.findViewById(R.id.textBox);
@@ -69,6 +76,8 @@ public class calendar extends Fragment
 
         String date = new SimpleDateFormat("M/d/yyyy", Locale.getDefault()).format(new Date());
         editText.setText(date);
+
+
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +113,21 @@ public class calendar extends Fragment
         });
         return rootView;
 
+    }
+
+    private List<recipe> getRecipes()
+    {
+        List<recipe> dayRecipes = new ArrayList<recipe>();
+        d.getAllRecipes();
+        List<recipe> allRecipes = d.getRecipes();
+        for(int i = 0; i < allRecipes.size(); i++)
+        {
+            if(allRecipes.get(i).day == day && allRecipes.get(i).month == month && allRecipes.get(i).year == year)
+            {
+                dayRecipes.add(allRecipes.get(i));
+            }
+        }
+        return dayRecipes;
     }
 
 }

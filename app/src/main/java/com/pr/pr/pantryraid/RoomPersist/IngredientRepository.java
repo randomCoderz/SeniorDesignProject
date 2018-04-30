@@ -13,6 +13,9 @@ import java.util.List;
 public class IngredientRepository {
     private AppDatabase gdb;
 
+    private static ArrayList<ingredient> ing;
+
+
     public IngredientRepository(AppDatabase data){
         gdb = data;
     }
@@ -108,7 +111,6 @@ public class IngredientRepository {
         }
     }
 
-    static ArrayList<ingredient> ing;
 
     public static void setIngredient(ArrayList<ingredient> i)
     {
