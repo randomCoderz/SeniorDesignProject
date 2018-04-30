@@ -5,17 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
@@ -23,7 +21,6 @@ import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -33,7 +30,10 @@ public class myPantry extends Fragment{
     //declaration
     ImageButton searchButton;
     Button RecipeButton;
+    Button deleteButton;
     EditText searchPantry;
+
+    //ArrayList<String> listItems;
 
 
     pantry p = new pantry(KEY);
@@ -60,8 +60,9 @@ public class myPantry extends Fragment{
 
 
         searchButton = rootView.findViewById(R.id.searchButton);
-//        searchPantry = rootView.findViewById(R.id.searchPantry);
+        searchPantry = rootView.findViewById(R.id.searchPantry);
         RecipeButton = rootView.findViewById(R.id.bttnRecipe);
+        deleteButton = rootView.findViewById(R.id.bttnDelete);
 
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
@@ -78,6 +79,12 @@ public class myPantry extends Fragment{
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
+
+
+
+        //buttons click lister:
+
+        //This button will search for an ingredient
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +109,8 @@ public class myPantry extends Fragment{
             }
         });
 
+
+        //This button will search a recipe with selected ingredients
         RecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,12 +124,24 @@ public class myPantry extends Fragment{
                 }
 
 
+            }
+        });
+
+        //This button will delete selected ingredients from my pantry
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
 
             }
         });
 
+
+
         return rootView;
         }
+
 
 
     private void initializeList() {
