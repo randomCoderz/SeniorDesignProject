@@ -13,6 +13,7 @@ public class DietRestrictLVAdapter extends BaseAdapter {
     Context context;
     ArrayList<DietRestrictName> List;
 
+
     private static LayoutInflater inflater = null;
 
     public DietRestrictLVAdapter(Context context, ArrayList<DietRestrictName> List)
@@ -36,6 +37,8 @@ public class DietRestrictLVAdapter extends BaseAdapter {
         return position;
     }
 
+
+
     public View getView(int position, View convertView, ViewGroup parent)
     {
         View row;
@@ -58,7 +61,6 @@ public class DietRestrictLVAdapter extends BaseAdapter {
 
         listViewHolder.restriction.setText(products.name);
         listViewHolder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(listViewHolder.selected.isChecked()){
