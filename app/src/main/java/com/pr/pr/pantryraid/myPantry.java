@@ -71,6 +71,7 @@ public class myPantry extends Fragment{
 
         //searchPantry = rootView.findViewById(R.id.searchPantry);
 
+
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rv.setHasFixedSize(true);
@@ -89,6 +90,7 @@ public class myPantry extends Fragment{
         ////////////////////////////////////////
         searchView = rootView.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //Do some magic
@@ -113,6 +115,40 @@ public class myPantry extends Fragment{
                 //Do some magic
             }
         });
+        ////////////////////////////////////////
+
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                //Do some magic
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //Do some magic
+//                return false;
+//            }
+//        });
+
+
+//        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
+//                for(int i = 0; i < pantryList.size(); i++)
+//                {
+//                    if(pantryList.get(i).selected)
+//                    {
+//                        toSearch.add(pantryList.get(i));
+//                    }
+//                }
+//            }
+//        });
+
+
+
 
         ////////////////////////////////////////
 
@@ -180,6 +216,7 @@ public class myPantry extends Fragment{
 //            setHasOptionsMenu(true);
 //        }
 //
+
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
             super.onCreateOptionsMenu(menu, inflater);
