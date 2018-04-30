@@ -28,9 +28,9 @@ public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
 
     //declaration
-    ImageButton searchButton;
-    Button RecipeButton;
-    Button deleteButton;
+//    ImageButton searchButton;
+//    Button RecipeButton;
+//    Button deleteButton;
     EditText searchPantry;
 
     //ArrayList<String> listItems;
@@ -59,10 +59,12 @@ public class myPantry extends Fragment{
         final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
 
 
-        searchButton = rootView.findViewById(R.id.searchButton);
-        searchPantry = rootView.findViewById(R.id.searchPantry);
-        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
-        deleteButton = rootView.findViewById(R.id.bttnDelete);
+//        Buttons
+//        searchButton = rootView.findViewById(R.id.searchButton);
+//        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
+//        deleteButton = rootView.findViewById(R.id.bttnDelete);
+
+        //searchPantry = rootView.findViewById(R.id.searchPantry);
 
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
@@ -85,57 +87,57 @@ public class myPantry extends Fragment{
         //buttons click lister:
 
         //This button will search for an ingredient
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<ingredient> list;
-                String ingredientString = searchPantry.getText().toString();
-                try {
-                    list = p.searchIngredient(null, true, 1, ingredientString);
-
-                    ingredient ing = list.get(0);
-                    ing.pantry = true;
-                    pbI.insertIngredient(ing);
-
-                    rootView.clearFocus();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
-
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<ingredient> list;
+//                String ingredientString = searchPantry.getText().toString();
+//                try {
+//                    list = p.searchIngredient(null, true, 1, ingredientString);
+//
+//                    ingredient ing = list.get(0);
+//                    ing.pantry = true;
+//                    pbI.insertIngredient(ing);
+//
+//                    rootView.clearFocus();
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//        });
+//
 
         //This button will search a recipe with selected ingredients
-        RecipeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
-                for(int i = 0; i < pantryList.size(); i++)
-                {
-                    if(pantryList.get(i).selected)
-                    {
-                        toSearch.add(pantryList.get(i));
-                    }
-                }
-
-
-            }
-        });
+//        RecipeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
+//                for(int i = 0; i < pantryList.size(); i++)
+//                {
+//                    if(pantryList.get(i).selected)
+//                    {
+//                        toSearch.add(pantryList.get(i));
+//                    }
+//                }
+//
+//
+//            }
+//        });
 
         //This button will delete selected ingredients from my pantry
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-            }
-        });
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//            }
+//        });
 
 
 

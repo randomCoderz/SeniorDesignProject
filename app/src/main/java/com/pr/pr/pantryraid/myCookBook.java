@@ -104,7 +104,7 @@ public class myCookBook extends Fragment {
 
             }
         });
-        
+
         //on click buttons redirect to other pages shoppingCart
         shoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override
