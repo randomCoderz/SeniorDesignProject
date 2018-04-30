@@ -62,9 +62,9 @@ public class myCookBook extends Fragment {
         }
 
         //this is for the keyboard to hide later.
-
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         //refresh(recipeList);
+
 
         // linking buttons
         favoriteRecipes = (Button)rootView.findViewById(R.id.bttnFav);
@@ -144,4 +144,6 @@ public class myCookBook extends Fragment {
         rv.setAdapter(adapter);
 
     };
+
 }
+

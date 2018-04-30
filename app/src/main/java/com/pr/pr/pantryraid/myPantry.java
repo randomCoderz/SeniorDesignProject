@@ -5,17 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
@@ -23,7 +21,6 @@ import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -34,6 +31,7 @@ public class myPantry extends Fragment{
     ImageButton searchButton;
     Button RecipeButton;
     EditText searchPantry;
+    CheckBox checkBox;
     //ArrayList<String> listItems;
 
     ArrayList<ingredient> listItems = new ArrayList<>();
@@ -67,7 +65,8 @@ public class myPantry extends Fragment{
 
         searchButton = rootView.findViewById(R.id.searchButton);
         searchPantry = rootView.findViewById(R.id.searchPantry);
-        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
+        RecipeButton = rootView.findViewById(R.id.bttnDelete);
+        checkBox = rootView.findViewById(R.id.checkBox);
 
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
@@ -113,6 +112,13 @@ public class myPantry extends Fragment{
 
             }
         });
+
+
+
+
+
+
+
         getList();
 
         myPantryAdapter adapter = new myPantryAdapter(pantryList);
@@ -136,12 +142,6 @@ public class myPantry extends Fragment{
         pantryList.add(new ingredient(2, "test2", "fef", "", " ", 0, false, false));
     }
 
-//    private void initializeList() {
-//        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-//        IngredientRepository pbI = new IngredientRepository(mdb);
-//
-//
-//    }
 
 } // myPantry ends
 
