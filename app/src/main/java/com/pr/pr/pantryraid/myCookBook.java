@@ -39,6 +39,10 @@ public class myCookBook extends Fragment {
 
     private cookBook c = new cookBook(KEY);
 
+    public myCookBook()
+    {
+
+    }
     @SuppressLint("ValidFragment")
     public myCookBook(List<recipe> recipeList)
     {
@@ -55,10 +59,9 @@ public class myCookBook extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
-
-
-
-
+/////////////////////////////////////
+        if(recipeList != null)
+            System.out.println(recipeList.size());
         adapter = new recipeRVAdapter(recipeList);
         rv.setAdapter(adapter);
 

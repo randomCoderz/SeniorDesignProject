@@ -29,6 +29,9 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 //Unirest, Spoonacular Imports, JSON
 
@@ -41,50 +44,25 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     private List<recipe> recipeList;
     private RecyclerView rv;
     private home h = new home(KEY);
+    //Database Here
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+        RecipeRepository dbI = new RecipeRepository(mdb);
+        IngredientRepository pbI = new IngredientRepository(mdb);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-        //Database Here
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
 
-//
-        RecipeRepository dbI = new RecipeRepository(mdb);
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(getDailyRecipes(), 0, 24, TimeUnit.HOURS);
 
-        IngredientRepository pbI = new IngredientRepository(mdb);
+        getHomeRecipes();
 
-//
-        //    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
-        List<recipe> recipeList = new ArrayList<recipe>();
-        recipeList.add(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
-        recipeList.add(new recipe(55,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
-        recipeList.add(new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
-        recipeList.add(new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
-
-        List<ingredient> ingredientList = new ArrayList<ingredient>();
-        ingredientList.add(new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false, true, false));
-        ingredientList.add(new ingredient(6, "Banana", "test","20", "httpwhatever", 12, false, false, true ,false));
-        ingredientList.add(new ingredient(7, "Münster Cheese", "test","20", "httpwhatever", 12, false, false,true, true));
-
-
-
-        dbI.insertRecipeList(recipeList);
-
-        //dbI.getFavorites();
-        //dbI.getAllRecipes();
-
-        pbI.insertIngredientList(ingredientList);
-//        pbI.getAllIngredients();
-
-        //scI.insertShoppingCartItem(testCartItem);
-        //scI.insertShoppingCartItem(testCartItem2);
-        //scI.insertShoppingCartItem(testCartItem3);
-        //scI.insertShoppingCartItemList(testCartList);
-        //scI.getAllCartItems();
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
@@ -107,19 +85,10 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         rv.setLayoutManager(llm);
 
 
-        try {
+        recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
 
-            recipeList = h.randomRecipe(false, 5, null);
+        rv.setAdapter(adapter);
 
-            recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
-
-            rv.setAdapter(adapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -201,6 +170,65 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public Runnable getDailyRecipes() {
+        final Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    recipeList = h.randomRecipe(false, 5, null);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            };
+        };
+        return task;
+    }
+
+    public void getHomeRecipes()
+    {
+
+        //Delete old home page recipes if new ones are added
+        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
+        RecipeRepository dbI = new RecipeRepository(mdb);
+        dbI.getAllRecipes();
+        List<recipe> allRecipes = dbI.getRecipes();
+        List<recipe> homeRecipes = new ArrayList<>();
+        if(allRecipes != null)
+        {
+            for(int i = 0; i < allRecipes.size(); i++)
+            {
+
+                if(allRecipes.get(i).homePage)
+                {
+                    homeRecipes.add(allRecipes.get(i));
+    
+                }
+            }
+            System.out.println(homeRecipes.size());
+            if(homeRecipes.size() == 0)
+            {
+                try {
+                    recipeList = h.randomRecipe(false, 5, null);
+                    dbI.insertRecipeList(recipeList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+                recipeList = homeRecipes;
+            }
+
+        }
+
+
+
     }
 }
 

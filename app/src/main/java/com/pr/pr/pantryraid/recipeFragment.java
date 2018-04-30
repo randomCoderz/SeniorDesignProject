@@ -44,6 +44,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     ArrayList<step> analyzedInstructions;
     boolean favorites;
     boolean mealCalendar;
+    boolean homePage;
     int day;
     int month;
     int year;
@@ -71,6 +72,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         this.analyzedInstructions = rec.getAnalyzedInstructions();
         this.favorites = rec.favorites;
         this.mealCalendar = rec.mealCalendar;
+        this.homePage = rec.homePage;
         this.day = rec.day;
         this.month = rec.month;
         this.year = rec.year;
@@ -78,7 +80,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
     public recipe getAsRecipe()
     {
-        return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, month , day, year);
+        return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, homePage, month , day, year);
     }
 
 

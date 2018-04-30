@@ -3,6 +3,7 @@ package com.pr.pr.pantryraid;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ import java.util.List;
 public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
 
+
+    cookBook c = new cookBook(KEY);
     //declaration
     ImageButton searchButton;
     Button RecipeButton;
@@ -60,7 +63,7 @@ public class myPantry extends Fragment{
 
 
         searchButton = rootView.findViewById(R.id.searchButton);
-        searchPantry = rootView.findViewById(R.id.searchPantry);
+//        searchPantry = rootView.findViewById(R.id.searchPantry);
         RecipeButton = rootView.findViewById(R.id.bttnRecipe);
         deleteButton = rootView.findViewById(R.id.bttnDelete);
 
@@ -78,9 +81,6 @@ public class myPantry extends Fragment{
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
-
-
-
 
         //buttons click lister:
 
@@ -122,6 +122,23 @@ public class myPantry extends Fragment{
                         toSearch.add(pantryList.get(i));
                     }
                 }
+                ArrayList<recipe> results = new ArrayList<>();
+                try {
+                    results = c.getRecipesByIngredients(false, toSearch, true, 5, 1);
+                    if(results != null)
+                        System.out.println(results.size());
+
+                    Fragment fragment =  new myCookBook(results);
+
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
 
 
             }
@@ -131,9 +148,18 @@ public class myPantry extends Fragment{
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
+                List<ingredient> toDelete = new ArrayList<>();
+                for(int i = 0; i < pantryList.size(); i++)
+                {
+                    if(pantryList.get(i).selected)
+                    {
+                        toDelete.add(pantryList.get(i));
+                    }
+                }
+                for(int j = 0; j < toDelete.size(); j++)
+                {
+                    pbI.removeIngredient(toDelete.get(j));
+                }
             }
         });
 

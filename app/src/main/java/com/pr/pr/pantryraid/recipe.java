@@ -59,6 +59,9 @@ public class recipe
     @ColumnInfo(name = "mealCalendar")
     boolean mealCalendar;
 
+    @ColumnInfo(name = "homePage")
+    boolean homePage;
+
     @ColumnInfo(name = "day")
     int day;
 
@@ -70,7 +73,7 @@ public class recipe
 
 
     @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions, boolean favorites, boolean mealCalendar,int month, int day, int year)
+    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions, boolean favorites, boolean mealCalendar, boolean homePage, int month, int day, int year)
     {
         this.id = id;
         this.name = name;
@@ -81,6 +84,7 @@ public class recipe
         this.instructions = instructions;
         this.favorites = favorites;
         this.mealCalendar = mealCalendar;
+        this.homePage = homePage;
         this.month = month;
         this.day = day;
         this.year = year;
@@ -159,6 +163,14 @@ public class recipe
 
     public void setMealCalendar(boolean mealCalendar) {
         this.mealCalendar = mealCalendar;
+    }
+
+    public boolean isHomePage() {
+        return homePage;
+    }
+
+    public void setHomePage(boolean homePage) {
+        this.homePage = homePage;
     }
 
     public int getDay() {
