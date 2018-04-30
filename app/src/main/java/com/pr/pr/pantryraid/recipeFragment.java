@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.DatePicker;
 
@@ -102,9 +104,11 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         };
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
-        //rv.setItemViewCacheSize(20);
-        //rv.setDrawingCacheEnabled(true);
-        //rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+//        rv.setItemViewCacheSize(20);
+//        rv.setDrawingCacheEnabled(true);
+//        rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        ScrollView scrollView = rootView.findViewById(R.id.scrollView);
+        scrollView.setSmoothScrollingEnabled(true);
 
         myPantryAdapter adapter = new myPantryAdapter(ingredients);
         rv.setAdapter(adapter);

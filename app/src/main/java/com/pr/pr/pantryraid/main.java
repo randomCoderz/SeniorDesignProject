@@ -100,27 +100,31 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
         //end of navigation drawer
 
-        rv = findViewById(R.id.rv);
+//        rv = findViewById(R.id.rv);
+//
+//        LinearLayoutManager llm = new LinearLayoutManager(this);
+//
+//        rv.setHasFixedSize(true);
+//        rv.setLayoutManager(llm);
+//
+//
+//        try {
+//
+//            recipeList = h.randomRecipe(false, 5, null);
+//
+//            recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
+//
+//            rv.setAdapter(adapter);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(llm);
-
-
-        try {
-
-            recipeList = h.randomRecipe(false, 5, null);
-
-            recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
-
-            rv.setAdapter(adapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Fragment frag = new homePage();
+        FragmentManager fragman = getSupportFragmentManager();
+        fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 
     }
 
@@ -176,8 +180,9 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(this, main.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, main.class);
+//            startActivity(intent);
+            frag = new homePage();
         } else if (id == R.id.nav_cart) {
             frag = new shoppingCart();
         } else if (id == R.id.nav_pantry) {
