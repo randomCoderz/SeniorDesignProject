@@ -37,17 +37,13 @@
         <!--android:id="@+id/searchPantry"-->
         <!--android:layout_width="299dp"-->
         <!--android:layout_height="46dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="7dp"-->
-        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginBottom="161dp"-->
+        <!--android:layout_marginStart="31dp"-->
         <!--android:ems="10"-->
         <!--android:hint="Search"-->
-        <!--android:inputType="textPersonName"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/myPantry"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/searchButton"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.0" />-->
+        <!--android:inputType="textPersonName" />-->
 
 
 
