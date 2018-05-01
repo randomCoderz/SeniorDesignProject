@@ -96,6 +96,10 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     @Override
     public int getItemCount()
     {
+        if(ingredientList == null)
+        {
+            return 0;
+        }
         return ingredientList.size();
     }
 

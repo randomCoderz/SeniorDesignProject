@@ -51,18 +51,9 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-        RecipeRepository dbI = new RecipeRepository(mdb);
-        IngredientRepository pbI = new IngredientRepository(mdb);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(getDailyRecipes(), 0, 24, TimeUnit.HOURS);
-
-        getHomeRecipes();
-
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
@@ -77,17 +68,10 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
         //end of navigation drawer
 
-        rv = findViewById(R.id.rv);
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(llm);
-
-
-        recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
-
-        rv.setAdapter(adapter);
+        Fragment frag = new homePage();
+        FragmentManager fragman = getSupportFragmentManager();
+        fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 
 
     }
@@ -144,8 +128,9 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(this, main.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, main.class);
+//            startActivity(intent);
+            frag = new homePage();
         } else if (id == R.id.nav_cart) {
             frag = new shoppingCart();
         } else if (id == R.id.nav_pantry) {
@@ -171,64 +156,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         return true;
     }
 
-    public Runnable getDailyRecipes() {
-        final Runnable task = new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    recipeList = h.randomRecipe(false, 5, null);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            };
-        };
-        return task;
-    }
 
-    public void getHomeRecipes()
-    {
-
-        //Delete old home page recipes if new ones are added
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-        RecipeRepository dbI = new RecipeRepository(mdb);
-        dbI.getAllRecipes();
-        List<recipe> allRecipes = dbI.getRecipes();
-        List<recipe> homeRecipes = new ArrayList<>();
-        if(allRecipes != null)
-        {
-            for(int i = 0; i < allRecipes.size(); i++)
-            {
-
-                if(allRecipes.get(i).homePage)
-                {
-                    homeRecipes.add(allRecipes.get(i));
-    
-                }
-            }
-            System.out.println(homeRecipes.size());
-            if(homeRecipes.size() == 0)
-            {
-                try {
-                    recipeList = h.randomRecipe(false, 5, null);
-                    dbI.insertRecipeList(recipeList);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else
-            {
-                recipeList = homeRecipes;
-            }
-
-        }
-
-
-
-    }
 }
 
 

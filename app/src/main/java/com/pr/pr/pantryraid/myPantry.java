@@ -36,9 +36,9 @@ public class myPantry extends Fragment{
 
     cookBook c = new cookBook(KEY);
     //declaration
-    ImageButton searchButton;
-    Button RecipeButton;
-    Button deleteButton;
+//    ImageButton searchButton;
+//    Button RecipeButton;
+//    Button deleteButton;
     EditText searchPantry;
 
     //ArrayList<String> listItems;
@@ -67,11 +67,15 @@ public class myPantry extends Fragment{
         final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
         setHasOptionsMenu(true);
 
-        searchButton = rootView.findViewById(R.id.searchButton);
-//        searchPantry = rootView.findViewById(R.id.searchPantry);
 
-        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
-        deleteButton = rootView.findViewById(R.id.bttnDelete);
+//        Buttons
+//        searchButton = rootView.findViewById(R.id.searchButton);
+//        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
+//        deleteButton = rootView.findViewById(R.id.bttnDelete);
+
+        //searchPantry = rootView.findViewById(R.id.searchPantry);
+
+
 
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
@@ -92,6 +96,7 @@ public class myPantry extends Fragment{
         ////////////////////////////////////////
         searchView = rootView.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //Do some magic
@@ -119,86 +124,159 @@ public class myPantry extends Fragment{
         ////////////////////////////////////////
 
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<ingredient> list;
-                String ingredientString = searchPantry.getText().toString();
-                try {
-                    list = p.searchIngredient(null, true, 1, ingredientString);
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<ingredient> list;
+//                String ingredientString = searchPantry.getText().toString();
+//                try {
+//                    list = p.searchIngredient(null, true, 1, ingredientString);
 
-                    ingredient ing = list.get(0);
-                    ing.pantry = true;
-                    pbI.insertIngredient(ing);
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                //Do some magic
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //Do some magic
+//                return false;
+//            }
+//        });
 
-                    rootView.clearFocus();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
 
-            }
-        });
+//        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
+//                for(int i = 0; i < pantryList.size(); i++)
+//                {
+//                    if(pantryList.get(i).selected)
+//                    {
+//                        toSearch.add(pantryList.get(i));
+//                    }
+//                }
+//            }
+//        });
 
+
+
+
+        ////////////////////////////////////////
+
+        //This button will search for an ingredient
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<ingredient> list;
+//                String ingredientString = searchPantry.getText().toString();
+//                try {
+//                    list = p.searchIngredient(null, true, 1, ingredientString);
+//
+//                    ingredient ing = list.get(0);
+//                    ing.pantry = true;
+//                    pbI.insertIngredient(ing);
+//
+//                    rootView.clearFocus();
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//        });
+//
 
         //This button will search a recipe with selected ingredients
-        RecipeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
-                for(int i = 0; i < pantryList.size(); i++)
-                {
-                    if(pantryList.get(i).selected)
-                    {
-                        toSearch.add(pantryList.get(i));
-                    }
-                }
-                ArrayList<recipe> results = new ArrayList<>();
-                try {
-                    results = c.getRecipesByIngredients(false, toSearch, true, 5, 1);
-                    if(results != null)
-                        System.out.println(results.size());
 
-                    Fragment fragment =  new myCookBook(results);
-
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-        });
+//        RecipeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
+//                for(int i = 0; i < pantryList.size(); i++)
+//                {
+//                    if(pantryList.get(i).selected)
+//                    {
+//                        toSearch.add(pantryList.get(i));
+//                    }
+//                }
+//                ArrayList<recipe> results = new ArrayList<>();
+//                try {
+//                    results = c.getRecipesByIngredients(false, toSearch, true, 5, 1);
+//                    if(results != null)
+//                        System.out.println(results.size());
+//
+//                    Fragment fragment =  new myCookBook(results);
+//
+//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//
+//            }
+//        });
 
         //This button will delete selected ingredients from my pantry
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<ingredient> toDelete = new ArrayList<>();
-                for(int i = 0; i < pantryList.size(); i++)
-                {
-                    if(pantryList.get(i).selected)
-                    {
-                        toDelete.add(pantryList.get(i));
-                    }
-                }
-                for(int j = 0; j < toDelete.size(); j++)
-                {
-                    pbI.removeIngredient(toDelete.get(j));
-                }
-            }
-        });
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<ingredient> toDelete = new ArrayList<>();
+//                for(int i = 0; i < pantryList.size(); i++)
+//                {
+//                    if(pantryList.get(i).selected)
+//                    {
+//                        toDelete.add(pantryList.get(i));
+//                    }
+//                }
+//                for(int j = 0; j < toDelete.size(); j++)
+//                {
+//                    pbI.removeIngredient(toDelete.get(j));
+//                }
+//            }
+//        });
+
+//        RecipeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList<ingredient> toSearch = new ArrayList<ingredient>();
+//                for(int i = 0; i < pantryList.size(); i++)
+//                {
+//                    if(pantryList.get(i).selected)
+//                    {
+//                        toSearch.add(pantryList.get(i));
+//                    }
+//                }
+//
+//
+//            }
+//        });
+
+        //This button will delete selected ingredients from my pantry
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//            }
+//        });
 
 
 
-        return rootView;
+
+            return rootView;
         }
 
 //        @Override
@@ -207,6 +285,7 @@ public class myPantry extends Fragment{
 //            setHasOptionsMenu(true);
 //        }
 //
+
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
             super.onCreateOptionsMenu(menu, inflater);

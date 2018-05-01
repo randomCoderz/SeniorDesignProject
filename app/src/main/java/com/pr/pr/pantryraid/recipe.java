@@ -13,10 +13,10 @@ import android.annotation.SuppressLint;
 
 import java.util.ArrayList;
 
-@Entity(tableName = "Recipes")
+@Entity(tableName = "Recipes", primaryKeys = {"recipeID","month","day","year"})
 public class recipe
 {
-    @PrimaryKey
+    //@PrimaryKey
     @NonNull
     @ColumnInfo(name = "recipeID")
     private int id;
@@ -49,12 +49,17 @@ public class recipe
     @ColumnInfo(name = "homePage")
     boolean homePage;
 
+
+    //@PrimaryKey
+
     @ColumnInfo(name = "day")
     int day;
 
+    //@PrimaryKey
     @ColumnInfo(name = "month")
     int month;
 
+    //@PrimaryKey
     @ColumnInfo(name = "year")
     int year;
 
