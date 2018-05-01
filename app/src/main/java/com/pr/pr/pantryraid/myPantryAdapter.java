@@ -35,7 +35,7 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
             {
                 if(ingredientList.get(i).missing)
                 {
-                    cv.setCardBackgroundColor(Color.RED);
+                    ingredientName.setTextColor(Color.RED);
                 }
             }
             
