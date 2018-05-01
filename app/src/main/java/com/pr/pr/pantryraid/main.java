@@ -172,7 +172,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
         Fragment frag = null;
 
-        Toast.makeText(this, "selected item", Toast.LENGTH_SHORT).show();
 
 
         if (id == R.id.nav_home) {

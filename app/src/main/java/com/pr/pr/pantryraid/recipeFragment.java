@@ -1,10 +1,9 @@
 package com.pr.pr.pantryraid;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
-//import android.support.design.widget.FloatingActionButton;
-
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,11 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.DatePicker;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
@@ -25,12 +25,11 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
-import com.github.clans.fab.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import android.app.DatePickerDialog;
+
+//import android.support.design.widget.FloatingActionButton;
 
 public class recipeFragment extends Fragment implements DatePickerDialog.OnDateSetListener   {
     private final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
@@ -127,6 +126,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         final FloatingActionButton missingToCart = rootView.findViewById(R.id.missingToCart);
         final FloatingActionButton selectedToCart = rootView.findViewById(R.id.selectedToCart);
         final FloatingActionButton completed = rootView.findViewById(R.id.completed);
+        final FloatingActionButton favorites = rootView.findViewById(R.id.favorites);
 
         Calendar currentDate = Calendar.getInstance();
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -220,6 +220,13 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                        pbI.removeIngredient(ingredients.get(i));
                    }
                }
+            }
+        });
+
+        favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

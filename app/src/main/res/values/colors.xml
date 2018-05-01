@@ -5,4 +5,5 @@
     <color name="colorAccent">#75292B</color>
     <color name = "primaryLight" > #fff9fa</color>
     <color name="White">#FFFFFF</color>
+    <color name = "fab">#DA4235</color>
 </resources>

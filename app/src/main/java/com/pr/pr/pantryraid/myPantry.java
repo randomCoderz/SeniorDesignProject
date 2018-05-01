@@ -1,10 +1,12 @@
 package com.pr.pr.pantryraid;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,15 +16,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
-
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +63,6 @@ public class myPantry extends Fragment{
         final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
         setHasOptionsMenu(true);
 
-        searchButton = rootView.findViewById(R.id.searchButton);
         //searchPantry = rootView.findViewById(R.id.searchPantry);
         RecipeButton = rootView.findViewById(R.id.bttnRecipe);
         deleteButton = rootView.findViewById(R.id.bttnDelete);
@@ -85,57 +83,57 @@ public class myPantry extends Fragment{
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
         ////////////////////////////////////////
-        searchView = rootView.findViewById(R.id.search_view);
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                //Do some magic
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //Do some magic
-                return false;
-            }
-        });
-
-        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-            @Override
-            public void onSearchViewShown() {
-                //Do some magic
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-                //Do some magic
-            }
-        });
+       //searchView = rootView.findViewById(R.id.search_view);
+//        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                //Do some magic
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //Do some magic
+//                return false;
+//            }
+//        });
+//
+//        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+//            @Override
+//            public void onSearchViewShown() {
+//                //Do some magic
+//            }
+//
+//            @Override
+//            public void onSearchViewClosed() {
+//                //Do some magic
+//            }
+//        });
         ////////////////////////////////////////
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<ingredient> list;
-                String ingredientString = searchPantry.getText().toString();
-                try {
-                    list = p.searchIngredient(null, true, 1, ingredientString);
-
-                    ingredient ing = list.get(0);
-                    ing.pantry = true;
-                    pbI.insertIngredient(ing);
-
-                    rootView.clearFocus();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<ingredient> list;
+//                String ingredientString = searchPantry.getText().toString();
+//                try {
+//                    list = p.searchIngredient(null, true, 1, ingredientString);
+//
+//                    ingredient ing = list.get(0);
+//                    ing.pantry = true;
+//                    pbI.insertIngredient(ing);
+//
+//                    rootView.clearFocus();
+//
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//
+//            }
+//        });
 
 
         //This button will search a recipe with selected ingredients
@@ -179,7 +177,13 @@ public class myPantry extends Fragment{
             super.onCreateOptionsMenu(menu, inflater);
             MenuItem item = menu.findItem(R.id.action_search);
             item.setVisible(true);
-            searchView.setMenuItem(item);
+//            searchView.setMenuItem(item);
+            SearchManager searchManager =
+                    (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+            SearchView searchView =
+                    (SearchView) menu.findItem(R.id.action_search).getActionView();
+            searchView.setSearchableInfo(
+                    searchManager.getSearchableInfo(getActivity().getComponentName()));
         }
 
 

@@ -10,7 +10,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/cardview_light_background">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,11 +27,12 @@
                 <ImageView
                     android:id="@+id/recipeImage"
                     android:layout_width="match_parent"
-
                     android:layout_height="254dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="22dp" />
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"/>
 
 
                 <!--<ListView-->
@@ -42,16 +46,15 @@
                 <!--app:layout_constraintStart_toStartOf="parent"/>-->
 
                 <android.support.v7.widget.RecyclerView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="315dp"
                     android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
+                    android:layout_marginTop="315dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    >
+                    app:layout_constraintStart_toStartOf="parent">
 
                 </android.support.v7.widget.RecyclerView>
 
@@ -179,8 +182,8 @@
                 android:id="@+id/favorites"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_done_white_24px"
-                app:fab_label="Completed"
+                android:src="@drawable/ic_favorites"
+                app:fab_label="Favorites"
                 app:fab_size="mini"/>
 
         </com.github.clans.fab.FloatingActionMenu>
