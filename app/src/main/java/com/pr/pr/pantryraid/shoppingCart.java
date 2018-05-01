@@ -50,16 +50,19 @@ public class shoppingCart extends Fragment{
 
     public void initalizeData()
     {
-
         pbI.getAllIngredients();
         ArrayList<ingredient> allIngredients = pbI.getIngredients();
-        for(int i = 0; i < allIngredients.size(); i++)
+        if(allIngredients != null)
         {
-            if(allIngredients.get(i).shoppingCart)
+            for(int i = 0; i < allIngredients.size(); i++)
             {
-                products.add(allIngredients.get(i));
+                if(allIngredients.get(i).shoppingCart)
+                {
+                    products.add(allIngredients.get(i));
+                }
             }
         }
+
 
     }
 

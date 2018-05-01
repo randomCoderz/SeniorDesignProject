@@ -29,6 +29,9 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 //Unirest, Spoonacular Imports, JSON
 
@@ -41,51 +44,16 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     private List<recipe> recipeList;
     private RecyclerView rv;
     private home h = new home(KEY);
+    //Database Here
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-        //Database Here
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(getApplicationContext());
-
-//
-        RecipeRepository dbI = new RecipeRepository(mdb);
-
-        IngredientRepository pbI = new IngredientRepository(mdb);
-
-//
-        //    ingredient(int id, String name, String amount, String unit, String photoURL, double quantity, boolean missing, boolean selected)
-        List<recipe> recipeList = new ArrayList<recipe>();
-        recipeList.add(new recipe(10,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
-        recipeList.add(new recipe(55,"Hello","Hello",10, null, null,"Yolo", false, false, 0, 0, 0));
-        recipeList.add(new recipe(11,"Favorite","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
-        recipeList.add(new recipe(12,"Favorite2","Hello",10, null, null,"Yolo", true, false, 0, 0, 0));
-
-        List<ingredient> ingredientList = new ArrayList<ingredient>();
-        ingredientList.add(new ingredient(5, "Apple", "test","20", "httpwhatever", 12, false, false, true, false));
-        ingredientList.add(new ingredient(6, "Banana", "test","20", "httpwhatever", 12, false, false, true ,false));
-        ingredientList.add(new ingredient(7, "Münster Cheese", "test","20", "httpwhatever", 12, false, false,true, true));
-
-
-
-        System.out.println("----------------------------HERE----------------------------");
-        //dbI.insertRecipeList(recipeList);
-
-        //dbI.getFavorites();
-        //dbI.getAllRecipes();
-
-        pbI.insertIngredientList(ingredientList);
-        pbI.getAllIngredients();
-
-        //scI.insertShoppingCartItem(testCartItem);
-        //scI.insertShoppingCartItem(testCartItem2);
-        //scI.insertShoppingCartItem(testCartItem3);
-        //scI.insertShoppingCartItemList(testCartList);
-        //scI.getAllCartItems();
 
         //start of navigation drawer
         setSupportActionBar(toolbar);
@@ -100,27 +68,11 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
         //end of navigation drawer
 
-        rv = findViewById(R.id.rv);
 
-        LinearLayoutManager llm = new LinearLayoutManager(this);
+        Fragment frag = new homePage();
+        FragmentManager fragman = getSupportFragmentManager();
+        fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(llm);
-
-
-        try {
-
-            recipeList = h.randomRecipe(false, 5, null);
-
-            recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
-
-            rv.setAdapter(adapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -175,8 +127,9 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         if (id == R.id.nav_home) {
-            Intent intent = new Intent(this, main.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, main.class);
+//            startActivity(intent);
+            frag = new homePage();
         } else if (id == R.id.nav_cart) {
             frag = new shoppingCart();
         } else if (id == R.id.nav_pantry) {
@@ -201,6 +154,8 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
 
 

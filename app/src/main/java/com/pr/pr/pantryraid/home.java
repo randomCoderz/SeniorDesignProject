@@ -60,7 +60,7 @@ class home extends Thread
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
 
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false ,false, 0,0, 0));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false ,false, false, 0,0, 0));
 
         }
         return recipeList;
@@ -100,7 +100,10 @@ class home extends Thread
         join();
         HttpResponse<JsonNode> response = response_return;
 
-        JSONArray array = response.getBody().getObject().getJSONArray("recipes");
+        JSONArray array = new JSONArray();
+        if(response != null) {
+            array = response.getBody().getObject().getJSONArray("recipes");
+        }
 //        System.out.println(array.toString(2));
         for(int i = 0; i < array.length(); i++)
         {
@@ -158,7 +161,7 @@ class home extends Thread
                 }
             }
 
-            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions, false, false, 0, 0, 0));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions, false, false, true, 0, 0, 0));
 
 
         }

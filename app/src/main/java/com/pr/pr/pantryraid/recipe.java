@@ -11,25 +11,12 @@ import android.annotation.SuppressLint;
 //import android.os.Bundle;
 
 
-//import android.annotation.SuppressLint;
-//import android.os.Bundle;
-//import android.support.v4.app.Fragment;
-//import android.support.v4.app.FragmentManager;
-//import android.support.v4.app.FragmentTransaction;
-//
-//import android.support.v7.app.AppCompatActivity;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.widget.*;
-//import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
-@Entity(tableName = "Recipes")
+@Entity(tableName = "Recipes", primaryKeys = {"recipeID","month","day","year"})
 public class recipe
 {
-    @PrimaryKey
+    //@PrimaryKey
     @NonNull
     @ColumnInfo(name = "recipeID")
     private int id;
@@ -59,18 +46,26 @@ public class recipe
     @ColumnInfo(name = "mealCalendar")
     boolean mealCalendar;
 
+    @ColumnInfo(name = "homePage")
+    boolean homePage;
+
+
+    //@PrimaryKey
+
     @ColumnInfo(name = "day")
     int day;
 
+    //@PrimaryKey
     @ColumnInfo(name = "month")
     int month;
 
+    //@PrimaryKey
     @ColumnInfo(name = "year")
     int year;
 
 
     @SuppressLint("ValidFragment")
-    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions, boolean favorites, boolean mealCalendar,int month, int day, int year)
+    public recipe(int id, String name, String url, int readyInMinutes, ArrayList<ingredient> ingredients, ArrayList<step> analyzedInstructions, String instructions, boolean favorites, boolean mealCalendar, boolean homePage, int month, int day, int year)
     {
         this.id = id;
         this.name = name;
@@ -81,6 +76,7 @@ public class recipe
         this.instructions = instructions;
         this.favorites = favorites;
         this.mealCalendar = mealCalendar;
+        this.homePage = homePage;
         this.month = month;
         this.day = day;
         this.year = year;
@@ -159,6 +155,14 @@ public class recipe
 
     public void setMealCalendar(boolean mealCalendar) {
         this.mealCalendar = mealCalendar;
+    }
+
+    public boolean isHomePage() {
+        return homePage;
+    }
+
+    public void setHomePage(boolean homePage) {
+        this.homePage = homePage;
     }
 
     public int getDay() {

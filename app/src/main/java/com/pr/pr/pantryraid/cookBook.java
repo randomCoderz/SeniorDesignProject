@@ -139,7 +139,7 @@ class cookBook extends Thread
 
             int readyInMinutes = recipe.getInt("readyInMinutes");
 
-            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false, false, 0, 0, 0));
+            recipeList.add(new recipe(id, title, image, readyInMinutes, null, null, null, false, false, false,0, 0, 0));
         }
         return recipeList;
     }
@@ -152,20 +152,20 @@ class cookBook extends Thread
      * @param number The maximal number of recipes to return
      * @param ranking Whether to maximize used ingredients (1) or minimize missing ingredients (2) first
      */
-    public ArrayList<recipe> getRecipesByIngredients(boolean fillIngredients, String[] ingredients, boolean limitLicense, int number, int ranking) throws InterruptedException, JSONException {
+    public ArrayList<recipe> getRecipesByIngredients(boolean fillIngredients, ArrayList<ingredient> ingredients, boolean limitLicense, int number, int ranking) throws InterruptedException, JSONException {
 
         http = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?";
         http += "fillIngredients=" + fillIngredients;
         http += "&ingredients=";
-        for(int i = 0; i < ingredients.length; i++)
+        for(int i = 0; i < ingredients.size(); i++)
         {
-            if(i != ingredients.length - 1)
+            if(i != ingredients.size() - 1)
             {
-                http += (ingredients[i] + "%2C");
+                http += (ingredients.get(i) + "%2C");
             }
             else
             {
-                http += ingredients[i];
+                http += ingredients.get(i);
             }
         }
         http += "&limitLicense=" + limitLicense;
@@ -186,7 +186,7 @@ class cookBook extends Thread
             String name = recipe.getString("title");
             String image = recipe.getString("image");
 
-            recipeList.add(new recipe(id, name, image, 0,null,null, null, false, false, 0, 0, 0));
+            recipeList.add(new recipe(id, name, image, 0,null,null, null, false, false,false, 0, 0, 0));
 
         }
 

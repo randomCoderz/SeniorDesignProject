@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -43,6 +44,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     ArrayList<step> analyzedInstructions;
     boolean favorites;
     boolean mealCalendar;
+    boolean homePage;
     int day;
     int month;
     int year;
@@ -70,6 +72,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         this.analyzedInstructions = rec.getAnalyzedInstructions();
         this.favorites = rec.favorites;
         this.mealCalendar = rec.mealCalendar;
+        this.homePage = rec.homePage;
         this.day = rec.day;
         this.month = rec.month;
         this.year = rec.year;
@@ -77,7 +80,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
     public recipe getAsRecipe()
     {
-        return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, month , day, year);
+        return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, homePage, month , day, year);
     }
 
 
@@ -86,8 +89,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
 
         final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
 
@@ -101,10 +102,14 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         };
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
-        rv.setItemViewCacheSize(20);
-        rv.setDrawingCacheEnabled(true);
-        rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
+        setMissing();
+
+//        rv.setItemViewCacheSize(20);
+//        rv.setDrawingCacheEnabled(true);
+//        rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        ScrollView scrollView = rootView.findViewById(R.id.scrollView);
+        scrollView.setSmoothScrollingEnabled(true);
 
 
         myPantryAdapter adapter = new myPantryAdapter(ingredients);
@@ -174,6 +179,8 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                         toCart.add(ingredients.get(i));
                     }
                 }
+
+                System.out.println(toCart.size());
                 pbI.insertIngredientList(toCart);
             }
         });
@@ -240,5 +247,21 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         this.day = day;
 
         dbI.insertRecipe(getAsRecipe());
+    }
+
+    public void setMissing()
+    {
+        pbI.getAllIngredients();
+        ArrayList<ingredient> ing = pbI.getIngredients();
+        if(ing != null && ingredients != null)
+        {
+            for(int i = 0; i < ingredients.size(); i++)
+            {
+                if(!ing.contains(ingredients.get(i)))
+                {
+                    ingredients.get(i).missing = true;
+                }
+            }
+        }
     }
 }

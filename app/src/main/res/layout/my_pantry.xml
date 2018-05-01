@@ -20,32 +20,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
     <!--<EditText-->
         <!--android:id="@+id/searchPantry"-->
         <!--android:layout_width="299dp"-->
         <!--android:layout_height="46dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:layout_marginEnd="7dp"-->
-        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginBottom="161dp"-->
+        <!--android:layout_marginStart="31dp"-->
         <!--android:ems="10"-->
         <!--android:hint="Search"-->
-        <!--android:inputType="textPersonName"-->
-        <!--app:layout_constraintBottom_toTopOf="@+id/myPantry"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/searchButton"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.0" />-->
+        <!--android:inputType="textPersonName" />-->
 
 
 
-    <Button
-        android:id="@+id/bttnDelete"
-        android:layout_width="177dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="40dp"
-        android:text="Delete selected"
-        app:layout_constraintBottom_toTopOf="@+id/bttnRecipe"
-        app:layout_constraintEnd_toEndOf="parent" />
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
@@ -55,10 +46,16 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bttnDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        >
+
+
+    </android.support.v7.widget.RecyclerView>
+    <FrameLayout
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <!--</android.support.v7.widget.RecyclerView>-->
     <!--<FrameLayout-->
