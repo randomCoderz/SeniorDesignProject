@@ -64,6 +64,8 @@ public class homePage extends Fragment
 
         if(allRecipes != null)
         {
+            System.out.println("-------" + allRecipes.size());
+
             for(int i = 0; i < allRecipes.size(); i++)
             {
                 if(allRecipes.get(i).homePage)
@@ -73,17 +75,12 @@ public class homePage extends Fragment
             }
         }
 
-        if(homeRecipes.size() == 0)
+        if(homeRecipes.size() < 5)
         {
             getDailyRecipes().run();
             homeRecipes = recipeList;
             dbI.insertRecipeList(homeRecipes);
         }
-        else
-        {
-            recipeList = homeRecipes;
-        }
-//        System.out.println("-------" + allRecipes.size());
         System.out.println("+++++++" + homeRecipes.size());
 
         recipeList = homeRecipes;
