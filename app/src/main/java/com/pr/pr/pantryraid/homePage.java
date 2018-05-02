@@ -2,6 +2,7 @@ package com.pr.pr.pantryraid;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,6 +49,8 @@ public class homePage extends Fragment
 
         recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
         rv.setAdapter(adapter);
+
+
 
         return rootView;
     }
@@ -102,4 +105,7 @@ public class homePage extends Fragment
         };
         return task;
     }
+
+
+
 }
