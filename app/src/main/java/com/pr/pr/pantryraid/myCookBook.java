@@ -1,5 +1,6 @@
 package com.pr.pr.pantryraid;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -38,6 +39,16 @@ public class myCookBook extends Fragment {
 
     private cookBook c = new cookBook(KEY);
 
+    public myCookBook()
+    {
+
+    }
+    @SuppressLint("ValidFragment")
+    public myCookBook(List<recipe> recipeList)
+    {
+        this.recipeList = recipeList;
+    }
+
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -48,23 +59,16 @@ public class myCookBook extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
-
-        try {
-            recipeList = h.randomRecipe(false, 2, null);
-            adapter = new recipeRVAdapter(recipeList);
-
-            rv.setAdapter(adapter);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+/////////////////////////////////////
+        if(recipeList != null)
+            System.out.println(recipeList.size());
+        adapter = new recipeRVAdapter(recipeList);
+        rv.setAdapter(adapter);
 
         //this is for the keyboard to hide later.
-
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         //refresh(recipeList);
+
 
         // linking buttons
         favoriteRecipes = (Button)rootView.findViewById(R.id.bttnFav);
@@ -77,8 +81,9 @@ public class myCookBook extends Fragment {
         favoriteRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+                Fragment favoritesFrag =  new favorites();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
             }
         });
 
@@ -89,6 +94,18 @@ public class myCookBook extends Fragment {
                 Fragment pantryFrag =  new myPantry();
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, pantryFrag).addToBackStack(null).commit();
+
+            }
+        });
+
+
+        //on click buttons redirect to other pages viewIngredients
+        favoriteRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment favoritesFrag =  new favorites();
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
 
             }
         });
@@ -127,7 +144,6 @@ public class myCookBook extends Fragment {
                     e.printStackTrace();
                 }
 
-
             }
         });
 
@@ -144,4 +160,6 @@ public class myCookBook extends Fragment {
         rv.setAdapter(adapter);
 
     };
+
 }
+

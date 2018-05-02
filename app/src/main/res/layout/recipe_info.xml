@@ -8,14 +8,20 @@
     android:paddingTop="?android:attr/actionBarSize">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_light_background">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/cardview_light_background"
+        android:smoothScrollbar="true"
+        android:scrollingCache="false"
+        android:animationCache="false">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -24,35 +30,29 @@
                 <ImageView
                     android:id="@+id/recipeImage"
                     android:layout_width="match_parent"
-
                     android:layout_height="254dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="22dp" />
-
-
-                <!--<ListView-->
-                <!--android:id="@+id/ingredientList"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="267dp"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_alignParentStart="true"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"/>-->
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"/>
 
                 <android.support.v7.widget.RecyclerView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="315dp"
                     android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentStart="true"
+                    android:layout_marginTop="315dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    >
-
+                    app:layout_constraintStart_toStartOf="parent">
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--app:layout_constraintStart_toStartOf="parent"-->
+                    <!--&gt;-->
                 </android.support.v7.widget.RecyclerView>
 
 
@@ -75,7 +75,9 @@
                     android:text="TextView" />
 
             </RelativeLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
     <FrameLayout
@@ -173,7 +175,15 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_done_white_24px"
                 app:fab_label="Completed"
-                app:fab_size="mini" />
+                app:fab_size="mini"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_favorites"
+                app:fab_label="Favorites"
+                app:fab_size="mini"/>
 
         </com.github.clans.fab.FloatingActionMenu>
     </FrameLayout>

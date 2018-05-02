@@ -92,9 +92,7 @@ public class RecipeRepository {
 
         @Override
         protected void onPostExecute(List<recipe> r){
-            for (int i = 0; i < r.size(); i++) {
-                System.out.println(r.get(i).getName());
-            }
+            setRecipe(r);
         }
 
     }
@@ -114,9 +112,6 @@ public class RecipeRepository {
 
         @Override
         protected void onPostExecute(List<recipe> r){
-            for (int i = 0; i < r.size(); i++) {
-                System.out.println(r.get(i).getName());
-            }
             setRecipe(r);
         }
 

@@ -28,9 +28,9 @@ import android.widget.ListView;
 //import android.widget.Switch;
 import android.widget.Switch;
 
+
 import android.widget.Toast;
 
-//import com.google.gson.Gson;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -340,10 +340,18 @@ public class Settings extends Fragment {
             }
         });
 
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                if (view != null) {
+//                    CheckBox checkBox = (CheckBox)view.findViewById(R.id.restrictionCheckBox);
+//                    checkBox.setChecked(!checkBox.isChecked());
+//                }
+//            }
+//        });
 
         return rootView;
     }
-
     public void getList() {
         r.add(new DietRestrictName("Dairy"));
         r.add(new DietRestrictName("Egg"));
