@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -47,7 +48,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     //Database Here
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +67,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //end of navigation drawer
-
-
         Fragment frag = new homePage();
         FragmentManager fragman = getSupportFragmentManager();
         fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
@@ -77,7 +75,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
 
-//    private void initializeAdapter() {
+    //    private void initializeAdapter() {
 //        recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
 //
 //        rv.setAdapter(adapter);
@@ -123,7 +121,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment frag = null;
-
 
 
         if (id == R.id.nav_home) {

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -25,7 +26,6 @@ import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -131,7 +131,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         final FloatingActionButton missingToCart = rootView.findViewById(R.id.missingToCart);
         final FloatingActionButton selectedToCart = rootView.findViewById(R.id.selectedToCart);
         final FloatingActionButton completed = rootView.findViewById(R.id.completed);
-        final FloatingActionButton favorites = rootView.findViewById(R.id.favorites);
+        final FloatingActionButton favoritesButton = rootView.findViewById(R.id.favorites);
 
         Calendar currentDate = Calendar.getInstance();
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -209,8 +209,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
                 mealCalendar = true;
                 datePickerDialog.show();
-                System.out.println(month + "/" + day+ "/" + year);
-
 
             }
         });
@@ -230,10 +228,11 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
             }
         });
 
-        favorites.setOnClickListener(new View.OnClickListener() {
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                favorites = true;
+                dbI.insertRecipe(getAsRecipe());
             }
         });
 
