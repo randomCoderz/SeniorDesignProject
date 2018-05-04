@@ -29,7 +29,6 @@ public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     private MaterialSearchView searchView;
 
-
     cookBook c = new cookBook(KEY);
     //declaration
 //    ImageButton searchButton;
@@ -91,32 +90,34 @@ public class myPantry extends Fragment{
 
 
         ////////////////////////////////////////
-       //searchView = rootView.findViewById(R.id.search_view);
-//        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                //Do some magic
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                //Do some magic
-//                return false;
-//            }
-//        });
-//
-//        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-//            @Override
-//            public void onSearchViewShown() {
-//                //Do some magic
-//            }
-//
-//            @Override
-//            public void onSearchViewClosed() {
-//                //Do some magic
-//            }
-//        });
+        MaterialSearchView searchView = rootView.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //Do some magic
+                //System.out.println("Hello World");
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Do some magic
+                return false;
+            }
+        });
+
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                //Do some magic
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                //Do some magic
+            }
+        });
+
         ////////////////////////////////////////
 
 //        searchButton.setOnClickListener(new View.OnClickListener() {
@@ -282,9 +283,6 @@ public class myPantry extends Fragment{
 //            }
 //        });
 
-
-
-
             return rootView;
         }
 
@@ -298,17 +296,18 @@ public class myPantry extends Fragment{
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
             super.onCreateOptionsMenu(menu, inflater);
+            final MaterialSearchView searchView = getActivity().findViewById(R.id.search_view);
             MenuItem item = menu.findItem(R.id.action_search);
-            item.setVisible(true);
+            searchView.setMenuItem(item);
+            menu.findItem(R.id.action_search).setVisible(true);
 //            searchView.setMenuItem(item);
-            SearchManager searchManager =
-                    (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-            SearchView searchView =
-                    (SearchView) menu.findItem(R.id.action_search).getActionView();
-            searchView.setSearchableInfo(
-                    searchManager.getSearchableInfo(getActivity().getComponentName()));
+//            SearchManager searchManager =
+//                    (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+//            SearchView searchView =
+//                    (SearchView) menu.findItem(R.id.action_search).getActionView();
+//            searchView.setSearchableInfo(
+//                    searchManager.getSearchableInfo(getActivity().getComponentName()));
         }
-
 
     private void initializeList() {
 
@@ -324,10 +323,8 @@ public class myPantry extends Fragment{
                 }
             }
         }
-
-
     }
 
 
-} // myPantry ends
+}
 
