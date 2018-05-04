@@ -53,16 +53,7 @@ public class homePage extends Fragment
         {
             try {
                 recipeList = h.randomRecipe(false, 5, null);
-                for(int i = 0; i < recipeList.size(); i++)
-                {
-                    if(recipeList.get(i).homePage)
-                    {
-                        homeRecipeList = new ArrayList<>();
-                        homeRecipeList.add(recipeList.get(i));
-                    }
-
-                }
-                dbI.insertRecipeList(homeRecipeList);
+                dbI.insertRecipeList(recipeList);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
@@ -92,12 +83,16 @@ public class homePage extends Fragment
         List<recipe> allRecipes = dbI.getRecipes();
         if(allRecipes != null)
         {
-            System.out.println("allrecipes != null: " + allRecipes.size());
+            homeRecipeList = new ArrayList<>();
             for(int i = 0; i < allRecipes.size(); i++)
             {
-                System.out.println(allRecipes.get(i).name);
+                if(allRecipes.get(i).homePage)
+                {
+                    homeRecipeList.add(allRecipes.get(i));
+                }
+                System.out.println(allRecipes.get(i).name + " " + allRecipes.get(i).homePage);
             }
-            recipeList = allRecipes;
+            recipeList = homeRecipeList;
         }
 //        System.out.println("recipes size:" + recipeList.size());
     }
