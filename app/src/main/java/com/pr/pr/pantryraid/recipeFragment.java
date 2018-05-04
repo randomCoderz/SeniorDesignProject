@@ -206,7 +206,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         addToCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                homePage = false;
                 mealCalendar = true;
                 datePickerDialog.show();
 
@@ -216,6 +216,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         completed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mealCalendar = false;
                 pbI.getAllIngredients();
                 ArrayList<ingredient> pantry = pbI.getIngredients();
                for(int i = 0; i < ingredients.size(); i++)

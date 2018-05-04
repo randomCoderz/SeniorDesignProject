@@ -71,6 +71,7 @@ public class myPantry extends Fragment{
 //        deleteButton = rootView.findViewById(R.id.bttnDelete);
 
         //searchPantry = rootView.findViewById(R.id.searchPantry);
+//        searchView = rootView.findViewById(R.id.search_view);
 
 
 
@@ -91,7 +92,7 @@ public class myPantry extends Fragment{
 
 
         ////////////////////////////////////////
-       //searchView = rootView.findViewById(R.id.search_view);
+
 //        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {

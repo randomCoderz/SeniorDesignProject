@@ -71,7 +71,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         FragmentManager fragman = getSupportFragmentManager();
         fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 
-
     }
 
 
