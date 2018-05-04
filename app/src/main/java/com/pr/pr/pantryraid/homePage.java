@@ -62,6 +62,8 @@ public class homePage extends Fragment
         }
 
 
+
+
         return rootView;
     }
 
@@ -116,6 +118,7 @@ public class homePage extends Fragment
 
     }
 
+
 //    public Runnable getDailyRecipes() {
 //        final Runnable task = new Runnable() {
 //            @Override
@@ -134,6 +137,7 @@ public class homePage extends Fragment
 //        };
 //        return task;
 //    }
+
 
 
 }
