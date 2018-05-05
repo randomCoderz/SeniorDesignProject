@@ -61,9 +61,6 @@ public class homePage extends Fragment
             }
         }
 
-
-
-
         return rootView;
     }
 
@@ -119,24 +116,23 @@ public class homePage extends Fragment
     }
 
 
-//    public Runnable getDailyRecipes() {
-//        final Runnable task = new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//
-//                    recipeList = h.randomRecipe(false, 5, null);
-//                    System.out.println("in getDailyRecipes, recipeslist size: " + recipeList.size());
-//                    //gets correct recipe, need to store it
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            };
-//        };
-//        return task;
-//    }
+    public Runnable getDailyRecipes() {
+        final Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    recipeList = h.randomRecipe(false, 5, null);
+                    System.out.println("in getDailyRecipes, recipeslist size: " + recipeList.size());
+                    //gets correct recipe, need to store it
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            };
+        };
+        return task;
+    }
 
 
 

@@ -78,6 +78,23 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         this.year = rec.year;
     }
 
+    public void setValues(recipe rec)
+    {
+        this.id = rec.getId();
+        this.name = rec.name;
+        this.url = rec.url;
+        this.readyInMinutes = rec.getReadyInMinutes();
+        this.ingredients = rec.getIngredients();
+        this.instructions = rec.getInstructions();
+        this.analyzedInstructions = rec.getAnalyzedInstructions();
+        this.favorites = rec.favorites;
+        this.mealCalendar = rec.mealCalendar;
+        this.homePage = rec.homePage;
+        this.day = rec.day;
+        this.month = rec.month;
+        this.year = rec.year;
+    }
+
     public recipe getAsRecipe()
     {
         return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, homePage, month , day, year);
@@ -91,8 +108,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
-
-
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext()){
                 @Override
@@ -102,6 +117,19 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         };
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
+
+        if(ingredients == null)
+        {
+            cookBook c = new cookBook(KEY);
+            try {
+                recipe rec = c.getRecipeInformation(id, true);
+                setValues(rec);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         setMissing();
 
@@ -132,6 +160,11 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         final FloatingActionButton selectedToCart = rootView.findViewById(R.id.selectedToCart);
         final FloatingActionButton completed = rootView.findViewById(R.id.completed);
         final FloatingActionButton favoritesButton = rootView.findViewById(R.id.favorites);
+
+        if(mealCalendar == true)
+        {
+            addToCalendar.setLabelText("Remove from Calendar");
+        }
 
         Calendar currentDate = Calendar.getInstance();
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -166,6 +199,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
             }
         });
+
 
         missingToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,9 +240,22 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         addToCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homePage = false;
-                mealCalendar = true;
-                datePickerDialog.show();
+
+                if(mealCalendar == false)
+                {
+                    datePickerDialog.show();
+                    homePage = false;
+                    mealCalendar = true;
+
+                }
+                else
+                {
+                    dbI.removeRecipe(getAsRecipe());
+                    mealCalendar = false;
+                    addToCalendar.setLabelText("Add to Calendar");
+                }
+
+
 
             }
         });
@@ -232,7 +279,15 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                favorites = true;
+                if(favorites)
+                {
+                    favorites = false;
+                }
+                else
+                {
+                    homePage = false;
+                    favorites = true;
+                }
                 dbI.insertRecipe(getAsRecipe());
             }
         });
