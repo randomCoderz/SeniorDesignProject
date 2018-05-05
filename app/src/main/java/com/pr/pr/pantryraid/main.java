@@ -45,6 +45,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     private List<recipe> recipeList;
     private RecyclerView rv;
     private home h = new home(KEY);
+    Fragment frag = new homePage();
     //Database Here
 
 
@@ -67,7 +68,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //end of navigation drawer
-        Fragment frag = new homePage();
+
         FragmentManager fragman = getSupportFragmentManager();
         fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
 

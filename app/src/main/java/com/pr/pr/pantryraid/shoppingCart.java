@@ -21,7 +21,7 @@ public class shoppingCart extends Fragment{
 
     private ListView listView;
     private shoppingCartLVAdapter listAdapter;
-    ArrayList<ingredient> products = new ArrayList<>();
+    ArrayList<ingredient> products;
     Button btnPlaceOrder;
 
     public shoppingCart(){
@@ -32,7 +32,6 @@ public class shoppingCart extends Fragment{
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_shoppingcart, container, false);
 
-        //later use
         //products = (ArrayList<items>) getActivity().getIntent().getSerializableExtra("products");
         listView = rootView.findViewById(R.id.customCartListView);
         initalizeData();
