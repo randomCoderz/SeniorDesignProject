@@ -34,7 +34,7 @@ public class myPantry extends Fragment{
 //    ImageButton searchButton;
 //    Button RecipeButton;
 //    Button deleteButton;
-    EditText searchPantry;
+//    EditText searchPantry;
 
     //ArrayList<String> listItems;
 
@@ -44,11 +44,11 @@ public class myPantry extends Fragment{
     IngredientRepository pbI = new IngredientRepository(mdb);
 
     private ArrayList<ingredient> pantryList = new ArrayList<ingredient>();
-    private RecyclerView rv;
+//    private RecyclerView rv;
 
 
     // This will make it so that when you search for ingredients it will filter the list.
-    String[] items;
+//    String[] items;
     ArrayAdapter<String> adapter;
 
     public myPantry(){
@@ -73,24 +73,24 @@ public class myPantry extends Fragment{
 
 
 
-        rv = rootView.findViewById(R.id.rv);
-        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(llm);
+//        rv = rootView.findViewById(R.id.rv);
+//        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+//        rv.setHasFixedSize(true);
+//        rv.setLayoutManager(llm);
 
 
         List<ingredient> list;
         initializeList();
 //        pantryList.add();
         myPantryAdapter adapter = new myPantryAdapter(pantryList);
-        rv.setAdapter(adapter);
+        //rv.setAdapter(adapter);
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
 
         ////////////////////////////////////////
-        MaterialSearchView searchView = rootView.findViewById(R.id.search_view);
+        searchView = rootView.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -300,13 +300,6 @@ public class myPantry extends Fragment{
             MenuItem item = menu.findItem(R.id.action_search);
             searchView.setMenuItem(item);
             menu.findItem(R.id.action_search).setVisible(true);
-//            searchView.setMenuItem(item);
-//            SearchManager searchManager =
-//                    (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-//            SearchView searchView =
-//                    (SearchView) menu.findItem(R.id.action_search).getActionView();
-//            searchView.setSearchableInfo(
-//                    searchManager.getSearchableInfo(getActivity().getComponentName()));
         }
 
     private void initializeList() {
