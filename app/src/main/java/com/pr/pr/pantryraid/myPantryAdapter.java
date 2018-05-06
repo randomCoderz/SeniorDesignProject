@@ -20,6 +20,7 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     public static class recipeViewHolder extends RecyclerView.ViewHolder
     {
         int index;
+        boolean missing;
         CardView cv;
         TextView ingredientName;
         CheckBox checkBox;
@@ -30,14 +31,6 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
             cv = itemView.findViewById(R.id.cv);
             ingredientName = itemView.findViewById(R.id.cvName);
             checkBox = itemView.findViewById(R.id.checkBox);
-            
-            for(int i = 0; i < ingredientList.size(); i++)
-            {
-                if(ingredientList.get(i).missing)
-                {
-                    ingredientName.setTextColor(Color.RED);
-                }
-            }
             
             cv.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -70,6 +63,7 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView)
     {
+
         super.onAttachedToRecyclerView(recyclerView);
     }
 
@@ -77,6 +71,7 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     public myPantryAdapter.recipeViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
     {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_my_pantry_ingredient, viewGroup, false);
+
         recipeViewHolder rvh = new recipeViewHolder(view);
         return rvh;
     }
@@ -85,6 +80,10 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
     public void onBindViewHolder(myPantryAdapter.recipeViewHolder holder, int i)
     {
         try {
+            if(ingredientList.get(i).missing)
+            {
+                holder.ingredientName.setTextColor(Color.RED);
+            }
             holder.ingredientName.setText(ingredientList.get(i).name);
             holder.index = i;
         } catch(Exception e){

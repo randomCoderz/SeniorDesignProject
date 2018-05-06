@@ -64,24 +64,6 @@ public class myPantry extends Fragment{
         final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
         setHasOptionsMenu(true);
 
-
-
-//        Buttons
-//        searchButton = rootView.findViewById(R.id.searchButton);
-//        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
-//        deleteButton = rootView.findViewById(R.id.bttnDelete);
-
-        //searchPantry = rootView.findViewById(R.id.searchPantry);
-//        searchView = rootView.findViewById(R.id.search_view);
-
-
-
-//        rv = rootView.findViewById(R.id.rv);
-//        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
-//        rv.setHasFixedSize(true);
-//        rv.setLayoutManager(llm);
-
-
         initializeList();
 
         rv = rootView.findViewById(R.id.rv);
@@ -99,9 +81,10 @@ public class myPantry extends Fragment{
             public boolean onQueryTextSubmit(String query) {
                 //Do some magic
                 try {
-                    List<ingredient> list = p.searchIngredient(null, true, 50, query);
+                    List<ingredient> list = p.searchIngredient(null, true, 1, query);
 
                     ingredient ing = list.get(0);
+                    pantryList.add(ing);
                     ing.pantry = true;
                     pbI.insertIngredient(ing);
 
@@ -109,7 +92,8 @@ public class myPantry extends Fragment{
 
                     imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
 
-                    adapter2.myPantryAdapterRefresh(list);
+                    adapter2.myPantryAdapterRefresh(pantryList);
+
                     rv.setAdapter(adapter2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

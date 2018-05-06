@@ -49,6 +49,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     int month;
     int year;
 
+    myPantryAdapter adapter = new myPantryAdapter(ingredients);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
     IngredientRepository pbI = new IngredientRepository(mdb);
     final RecipeRepository dbI = new RecipeRepository(mdb);
@@ -140,8 +141,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         scrollView.setSmoothScrollingEnabled(true);
 
 
-        myPantryAdapter adapter = new myPantryAdapter(ingredients);
-        rv.setAdapter(adapter);
+
 
 //        listView = rootView.findViewById(R.id.ingredientList);
 //        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
@@ -199,7 +199,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
             }
         });
-
 
         missingToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,6 +294,13 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         return rootView;
     }
 
+    public void onStart()
+    {
+        super.onStart();
+        adapter = new myPantryAdapter(ingredients);
+        rv.setAdapter(adapter);
+    }
+
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         this.year = year;
@@ -308,15 +314,42 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     {
         pbI.getAllIngredients();
         ArrayList<ingredient> ing = pbI.getIngredients();
+
         if(ing != null && ingredients != null)
         {
+
             for(int i = 0; i < ingredients.size(); i++)
             {
-                if(!ing.contains(ingredients.get(i)))
+                if(!contains(ing, ingredients.get(i)))
                 {
                     ingredients.get(i).missing = true;
                 }
+                else
+                {
+                    ingredients.get(i).missing = false;
+                }
+                System.out.println(ingredients.get(i).name + " " + ingredients.get(i).missing);
+            }
+
+//            adapter.myPantryAdapterRefresh(ingredients);
+        }
+
+    }
+
+    public boolean contains(ArrayList<ingredient> list, ingredient ing)
+    {
+        boolean result = false;
+
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(list.get(i).pantry)
+            {
+                if(list.get(i).id == ing.id)
+                {
+                    result = true;
+                }
             }
         }
+        return result;
     }
 }
