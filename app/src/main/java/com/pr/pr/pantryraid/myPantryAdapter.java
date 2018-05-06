@@ -62,7 +62,7 @@ public class myPantryAdapter extends RecyclerView.Adapter<myPantryAdapter.recipe
 
     public myPantryAdapter(List<ingredient> ingredientList) { this.ingredientList = ingredientList; }
 
-    public void myPantryAdapter(List<ingredient> ingredientList)
+    public void myPantryAdapterRefresh(List<ingredient> ingredientList)
     {
         this.ingredientList = ingredientList;
     }

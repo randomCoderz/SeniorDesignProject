@@ -160,7 +160,7 @@ public class myCookBook extends Fragment {
 
         rv.setAdapter(adapter);
 
-    };
+    }
 
 }
 

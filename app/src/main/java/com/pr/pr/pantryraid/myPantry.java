@@ -30,8 +30,6 @@ import java.util.List;
 public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     private MaterialSearchView searchView;
-
-    cookBook c = new cookBook(KEY);
     //declaration
 //    ImageButton searchButton;
 //    Button RecipeButton;
@@ -39,8 +37,7 @@ public class myPantry extends Fragment{
 //    EditText searchPantry;
 
     //ArrayList<String> listItems;
-
-
+    cookBook c = new cookBook(KEY);
     pantry p = new pantry(KEY);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
     IngredientRepository pbI = new IngredientRepository(mdb);
@@ -52,6 +49,9 @@ public class myPantry extends Fragment{
     // This will make it so that when you search for ingredients it will filter the list.
 //    String[] items;
     ArrayAdapter<String> adapter;
+
+    RecyclerView rv;
+    myPantryAdapter adapter2;
 
     public myPantry(){
 
@@ -83,22 +83,23 @@ public class myPantry extends Fragment{
 
 
         initializeList();
-//        pantryList.add();
-        myPantryAdapter adapter = new myPantryAdapter(pantryList);
-        //rv.setAdapter(adapter);
+
+        rv = rootView.findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(llm);
+        adapter2 = new myPantryAdapter(pantryList);
+        rv.setAdapter(adapter2);
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
 
-
-        ////////////////////////////////////////
         searchView = rootView.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //Do some magic
                 try {
-                    List<ingredient> list = p.searchIngredient(null, true, 1, query);
+                    List<ingredient> list = p.searchIngredient(null, true, 50, query);
 
                     ingredient ing = list.get(0);
                     ing.pantry = true;
@@ -106,6 +107,10 @@ public class myPantry extends Fragment{
 
                     rootView.clearFocus();
 
+                    imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
+                    adapter2.myPantryAdapterRefresh(list);
+                    rv.setAdapter(adapter2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
