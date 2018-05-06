@@ -4,9 +4,11 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +19,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+
+import com.github.clans.fab.FloatingActionButton;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
@@ -52,6 +56,7 @@ public class myPantry extends Fragment{
 
     RecyclerView rv;
     myPantryAdapter adapter2;
+    recipeRVAdapter adapter3;
 
     public myPantry(){
 
@@ -63,6 +68,49 @@ public class myPantry extends Fragment{
 
         final View rootView = inflater.inflate(R.layout.my_pantry, container,false);
         setHasOptionsMenu(true);
+
+
+//        Buttons
+//        searchButton = rootView.findViewById(R.id.searchButton);
+//        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
+//        deleteButton = rootView.findViewById(R.id.bttnDelete);
+
+        //searchPantry = rootView.findViewById(R.id.searchPantry);
+//        searchView = rootView.findViewById(R.id.search_view);
+
+        final FloatingActionButton searchSelected = rootView.findViewById(R.id.searchRecipe);
+
+        searchSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<ingredient> selected = new ArrayList<>();
+                for (int i = 0; i < pantryList.size(); i++)
+                {
+                    if(pantryList.get(i).selected && pantryList.get(i) != null)
+                    {
+                        pantryList.get(i).shoppingCart = true;
+                        selected.add(pantryList.get(i));
+                        System.out.println(pantryList.get(i).name);
+                    }
+                }
+                //Log.d("ingredient", "ingredient: " + selected.get(0).getName());
+                try {
+                    ArrayList<recipe> searched = c.getRecipesByIngredients(false, selected, false, 5, 5);
+//                    Log.d("list", "recipe: " + searched.get(0).getName());
+                    Fragment frag = new myCookBook(searched);
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, frag).addToBackStack(null).commit();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
 
         initializeList();
 

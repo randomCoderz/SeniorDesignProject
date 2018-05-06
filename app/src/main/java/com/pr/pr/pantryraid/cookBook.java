@@ -161,11 +161,11 @@ class cookBook extends Thread
         {
             if(i != ingredients.size() - 1)
             {
-                http += (ingredients.get(i) + "%2C");
+                http += (ingredients.get(i).name + "%2C");
             }
             else
             {
-                http += ingredients.get(i);
+                http += ingredients.get(i).name;
             }
         }
         http += "&limitLicense=" + limitLicense;
@@ -187,6 +187,7 @@ class cookBook extends Thread
             String image = recipe.getString("image");
 
             recipeList.add(new recipe(id, name, image, 0,null,null, null, false, false,false, 0, 0, 0));
+            System.out.println("----" + name);
 
         }
 
