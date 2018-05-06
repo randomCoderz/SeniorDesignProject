@@ -23,6 +23,10 @@ public class shoppingCartLVAdapter extends BaseAdapter{
     }
     @Override
     public int getCount() {
+        if(listProducts == null)
+        {
+            return 0;
+        }
         return listProducts.size();
     }
 

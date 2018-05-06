@@ -21,6 +21,8 @@ import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +82,6 @@ public class myPantry extends Fragment{
 //        rv.setLayoutManager(llm);
 
 
-        List<ingredient> list;
         initializeList();
 //        pantryList.add();
         myPantryAdapter adapter = new myPantryAdapter(pantryList);
@@ -96,7 +97,20 @@ public class myPantry extends Fragment{
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //Do some magic
-                //System.out.println("Hello World");
+                try {
+                    List<ingredient> list = p.searchIngredient(null, true, 1, query);
+
+                    ingredient ing = list.get(0);
+                    ing.pantry = true;
+                    pbI.insertIngredient(ing);
+
+                    rootView.clearFocus();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 return false;
             }
 

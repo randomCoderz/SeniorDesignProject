@@ -36,7 +36,6 @@ public class homePage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState)
     {
-
         final View rootView = inflater.inflate(R.layout.homepage, container, false);
 //        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 //        scheduler.scheduleAtFixedRate(getDailyRecipes(), 0, 24, TimeUnit.HOURS);
@@ -68,6 +67,7 @@ public class homePage extends Fragment
     public void onStart()
     {
         super.onStart();
+
         recipeRVAdapter adapter = new recipeRVAdapter(recipeList);
         rv.setAdapter(adapter);
 
