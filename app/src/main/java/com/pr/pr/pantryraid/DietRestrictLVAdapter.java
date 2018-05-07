@@ -1,6 +1,7 @@
 package com.pr.pr.pantryraid;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,15 @@ import android.widget.CompoundButton;
 
 public class DietRestrictLVAdapter extends ArrayAdapter<DietRestrictName> implements CompoundButton.OnCheckedChangeListener {
     Context context;
-//    ArrayList<DietRestrictName> List;
+
+    SharedPreferences.Editor editor;
+    savedSettings s = new savedSettings();
+
+
     SparseBooleanArray List;
     int layoutResourceId;
     DietRestrictName  data[];
+
 
     private static LayoutInflater inflater = null;
 
@@ -69,8 +75,9 @@ public class DietRestrictLVAdapter extends ArrayAdapter<DietRestrictName> implem
 
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
+        SharedPreferences sharedPrefs = context.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         View row;
         final DietRestrictHolder listViewHolder;
         if(convertView == null)
@@ -87,14 +94,16 @@ public class DietRestrictLVAdapter extends ArrayAdapter<DietRestrictName> implem
             row=convertView;
             listViewHolder= (DietRestrictHolder) row.getTag();
         }
+        editor = sharedPrefs.edit();
+        listViewHolder.selected.setChecked(sharedPrefs.getBoolean("CheckValue" +position,false));
         DietRestrictName products = data[position];
         listViewHolder.restriction.setText(products.name);
         listViewHolder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(listViewHolder.selected.isChecked()){
+                    editor.putBoolean("CheckValue"+position,isChecked);
+                    editor.commit();
 
-                }
 
             }
         });
