@@ -161,11 +161,11 @@ class cookBook extends Thread
         {
             if(i != ingredients.size() - 1)
             {
-                http += (ingredients.get(i) + "%2C");
+                http += (ingredients.get(i).name + "%2C");
             }
             else
             {
-                http += ingredients.get(i);
+                http += ingredients.get(i).name;
             }
         }
         http += "&limitLicense=" + limitLicense;
@@ -187,6 +187,7 @@ class cookBook extends Thread
             String image = recipe.getString("image");
 
             recipeList.add(new recipe(id, name, image, 0,null,null, null, false, false,false, 0, 0, 0));
+            System.out.println("----" + name);
 
         }
 
@@ -227,6 +228,79 @@ class cookBook extends Thread
             steps_list.add(new step(number, step_description, ingredients, equipment));
         }
         return steps_list;
+    }
+
+    /**
+     * Gets all information about recipe
+     * @param recipe_id id of the recipe
+     * @param includeNutrition whether you want nutritional information
+     * @return returns the recipe with all information
+     */
+    public recipe getRecipeInformation(int recipe_id, boolean includeNutrition) throws InterruptedException, JSONException {
+        http += "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + recipe_id + "/information";
+
+        start();
+        join();
+
+        HttpResponse<JsonNode> response = response_return;
+        JSONObject object = response.getBody().getObject();
+
+        int id = object.getInt("id");
+        String title = object.getString("title");
+        String image = "";
+        if(object.has("image"))
+            image = object.getString("image");
+        int readyInMinutes = object.getInt("readyInMinutes");
+        String instructions = object.getString("instructions");
+
+        ArrayList<ingredient> ingredients = new ArrayList<>();
+        JSONArray ingredient_array = object.getJSONArray("extendedIngredients");
+
+        for(int j = 0; j < ingredient_array.length(); j++)
+        {
+            JSONObject ingredient = ingredient_array.getJSONObject(j);
+            int ingredient_id = 0;
+            String ingredient_name = ingredient.getString("name");
+            if(ingredient.has("id") && !ingredient.isNull("id"))
+                ingredient_id = ingredient.getInt("id");
+
+            String amount = ingredient.getString("amount");
+            String unit = ingredient.getString("unit");
+
+            String ingredient_image = "";
+            if(ingredient.has("image"))
+                ingredient_image = ingredient.getString("image");
+
+            ingredients.add(new ingredient(ingredient_id, ingredient_name, amount, unit, ingredient_image, 0, false, false, false ,false));
+
+        }
+        ArrayList<step> analyzedInstructions = new ArrayList();
+        JSONArray ai = object.getJSONArray("analyzedInstructions");
+        if(ai.length() > 0)
+        {
+            JSONArray s = ai.getJSONObject(0).getJSONArray("steps");
+
+            for(int k = 0; k < s.length(); k++)
+            {
+                int num = s.getJSONObject(k).getInt("number");
+                String step_description = s.getJSONObject(k).getString("step");
+                JSONArray ing = s.getJSONObject(k).getJSONArray("ingredients");
+                ArrayList<ingredient> step_ingredients = new ArrayList();
+                for(int l = 0; l < ing.length(); l++)
+                {
+                    int id_ = ing.getJSONObject(l).getInt("id");
+                    String name = ing.getJSONObject(l).getString("name");
+                    String url = ing.getJSONObject(l).getString("image");
+                    step_ingredients.add(new ingredient(id_, name, url));
+                }
+                JSONArray equipment = s.getJSONObject(k).getJSONArray("equipment");
+                analyzedInstructions.add(new step(num, step_description, step_ingredients, equipment));
+            }
+        }
+
+        return new recipe(id, title, image, readyInMinutes, ingredients, analyzedInstructions, instructions, false, false, true, 0, 0, 0);
+
+
     }
 
 

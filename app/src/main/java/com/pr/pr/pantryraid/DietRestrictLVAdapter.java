@@ -2,45 +2,78 @@ package com.pr.pr.pantryraid;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
-import java.util.ArrayList;
-
-public class DietRestrictLVAdapter extends BaseAdapter {
+public class DietRestrictLVAdapter extends ArrayAdapter<DietRestrictName> implements CompoundButton.OnCheckedChangeListener {
     Context context;
-    ArrayList<DietRestrictName> List;
+
     SharedPreferences.Editor editor;
     savedSettings s = new savedSettings();
 
 
+    SparseBooleanArray List;
+    int layoutResourceId;
+    DietRestrictName  data[];
+
+
     private static LayoutInflater inflater = null;
 
-    public DietRestrictLVAdapter(Context context, ArrayList<DietRestrictName> List)
+    public DietRestrictLVAdapter(Context context,int layoutResourceId, DietRestrictName[] data)
     {
+        super(context, layoutResourceId, data);
+        this.layoutResourceId = layoutResourceId;
         this.context = context;
-        this.List = List;
+        this.data = data;
+        List = new SparseBooleanArray(data.length);
+
     }
+
+
+
+    public boolean isChecked(int position) {
+        return List.get(position, false);
+    }
+
+    public void setChecked(int position, boolean isChecked) {
+        List.put(position, isChecked);
+
+    }
+
+    public void toggle(int position) {
+        setChecked(position, !isChecked(position));
+
+    }
+
+
 
     public int getCount()
     {
-        return List.size();
+        return data.length;
     }
 
-    public DietRestrictName getItem(int position)
-    {
-        return List.get(position);
-    }
 
     public long getItemId(int position)
     {
         return position;
     }
 
+    public DietRestrictName getItem(int position)
+    {
+        return data[position];
+    }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView,
+                                 boolean isChecked) {
+
+        List.put((Integer) buttonView.getTag(), isChecked);
+
+    }
 
     public View getView(final int position, View convertView, ViewGroup parent)
     {
@@ -62,8 +95,8 @@ public class DietRestrictLVAdapter extends BaseAdapter {
             listViewHolder= (DietRestrictHolder) row.getTag();
         }
         editor = sharedPrefs.edit();
-        final DietRestrictName products = getItem(position);
         listViewHolder.selected.setChecked(sharedPrefs.getBoolean("CheckValue" +position,false));
+        DietRestrictName products = data[position];
         listViewHolder.restriction.setText(products.name);
         listViewHolder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

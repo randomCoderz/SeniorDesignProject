@@ -47,6 +47,7 @@ class pantry extends Thread
         {
             http += "number=" + number + "&";
         }
+        query = query.replaceAll("\\s", "+");
         http += "query=" + query;
 
         ArrayList<ingredient> ingredientList = new ArrayList<>();

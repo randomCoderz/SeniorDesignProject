@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -44,8 +45,8 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
     private List<recipe> recipeList;
     private RecyclerView rv;
     private home h = new home(KEY);
+    Fragment frag = new homePage();
     //Database Here
-
 
 
     @Override
@@ -59,8 +60,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -68,16 +68,13 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
         //end of navigation drawer
 
-
-        Fragment frag = new homePage();
         FragmentManager fragman = getSupportFragmentManager();
         fragman.beginTransaction().replace(R.id.mainFrame, frag).commit();
-
 
     }
 
 
-//    private void initializeAdapter() {
+    //    private void initializeAdapter() {
 //        recyclerViewAdapter adapter = new recyclerViewAdapter(ingredientList);
 //
 //        rv.setAdapter(adapter);
@@ -123,7 +120,6 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment frag = null;
-
 
 
         if (id == R.id.nav_home) {

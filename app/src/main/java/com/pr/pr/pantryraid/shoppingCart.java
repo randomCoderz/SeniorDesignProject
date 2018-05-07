@@ -47,8 +47,7 @@ public class shoppingCart extends Fragment{
         //products = (ArrayList<items>) getActivity().getIntent().getSerializableExtra("products");
         listView = rootView.findViewById(R.id.customCartListView);
         initalizeData();
-        listAdapter = new shoppingCartLVAdapter(getActivity(),products);
-        listView.setAdapter(listAdapter);
+
         btnPlaceOrder = rootView.findViewById(R.id.btnPlaceOrder);
         btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +66,13 @@ public class shoppingCart extends Fragment{
     public void getList(){
 
     }
+    public void onStart() {
+
+        super.onStart();
+        listAdapter = new shoppingCartLVAdapter(getActivity(),products);
+        listView.setAdapter(listAdapter);
+    }
+
     public void initalizeData()
     {
         pbI.getAllIngredients();

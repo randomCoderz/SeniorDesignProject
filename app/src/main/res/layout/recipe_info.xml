@@ -80,26 +80,12 @@
 
     </ScrollView>
 
-    <FrameLayout
-        android:layout_width="254dp"
-        android:layout_height="391dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
-
-        <ListView
-            android:id="@+id/list"
-            android:layout_width="361dp"
-            android:layout_height="257dp" />
-
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/menu"
             android:layout_width="334dp"
             android:layout_height="271dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginLeft="110dp"
             app:menu_animationDelayPerItem="50"
             app:menu_backgroundColor="@android:color/transparent"
             app:menu_buttonSpacing="0dp"
@@ -186,6 +172,5 @@
                 app:fab_size="mini"/>
 
         </com.github.clans.fab.FloatingActionMenu>
-    </FrameLayout>
 
 </RelativeLayout>

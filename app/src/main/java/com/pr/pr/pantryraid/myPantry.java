@@ -4,9 +4,11 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,9 +19,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+
+import com.github.clans.fab.FloatingActionButton;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,29 +34,29 @@ import java.util.List;
 public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     private MaterialSearchView searchView;
-
-
-    cookBook c = new cookBook(KEY);
     //declaration
 //    ImageButton searchButton;
 //    Button RecipeButton;
 //    Button deleteButton;
-    EditText searchPantry;
+//    EditText searchPantry;
 
     //ArrayList<String> listItems;
-
-
+    cookBook c = new cookBook(KEY);
     pantry p = new pantry(KEY);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
     IngredientRepository pbI = new IngredientRepository(mdb);
 
     private ArrayList<ingredient> pantryList = new ArrayList<ingredient>();
-    private RecyclerView rv;
+//    private RecyclerView rv;
 
 
     // This will make it so that when you search for ingredients it will filter the list.
-    String[] items;
+//    String[] items;
     ArrayAdapter<String> adapter;
+
+    RecyclerView rv;
+    myPantryAdapter adapter2;
+    recipeRVAdapter adapter3;
 
     public myPantry(){
 
@@ -64,59 +70,107 @@ public class myPantry extends Fragment{
         setHasOptionsMenu(true);
 
 
-
 //        Buttons
 //        searchButton = rootView.findViewById(R.id.searchButton);
 //        RecipeButton = rootView.findViewById(R.id.bttnRecipe);
 //        deleteButton = rootView.findViewById(R.id.bttnDelete);
 
         //searchPantry = rootView.findViewById(R.id.searchPantry);
+//        searchView = rootView.findViewById(R.id.search_view);
+
+        final FloatingActionButton searchSelected = rootView.findViewById(R.id.searchRecipe);
+
+        searchSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<ingredient> selected = new ArrayList<>();
+                for (int i = 0; i < pantryList.size(); i++)
+                {
+                    if(pantryList.get(i).selected && pantryList.get(i) != null)
+                    {
+                        pantryList.get(i).shoppingCart = true;
+                        selected.add(pantryList.get(i));
+                        System.out.println(pantryList.get(i).name);
+                    }
+                }
+                //Log.d("ingredient", "ingredient: " + selected.get(0).getName());
+                try {
+                    ArrayList<recipe> searched = c.getRecipesByIngredients(false, selected, false, 5, 5);
+//                    Log.d("list", "recipe: " + searched.get(0).getName());
+                    Fragment frag = new myCookBook(searched);
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, frag).addToBackStack(null).commit();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
+            }
+        });
+
+
+        initializeList();
 
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
-
-
-        List<ingredient> list;
-        initializeList();
-//        pantryList.add();
-        myPantryAdapter adapter = new myPantryAdapter(pantryList);
-        rv.setAdapter(adapter);
+        adapter2 = new myPantryAdapter(pantryList);
+        rv.setAdapter(adapter2);
 
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//        listItems.add(new ingredient(1, "ah", "fef", "", " ", 0, false, false));
+
+        searchView = rootView.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //Do some magic
+                try {
+                    List<ingredient> list = p.searchIngredient(null, true, 1, query);
+
+                    ingredient ing = list.get(0);
+                    pantryList.add(ing);
+                    ing.pantry = true;
+                    pbI.insertIngredient(ing);
+
+                    rootView.clearFocus();
+
+                    imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
+                    adapter2.myPantryAdapterRefresh(pantryList);
+
+                    rv.setAdapter(adapter2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Do some magic
+                return false;
+            }
+        });
+
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                //Do some magic
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                //Do some magic
+            }
+        });
 
 
-        ////////////////////////////////////////
-       //searchView = rootView.findViewById(R.id.search_view);
-//        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                //Do some magic
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                //Do some magic
-//                return false;
-//            }
-//        });
-//
-//        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-//            @Override
-//            public void onSearchViewShown() {
-//                //Do some magic
-//            }
-//
-//            @Override
-//            public void onSearchViewClosed() {
-//                //Do some magic
-//            }
-//        });
         ////////////////////////////////////////
 
 //        searchButton.setOnClickListener(new View.OnClickListener() {
@@ -282,9 +336,6 @@ public class myPantry extends Fragment{
 //            }
 //        });
 
-
-
-
             return rootView;
         }
 
@@ -298,17 +349,11 @@ public class myPantry extends Fragment{
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
             super.onCreateOptionsMenu(menu, inflater);
+            final MaterialSearchView searchView = getActivity().findViewById(R.id.search_view);
             MenuItem item = menu.findItem(R.id.action_search);
-            item.setVisible(true);
-//            searchView.setMenuItem(item);
-            SearchManager searchManager =
-                    (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-            SearchView searchView =
-                    (SearchView) menu.findItem(R.id.action_search).getActionView();
-            searchView.setSearchableInfo(
-                    searchManager.getSearchableInfo(getActivity().getComponentName()));
+            searchView.setMenuItem(item);
+            menu.findItem(R.id.action_search).setVisible(true);
         }
-
 
     private void initializeList() {
 
@@ -324,10 +369,8 @@ public class myPantry extends Fragment{
                 }
             }
         }
-
-
     }
 
 
-} // myPantry ends
+}
 
