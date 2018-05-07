@@ -81,6 +81,7 @@ public class homePage extends Fragment
         RecipeRepository dbI = new RecipeRepository(mdb);
         dbI.getAllRecipes();
         List<recipe> allRecipes = dbI.getRecipes();
+
         if(allRecipes != null)
         {
             homeRecipeList = new ArrayList<>();
@@ -90,11 +91,9 @@ public class homePage extends Fragment
                 {
                     homeRecipeList.add(allRecipes.get(i));
                 }
-                System.out.println(allRecipes.get(i).name + " " + allRecipes.get(i).homePage);
             }
             recipeList = homeRecipeList;
         }
-//        System.out.println("recipes size:" + recipeList.size());
     }
 
     public void removeOldHomeRecipes()

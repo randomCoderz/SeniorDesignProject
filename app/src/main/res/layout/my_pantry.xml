@@ -40,8 +40,8 @@
         android:id="@+id/menu"
         android:layout_width="334dp"
         android:layout_height="271dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         app:menu_animationDelayPerItem="50"
         app:menu_backgroundColor="@android:color/transparent"
         app:menu_buttonSpacing="0dp"
@@ -83,8 +83,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_event_white_24px"
             app:fab_label="Search Recipe"
-            app:fab_size="mini"
-            />
+            app:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

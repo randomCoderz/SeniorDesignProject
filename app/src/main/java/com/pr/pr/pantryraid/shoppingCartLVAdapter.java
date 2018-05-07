@@ -35,6 +35,11 @@ public class shoppingCartLVAdapter extends BaseAdapter{
         return listProducts.get(position);
     }
 
+    public void refreshShoppingCartAdapter(ArrayList<ingredient> listProducts)
+    {
+        this.listProducts = listProducts;
+    }
+
     @Override
     public long getItemId(int i) {
         return 0;

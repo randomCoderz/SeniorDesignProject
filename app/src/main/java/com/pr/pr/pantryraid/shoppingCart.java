@@ -22,7 +22,7 @@ public class shoppingCart extends Fragment{
     private ListView listView;
     private shoppingCartLVAdapter listAdapter;
     ArrayList<ingredient> products = new ArrayList<>();
-    Button btnPlaceOrder;
+    Button btnPurchase;
 
     public shoppingCart(){
 
@@ -37,13 +37,24 @@ public class shoppingCart extends Fragment{
         listView = rootView.findViewById(R.id.customCartListView);
         initalizeData();
 
-        btnPlaceOrder = rootView.findViewById(R.id.btnPlaceOrder);
-        btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
+        btnPurchase = rootView.findViewById(R.id.btnPurchased);
+        btnPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //    placeOrder();
+            for(int i = 0; i < products.size(); i++)
+            {
+                products.get(i).shoppingCart = false;
+                products.get(i).pantry = true;
+                products.get(i).missing = false;
+            }
+            pbI.insertIngredientList(products);
+            products = new ArrayList<>();
+            listAdapter.refreshShoppingCartAdapter(products);
+            listView.setAdapter(listAdapter);
+
             }
         });
+
         return rootView;
     }
 

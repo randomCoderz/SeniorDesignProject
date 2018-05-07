@@ -141,17 +141,15 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_event_white_24px"
                 app:fab_label="Add To Calendar"
-                app:fab_size="mini"
-                />
+                app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src = "@drawable/ic_description_white_24px"
+                android:src="@drawable/ic_description_white_24px"
                 app:fab_label="View Instructions"
-                app:fab_size="mini"
-                />
+                app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/missingToCart"
@@ -175,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_done_white_24px"
                 app:fab_label="Completed"
-                app:fab_size="mini"/>
+                app:fab_size="mini" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/favorites"
@@ -183,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_favorites"
                 app:fab_label="Favorites"
-                app:fab_size="mini"/>
+                app:fab_size="mini" />
 
         </com.github.clans.fab.FloatingActionMenu>
     </FrameLayout>
