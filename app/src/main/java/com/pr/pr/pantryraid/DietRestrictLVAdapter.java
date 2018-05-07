@@ -1,6 +1,7 @@
 package com.pr.pr.pantryraid;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 public class DietRestrictLVAdapter extends BaseAdapter {
     Context context;
     ArrayList<DietRestrictName> List;
+    SharedPreferences.Editor editor;
+    savedSettings s = new savedSettings();
 
 
     private static LayoutInflater inflater = null;
@@ -39,8 +42,9 @@ public class DietRestrictLVAdapter extends BaseAdapter {
 
 
 
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
+        SharedPreferences sharedPrefs = context.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         View row;
         final DietRestrictHolder listViewHolder;
         if(convertView == null)
@@ -57,15 +61,16 @@ public class DietRestrictLVAdapter extends BaseAdapter {
             row=convertView;
             listViewHolder= (DietRestrictHolder) row.getTag();
         }
+        editor = sharedPrefs.edit();
         final DietRestrictName products = getItem(position);
-
+        listViewHolder.selected.setChecked(sharedPrefs.getBoolean("CheckValue" +position,false));
         listViewHolder.restriction.setText(products.name);
         listViewHolder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(listViewHolder.selected.isChecked()){
+                    editor.putBoolean("CheckValue"+position,isChecked);
+                    editor.commit();
 
-                }
 
             }
         });

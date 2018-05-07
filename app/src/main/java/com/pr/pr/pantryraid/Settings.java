@@ -1,34 +1,18 @@
 package com.pr.pr.pantryraid;
 
 import android.content.SharedPreferences;
-
-//import android.os.Bundle;
+import android.os.Build;
 import android.os.Bundle;
-
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-
-//import android.view.LayoutInflater;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-
-//import android.view.View;
 import android.view.View;
-
-//import android.view.ViewGroup;
 import android.view.ViewGroup;
-
-//import android.widget.Button;
 import android.widget.Button;
-
-//import android.widget.CompoundButton;
 import android.widget.CompoundButton;
-
-//import android.widget.ListView;
 import android.widget.ListView;
-
-//import android.widget.Switch;
 import android.widget.Switch;
-
-
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -36,6 +20,15 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
+
+//import android.os.Bundle;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.Button;
+//import android.widget.CompoundButton;
+//import android.widget.ListView;
+//import android.widget.Switch;
 
 public class Settings extends Fragment {
 
@@ -54,12 +47,15 @@ public class Settings extends Fragment {
     private ListView listView;
     ArrayList<DietRestrictName> r = new ArrayList<>();
     private DietRestrictLVAdapter listAdapter;
+    DietRestrictHolder l = new DietRestrictHolder();
+
 
 
     public Settings() {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -91,8 +87,10 @@ public class Settings extends Fragment {
 
         if (s.getRestrictions() == false) {
             restrictions.setChecked(false);
+            listView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.grey));
         } else {
             restrictions.setChecked(true);
+            listView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.primaryLight));
         }
         if (s.getCalendarNotifications() == false) {
             calendar.setChecked(false);
@@ -106,47 +104,54 @@ public class Settings extends Fragment {
         }
         if (s.getCalendarDaily() == false) {
             //change color to a false color
-            calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                calendarDaily.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.colorPrimary));
         } else {
-            calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
+            calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         }
         if (s.getCalendarWeekly() == false) {
-            calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         } else {
-            calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
+            calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         }
         if (s.getCalendarMonthly() == false) {
-            calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
 
         } else {
-            calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
         }
         if (s.getExpDaily() == false) {
-            expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         } else {
-            expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
+            expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         }
         if (s.getExpWeekly() == false) {
-            expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         } else {
-            expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-            expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
+            expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         }
         if (s.getExpMonthly() == false) {
-            expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
         } else {
-            expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+            expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+            expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
         }
 
         calendarDaily.setOnClickListener(new View.OnClickListener() {
@@ -157,13 +162,15 @@ public class Settings extends Fragment {
                 s.setCalendarWeekly(false);
                 s.setCalendarMonthly(false);
                 if (calendar.isChecked()) {
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                        calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    }
                 } else {
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
                 }
             }
         });
@@ -175,13 +182,15 @@ public class Settings extends Fragment {
                 s.setCalendarDaily(false);
                 s.setCalendarMonthly(false);
                 if (calendar.isChecked()) {
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                        calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    }
                 } else {
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
                 }
             }
         });
@@ -193,13 +202,30 @@ public class Settings extends Fragment {
                 s.setCalendarDaily(false);
                 s.setCalendarWeekly(false);
                 if (calendar.isChecked()) {
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                }
                 } else {
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                }
+            }
+        });
+
+        restrictions.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
+
+                if (restrictions.isChecked()) {
+                    s.setRestrictions(true);
+                    restrictions.setChecked(true);
+                    listView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.White));
+                   
+                } else {
+                    listView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.grey));
+                    s.setRestrictions(false);
                 }
             }
         });
@@ -215,14 +241,15 @@ public class Settings extends Fragment {
                     calendar.setChecked(true);
                     // default state
                     s.setCalendarDaily(true);
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
 
                 } else {
 
                     //UI side
-                    calendarDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    calendarMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    calendarDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
                     calendar.setChecked(false);
 
                     // background side
@@ -243,13 +270,14 @@ public class Settings extends Fragment {
                     s.setExpNotifications(true);
                     expNotification.setChecked(true);
                     s.setExpDaily(true);
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
 
                 } else {
 
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
                     s.setExpDaily(false);
                     s.setExpWeekly(false);
                     s.setExpMonthly(false);
@@ -265,13 +293,15 @@ public class Settings extends Fragment {
                 s.setExpWeekly(false);
                 s.setExpMonthly(false);
                 if (expNotification.isChecked()) {
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                        expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    }
                 } else {
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
                 }
             }
         });
@@ -283,13 +313,15 @@ public class Settings extends Fragment {
                 s.setExpWeekly(true);
                 s.setExpMonthly(false);
                 if (expNotification.isChecked()) {
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                        expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                    }
                 } else {
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
                 }
 
             }
@@ -302,13 +334,15 @@ public class Settings extends Fragment {
                 s.setExpWeekly(false);
                 s.setExpMonthly(true);
                 if (expNotification.isChecked()) {
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                        expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+                    }
                 } else {
-                    expirationDaily.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
+                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
                 }
             }
         });
@@ -327,18 +361,7 @@ public class Settings extends Fragment {
             }
         });
 
-        restrictions.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
 
-                if (b) {
-                    s.setRestrictions(true);
-
-                } else {
-                    s.setRestrictions(false);
-
-                }
-            }
-        });
 
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override

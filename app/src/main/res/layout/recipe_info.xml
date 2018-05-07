@@ -132,8 +132,8 @@
             app:menu_shadowColor="#66000000"
             app:menu_shadowRadius="4dp"
             app:menu_shadowXOffset="1dp"
-            app:menu_shadowYOffset="3dp"
-            app:menu_showShadow="true">
+            app:menu_shadowYOffset="0dp"
+            app:menu_showShadow="false">
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/addToCalendar"
