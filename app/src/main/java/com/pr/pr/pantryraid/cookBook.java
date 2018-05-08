@@ -1,5 +1,8 @@
 package com.pr.pr.pantryraid;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -25,7 +28,7 @@ class cookBook extends Thread
         KEY = key;
         http = "";
     }
-
+    
     /**
      * Searches for recipes (Everything but query is optional)
      * @param cuisine The cuisine(s) of the recipes (african, chinese, japanese, korean, vietnamese, thai, indian, british, irish, french, italian, mexican, spanish, middle eastern, jewish, american, cajun, southern, greek, german, nordic, eastern european, caribbean, or latin american).
