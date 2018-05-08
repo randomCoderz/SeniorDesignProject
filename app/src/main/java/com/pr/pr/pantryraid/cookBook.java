@@ -161,11 +161,13 @@ class cookBook extends Thread
         {
             if(i != ingredients.size() - 1)
             {
-                http += (ingredients.get(i).name + "%2C");
+                String n = ingredients.get(i).name.replaceAll("\\s", "+");
+                http += (n + "%2C");
             }
             else
             {
-                http += ingredients.get(i).name;
+                String n = ingredients.get(i).name.replaceAll("\\s", "+");
+                http += n;
             }
         }
         http += "&limitLicense=" + limitLicense;

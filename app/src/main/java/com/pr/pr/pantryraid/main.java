@@ -66,6 +66,7 @@ public class main extends AppCompatActivity implements NavigationView.OnNavigati
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
         //end of navigation drawer
 
         FragmentManager fragman = getSupportFragmentManager();
