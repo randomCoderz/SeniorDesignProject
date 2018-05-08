@@ -18,18 +18,13 @@ import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-/**
- * Created by Nam on 4/2/2018.
- */
-
 public class calendar extends Fragment
 {
     EditText editText;
     Calendar currentDate = Calendar.getInstance();
     Button dateButton;
-    Button addButton;
-    Button removeButton;
+    //Button addButton;
+    //Button removeButton;
 
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
 
@@ -51,8 +46,8 @@ public class calendar extends Fragment
 
         editText = (EditText) rootView.findViewById(R.id.textBox);
         dateButton = (Button) rootView.findViewById(R.id.dateButton);
-        addButton = (Button) rootView.findViewById(R.id.addButton);
-        removeButton = (Button) rootView.findViewById(R.id.removeButton);
+        //addButton = (Button) rootView.findViewById(R.id.addButton);
+        //removeButton = (Button) rootView.findViewById(R.id.removeButton);
 
         //checks for arguments
         //if arguments exist, display a date that is not current date
@@ -109,19 +104,19 @@ public class calendar extends Fragment
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        addButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        removeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         return rootView;
 
     }

@@ -7,6 +7,14 @@
     android:paddingTop="?android:attr/actionBarSize"
     >
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="467dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="76dp"></android.support.v7.widget.RecyclerView>
+
     <EditText
         android:id="@+id/textBox"
         android:layout_width="match_parent"
@@ -20,38 +28,12 @@
         android:hint="MM-DD-YYYY" />
 
     <Button
+        android:theme="@style/AppTheme.Button"
         android:id="@+id/dateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:text="Date" />
-
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/dateButton"
-        android:layout_marginLeft="80dp"
-        android:text="Add Recipe" />
-
-    <Button
-        android:id="@+id/removeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/dateButton"
-        android:layout_marginLeft="180dp"
-        android:text="Remove Recipe" />
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/addButton"
-        android:layout_marginTop="0dp"
-        android:id="@+id/rv"
-        >
-    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
