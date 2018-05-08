@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 
+import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
+
 import java.util.ArrayList;
 
 /**
@@ -16,6 +19,9 @@ import java.util.ArrayList;
 public class shoppingCartLVAdapter extends BaseAdapter{
     public ArrayList<ingredient> listProducts;
     private Context context;
+
+    AppDatabase mdb = AppDatabase.getInMemoryDatabase(context);
+    IngredientRepository pbI = new IngredientRepository(mdb);
 
     public shoppingCartLVAdapter(Context context, ArrayList<ingredient> listProducts){
         this.context = context;
@@ -76,6 +82,8 @@ public class shoppingCartLVAdapter extends BaseAdapter{
             public void onClick(View v)
             {
                 updateQuantity(position,listViewHolder.itemQty,1);
+                ingredient ing = getItem(position);
+                pbI.insertIngredient(ing);
             }
         });
         //listViewHolder.edTextQuantity.setText("0");
@@ -83,7 +91,8 @@ public class shoppingCartLVAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 updateQuantity(position,listViewHolder.itemQty,-1);
-
+                ingredient ing = getItem(position);
+                pbI.insertIngredient(ing);
             }
         });
 

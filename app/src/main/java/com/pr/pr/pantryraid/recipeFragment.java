@@ -134,22 +134,14 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
         setMissing();
 
-//        rv.setItemViewCacheSize(20);
-//        rv.setDrawingCacheEnabled(true);
-//        rv.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         ScrollView scrollView = rootView.findViewById(R.id.scrollView);
         scrollView.setSmoothScrollingEnabled(true);
 
 
-
-
-//        listView = rootView.findViewById(R.id.ingredientList);
-//        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
         TextView recipeName = rootView.findViewById(R.id.recipeName);
         recipeName.setText(name);
         ImageView img = rootView.findViewById(R.id.recipeImage);
-//        img.getLayoutParams().width = 700;
-//        img.getLayoutParams().height = 700;
+
         Picasso.with(rootView.getContext()).load(url).resize(2300,1300).into(img);
         TextView readyInMin = rootView.findViewById(R.id.readyInMin);
         readyInMin.setText("Ready in: " + readyInMinutes + " minutes");
@@ -313,7 +305,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                 System.out.println(ingredients.get(i).name + " " + ingredients.get(i).missing);
             }
 
-//            adapter.myPantryAdapterRefresh(ingredients);
         }
 
     }
