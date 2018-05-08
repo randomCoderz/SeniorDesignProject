@@ -141,18 +141,19 @@ public class homePage extends Fragment
     public void initalizeData()
     {
         ArrayList<ingredient> r1list = new ArrayList<>();
-        r1list.add(new ingredient(1230, "buttermilk", null, null, "buttermilk.jpg", 0, false, false, false, false));
-        r1list.add(new ingredient(1001, "butter", null, null, "butter-sliced.jpg", 0, false, false, false, false));
-        r1list.add(new ingredient(20081, "all purpose flour", null, null, "flour.png", 0, false, false, false, false));
+        r1list.add(new ingredient(18632, "brownie mix", null, null, null, 0, false, false, false, false));
+        r1list.add(new ingredient(1123, "egg", null, null, null, 0, false, false, false, false));
+        r1list.add(new ingredient(10018166, "oreo cookies", null, null, null, 0, false, false, false, false));
+        r1list.add(new ingredient(14412, "water", null, null, null, 0, false, false, false, false));
 
         ArrayList<step> r1steps = new ArrayList<>();
-        r1steps.add(new step(1, "Heat oven to 475 degrees F. Line a rimmed baking sheet with parchment or a silpat liner.In a large bowl, whisk together the dry ingredients. In a 2-cup liquid measure, stir together the chilled buttermilk and melted butter until the butter forms small clumps. Stir the buttermilk mixture into the flour mixture with a rubber spatula just until the ingredients are incorporated and the mixture slightly pulls away from the edges of the bowl.Using a greased ¼-cup measure, scoop out mounds of the dough and drop them onto the prepared baking sheet, spacing about 1 ½ inches apart."
-        , null, null));
-        r1steps.add(new step(2, "Bake the biscuits until the tops are golden brown and crisp, 12 to 14 minutes.", null, null));
-        r1steps.add(new step(3, "Remove from the oven, brush with additional melted butter.", null, null));
-        r1steps.add(new step(4, "Serve warm.", null, null));
+        r1steps.add(new step(1, "Preheat the oven to 325", null, null));
+        r1steps.add(new step(2, "Prepare the brownie mix as directed with the egg, oil and water.Coarsely crush the Oreos in a large bag with your hands or a rolling pin.  I like to leave some pieces pretty big.", null, null));
+        r1steps.add(new step(3, "Pour them into the batter and mix well. Batter will be thick.", null, null));
+        r1steps.add(new step(4, "Pour batter into a greased square baking pan (mine is about 8x8)", null, null));
+        r1steps.add(new step(5, "and bake for 30-40 minutes. Check doneness by inserting a knife into the brownies; if it comes out mostly clean, you should be good to go. But when in doubt, I'd say underbake!", null, null));
 
-        recipe r1 = new recipe(513625, "The Best Drop Biscuits", "https://spoonacular.com/recipeImages/513625-556x370.jpg", 45,  r1list, r1steps,"Heat oven to 475 degrees F. Line a rimmed baking sheet with parchment or a silpat liner.In a large bowl, whisk together the dry ingredients. In a 2-cup liquid measure, stir together the chilled buttermilk and melted butter until the butter forms small clumps. Stir the buttermilk mixture into the flour mixture with a rubber spatula just until the ingredients are incorporated and the mixture slightly pulls away from the edges of the bowl.Using a greased ¼-cup measure, scoop out mounds of the dough and drop them onto the prepared baking sheet, spacing about 1 ½ inches apart. Bake the biscuits until the tops are golden brown and crisp, 12 to 14 minutes. Remove from the oven, brush with additional melted butter. Serve warm.",
+        recipe r1 = new recipe(601688, "Best Ever Brownies", "https://spoonacular.com/recipeImages/601688-556x370.jpg", 45,  r1list, r1steps,"Preheat the oven to 325. Prepare the brownie mix as directed with the egg, oil and water.Coarsely crush the Oreos in a large bag with your hands or a rolling pin.  I like to leave some pieces pretty big. Pour them into the batter and mix well. Batter will be thick.Pour batter into a greased square baking pan (mine is about 8x8) and bake for 30-40 minutes. Check doneness by inserting a knife into the brownies; if it comes out mostly clean, you should be good to go. But when in doubt, I'd say underbake!",
                 true , false, true, 0, 0, 0);
 
         ArrayList<ingredient> r2list = new ArrayList<>();
@@ -242,13 +243,10 @@ public class homePage extends Fragment
         recipeList.add(r4);
         recipeList.add(r5);
 
+        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+        RecipeRepository dbI = new RecipeRepository(mdb);
 
-//
-//
-//        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-//        RecipeRepository dbI = new RecipeRepository(mdb);
-//        IngredientRepository pbI = new IngredientRepository(mdb);
-//        dbI.insertRecipeList(r);
+        dbI.insertRecipeList(r);
 
     }
 
