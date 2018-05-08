@@ -158,7 +158,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         final FloatingActionButton addToCalendar = rootView.findViewById(R.id.addToCalendar);
         final FloatingActionButton missingToCart = rootView.findViewById(R.id.missingToCart);
         final FloatingActionButton selectedToCart = rootView.findViewById(R.id.selectedToCart);
-        final FloatingActionButton completed = rootView.findViewById(R.id.completed);
         final FloatingActionButton favoritesButton = rootView.findViewById(R.id.favorites);
 
         if(mealCalendar == true)
@@ -256,22 +255,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
 
 
-            }
-        });
-
-        completed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               mealCalendar = false;
-               pbI.getAllIngredients();
-               ArrayList<ingredient> pantry = pbI.getIngredients();
-               for(int i = 0; i < ingredients.size(); i++)
-               {
-                   if(pantry.contains(ingredients.get(i)))
-                   {
-                       pbI.removeIngredient(ingredients.get(i));
-                   }
-               }
             }
         });
 
