@@ -113,6 +113,7 @@ class cookBook extends Thread
         {
             http += "offset=" + offset;
         }
+        query = query.replaceAll("\\s", "+");
         http += "&query=" + query;
         if(type != null)
         {
