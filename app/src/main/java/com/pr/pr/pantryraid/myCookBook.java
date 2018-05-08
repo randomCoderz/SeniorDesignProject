@@ -71,57 +71,57 @@ public class myCookBook extends Fragment {
 
 
         // linking buttons
-        favoriteRecipes = (Button)rootView.findViewById(R.id.bttnFav);
-        viewIngredients = (Button)rootView.findViewById(R.id.bttnIngredients);
-        shoppingCart = (ImageButton) rootView.findViewById(R.id.bttnShoppingCart);
+//        favoriteRecipes = (Button)rootView.findViewById(R.id.bttnFav);
+//        viewIngredients = (Button)rootView.findViewById(R.id.bttnIngredients);
+//        shoppingCart = (ImageButton) rootView.findViewById(R.id.bttnShoppingCart);
         searchRecipe = (ImageButton)rootView.findViewById(R.id.bttnSearchRecipe);
         recipeName = (EditText) rootView.findViewById(R.id.editText);
 
         //on click buttons redirect to other pages favoriteRecipes
-        favoriteRecipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment favoritesFrag =  new favorites();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
-            }
-        });
-
-        //on click buttons redirect to other pages viewIngredients
-        viewIngredients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment pantryFrag =  new myPantry();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, pantryFrag).addToBackStack(null).commit();
-
-            }
-        });
-
-
-        //on click buttons redirect to other pages viewIngredients
-        favoriteRecipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment favoritesFrag =  new favorites();
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
-
-            }
-        });
-
-        //on click buttons redirect to other pages shoppingCart
-        shoppingCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Fragment shoppingCartFrag =  new shoppingCart();
-
-                AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, shoppingCartFrag).addToBackStack(null).commit();
-
-            }
-        });
+//        favoriteRecipes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Fragment favoritesFrag =  new favorites();
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
+//            }
+//        });
+//
+//        //on click buttons redirect to other pages viewIngredients
+//        viewIngredients.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Fragment pantryFrag =  new myPantry();
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, pantryFrag).addToBackStack(null).commit();
+//
+//            }
+//        });
+//
+//
+//        //on click buttons redirect to other pages viewIngredients
+//        favoriteRecipes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Fragment favoritesFrag =  new favorites();
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, favoritesFrag).addToBackStack(null).commit();
+//
+//            }
+//        });
+//
+//        //on click buttons redirect to other pages shoppingCart
+//        shoppingCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Fragment shoppingCartFrag =  new shoppingCart();
+//
+//                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, shoppingCartFrag).addToBackStack(null).commit();
+//
+//            }
+//        });
 
         searchRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
