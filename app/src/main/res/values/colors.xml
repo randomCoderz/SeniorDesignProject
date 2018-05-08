@@ -6,4 +6,5 @@
     <color name = "primaryLight" > #fff9fa</color>
     <color name="White">#FFFFFF</color>
     <color name = "fab">#DA4235</color>
+    <color name = "grey">#dddae5</color>
 </resources>

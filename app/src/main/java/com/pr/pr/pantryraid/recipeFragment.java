@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -25,7 +26,6 @@ import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -49,6 +49,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     int month;
     int year;
 
+    myPantryAdapter adapter = new myPantryAdapter(ingredients);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
     IngredientRepository pbI = new IngredientRepository(mdb);
     final RecipeRepository dbI = new RecipeRepository(mdb);
@@ -78,6 +79,23 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         this.year = rec.year;
     }
 
+    public void setValues(recipe rec)
+    {
+        this.id = rec.getId();
+        this.name = rec.name;
+        this.url = rec.url;
+        this.readyInMinutes = rec.getReadyInMinutes();
+        this.ingredients = rec.getIngredients();
+        this.instructions = rec.getInstructions();
+        this.analyzedInstructions = rec.getAnalyzedInstructions();
+        this.favorites = rec.favorites;
+        this.mealCalendar = rec.mealCalendar;
+        this.homePage = rec.homePage;
+        this.day = rec.day;
+        this.month = rec.month;
+        this.year = rec.year;
+    }
+
     public recipe getAsRecipe()
     {
         return new recipe(id, name, url, readyInMinutes, ingredients, analyzedInstructions, instructions, favorites, mealCalendar, homePage, month , day, year);
@@ -91,8 +109,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.recipe_info, container, false);
-
-
         rv = rootView.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext()){
                 @Override
@@ -103,6 +119,19 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
 
+        if(ingredients == null)
+        {
+            cookBook c = new cookBook(KEY);
+            try {
+                recipe rec = c.getRecipeInformation(id, true);
+                setValues(rec);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         setMissing();
 
 //        rv.setItemViewCacheSize(20);
@@ -112,8 +141,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         scrollView.setSmoothScrollingEnabled(true);
 
 
-        myPantryAdapter adapter = new myPantryAdapter(ingredients);
-        rv.setAdapter(adapter);
+
 
 //        listView = rootView.findViewById(R.id.ingredientList);
 //        listView.setAdapter(new ingredientsLVAdapter(getActivity(), ingredients));
@@ -130,8 +158,12 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
         final FloatingActionButton addToCalendar = rootView.findViewById(R.id.addToCalendar);
         final FloatingActionButton missingToCart = rootView.findViewById(R.id.missingToCart);
         final FloatingActionButton selectedToCart = rootView.findViewById(R.id.selectedToCart);
-        final FloatingActionButton completed = rootView.findViewById(R.id.completed);
-        final FloatingActionButton favorites = rootView.findViewById(R.id.favorites);
+        final FloatingActionButton favoritesButton = rootView.findViewById(R.id.favorites);
+
+        if(mealCalendar == true)
+        {
+            addToCalendar.setLabelText("Remove from Calendar");
+        }
 
         Calendar currentDate = Calendar.getInstance();
         final DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -207,37 +239,48 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
             @Override
             public void onClick(View view) {
 
-                mealCalendar = true;
-                datePickerDialog.show();
-                System.out.println(month + "/" + day+ "/" + year);
+                if(mealCalendar == false)
+                {
+                    datePickerDialog.show();
+                    homePage = false;
+                    mealCalendar = true;
+
+                }
+                else
+                {
+                    dbI.removeRecipe(getAsRecipe());
+                    mealCalendar = false;
+                    addToCalendar.setLabelText("Add to Calendar");
+                }
+
 
 
             }
         });
 
-        completed.setOnClickListener(new View.OnClickListener() {
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pbI.getAllIngredients();
-                ArrayList<ingredient> pantry = pbI.getIngredients();
-               for(int i = 0; i < ingredients.size(); i++)
-               {
-                   if(pantry.contains(ingredients.get(i)))
-                   {
-                       pbI.removeIngredient(ingredients.get(i));
-                   }
-               }
-            }
-        });
-
-        favorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+                if(favorites)
+                {
+                    favorites = false;
+                }
+                else
+                {
+                    favorites = true;
+                }
+                dbI.insertRecipe(getAsRecipe());
             }
         });
 
         return rootView;
+    }
+
+    public void onStart()
+    {
+        super.onStart();
+        adapter = new myPantryAdapter(ingredients);
+        rv.setAdapter(adapter);
     }
 
     @Override
@@ -253,15 +296,42 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     {
         pbI.getAllIngredients();
         ArrayList<ingredient> ing = pbI.getIngredients();
+
         if(ing != null && ingredients != null)
         {
+
             for(int i = 0; i < ingredients.size(); i++)
             {
-                if(!ing.contains(ingredients.get(i)))
+                if(!contains(ing, ingredients.get(i)))
                 {
                     ingredients.get(i).missing = true;
                 }
+                else
+                {
+                    ingredients.get(i).missing = false;
+                }
+                System.out.println(ingredients.get(i).name + " " + ingredients.get(i).missing);
+            }
+
+//            adapter.myPantryAdapterRefresh(ingredients);
+        }
+
+    }
+
+    public boolean contains(ArrayList<ingredient> list, ingredient ing)
+    {
+        boolean result = false;
+
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(list.get(i).pantry)
+            {
+                if(list.get(i).id == ing.id)
+                {
+                    result = true;
+                }
             }
         }
+        return result;
     }
 }

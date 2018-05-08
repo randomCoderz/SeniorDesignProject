@@ -130,6 +130,7 @@ public class myCookBook extends Fragment {
                 stringRecipe = recipeName.getText().toString();
                 try {
                     updatedList = c.searchRecipes(null,null,null,true,null,false,5,0,stringRecipe,null);
+
                     // adapter.recipeRVAdapterR(updatedList);
                     rootView.clearFocus();
 
@@ -159,7 +160,7 @@ public class myCookBook extends Fragment {
 
         rv.setAdapter(adapter);
 
-    };
+    }
 
 }
 

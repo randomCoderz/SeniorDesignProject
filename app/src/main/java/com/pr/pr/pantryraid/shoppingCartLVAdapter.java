@@ -23,12 +23,21 @@ public class shoppingCartLVAdapter extends BaseAdapter{
     }
     @Override
     public int getCount() {
+        if(listProducts == null)
+        {
+            return 0;
+        }
         return listProducts.size();
     }
 
     @Override
     public ingredient getItem(int position) {
         return listProducts.get(position);
+    }
+
+    public void refreshShoppingCartAdapter(ArrayList<ingredient> listProducts)
+    {
+        this.listProducts = listProducts;
     }
 
     @Override
@@ -60,7 +69,7 @@ public class shoppingCartLVAdapter extends BaseAdapter{
 
         listViewHolder.itemName.setText(products.name);
 
-        listViewHolder.itemQty.setText(products.quantity+"");
+        listViewHolder.itemQty.setText((int)products.quantity+"");
 
         listViewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
