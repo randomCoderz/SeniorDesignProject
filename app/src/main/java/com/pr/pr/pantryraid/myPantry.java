@@ -1,14 +1,11 @@
 package com.pr.pr.pantryraid;
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-
 
 import com.github.clans.fab.FloatingActionButton;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -62,34 +57,58 @@ public class myPantry extends Fragment{
         setHasOptionsMenu(true);
 
         final FloatingActionButton searchSelected = rootView.findViewById(R.id.searchRecipe);
+        final FloatingActionButton remove = rootView.findViewById(R.id.remove);
 
-//        searchSelected.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ArrayList<ingredient> selected = new ArrayList<>();
-//                for (int i = 0; i < pantryList.size(); i++)
-//                {
-//                    if(pantryList.get(i).selected && pantryList.get(i) != null)
-//                    {
-//                        pantryList.get(i).shoppingCart = true;
-//                        selected.add(pantryList.get(i));
-//                        System.out.println(pantryList.get(i).name);
-//                    }
-//                }
-//
-//                try {
-//                    ArrayList<recipe> searched = c.getRecipesByIngredients(false, selected, false, 5, 5);
-//                    Fragment frag = new myCookBook(searched);
-//                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, frag).addToBackStack(null).commit();
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+        searchSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<ingredient> selected = new ArrayList<>();
+                for (int i = 0; i < pantryList.size(); i++)
+                {
+                    if(pantryList.get(i).selected && pantryList.get(i) != null)
+                    {
+                        pantryList.get(i).shoppingCart = true;
+                        selected.add(pantryList.get(i));
+                        System.out.println(pantryList.get(i).name);
+                    }
+                }
+
+                try {
+                    ArrayList<recipe> searched = c.getRecipesByIngredients(false, selected, false, 5, 5);
+                    Fragment frag = new myCookBook(searched);
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, frag).addToBackStack(null).commit();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<ingredient> selected = new ArrayList<>();
+                for (int i = 0; i < pantryList.size(); i++)
+                {
+                    if(pantryList.get(i).selected && pantryList.get(i) != null)
+                    {
+                        pantryList.get(i).shoppingCart = true;
+                        selected.add(pantryList.get(i));
+                        pantryList.remove(i);
+                    }
+
+                }
+                for(int j = 0 ; j < selected.size(); j++)
+                {
+                    pbI.removeIngredient(selected.get(j));
+                }
+                adapter2 = new myPantryAdapter(pantryList);
+                rv.setAdapter(adapter2);
+            }
+        });
 
         initializeList();
 

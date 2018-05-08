@@ -12,9 +12,6 @@ import android.widget.CheckBox;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
 
-import org.json.JSONException;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
