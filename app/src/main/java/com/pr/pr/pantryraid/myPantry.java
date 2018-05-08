@@ -29,9 +29,8 @@ import java.util.List;
 public class myPantry extends Fragment{
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     private MaterialSearchView searchView;
-    //declaration
 
-    //
+
     cookBook c = new cookBook(KEY);
     pantry p = new pantry(KEY);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
@@ -185,18 +184,15 @@ public class myPantry extends Fragment{
 
         pbI.getAllIngredients();
         ArrayList<ingredient> allIngredients = pbI.getIngredients();
-        if(allIngredients != null)
-        {
-            for(int i = 0; i < allIngredients.size(); i++)
-            {
-                if(allIngredients.get(i).pantry)
-                {
+        if (allIngredients != null) {
+            for (int i = 0; i < allIngredients.size(); i++) {
+                if (allIngredients.get(i).pantry) {
                     pantryList.add(allIngredients.get(i));
                 }
             }
         }
-    }
 
+    }
 
 }
 

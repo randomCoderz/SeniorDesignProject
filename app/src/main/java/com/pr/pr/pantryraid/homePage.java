@@ -97,6 +97,7 @@ public class homePage extends Fragment
             }
             recipeList = homeRecipeList;
         }
+        initalizeData();
     }
 
     public void removeOldHomeRecipes()
@@ -244,10 +245,10 @@ public class homePage extends Fragment
 
 //
 //
-        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
-        RecipeRepository dbI = new RecipeRepository(mdb);
-        IngredientRepository pbI = new IngredientRepository(mdb);
-        dbI.insertRecipeList(r);
+//        AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
+//        RecipeRepository dbI = new RecipeRepository(mdb);
+//        IngredientRepository pbI = new IngredientRepository(mdb);
+//        dbI.insertRecipeList(r);
 
     }
 
