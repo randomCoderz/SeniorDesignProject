@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -107,6 +108,9 @@ public class myPantry extends Fragment{
                 }
                 adapter2 = new myPantryAdapter(pantryList);
                 rv.setAdapter(adapter2);
+                CharSequence text = "Removed from Pantry";
+                Toast toast = Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
