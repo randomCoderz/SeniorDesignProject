@@ -85,7 +85,7 @@ public class myRecipeAdapter extends RecyclerView.Adapter<myRecipeAdapter.recipe
             {
                 holder.ingredientName.setTextColor(Color.RED);
             }
-            holder.ingredientName.setText(new DecimalFormat("#.##").format(ingredientList.get(i).amount) + " " + ingredientList.get(i).unit + " " + ingredientList.get(i).name);
+            holder.ingredientName.setText(ingredientList.get(i).amount + " " + ingredientList.get(i).unit + " " + ingredientList.get(i).name);
             holder.index = i;
         } catch(Exception e){
             e.printStackTrace();
