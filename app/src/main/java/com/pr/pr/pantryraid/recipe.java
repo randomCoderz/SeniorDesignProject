@@ -1,17 +1,16 @@
 package com.pr.pr.pantryraid;
 
 
+import android.annotation.SuppressLint;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-//import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
-import android.annotation.SuppressLint;
-//import android.graphics.Color;
-//import android.os.Bundle;
-
 
 import java.util.ArrayList;
+
+//import android.arch.persistence.room.Ignore;
+//import android.graphics.Color;
+//import android.os.Bundle;
 
 @Entity(tableName = "Recipes", primaryKeys = {"recipeID","month","day","year"})
 public class recipe

@@ -2,37 +2,20 @@ package com.pr.pr.pantryraid;
 
 //Android Tools
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-
-import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
-
-import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
-import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
-
-
-import org.json.JSONException;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 //Unirest, Spoonacular Imports, JSON
 

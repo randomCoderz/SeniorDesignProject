@@ -2,10 +2,8 @@ package com.pr.pr.pantryraid;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,9 +20,7 @@ import java.util.List;
 
 public class myCookBook extends Fragment {
     //GUI
-    Button favoriteRecipes;
-    Button viewIngredients;
-    ImageButton shoppingCart;
+
     ImageButton searchRecipe;
     EditText recipeName;
     String stringRecipe;
@@ -33,9 +29,8 @@ public class myCookBook extends Fragment {
     private static final String KEY = "Y2arFIdXItmsh3d4HlBeB2ar1Zdzp17aqmJjsnUYGxgm2KHYG5";
     private List<recipe> recipeList;
     private RecyclerView rv;
-    private home h = new home(KEY);
     recipeRVAdapter adapter;
-    recipeRVAdapter adapter2;
+
 
     private cookBook c = new cookBook(KEY);
 
@@ -59,9 +54,7 @@ public class myCookBook extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         rv.setHasFixedSize(true);
         rv.setLayoutManager(llm);
-/////////////////////////////////////
-        if(recipeList != null)
-            System.out.println(recipeList.size());
+
         adapter = new recipeRVAdapter(recipeList);
         rv.setAdapter(adapter);
 
@@ -80,7 +73,6 @@ public class myCookBook extends Fragment {
                 try {
                     updatedList = c.searchRecipes(null,null,null,true,null,false,5,0,stringRecipe,null);
 
-                    // adapter.recipeRVAdapterR(updatedList);
                     rootView.clearFocus();
 
                     //this is to hide the keyboard

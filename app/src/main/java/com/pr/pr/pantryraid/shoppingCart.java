@@ -44,7 +44,6 @@ public class shoppingCart extends Fragment{
         String json = mpref.getString("settings", "");
 
         //later use
-        //products = (ArrayList<items>) getActivity().getIntent().getSerializableExtra("products");
         listView = rootView.findViewById(R.id.customCartListView);
         initalizeData();
 
@@ -70,19 +69,13 @@ public class shoppingCart extends Fragment{
             SharedPreferences pref = getActivity().getPreferences(MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = pref.edit();
             Gson gson = new Gson();
-//                String json = gson.toJson(s);
-//                prefsEditor.putString("settings", json);
-//            prefsEditor.commit();
-//            Toast.makeText(getActivity(), "Your Settings Have Been Saved", Toast.LENGTH_LONG).show();
+
 
         });
 
         return rootView;
     }
 
-    public void getList(){
-
-    }
     public void onStart() {
 
         super.onStart();
