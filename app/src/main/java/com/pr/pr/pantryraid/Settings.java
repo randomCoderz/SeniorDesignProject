@@ -9,11 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -40,13 +35,9 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
 
     Switch restrictions;
     Switch calendar;
-    Switch expNotification;
     Button calendarDaily;
     Button calendarWeekly;
     Button calendarMonthly;
-    Button expirationDaily;
-    Button expirationWeekly;
-    Button expirationMonthly;
     savedSettings s;
     Button saveSettings;
     SharedPreferences mpref;
@@ -74,6 +65,7 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
         } else {
             s = gson.fromJson(json, savedSettings.class);
         }
+        // TODO:
         getList();
         listView = rootView.findViewById(R.id.restrictionList);
         listAdapter = new DietRestrictLVAdapter(getActivity(), R.layout.settings, data);
@@ -96,13 +88,10 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
         restrictions = rootView.findViewById(R.id.DietaryRestrictions);
         saveSettings = rootView.findViewById(R.id.saveSettings);
         calendar = rootView.findViewById(R.id.calendarSwitch);
-        expNotification = rootView.findViewById(R.id.expirationSwitch);
         calendarDaily = rootView.findViewById(R.id.calendarDaily);
         calendarWeekly = rootView.findViewById(R.id.calendarWeekly);
         calendarMonthly = rootView.findViewById(R.id.calendarMonthly);
-        expirationDaily = rootView.findViewById(R.id.expirationDaily);
-        expirationWeekly = rootView.findViewById(R.id.expirationWeekly);
-        expirationMonthly = rootView.findViewById(R.id.expirationMonthly);
+
 
         if (s.getRestrictions() == false) {
             restrictions.setChecked(false);
@@ -115,11 +104,6 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
             calendar.setChecked(false);
         } else {
             calendar.setChecked(true);
-        }
-        if (s.getExpNotifications() == false) {
-            expNotification.setChecked(false);
-        } else {
-            expNotification.setChecked(true);
         }
         if (s.getCalendarDaily() == false) {
             //change color to a false color
@@ -147,31 +131,7 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
             calendarWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
             calendarMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
         }
-        if (s.getExpDaily() == false) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-        } else {
-            expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
-            expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-            expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-        }
-        if (s.getExpWeekly() == false) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-        } else {
-            expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-            expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
-            expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-        }
-        if (s.getExpMonthly() == false) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-        } else {
 
-            expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-            expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-            expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
-        }
 
         calendarDaily.setOnClickListener(new View.OnClickListener() {
 
@@ -282,89 +242,7 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
         });
 
 
-        expNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (expNotification.isChecked()) {
-                    s.setExpNotifications(true);
-                    expNotification.setChecked(true);
-                    s.setExpDaily(true);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorAccent));
 
-                } else {
-
-                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    s.setExpDaily(false);
-                    s.setExpWeekly(false);
-                    s.setExpMonthly(false);
-                    s.setExpNotifications(false);
-                }
-            }
-        });
-
-        expirationDaily.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                s.setExpDaily(true);
-                s.setExpWeekly(false);
-                s.setExpMonthly(false);
-                if (expNotification.isChecked()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
-                        expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                        expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                    }
-                } else {
-                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                }
-            }
-        });
-
-        expirationWeekly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                s.setExpDaily(false);
-                s.setExpWeekly(true);
-                s.setExpMonthly(false);
-                if (expNotification.isChecked()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                        expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
-                        expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                    }
-                } else {
-                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                }
-
-            }
-        });
-
-        expirationMonthly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                s.setExpDaily(false);
-                s.setExpWeekly(false);
-                s.setExpMonthly(true);
-                if (expNotification.isChecked()) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                        expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
-                        expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
-                    }
-                } else {
-                    expirationDaily.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationWeekly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                    expirationMonthly.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorPrimary));
-                }
-            }
-        });
 
         saveSettings.setOnClickListener(new View.OnClickListener() {
             @Override

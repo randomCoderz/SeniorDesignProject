@@ -101,8 +101,11 @@ public class DietRestrictLVAdapter extends ArrayAdapter<DietRestrictName> implem
         listViewHolder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    editor.putBoolean("CheckValue"+position,isChecked);
-                    editor.commit();
+                boolean[] array = new boolean[15];
+                editor.putBoolean("CheckValue"+position,isChecked);
+                for(int i=0;i<array.length;i++)
+                    editor.putBoolean("CheckValue" + i, array[i]);
+                editor.commit();
 
 
             }

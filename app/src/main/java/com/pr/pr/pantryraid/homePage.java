@@ -7,8 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
+import com.pr.pr.pantryraid.RoomPersist.IngredientRepository;
 import com.pr.pr.pantryraid.RoomPersist.RecipeRepository;
 
 import org.json.JSONException;
@@ -33,6 +36,8 @@ public class homePage extends Fragment
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState)
     {
         final View rootView = inflater.inflate(R.layout.homepage, container, false);
+
+
 //        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 //        scheduler.scheduleAtFixedRate(getDailyRecipes(), 0, 24, TimeUnit.HOURS);
         AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
@@ -56,6 +61,8 @@ public class homePage extends Fragment
             }
         }
 
+        //demo
+//        initalizeData();
 
         return rootView;
     }
@@ -108,9 +115,7 @@ public class homePage extends Fragment
                 }
             }
         }
-
     }
-
 
     public Runnable getDailyRecipes() {
         final Runnable task = new Runnable() {

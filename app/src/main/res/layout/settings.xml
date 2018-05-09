@@ -69,67 +69,12 @@
 
             />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Expiration Notifications"
-            android:textSize="30dp"
-            android:layout_below="@+id/calendarWeekly"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/colorPrimaryDark"
-            />
-
-        <Switch
-            android:id="@+id/expirationSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView3"
-            android:text=""
-            android:layout_centerHorizontal="true"
-            />
-
-
-        <Button
-            android:id="@+id/expirationDaily"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/expirationSwitch"
-            android:layout_toLeftOf="@id/expirationWeekly"
-            android:text="Daily"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-            />
-
-
-
-        <Button
-            android:id="@+id/expirationWeekly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/expirationSwitch"
-            android:text="Weekly"
-            android:layout_centerHorizontal="true"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-            />
-
-        <Button
-            android:id="@+id/expirationMonthly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/expirationWeekly"
-            android:layout_below="@+id/expirationSwitch"
-            android:text="Monthly"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/White"
-            />
 
         <TextView
             android:id="@+id/restrictions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/expirationWeekly"
+            android:layout_below="@id/calendarWeekly"
             android:text="Dietary Restrictions"
             android:layout_centerHorizontal="true"
             />
