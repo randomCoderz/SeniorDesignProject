@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.github.clans.fab.FloatingActionButton;
 import com.pr.pr.pantryraid.RoomPersist.AppDatabase;
@@ -188,6 +190,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainFrame, fragment).addToBackStack(null).commit();
+
             }
         });
 
@@ -206,6 +209,10 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
 
                 System.out.println(toCart.size());
                 pbI.insertIngredientList(toCart);
+
+                CharSequence text = "Added to Cart";
+                Toast toast = Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -222,6 +229,9 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                     }
                 }
                 pbI.insertIngredientList(toCart);
+                CharSequence text = "Added to Cart";
+                Toast toast = Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -236,7 +246,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                     datePickerDialog.show();
                     homePage = false;
                     mealCalendar = true;
-
                 }
                 else
                 {
@@ -244,7 +253,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                     mealCalendar = false;
                     addToCalendar.setLabelText("Add to Calendar");
                 }
-
 
 
             }
@@ -262,6 +270,9 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
                     favorites = true;
                 }
                 dbI.insertRecipe(getAsRecipe());
+                CharSequence text = "Added to Favorites";
+                Toast toast = Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 

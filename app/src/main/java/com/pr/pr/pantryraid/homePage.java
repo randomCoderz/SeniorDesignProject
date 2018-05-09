@@ -116,9 +116,7 @@ public class homePage extends Fragment
                 }
             }
         }
-
     }
-
 
     public Runnable getDailyRecipes() {
         final Runnable task = new Runnable() {

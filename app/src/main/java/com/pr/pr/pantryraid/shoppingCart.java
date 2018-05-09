@@ -62,7 +62,9 @@ public class shoppingCart extends Fragment{
             products = new ArrayList<>();
             listAdapter.refreshShoppingCartAdapter(products);
             listView.setAdapter(listAdapter);
-
+            CharSequence text = "Sent to Cart";
+            Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_SHORT);
+            toast.show();
             }
 
             SharedPreferences pref = getActivity().getPreferences(MODE_PRIVATE);

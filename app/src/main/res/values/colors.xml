@@ -7,4 +7,6 @@
     <color name="White">#FFFFFF</color>
     <color name = "fab">#DA4235</color>
     <color name = "grey">#dddae5</color>
+    <color name = "blue">#1976D2</color>
+    <color name = "black">#212121</color>
 </resources>

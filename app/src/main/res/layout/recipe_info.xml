@@ -47,32 +47,28 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
-                    <!--android:layout_alignParentBottom="true"-->
-                    <!--android:layout_alignParentStart="true"-->
-                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--&gt;-->
                 </android.support.v7.widget.RecyclerView>
 
 
                 <TextView
                     android:id="@+id/readyInMin"
-                    android:layout_width="98dp"
+                    android:layout_width="138dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_below="@+id/recipeImage"
-                    android:layout_marginEnd="18dp"
-                    android:text="readyinmin" />
+                    android:layout_marginEnd="12dp"
+                    android:text="readyinmin"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/recipeName"
-                    android:layout_width="218dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="174dp"
+                    android:layout_height="32dp"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/recipeImage"
-                    android:layout_marginStart="31dp"
-                    android:text="TextView" />
+                    android:layout_marginStart="19dp"
+                    android:text="Recipe"
+                    android:textColor="@color/black" />
 
             </RelativeLayout>
 
