@@ -50,7 +50,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     int month;
     int year;
 
-    myPantryAdapter adapter = new myPantryAdapter(ingredients);
+    myRecipeAdapter adapter = new myRecipeAdapter(ingredients);
     AppDatabase mdb = AppDatabase.getInMemoryDatabase(this.getContext());
     IngredientRepository pbI = new IngredientRepository(mdb);
     final RecipeRepository dbI = new RecipeRepository(mdb);
@@ -103,7 +103,6 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     }
 
 
-    private ArrayList<ingredient> pantryList = new ArrayList<ingredient>();
     private RecyclerView rv;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -280,7 +279,7 @@ public class recipeFragment extends Fragment implements DatePickerDialog.OnDateS
     public void onStart()
     {
         super.onStart();
-        adapter = new myPantryAdapter(ingredients);
+        adapter = new myRecipeAdapter(ingredients);
         rv.setAdapter(adapter);
     }
 
