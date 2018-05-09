@@ -61,7 +61,7 @@ public class shoppingCart extends Fragment{
             products = new ArrayList<>();
             listAdapter.refreshShoppingCartAdapter(products);
             listView.setAdapter(listAdapter);
-            CharSequence text = "Sent to Cart";
+            CharSequence text = "Sent to Pantry";
             Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_SHORT);
             toast.show();
             }
